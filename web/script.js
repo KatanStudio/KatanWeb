@@ -40,23 +40,34 @@ document.querySelectorAll('.service-card, .module, .process__step, .compare__col
     observer.observe(el);
 });
 
-// main.js - Actualizado con animación de deslizamiento
 
-document.addEventListener('DOMContentLoaded', function () {
+document.addEventListener('DOMContentLoaded', function() {
+  
+  // ─── LÓGICA DEL BANNER DE COOKIES ───
+  const btnAceptar = document.getElementById('btn-aceptar-cookies');
+  const bannerCookies = document.getElementById('banner-cookies');
 
-    const btnAceptar = document.getElementById('btn-aceptar-cookies');
-    const bannerCookies = document.getElementById('banner-cookies');
-
-    if (btnAceptar && bannerCookies) {
-        btnAceptar.addEventListener('click', function () {
-            // En lugar de .style.display = 'none', usamos la clase de CSS
-            bannerCookies.classList.add('cookies-banner--hidden');
-
-            // Opcional: Eliminar el elemento del DOM después de la animación 
-            // para que no interfiera con lectores de pantalla
-            setTimeout(() => {
-                bannerCookies.style.display = 'none';
-            }, 600); // 600ms coincide con la duración del CSS
-        });
+  if (btnAceptar && bannerCookies) {
+    
+    // 1. Comprobación inicial: Ya aceptó las cookies?
+    if (localStorage.getItem('katanCookiesAceptadas') === 'true') {
+      // Si ya las aceptó, ocultamos el banner de golpe, sin animaciones ni esperas.
+      bannerCookies.style.display = 'none';
     }
+
+    // 2. Acción al hacer clic en "Aceptar"
+    btnAceptar.addEventListener('click', function() {
+      // Guardamos la decisión en la memoria del navegador
+      localStorage.setItem('katanCookiesAceptadas', 'true');
+      
+      // Ejecutamos la animación de salida (la clase que creamos en CSS)
+      bannerCookies.classList.add('cookies-banner--hidden');
+      
+      // Lo eliminamos del flujo visual tras terminar la animación (600ms)
+      setTimeout(() => {
+        bannerCookies.style.display = 'none';
+      }, 600); 
+    });
+  }
+
 });
