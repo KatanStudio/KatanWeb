@@ -95,7 +95,7 @@ ul {
 }
 
 .section--dark {
-  background: var(--sheath);
+  background: var(--ghost);
 }
 
 .section__header {
