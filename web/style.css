@@ -1,6 +1,6 @@
 /* ═══════════════════════════════════════════════
-   KATAN — style.css
-   Sharp by Design · Mobile-First · v1.0
+   KATAN STUDIO — style.css
+   Sharp by Design · Mobile-First · v2.0
    ═══════════════════════════════════════════════ */
 
 /* ── Reset & Tokens ── */
@@ -124,10 +124,12 @@ ul {
 
 .section__h2 {
   font-family: var(--font-head);
-  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-size: clamp(1.8rem, 6vw, 3.5rem);
   font-weight: 900;
-  letter-spacing: -0.05em;
-  line-height: 0.95;
+  letter-spacing: -0.04em;
+  line-height: 1.0;
+  word-break: break-word;
+  overflow-wrap: break-word;
 }
 
 .section__sub {
@@ -385,7 +387,15 @@ ul {
   height: 100%;
   z-index: 0;
   overflow: hidden;
-  display: none;
+  display: block;
+  /* visible on mobile too, but orbs are dimmer */
+  opacity: 0.4;
+}
+
+@media (min-width: 900px) {
+  .hero__visual {
+    opacity: 1;
+  }
 }
 
 .glow-orb {
@@ -478,12 +488,15 @@ ul {
 
 .hero__h1 {
   font-family: var(--font-head);
-  font-size: clamp(2.2rem, 9vw, 4.5rem);
+  font-size: clamp(1.9rem, 8vw, 4.5rem);
   font-weight: 900;
-  letter-spacing: -0.04em;
-  line-height: 0.95;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
   text-transform: lowercase;
   margin-bottom: 1.5rem;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  hyphens: auto;
 }
 
 .hero__h1-accent {
@@ -523,22 +536,36 @@ ul {
 }
 
 .stat {
-  padding: 1.5rem;
+  padding: 1.25rem 0.75rem;
   border-right: 1px solid rgba(255, 255, 255, 0.05);
   background: transparent;
   display: flex;
   flex-direction: column;
   align-items: center;
   text-align: center;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.stat__num {
+  display: block;
+  font-family: var(--font-head);
+  font-size: clamp(1.1rem, 3vw, 1.5rem);
+  font-weight: 900;
+  color: var(--blade);
+  letter-spacing: -0.03em;
+  margin-bottom: 0.25rem;
 }
 
 .stat__label {
   display: block;
   font-family: var(--font-mono);
-  font-size: 0.9rem;
-  letter-spacing: 0.15em;
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
   color: var(--steel);
   text-transform: uppercase;
+  line-height: 1.4;
+  word-break: break-word;
 }
 
 .stat__div {
@@ -1622,13 +1649,14 @@ ul {
 
 .cta-section__h2 {
   font-family: var(--font-head);
-  font-size: clamp(3rem, 8vw, 4.5rem);
+  font-size: clamp(2.2rem, 8vw, 4.5rem);
   font-weight: 900;
   letter-spacing: -0.04em;
-  line-height: 0.95;
+  line-height: 1.0;
   color: var(--blade);
   text-transform: lowercase;
   margin-bottom: 1.5rem;
+  word-break: break-word;
 }
 
 .cta-section__sub {
@@ -1683,6 +1711,40 @@ ul {
 .cta-email-link:hover {
   color: var(--blade);
   text-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+}
+
+/* Clases usadas en contacto.html */
+.cta-section__note {
+  margin-top: 1.5rem;
+  font-size: 0.85rem;
+  color: var(--steel);
+}
+
+.cta-section__email {
+  color: var(--spark);
+  transition: color var(--t-fast);
+}
+
+.cta-section__email:hover {
+  color: var(--blade);
+}
+
+.cta-section__bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.cta-section__k {
+  position: absolute;
+  right: -5%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: clamp(200px, 30vw, 400px);
+  height: auto;
+  opacity: 0.04;
 }
 
 /* ═══════════════════════════════════════════════
@@ -2310,6 +2372,15 @@ ul {
     grid-template-columns: repeat(4, 1fr);
   }
 
+  .stat {
+    padding: 1.5rem 1rem;
+  }
+
+  .stat__label {
+    font-size: 0.7rem;
+    letter-spacing: 0.12em;
+  }
+
   .stat:nth-child(even) {
     border-right: 1px solid var(--ghost);
   }
@@ -2346,11 +2417,19 @@ ul {
     padding: 5rem 4rem;
   }
 
+  .modules-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
   .radio-grid {
     grid-template-columns: repeat(3, 1fr);
   }
 
   .portfolio-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .process-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
@@ -2392,15 +2471,17 @@ ul {
   }
 
   /* Hero */
-  .hero__visual {
-    display: block;
-  }
-
   .hero__content {
     padding: 6rem 5rem 3rem 1.5rem;
     max-width: 900px;
     align-items: flex-start;
     text-align: left;
+  }
+
+  .hero__h1 {
+    font-size: clamp(3rem, 5vw, 4.5rem);
+    line-height: 0.95;
+    hyphens: none;
   }
 
   .hero__sub {
@@ -2429,11 +2510,6 @@ ul {
   .services-intro-grid {
     grid-template-columns: 1.2fr 0.8fr;
     gap: 6rem;
-  }
-
-  /* Modules */
-  .modules-grid {
-    grid-template-columns: repeat(4, 1fr);
   }
 
   /* Compare */
