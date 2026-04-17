@@ -15,120 +15,93 @@
 
 <body>
 
-  <!-- ══ NAV ══ -->
-  <header class="nav" id="nav">
-    <div class="nav__inner">
-      <a href="index.html" class="nav__brand" aria-label="Katan Studio — Inicio">
-        <svg class="nav__logo" width="36" height="36" viewBox="0 0 96 96" fill="none" aria-hidden="true">
-          <path d="M0 0 H96 V82 L82 96 H0 Z" fill="#1E1E2A" />
-          <path d="M82 96 L96 82" stroke="#FF0080" stroke-width="2.5" />
-          <rect x="26" y="22" width="7" height="52" fill="#F0F4F8" />
-          <path d="M33 48 L63 22 H72 L42 48 Z" fill="#F0F4F8" />
-          <path d="M33 48 L63 74 H72 L42 48 Z" fill="#F0F4F8" />
-          <circle cx="33" cy="48" r="3.5" fill="#FF0080" />
-        </svg>
-        <span class="nav__wordmark">katan</span>
-      </a>
+    <!-- ══ NAV ══ -->
+    <header class="nav" id="nav">
+        <div class="nav__inner">
+            <a href="index.html" class="nav__brand" aria-label="Katan Studio — Inicio">
+                <span class="nav__wordmark">katan</span>
+            </a>
 
-      <nav class="nav__links" aria-label="Navegación principal">
-        <a href="index.html" class="nav__link">Inicio</a>
-        <a href="servicios.html" class="nav__link">Servicios</a>
-        <a href="portfolio.html" class="nav__link">Portfolio</a>
-        <a href="nosotros.html" class="nav__link">Por qué Katan</a>
-        <a href="proceso.html" class="nav__link">Proceso</a>
-        <a href="contacto.html" class="nav__link">Contacto</a>
-      </nav>
+            <nav class="nav__links" aria-label="Navegación principal">
+                <a href="index.html" class="nav__link">Inicio</a>
+                <a href="servicios.html" class="nav__link">Servicios</a>
+                <a href="portfolio.html" class="nav__link">Portfolio</a>
+                <a href="nosotros.html" class="nav__link">Por qué Katan</a>
+                <a href="proceso.html" class="nav__link is-active">Proceso</a>
+                <a href="contacto.html" class="nav__link">Contacto</a>
+            </nav>
 
+            <a href="contacto.html" class="btn btn--primary nav__cta">Presupuesto gratis</a>
 
-      <a href="contacto.html" class="btn btn--primary nav__cta">Presupuesto gratis</a>
+            <button class="nav__hamburger" aria-label="Menú" aria-expanded="false" id="hamburger">
+                <span></span><span></span>
+            </button>
+        </div>
 
-      <button class="nav__hamburger" aria-label="Menú" aria-expanded="false" id="hamburger">
-        <span></span><span></span>
-      </button>
-    </div>
+        <div class="nav__mobile" id="mobileMenu" aria-hidden="true">
+            <a href="index.html" class="nav__mobile-link">Inicio</a>
+            <a href="servicios.html" class="nav__mobile-link">Servicios</a>
+            <a href="portfolio.html" class="nav__mobile-link">Portfolio</a>
+            <a href="nosotros.html" class="nav__mobile-link">Por qué Katan</a>
+            <a href="proceso.html" class="nav__mobile-link is-active">Proceso</a>
+            <a href="contacto.html" class="nav__mobile-link">Contacto</a>
+        </div>
+    </header>
 
-    <!-- Mobile menu -->
-    <div class="nav__mobile" id="mobileMenu" aria-hidden="true">
-      <a href="index.html" class="nav__mobile-link">Inicio</a>
-      <a href="servicios.html" class="nav__mobile-link">Servicios</a>
-      <a href="portfolio.html" class="nav__mobile-link">Portfolio</a>
-      <a href="nosotros.html" class="nav__mobile-link">Por qué Katan</a>
-      <a href="proceso.html" class="nav__mobile-link">Proceso</a>
-      <a href="contacto.html" class="nav__mobile-link">Contacto</a>
-      <a href="contacto.html" class="btn btn--primary"
-        style="margin-top:1rem;display:block;text-align:center;">Presupuesto
-        gratis</a>
-    </div>
-  </header>
     <main>
-        <!-- ══ PROCESO ══ -->
         <section class="section section--dark" id="proceso">
             <div class="container">
                 <header class="section__header">
-                    <p class="section-label">/Proceso</p>
+                    <p class="section-label">05 / Proceso</p>
                     <h2 class="section__h2" style="text-transform: none;">Del brief al<br>corte final</h2>
-                    <p class="section__sub">Cuatro pasos. Sin reuniones innecesarias.</p>
+                    <p class="section__sub">Cuatro pasos. Sin reuniones innecesarias. Ingeniería pura.</p>
                 </header>
 
-                <div class="process">
-                    <div class="process__step">
-                        <div class="process__num-wrap">
-                            <span class="process__num">01</span>
-                            <div class="process__line" aria-hidden="true"></div>
+                <div class="process-grid">
+
+                    <div class="process-card">
+                        <div class="process-card__header">
+                            <span class="process-card__num">01</span>
+                            <span class="process-card__time">Día 0</span>
                         </div>
-                        <div class="process__body">
-                            <h4 class="process__title">Brief</h4>
-                            <p class="process__desc">Cuéntanos qué necesitas. Un formulario de 10 preguntas que define
-                                el
-                                proyecto completo. Nada más. Nada menos.</p>
-                            <span class="process__time">Día 0</span>
-                        </div>
+                        <h4 class="process-card__title">briefing</h4>
+                        <p class="process-card__desc">Cuéntanos qué necesitas. Un formulario asíncrono que define el
+                            proyecto completo. Nada de llamadas de "toma de contacto" para perder el tiempo.</p>
                     </div>
 
-                    <div class="process__step">
-                        <div class="process__num-wrap">
-                            <span class="process__num">02</span>
-                            <div class="process__line" aria-hidden="true"></div>
+                    <div class="process-card">
+                        <div class="process-card__header">
+                            <span class="process-card__num">02</span>
+                            <span class="process-card__time">Día 1</span>
                         </div>
-                        <div class="process__body">
-                            <h4 class="process__title">Propuesta</h4>
-                            <p class="process__desc">En 24 horas te mandamos arquitectura, precio cerrado y plazo. Lo
-                                firmas
-                                y arrancamos. Sin modificaciones sorpresa.</p>
-                            <span class="process__time">Día 1</span>
-                        </div>
+                        <h4 class="process-card__title">propuesta</h4>
+                        <p class="process-card__desc">En 24 horas te mandamos arquitectura, precio cerrado y plazo. Lo
+                            firmas y arrancamos el motor. Sin modificaciones sorpresa en la factura.</p>
                     </div>
 
-                    <div class="process__step">
-                        <div class="process__num-wrap">
-                            <span class="process__num">03</span>
-                            <div class="process__line" aria-hidden="true"></div>
+                    <div class="process-card">
+                        <div class="process-card__header">
+                            <span class="process-card__num">03</span>
+                            <span class="process-card__time">Días 2–9</span>
                         </div>
-                        <div class="process__body">
-                            <h4 class="process__title">Desarrollo</h4>
-                            <p class="process__desc">Construimos en código propio. Dos rondas de revisión incluidas. Tú
-                                ves
-                                los avances en un enlace privado.</p>
-                            <span class="process__time">Días 2–9</span>
-                        </div>
+                        <h4 class="process-card__title">desarrollo</h4>
+                        <p class="process-card__desc">Construimos tu sistema en código propio. Dos rondas de revisión
+                            incluidas. Tú vas viendo los avances de la interfaz en tiempo real en un enlace privado.</p>
                     </div>
 
-                    <div class="process__step process__step--last">
-                        <div class="process__num-wrap">
-                            <span class="process__num">04</span>
+                    <div class="process-card">
+                        <div class="process-card__header">
+                            <span class="process-card__num">04</span>
+                            <span class="process-card__time">Día 10</span>
                         </div>
-                        <div class="process__body">
-                            <h4 class="process__title">Corte Final</h4>
-                            <p class="process__desc">La web publicada, el dominio configurado, el código entregado.
-                                Hablas
-                                con quien hizo el trabajo.</p>
-                            <span class="process__time">Día 10</span>
-                        </div>
+                        <h4 class="process-card__title">corte final</h4>
+                        <p class="process-card__desc">La web publicada, optimizada para cargar en milisegundos, el
+                            dominio configurado y el código entregado. Tu negocio sube de nivel.</p>
                     </div>
+
                 </div>
             </div>
         </section>
-
     </main>
     <!-- ══ FOOTER ══ -->
     <footer class="footer">

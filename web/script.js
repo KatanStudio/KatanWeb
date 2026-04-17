@@ -98,3 +98,16 @@ document.addEventListener('DOMContentLoaded', function() {
       });
     });
   }
+
+  // --- AUTO-HIGHLIGHT NAV LINKS ---
+const currentPath = window.location.pathname.split('/').pop() || 'index.html';
+const allLinks = document.querySelectorAll('.nav__link, .nav__mobile-link');
+
+allLinks.forEach(link => {
+  // Si el href del enlace coincide con la página actual
+  if (link.getAttribute('href') === currentPath) {
+    link.classList.add('is-active');
+  } else {
+    link.classList.remove('is-active');
+  }
+});

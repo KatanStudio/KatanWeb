@@ -272,10 +272,35 @@ ul {
   font-size: 1.0rem;
   color: var(--steel);
   transition: color var(--t-fast);
+  position: relative;
 }
 
 .nav__link:hover {
   color: var(--blade);
+}
+
+.nav__link.is-active {
+  color: var(--edge); /* Se pinta de magenta */
+  font-weight: 600;
+}
+
+.nav__link.is-active::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--edge);
+}
+
+
+/* Para el menú en móvil */
+.nav__mobile-link.is-active {
+  color: var(--edge);
+  border-left: 3px solid var(--edge);
+  padding-left: 1rem;
+  background: rgba(255, 0, 128, 0.05);
 }
 
 .nav__cta {
@@ -686,10 +711,11 @@ ul {
 }
 
 .module__title {
-  font-family: var(--font-body);
-  font-size: 0.95rem;
-  font-weight: 600;
-  color: var(--blade);
+  font-family: var(--font-head);
+  font-size: 1rem;
+  font-weight: 900;
+  color: var(--edge);
+  letter-spacing: -0.03em;
 }
 
 .module__desc {
@@ -698,6 +724,43 @@ ul {
   line-height: 1.65;
 }
 
+
+/* ═══════════════════════════════════════════════
+   WIREFRAMES DE SERVICIOS (BOCETOS UI)
+   ═══════════════════════════════════════════════ */
+.service-wireframe {
+  background: var(--forge);
+  border-bottom: 1px solid var(--ghost);
+  height: 160px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: -2.5rem -2.5rem 2rem -2.5rem; /* Compensa el padding de la tarjeta */
+  position: relative;
+  overflow: hidden;
+}
+
+/* Efecto de brillo de fondo sutil */
+.service-wireframe::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at top, rgba(255, 0, 128, 0.05), transparent 70%);
+  pointer-events: none;
+}
+
+.service-wireframe svg {
+  height: 90%;
+  width: auto;
+  opacity: 0.8;
+  transition: transform var(--t-mid), opacity var(--t-mid);
+}
+
+/* Animación al hacer hover en la tarjeta entera */
+.service-card:hover .service-wireframe svg {
+  transform: translateY(-5px);
+  opacity: 1;
+}
 /* ═══════════════════════════════════════════════
    COMPARE
    ═══════════════════════════════════════════════ */
@@ -943,7 +1006,105 @@ ul {
   letter-spacing: 0.15em;
   text-transform: uppercase;
 }
+.process-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  position: relative;
+  margin-top: 3rem;
+}
 
+/* Línea conectora de fondo para escritorio */
+@media (min-width: 900px) {
+  .process-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  
+  .process-grid::before {
+    content: '';
+    position: absolute;
+    top: 2.5rem; /* Altura donde están los números */
+    left: 2rem;
+    right: 2rem;
+    height: 1px;
+    background: var(--ghost);
+    z-index: 0;
+  }
+}
+
+.process-card {
+  background: var(--sheath);
+  border: 1px solid var(--ghost);
+  padding: 2.5rem 2rem;
+  position: relative;
+  z-index: 1; /* Para quedar por encima de la línea conectora */
+  transition: border-color var(--t-mid), transform var(--t-mid), box-shadow var(--t-mid);
+}
+
+.process-card:hover {
+  border-color: rgba(255, 0, 128, 0.5);
+  transform: translateY(-5px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+/* El toque de luz superior de cada tarjeta */
+.process-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--edge);
+  transition: width var(--t-mid);
+}
+
+.process-card:hover::before {
+  width: 100%;
+}
+
+.process-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+
+.process-card__num {
+  font-family: var(--font-mono);
+  font-size: 1.25rem;
+  color: var(--edge);
+  font-weight: 700;
+  background: var(--sheath); /* Tapa la línea de atrás */
+  padding-right: 15px;
+}
+
+.process-card__time {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  color: var(--spark); /* Cian */
+  text-transform: uppercase;
+  background: rgba(0, 229, 255, 0.05);
+  padding: 0.25rem 0.5rem;
+  border: 1px solid rgba(0, 229, 255, 0.2);
+}
+
+.process-card__title {
+  font-family: var(--font-head);
+  font-size: 1.4rem;
+  font-weight: 900;
+  color: var(--blade);
+  margin-bottom: 1rem;
+  /* 👇 ESTA LÍNEA FUERZA LA PRIMERA LETRA MAYÚSCULA 👇 */
+  text-transform: capitalize; 
+}
+
+.process-card__desc {
+  font-size: 0.88rem;
+  color: var(--steel);
+  line-height: 1.7;
+}
 /* ═══════════════════════════════════════════════
    CTA SECTION
    ═══════════════════════════════════════════════ */
