@@ -632,24 +632,87 @@ ul {
 
 
 /* ═══════════════════════════════════════════════
-   FAQ (ACORDEÓN)
+   FAQ INMERSIVO (ACORDEÓN + AURORA)
    ═══════════════════════════════════════════════ */
-.faq-accordion {
-  display: flex;
-  flex-direction: column;
+.faq-section {
+  position: relative;
+  padding: 6rem 0;
+  overflow: hidden;
+  background: var(--forge);
   border-top: 1px solid var(--ghost);
 }
 
-.faq-item {
-  border-bottom: 1px solid var(--ghost);
+.faq__container {
+  position: relative;
+  z-index: 2;
+  max-width: 800px;
 }
 
+/* ── Efecto de Luces de Fondo ── */
+.faq__visual {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.orb-faq-1 {
+  width: 45vw;
+  height: 45vw;
+  background-color: var(--edge);
+  /* Magenta */
+  top: 10%;
+  left: -15%;
+  opacity: 0.2;
+  /* Muy sutil para no molestar la lectura */
+}
+
+.orb-faq-2 {
+  width: 40vw;
+  height: 40vw;
+  background-color: var(--spark);
+  /* Cian */
+  bottom: -10%;
+  right: -10%;
+  opacity: 0.15;
+  animation-delay: -4s;
+}
+
+/* ── Estructura del Acordeón (Efecto Cristal) ── */
+.faq-accordion {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  /* Separación entre tarjetas */
+}
+
+.faq-item {
+  background: rgba(20, 20, 26, 0.5);
+  /* Cristal oscuro */
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--ghost);
+  transition: border-color var(--t-mid), background var(--t-mid);
+}
+
+.faq-item:hover {
+  border-color: rgba(255, 0, 128, 0.3);
+}
+
+/* Estado activo del acordeón */
+.faq-item.is-active {
+  background: rgba(20, 20, 26, 0.85);
+  border-color: rgba(255, 0, 128, 0.6);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* ── Botón de Pregunta ── */
 .faq-question {
   width: 100%;
   display: flex;
   align-items: center;
   gap: 1.5rem;
-  padding: 1.5rem 0;
+  padding: 1.5rem 2rem;
   background: transparent;
   border: none;
   cursor: pointer;
@@ -657,26 +720,28 @@ ul {
   transition: color var(--t-fast);
 }
 
-.faq-question:hover .faq-text {
-  color: var(--blade);
-}
-
 .faq-num {
   font-family: var(--font-mono);
-  font-size: 0.75rem;
-  color: var(--edge); /* Número en magenta */
+  font-size: 0.85rem;
+  color: var(--edge);
+  font-weight: 700;
 }
 
 .faq-text {
   font-family: var(--font-body);
-  font-size: 1.3rem;
+  font-size: 1.05rem;
   font-weight: 600;
-  color: var(--blade);
+  color: var(--steel);
   flex: 1;
   transition: color var(--t-fast);
 }
 
-/* Icono de + y - animado */
+.faq-question:hover .faq-text,
+.faq-item.is-active .faq-text {
+  color: var(--blade);
+}
+
+/* ── Icono Animado (+ y -) ── */
 .faq-icon {
   position: relative;
   width: 16px;
@@ -688,7 +753,7 @@ ul {
 .faq-icon::after {
   content: '';
   position: absolute;
-  background-color: var(--spark); /* Icono en cian */
+  background-color: var(--spark);
   transition: transform var(--t-mid);
 }
 
@@ -706,6 +771,12 @@ ul {
   height: 100%;
 }
 
+.faq-item.is-active .faq-icon::after {
+  transform: rotate(90deg);
+  /* Convierte el + en un - */
+}
+
+/* ── Respuesta Desplegable ── */
 .faq-answer {
   max-height: 0;
   overflow: hidden;
@@ -714,33 +785,27 @@ ul {
 
 .faq-answer p {
   color: var(--blade);
-  font-size: 1rem;
+  font-size: 0.95rem;
   line-height: 1.7;
-  padding-left: 2.5rem; /* Alineado con el texto de la pregunta, saltando el número */
-  padding-bottom: 0;
+  padding: 0 2rem 0 4.3rem;
+  /* Alineado perfectamente debajo del texto */
   margin: 0;
   opacity: 0;
-  transition: opacity var(--t-mid);
-}
-
-/* ── ESTADOS ACTIVOS ── */
-.faq-question.is-active .faq-text {
-  color: var(--blade);
-}
-
-/* Convierte el + en un - rotando la línea vertical */
-.faq-question.is-active .faq-icon::after {
-  transform: rotate(90deg);
+  transform: translateY(-10px);
+  transition: opacity var(--t-mid), transform var(--t-mid);
 }
 
 .faq-item.is-active .faq-answer {
-  max-height: 300px; /* Suficiente para el texto, si es más largo, auméntalo */
-  padding-bottom: 1.5rem;
+  max-height: 400px;
+  /* Expande la caja */
+  padding-bottom: 1.75rem;
 }
 
 .faq-item.is-active .faq-answer p {
   opacity: 1;
+  transform: translateY(0);
 }
+
 /* ═══════════════════════════════════════════════
    SERVICES GRID
    ═══════════════════════════════════════════════ */
@@ -1626,74 +1691,132 @@ ul {
 /* ═══════════════════════════════════════════════
    CTA SECTION
    ═══════════════════════════════════════════════ */
+/* ═══════════════════════════════════════════════
+   CTA SECTION (REDISEÑO CENTRADO & TERMINAL)
+   ═══════════════════════════════════════════════ */
 .cta-section {
   position: relative;
-  padding: 6rem 0;
-  overflow: hidden;
-  border-top: 1px solid var(--ghost);
+  padding: 8rem 0;
   background: var(--forge);
+  border-top: 1px solid var(--ghost);
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.cta-section__bg {
+/* Brillo de fondo (aura magenta y cian fusionada) */
+.cta-section__glow {
   position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background:
-    radial-gradient(circle at 80% 50%, rgba(255, 0, 128, 0.07) 0%, transparent 60%),
-    radial-gradient(circle at 10% 80%, rgba(0, 229, 255, 0.04) 0%, transparent 50%);
-}
-
-.cta-section__k {
-  position: absolute;
-  right: -5%;
   top: 50%;
-  transform: translateY(-50%);
-  width: min(480px, 60vw);
-  height: auto;
-  opacity: 0.04;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 70vw;
+  height: 70vw;
+  background: radial-gradient(circle, rgba(255, 0, 128, 0.08) 0%, rgba(0, 229, 255, 0.04) 40%, transparent 70%);
+  filter: blur(60px);
+  z-index: 0;
+  pointer-events: none;
 }
 
-.cta-section__content {
+.cta-section__container {
   position: relative;
   z-index: 2;
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 1.5rem;
-  max-width: 640px;
+  justify-content: center;
+  width: 100%;
+  max-width: 1200px;
+}
+
+/* Caja contenedora central */
+.cta-section__box {
+  background: rgba(20, 20, 26, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--ghost);
+  padding: 4rem 2rem;
+  text-align: center;
+  max-width: 1100px;
+  width: 100%;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
+  border-top: 3px solid var(--edge);
+}
+
+.kicker--center {
+  text-align: center;
+  margin-bottom: 1.5rem;
 }
 
 .cta-section__h2 {
   font-family: var(--font-head);
-  font-size: clamp(3rem, 10vw, 6rem);
+  font-size: clamp(3rem, 8vw, 4.5rem);
   font-weight: 900;
-  letter-spacing: -0.05em;
-  line-height: 0.9;
-  text-transfrm: lowercase;
+  letter-spacing: -0.04em;
+  line-height: 0.95;
+  color: var(--blade);
+  text-transform: lowercase;
+  margin-bottom: 1.5rem;
 }
 
 .cta-section__sub {
-  font-size: 1rem;
+  font-size: 1.1rem;
+  /* Un pelín más grande para acompañar el ancho */
   color: var(--steel);
-  line-height: 1.7;
-  max-width: 40ch;
+  line-height: 1.6;
+  max-width: 70ch;
+  /* Aumentamos el límite de caracteres por línea */
+  margin: 0 auto 3rem auto;
 }
 
-.cta-section__note {
+.cta-actions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2.5rem;
+}
+
+/* Caja del email con estilo de consola/código */
+.cta-email-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1.25rem 2.5rem;
+  border: 1px dashed var(--ghost);
+  background: rgba(0, 0, 0, 0.3);
+  transition: border-color var(--t-fast);
+}
+
+.cta-email-box:hover {
+  border-color: var(--steel);
+}
+
+.cta-email-label {
   font-family: var(--font-mono);
-  font-size: 0.7rem;
+  font-size: 0.65rem;
   color: var(--steel);
-  letter-spacing: 0.08em;
-  margin-top: -0.5rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
 }
 
-.cta-section__email {
+.cta-email-link {
+  font-family: var(--font-mono);
+  font-size: 1rem;
   color: var(--spark);
-  transition: opacity var(--t-fast);
+  /* Usamos Cian para destacar frente al botón Magenta */
+  transition: color var(--t-fast), text-shadow var(--t-fast);
 }
 
-.cta-section__email:hover {
-  opacity: 0.7;
+.cta-email-link:hover {
+  color: var(--blade);
+  text-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+}
+
+/* ── RESPONSIVE PARA EL CTA ── */
+@media (min-width: 768px) {
+  .cta-section__box {
+    padding: 5rem 4rem;
+  }
 }
 
 /* ═══════════════════════════════════════════════
