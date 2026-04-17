@@ -965,87 +965,11 @@ ul {
 }
 
 /* ═══════════════════════════════════════════════
-   FOOTER
-   ═══════════════════════════════════════════════ */
-/* ═══════════════════════════════════════════════
-   FOOTER
-   ═══════════════════════════════════════════════ */
-/* ═══════════════════════════════════════════════
    FOOTER (Centrado)
    ═══════════════════════════════════════════════ */
 .footer {
   border-top: 1px solid var(--ghost);
-  padding: 4rem 0 8rem;
-  /* El padding de 8rem es para dejar sitio al banner de cookies */
-  background: var(--sheath);
-  position: relative;
-}
-
-.footer__inner {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  /* 👈 Esto centra todo el bloque de contenido */
-  gap: 1.5rem;
-  text-align: center;
-}
-
-/* Filas generales */
-.footer__row {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  /* 👈 Esto centra los links y textos en la misma línea */
-  align-items: center;
-  gap: 1rem;
-}
-
-/* Tipografía de la marca */
-.footer__brand {
-  font-family: var(--font-head);
-  font-weight: 900;
-  font-size: 1.2rem;
-  letter-spacing: -0.05em;
-  text-transform: lowercase;
-  color: var(--blade);
-}
-
-.footer__tagline {
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--steel);
-}
-
-/* Elementos de contacto y texto */
-.footer__link,
-.footer__text {
-  font-size: 0.85rem;
-  color: var(--steel);
-  transition: color var(--t-fast);
-}
-
-.footer__link:hover {
-  color: var(--blade);
-}
-
-/* El punto separador al estilo Katan (Magenta) */
-.footer__dot {
-  width: 4px;
-  height: 4px;
-  background-color: var(--edge);
-  border-radius: 50%;
-  display: inline-block;
-}
-
-
-/* ═══════════════════════════════════════════════
-   FOOTER (Centrado)
-   ═══════════════════════════════════════════════ */
-.footer {
-  border-top: 1px solid var(--ghost);
-  padding: 4rem 0 8rem; /* El padding de 8rem es para dejar sitio al banner de cookies */
+  padding: 2rem 0 4.5rem; /* El padding de 8rem es para dejar sitio al banner de cookies */
   background: var(--sheath);
   position: relative;
 }
@@ -1293,6 +1217,138 @@ ul {
 
 .process__step.anim-fade:nth-child(4) {
   transition-delay: 0.3s;
+}
+
+/* ═══════════════════════════════════════════════
+   PÁGINAS LEGALES (Aviso, Privacidad, Cookies)
+   ═══════════════════════════════════════════════ */
+.legal-hero {
+  padding: 8rem 0 3rem;
+  border-bottom: 1px solid var(--ghost);
+  margin-bottom: 3rem;
+}
+
+.legal-h1 {
+  font-family: var(--font-head);
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 900;
+  letter-spacing: -0.05em;
+  color: var(--blade);
+  text-transform: lowercase;
+  margin-bottom: 1rem;
+}
+
+.legal-content {
+  max-width: 760px; /* Ancho optimizado para lectura cómoda */
+  margin: 0 auto 5rem auto;
+}
+
+.legal-content h2 {
+  font-family: var(--font-head);
+  font-size: 1.4rem;
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  color: var(--blade);
+  text-transform: lowercase;
+  margin: 3rem 0 1.25rem;
+}
+
+.legal-content p, .legal-content ul {
+  color: var(--steel);
+  margin-bottom: 1.5rem;
+  line-height: 1.7;
+}
+
+.legal-content ul {
+  padding-left: 1.5rem;
+}
+
+.legal-content li {
+  margin-bottom: 0.5rem;
+}
+
+.legal-content li strong {
+  color: var(--blade);
+}
+
+/* Tabla de cookies estilo Terminal */
+.legal-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 2.5rem 0;
+  text-align: left;
+}
+
+.legal-table th, 
+.legal-table td {
+  padding: 1.25rem 1rem;
+  border-bottom: 1px solid var(--ghost);
+}
+
+.legal-table th {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--blade);
+  background: var(--sheath);
+}
+
+.legal-table td {
+  font-size: 0.85rem;
+  color: var(--steel);
+}
+
+.legal-table td strong {
+  color: var(--blade);
+  font-weight: 600;
+}
+
+/* Etiquetas (Badges) */
+.badge {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 0.35rem 0.65rem;
+  border: 1px solid;
+  white-space: nowrap;
+}
+
+.badge--necesaria {
+  color: var(--spark); /* Cian */
+  border-color: rgba(0, 229, 255, 0.3);
+  background: rgba(0, 229, 255, 0.05);
+}
+
+.badge--analitica {
+  color: var(--edge); /* Magenta */
+  border-color: rgba(255, 0, 128, 0.3);
+  background: rgba(255, 0, 128, 0.05);
+}
+
+/* Navegación al pie del documento */
+.legal-footer-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  margin-top: 4rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--ghost);
+}
+
+.legal-footer-nav a {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--steel);
+  transition: color var(--t-fast);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.legal-footer-nav a:hover,
+.legal-footer-nav a.active {
+  color: var(--edge);
 }
 
 /* ═══════════════════════════════════════════════
