@@ -111,3 +111,28 @@ allLinks.forEach(link => {
     link.classList.remove('is-active');
   }
 });
+
+// --- LÓGICA DEL ACORDEÓN FAQ ---
+  const faqQuestions = document.querySelectorAll('.faq-question');
+
+  faqQuestions.forEach(question => {
+    question.addEventListener('click', () => {
+      // Encuentra el contenedor padre (faq-item)
+      const faqItem = question.parentElement;
+      
+      // Comprueba si ya está activo
+      const isActive = faqItem.classList.contains('is-active');
+
+      // Opcional: Cierra todos los demás antes de abrir este (comenta este bloque si quieres que se puedan abrir varios a la vez)
+      document.querySelectorAll('.faq-item').forEach(item => {
+        item.classList.remove('is-active');
+        item.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+      });
+
+      // Si no estaba activo, ábrelo
+      if (!isActive) {
+        faqItem.classList.add('is-active');
+        question.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
