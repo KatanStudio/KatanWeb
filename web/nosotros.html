@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Katan Studio — Webs que cortan. Código propio, precio cerrado, entrega en 10 días.">
+    <title>Katan — Sharp by Design</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;900&family=Instrument+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=DM+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- ══ NAV ══ -->
+    <header class="nav" id="nav">
+        <div class="nav__inner">
+            <a href="index.html" class="nav__brand" aria-label="Katan Studio — Inicio">
+                <svg class="nav__logo" width="36" height="36" viewBox="0 0 96 96" fill="none" aria-hidden="true">
+                    <path d="M0 0 H96 V82 L82 96 H0 Z" fill="#1E1E2A" />
+                    <path d="M82 96 L96 82" stroke="#FF0080" stroke-width="2.5" />
+                    <rect x="26" y="22" width="7" height="52" fill="#F0F4F8" />
+                    <path d="M33 48 L63 22 H72 L42 48 Z" fill="#F0F4F8" />
+                    <path d="M33 48 L63 74 H72 L42 48 Z" fill="#F0F4F8" />
+                    <circle cx="33" cy="48" r="3.5" fill="#FF0080" />
+                </svg>
+                <span class="nav__wordmark">katan</span>
+            </a>
+
+            <nav class="nav__links" aria-label="Navegación principal">
+                <a href="index.html" class="nav__link">Inicio</a>
+
+                <a href="servicios.html" class="nav__link">Servicios</a>
+                <a href="nosotros.html" class="nav__link">Por qué Katan</a>
+                <a href="proceso.html" class="nav__link">Proceso</a>
+                <a href="contacto.html" class="nav__link">Contacto</a>
+            </nav>
+
+            <a href="contacto.html" class="btn btn--primary nav__cta">Presupuesto gratis</a>
+
+            <button class="nav__hamburger" aria-label="Menú" aria-expanded="false" id="hamburger">
+                <span></span><span></span>
+            </button>
+        </div>
+
+        <!-- Mobile menu -->
+        <div class="nav__mobile" id="mobileMenu" aria-hidden="true">
+            <a href="index.html" class="nav__mobile-link">Inicio</a>
+            <a href="servicios.html" class="nav__mobile-link">Servicios</a>
+            <a href="nosotros.html" class="nav__mobile-link">Por qué Katan</a>
+            <a href="proceso.html" class="nav__mobile-link">Proceso</a>
+            <a href="contacto.html" class="nav__mobile-link">Contacto</a>
+            <a href="contacto.html" class="btn btn--primary"
+                style="margin-top:1rem;display:block;text-align:center;">Presupuesto
+                gratis</a>
+        </div>
+    </header>
+    <main>
+
+
+        <!-- ══ DIFERENCIADOR ══ -->
+        <section class="section" id="diferenciador">
+            <div class="container">
+                <header class="section__header">
+                    <p class="section-label">03 / Método</p>
+                    <h2 class="section__h2">código artesanal<br><span class="accent">vs.</span> wordpress</h2>
+                </header>
+
+                <div class="compare">
+                    <div class="compare__col compare__col--katan">
+                        <div class="compare__badge">
+                            <svg width="20" height="20" viewBox="0 0 96 96" fill="none" aria-hidden="true">
+                                <path d="M0 0 H96 V82 L82 96 H0 Z" fill="#1E1E2A" />
+                                <path d="M82 96 L96 82" stroke="#FF0080" stroke-width="3" />
+                                <rect x="26" y="22" width="7" height="52" fill="#F0F4F8" />
+                                <path d="M33 48 L63 22 H72 L42 48 Z" fill="#F0F4F8" />
+                                <path d="M33 48 L63 74 H72 L42 48 Z" fill="#F0F4F8" />
+                                <circle cx="33" cy="48" r="3.5" fill="#FF0080" />
+                            </svg>
+                            katan studio
+                        </div>
+                        <div class="compare__rows">
+                            <div class="compare__row">
+                                <span class="compare__icon compare__icon--yes">✓</span>
+                                <div>
+                                    <strong>Carga &lt;1.5s</strong>
+                                    <p>Código limpio, cero plugins innecesarios. Lo que tarda tu web es lo que pierde tu
+                                        negocio.</p>
+                                </div>
+                            </div>
+                            <div class="compare__row">
+                                <span class="compare__icon compare__icon--yes">✓</span>
+                                <div>
+                                    <strong>100% tuyo, sin licencias</strong>
+                                    <p>El código te lo entregamos. Sin renovaciones anuales, sin dependencia de
+                                        terceros.
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="compare__row">
+                                <span class="compare__icon compare__icon--yes">✓</span>
+                                <div>
+                                    <strong>Seguridad blindada</strong>
+                                    <p>Sin plugins vulnerables. Sin actualizaciones que rompen la web un lunes por la
+                                        mañana.</p>
+                                </div>
+                            </div>
+                            <div class="compare__row">
+                                <span class="compare__icon compare__icon--yes">✓</span>
+                                <div>
+                                    <strong>Precio cerrado desde el día 1</strong>
+                                    <p>El presupuesto que firmas es el que aparece en la factura. Sin letra pequeña.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="compare__sep" aria-hidden="true">
+                        <span>vs.</span>
+                    </div>
+
+                    <div class="compare__col compare__col--wp">
+                        <div class="compare__badge compare__badge--wp">WordPress / Plantillas</div>
+                        <div class="compare__rows">
+                            <div class="compare__row">
+                                <span class="compare__icon compare__icon--no">✗</span>
+                                <div>
+                                    <strong>3–8s de carga media</strong>
+                                    <p>Plugins encadenados, temas genéricos, hosting compartido. Google te penaliza en
+                                        silencio.</p>
+                                </div>
+                            </div>
+                            <div class="compare__row">
+                                <span class="compare__icon compare__icon--no">✗</span>
+                                <div>
+                                    <strong>Dependencia de licencias</strong>
+                                    <p>Tema premium, plugin de formularios, plugin de SEO, plugin de caché… cada uno con
+                                        su
+                                        renovación.</p>
+                                </div>
+                            </div>
+                            <div class="compare__row">
+                                <span class="compare__icon compare__icon--no">✗</span>
+                                <div>
+                                    <strong>43% de la web usa WP</strong>
+                                    <p>El target favorito de los atacantes. Una vulnerabilidad afecta a millones de
+                                        sitios a
+                                        la vez.</p>
+                                </div>
+                            </div>
+                            <div class="compare__row">
+                                <span class="compare__icon compare__icon--no">✗</span>
+                                <div>
+                                    <strong>Scope creep garantizado</strong>
+                                    <p>El presupuesto inicial crece con cada "solo añade este plugin" que aparece en el
+                                        camino.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Pull quote -->
+                <blockquote class="pull-quote">
+                    <p>"Tu web actual tarda 8 segundos en cargar. La nuestra tarda menos de 1.5. La diferencia no es
+                        diseño
+                        — es código."</p>
+                </blockquote>
+
+            </div>
+        </section>
+
+    </main>
+    <!-- ══ FOOTER ══ -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__inner">
+                <div class="footer__brand">
+                    <svg width="28" height="28" viewBox="0 0 96 96" fill="none" aria-hidden="true">
+                        <path d="M0 0 H96 V82 L82 96 H0 Z" fill="#1E1E2A" />
+                        <path d="M82 96 L96 82" stroke="#FF0080" stroke-width="2.5" />
+                        <rect x="26" y="22" width="7" height="52" fill="#F0F4F8" />
+                        <path d="M33 48 L63 22 H72 L42 48 Z" fill="#F0F4F8" />
+                        <path d="M33 48 L63 74 H72 L42 48 Z" fill="#F0F4F8" />
+                        <circle cx="33" cy="48" r="3.5" fill="#FF0080" />
+                    </svg>
+                    <span class="footer__wordmark">katan studio</span>
+                </div>
+                <nav class="footer__links" aria-label="Footer navigation">
+                    <a href="#servicios" class="footer__link">Servicios</a>
+                    <a href="#diferenciador" class="footer__link">Por qué Katan</a>
+                    <a href="#proceso" class="footer__link">Proceso</a>
+                    <a href="#contacto" class="footer__link">Contacto</a>
+                </nav>
+                <p class="footer__copy">
+                    <span class="footer__mono">// sharp by design</span>
+                    &nbsp;·&nbsp; © 2025 Katan Studio
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ── Nav scroll effect
+        const nav = document.getElementById('nav');
+        window.addEventListener('scroll', () => {
+            nav.classList.toggle('nav--scrolled', window.scrollY > 40);
+        }, { passive: true });
+
+        // ── Mobile menu
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobileMenu');
+        hamburger.addEventListener('click', () => {
+            const open = hamburger.getAttribute('aria-expanded') === 'true';
+            hamburger.setAttribute('aria-expanded', String(!open));
+            mobileMenu.setAttribute('aria-hidden', String(open));
+            hamburger.classList.toggle('is-open', !open);
+            mobileMenu.classList.toggle('is-open', !open);
+        });
+
+        // Close mobile menu on link click
+        mobileMenu.querySelectorAll('a').forEach(a => {
+            a.addEventListener('click', () => {
+                hamburger.setAttribute('aria-expanded', 'false');
+                mobileMenu.setAttribute('aria-hidden', 'true');
+                hamburger.classList.remove('is-open');
+                mobileMenu.classList.remove('is-open');
+            });
+        });
+
+        // ── Intersection Observer for fade-in animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    e.target.classList.add('is-visible');
+                    observer.unobserve(e.target);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+
+        document.querySelectorAll('.service-card, .module, .process__step, .compare__col, .compare__col--wp').forEach(el => {
+            el.classList.add('anim-fade');
+            observer.observe(el);
+        });
+    </script>
+</body>
+
+</html>

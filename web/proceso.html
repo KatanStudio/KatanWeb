@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Katan Studio — Webs que cortan. Código propio, precio cerrado, entrega en 10 días.">
+    <title>Katan — Sharp by Design</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;900&family=Instrument+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=DM+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- ══ NAV ══ -->
+    <header class="nav" id="nav">
+        <div class="nav__inner">
+            <a href="index.html" class="nav__brand" aria-label="Katan Studio — Inicio">
+                <svg class="nav__logo" width="36" height="36" viewBox="0 0 96 96" fill="none" aria-hidden="true">
+                    <path d="M0 0 H96 V82 L82 96 H0 Z" fill="#1E1E2A" />
+                    <path d="M82 96 L96 82" stroke="#FF0080" stroke-width="2.5" />
+                    <rect x="26" y="22" width="7" height="52" fill="#F0F4F8" />
+                    <path d="M33 48 L63 22 H72 L42 48 Z" fill="#F0F4F8" />
+                    <path d="M33 48 L63 74 H72 L42 48 Z" fill="#F0F4F8" />
+                    <circle cx="33" cy="48" r="3.5" fill="#FF0080" />
+                </svg>
+                <span class="nav__wordmark">katan</span>
+            </a>
+
+            <nav class="nav__links" aria-label="Navegación principal">
+                <a href="index.html" class="nav__link">Inicio</a>
+                <a href="servicios.html" class="nav__link">Servicios</a>
+                <a href="nosotros.html" class="nav__link">Por qué Katan</a>
+                <a href="proceso.html" class="nav__link">Proceso</a>
+                <a href="contacto.html" class="nav__link">Contacto</a>
+            </nav>
+
+            <a href="contacto.html" class="btn btn--primary nav__cta">Presupuesto gratis</a>
+
+            <button class="nav__hamburger" aria-label="Menú" aria-expanded="false" id="hamburger">
+                <span></span><span></span>
+            </button>
+        </div>
+
+        <!-- Mobile menu -->
+        <div class="nav__mobile" id="mobileMenu" aria-hidden="true">
+            <a href="index.html" class="nav__mobile-link">Inicio</a>
+            <a href="servicios.html" class="nav__mobile-link">Servicios</a>
+            <a href="nosotros.html" class="nav__mobile-link">Por qué Katan</a>
+            <a href="proceso.html" class="nav__mobile-link">Proceso</a>
+            <a href="contacto.html" class="nav__mobile-link">Contacto</a>
+            <a href="contacto.html" class="btn btn--primary"
+                style="margin-top:1rem;display:block;text-align:center;">Presupuesto
+                gratis</a>
+        </div>
+    </header>
+    <main>
+        <!-- ══ PROCESO ══ -->
+        <section class="section section--dark" id="proceso">
+            <div class="container">
+                <header class="section__header">
+                    <p class="section-label">04 / Proceso</p>
+                    <h2 class="section__h2">del brief al<br>corte final</h2>
+                    <p class="section__sub">Cuatro pasos. Sin reuniones innecesarias.</p>
+                </header>
+
+                <div class="process">
+                    <div class="process__step">
+                        <div class="process__num-wrap">
+                            <span class="process__num">01</span>
+                            <div class="process__line" aria-hidden="true"></div>
+                        </div>
+                        <div class="process__body">
+                            <h4 class="process__title">Brief</h4>
+                            <p class="process__desc">Cuéntanos qué necesitas. Un formulario de 10 preguntas que define
+                                el
+                                proyecto completo. Nada más. Nada menos.</p>
+                            <span class="process__time">Día 0</span>
+                        </div>
+                    </div>
+
+                    <div class="process__step">
+                        <div class="process__num-wrap">
+                            <span class="process__num">02</span>
+                            <div class="process__line" aria-hidden="true"></div>
+                        </div>
+                        <div class="process__body">
+                            <h4 class="process__title">Propuesta</h4>
+                            <p class="process__desc">En 24 horas te mandamos arquitectura, precio cerrado y plazo. Lo
+                                firmas
+                                y arrancamos. Sin modificaciones sorpresa.</p>
+                            <span class="process__time">Día 1</span>
+                        </div>
+                    </div>
+
+                    <div class="process__step">
+                        <div class="process__num-wrap">
+                            <span class="process__num">03</span>
+                            <div class="process__line" aria-hidden="true"></div>
+                        </div>
+                        <div class="process__body">
+                            <h4 class="process__title">Desarrollo</h4>
+                            <p class="process__desc">Construimos en código propio. Dos rondas de revisión incluidas. Tú
+                                ves
+                                los avances en un enlace privado.</p>
+                            <span class="process__time">Días 2–9</span>
+                        </div>
+                    </div>
+
+                    <div class="process__step process__step--last">
+                        <div class="process__num-wrap">
+                            <span class="process__num">04</span>
+                        </div>
+                        <div class="process__body">
+                            <h4 class="process__title">Corte Final</h4>
+                            <p class="process__desc">La web publicada, el dominio configurado, el código entregado.
+                                Hablas
+                                con quien hizo el trabajo desde el minuto uno.</p>
+                            <span class="process__time">Día 10</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+    <!-- ══ FOOTER ══ -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__inner">
+                <div class="footer__brand">
+                    <svg width="28" height="28" viewBox="0 0 96 96" fill="none" aria-hidden="true">
+                        <path d="M0 0 H96 V82 L82 96 H0 Z" fill="#1E1E2A" />
+                        <path d="M82 96 L96 82" stroke="#FF0080" stroke-width="2.5" />
+                        <rect x="26" y="22" width="7" height="52" fill="#F0F4F8" />
+                        <path d="M33 48 L63 22 H72 L42 48 Z" fill="#F0F4F8" />
+                        <path d="M33 48 L63 74 H72 L42 48 Z" fill="#F0F4F8" />
+                        <circle cx="33" cy="48" r="3.5" fill="#FF0080" />
+                    </svg>
+                    <span class="footer__wordmark">katan studio</span>
+                </div>
+                <nav class="footer__links" aria-label="Footer navigation">
+                    <a href="#servicios" class="footer__link">Servicios</a>
+                    <a href="#diferenciador" class="footer__link">Por qué Katan</a>
+                    <a href="#proceso" class="footer__link">Proceso</a>
+                    <a href="#contacto" class="footer__link">Contacto</a>
+                </nav>
+                <p class="footer__copy">
+                    <span class="footer__mono">// sharp by design</span>
+                    &nbsp;·&nbsp; © 2025 Katan Studio
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // ── Nav scroll effect
+        const nav = document.getElementById('nav');
+        window.addEventListener('scroll', () => {
+            nav.classList.toggle('nav--scrolled', window.scrollY > 40);
+        }, { passive: true });
+
+        // ── Mobile menu
+        const hamburger = document.getElementById('hamburger');
+        const mobileMenu = document.getElementById('mobileMenu');
+        hamburger.addEventListener('click', () => {
+            const open = hamburger.getAttribute('aria-expanded') === 'true';
+            hamburger.setAttribute('aria-expanded', String(!open));
+            mobileMenu.setAttribute('aria-hidden', String(open));
+            hamburger.classList.toggle('is-open', !open);
+            mobileMenu.classList.toggle('is-open', !open);
+        });
+
+        // Close mobile menu on link click
+        mobileMenu.querySelectorAll('a').forEach(a => {
+            a.addEventListener('click', () => {
+                hamburger.setAttribute('aria-expanded', 'false');
+                mobileMenu.setAttribute('aria-hidden', 'true');
+                hamburger.classList.remove('is-open');
+                mobileMenu.classList.remove('is-open');
+            });
+        });
+
+        // ── Intersection Observer for fade-in animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(e => {
+                if (e.isIntersecting) {
+                    e.target.classList.add('is-visible');
+                    observer.unobserve(e.target);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
+
+        document.querySelectorAll('.service-card, .module, .process__step, .compare__col, .compare__col--wp').forEach(el => {
+            el.classList.add('anim-fade');
+            observer.observe(el);
+        });
+    </script>
+</body>
+
+</html>
