@@ -799,7 +799,7 @@ ul {
   background: var(--sheath);
   border-left: 3px solid var(--edge);
   padding: 2rem 2.5rem;
-  max-width: 72ch;
+  max-width: 1100px;
 }
 
 .pull-quote p {
@@ -810,6 +810,61 @@ ul {
   line-height: 1.4;
   text-transform: lowercase;
   color: var(--blade);
+}
+
+/* ═══════════════════════════════════════════════
+   IMÁGENES DE EQUIPO (MARCO KATAN)
+   ═══════════════════════════════════════════════ */
+.team-img-wrap {
+  position: relative;
+  width: 140px;
+  /* Tamaño total del círculo */
+  height: 140px;
+  margin: 2rem auto 1rem;
+  /* Centrado y con espacio */
+  border-radius: 50%;
+
+  /* Crea el borde con degradado magenta -> cian */
+  padding: 3px;
+  /* Grosor del borde */
+  background: linear-gradient(135deg, var(--edge), var(--spark));
+
+  /* Sombra sutil para dar profundidad */
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+}
+
+/* Crea el fondo oscuro y la textura dentro del círculo */
+.team-img-wrap::before {
+  content: '';
+  position: absolute;
+  inset: 3px;
+  /* Se ajusta al grosor del padding */
+  border-radius: 50%;
+  background-color: var(--sheath);
+  /* Color de fondo oscuro */
+
+  /* Patrón de retícula sutil */
+  background-image:
+    linear-gradient(var(--ghost) 1px, transparent 1px),
+    linear-gradient(90deg, var(--ghost) 1px, transparent 1px);
+  background-size: 20px 20px;
+  background-position: center center;
+  opacity: 0.4;
+  /* Hacemos la retícula muy sutil */
+  z-index: 0;
+}
+
+/* Estilos de la imagen en sí */
+.team-img {
+  position: relative;
+  z-index: 1;
+  /* Por encima del fondo */
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+  /* Un pequeño borde interno oscuro para separar la foto del marco de color */
+  border: 4px solid var(--forge);
 }
 
 /* ═══════════════════════════════════════════════
@@ -967,7 +1022,8 @@ ul {
    ═══════════════════════════════════════════════ */
 .footer {
   border-top: 1px solid var(--ghost);
-  padding: 2rem 0 4.5rem; /* El padding de 8rem es para dejar sitio al banner de cookies */
+  padding: 2rem 0 4.5rem;
+  /* El padding de 8rem es para dejar sitio al banner de cookies */
   background: var(--sheath);
   position: relative;
 }
@@ -975,7 +1031,8 @@ ul {
 .footer__inner {
   display: flex;
   flex-direction: column;
-  align-items: center; /* 👈 Esto centra todo el bloque de contenido */
+  align-items: center;
+  /* 👈 Esto centra todo el bloque de contenido */
   gap: 1.5rem;
   text-align: center;
 }
@@ -984,7 +1041,8 @@ ul {
 .footer__row {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center; /* 👈 Esto centra los links y textos en la misma línea */
+  justify-content: center;
+  /* 👈 Esto centra los links y textos en la misma línea */
   align-items: center;
   gap: 1rem;
 }
@@ -1032,7 +1090,7 @@ ul {
 .footer__bottom {
   display: flex;
   flex-direction: column;
-  align-items: center; 
+  align-items: center;
   gap: 1.5rem;
   width: 100%;
 }
@@ -1048,7 +1106,7 @@ ul {
 .footer__legal-links {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center; 
+  justify-content: center;
   align-items: center;
   gap: 0.75rem;
 }
@@ -1057,6 +1115,7 @@ ul {
   color: var(--ghost);
   font-size: 0.8rem;
 }
+
 .footer__copy {
   font-family: var(--font-mono);
   font-size: 0.65rem;
@@ -1100,7 +1159,9 @@ ul {
 }
 
 @media (min-width: 640px) {
-  .form-row { grid-template-columns: 1fr 1fr; }
+  .form-row {
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
 .form-group {
@@ -1132,7 +1193,9 @@ ul {
   transition: border-color var(--t-fast), box-shadow var(--t-fast);
 }
 
-.katan-form textarea { resize: vertical; }
+.katan-form textarea {
+  resize: vertical;
+}
 
 .katan-form input:focus,
 .katan-form textarea:focus,
@@ -1151,7 +1214,9 @@ ul {
 }
 
 @media (min-width: 768px) {
-  .radio-grid { grid-template-columns: repeat(3, 1fr); }
+  .radio-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 .radio-card {
@@ -1186,12 +1251,12 @@ ul {
   color: var(--steel);
 }
 
-.radio-card input:checked + .card-content {
+.radio-card input:checked+.card-content {
   border-color: var(--edge);
   background: rgba(255, 0, 128, 0.05);
 }
 
-.radio-card input:checked + .card-content .title {
+.radio-card input:checked+.card-content .title {
   color: var(--edge);
 }
 
@@ -1204,7 +1269,9 @@ ul {
 }
 
 @media (min-width: 640px) {
-  .checkbox-grid { grid-template-columns: 1fr 1fr; }
+  .checkbox-grid {
+    grid-template-columns: 1fr 1fr;
+  }
 }
 
 .check-box {
@@ -1345,7 +1412,8 @@ ul {
   font-family: var(--font-mono);
   font-size: 0.65rem;
   letter-spacing: 0.15em;
-  color: var(--spark); /* Cian */
+  color: var(--spark);
+  /* Cian */
   text-transform: uppercase;
 }
 
@@ -1527,7 +1595,8 @@ ul {
 }
 
 .legal-content {
-  max-width: 760px; /* Ancho optimizado para lectura cómoda */
+  max-width: 760px;
+  /* Ancho optimizado para lectura cómoda */
   margin: 0 auto 5rem auto;
 }
 
@@ -1541,7 +1610,8 @@ ul {
   margin: 3rem 0 1.25rem;
 }
 
-.legal-content p, .legal-content ul {
+.legal-content p,
+.legal-content ul {
   color: var(--steel);
   margin-bottom: 1.5rem;
   line-height: 1.7;
@@ -1567,7 +1637,7 @@ ul {
   text-align: left;
 }
 
-.legal-table th, 
+.legal-table th,
 .legal-table td {
   padding: 1.25rem 1rem;
   border-bottom: 1px solid var(--ghost);
@@ -1604,13 +1674,15 @@ ul {
 }
 
 .badge--necesaria {
-  color: var(--spark); /* Cian */
+  color: var(--spark);
+  /* Cian */
   border-color: rgba(0, 229, 255, 0.3);
   background: rgba(0, 229, 255, 0.05);
 }
 
 .badge--analitica {
-  color: var(--edge); /* Magenta */
+  color: var(--edge);
+  /* Magenta */
   border-color: rgba(255, 0, 128, 0.3);
   background: rgba(255, 0, 128, 0.05);
 }
