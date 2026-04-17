@@ -127,7 +127,6 @@ ul {
   font-weight: 900;
   letter-spacing: -0.05em;
   line-height: 0.95;
-  text-transform: lowercase;
 }
 
 .section__sub {
@@ -572,7 +571,6 @@ ul {
   font-weight: 900;
   letter-spacing: -0.04em;
   line-height: 0.95;
-  text-transform: lowercase;
   color: var(--blade);
 }
 
@@ -937,7 +935,7 @@ ul {
   font-weight: 900;
   letter-spacing: -0.05em;
   line-height: 0.9;
-  text-transform: lowercase;
+  text-transfrm: lowercase;
 }
 
 .cta-section__sub {
@@ -1222,6 +1220,153 @@ ul {
   accent-color: var(--edge);
   width: 1rem;
   height: 1rem;
+}
+
+/* ═══════════════════════════════════════════════
+   PORTFOLIO
+   ═══════════════════════════════════════════════ */
+/* Filtros */
+.portfolio-filters {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-bottom: 3rem;
+}
+
+.filter-btn {
+  background: transparent;
+  border: none;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  color: var(--steel);
+  text-transform: uppercase;
+  cursor: pointer;
+  padding-bottom: 0.25rem;
+  position: relative;
+  transition: color var(--t-fast);
+}
+
+.filter-btn::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--edge);
+  transition: width var(--t-mid);
+}
+
+.filter-btn:hover {
+  color: var(--blade);
+}
+
+.filter-btn.is-active {
+  color: var(--edge);
+}
+
+.filter-btn.is-active::after {
+  width: 100%;
+}
+
+/* Cuadrícula */
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+@media (min-width: 768px) {
+  .portfolio-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Tarjetas de Proyecto */
+.portfolio-card {
+  display: block;
+  background: var(--forge);
+  border: 1px solid var(--ghost);
+  overflow: hidden;
+  position: relative;
+  transition: border-color var(--t-mid), transform var(--t-mid);
+}
+
+.portfolio-card:hover {
+  border-color: rgba(255, 0, 128, 0.4);
+  transform: translateY(-4px);
+}
+
+.portfolio-card__img-wrap {
+  position: relative;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  background: var(--sheath);
+  border-bottom: 1px solid var(--ghost);
+}
+
+.portfolio-card__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.portfolio-card:hover .portfolio-card__img {
+  transform: scale(1.05);
+}
+
+.portfolio-card__overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 10, 10, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity var(--t-mid);
+  backdrop-filter: blur(2px);
+}
+
+.portfolio-card:hover .portfolio-card__overlay {
+  opacity: 1;
+}
+
+.portfolio-card__info {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.portfolio-card__tag {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  color: var(--spark); /* Cian */
+  text-transform: uppercase;
+}
+
+.portfolio-card__title {
+  font-family: var(--font-head);
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  text-transform: lowercase;
+  color: var(--blade);
+}
+
+.portfolio-card__metric {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--steel);
+}
+
+/* Utilidad para JavaScript (ocultar tarjetas) */
+.portfolio-card.is-hidden {
+  display: none;
 }
 
 /* ═══════════════════════════════════════════════

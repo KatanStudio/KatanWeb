@@ -71,3 +71,30 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
 });
+
+// ─── LÓGICA DEL PORTFOLIO ───
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const portfolioCards = document.querySelectorAll('.portfolio-card');
+
+  if (filterBtns.length > 0 && portfolioCards.length > 0) {
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        // 1. Quitar clase active de todos los botones
+        filterBtns.forEach(b => b.classList.remove('is-active'));
+        // 2. Añadir clase active al botón clicado
+        btn.classList.add('is-active');
+
+        // 3. Obtener el filtro seleccionado (landing, corporate, ecommerce, all)
+        const filterValue = btn.getAttribute('data-filter');
+
+        // 4. Mostrar/Ocultar tarjetas
+        portfolioCards.forEach(card => {
+          if (filterValue === 'all' || card.getAttribute('data-category') === filterValue) {
+            card.classList.remove('is-hidden');
+          } else {
+            card.classList.add('is-hidden');
+          }
+        });
+      });
+    });
+  }
