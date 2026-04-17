@@ -702,28 +702,64 @@ ul {
   font-family: var(--font-head);
   font-size: 1rem;
   font-weight: 900;
-  color: var(--edge);
+  color: var(--spark);
   letter-spacing: -0.03em;
 }
 
-.module--recurring .module__price {
-  color: var(--spark);
-}
 
 .module__title {
   font-family: var(--font-head);
-  font-size: 1rem;
+  font-size: 1.3rem;
   font-weight: 900;
-  color: var(--edge);
+  color: var(--blade);
   letter-spacing: -0.03em;
 }
 
 .module__desc {
-  font-size: 0.82rem;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
   color: var(--steel);
   line-height: 1.65;
 }
 
+.module__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--ghost);
+}
+
+.module__link {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  color: var(--edge);
+  transition: letter-spacing var(--t-fast), color var(--t-fast);
+}
+
+.module__link:hover {
+  letter-spacing: 0.15em;
+  color: var(--blade);
+}
+
+.module--recurring .module__link {
+  color: var(--spark);
+}
+
+/* Grid responsivo: 2 columnas en tablet, 3 en desktop */
+@media (min-width: 640px) {
+  .modules-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .modules-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
 
 /* ═══════════════════════════════════════════════
    WIREFRAMES DE SERVICIOS (BOCETOS UI)
