@@ -258,7 +258,7 @@ ul {
 .nav__wordmark {
   font-family: var(--font-head);
   font-weight: 900;
-  font-size: 1rem;
+  font-size: 1.5rem;
   letter-spacing: -0.05em;
   text-transform: lowercase;
   color: var(--blade);
@@ -270,7 +270,7 @@ ul {
 }
 
 .nav__link {
-  font-size: 0.8rem;
+  font-size: 1.0rem;
   color: var(--steel);
   transition: color var(--t-fast);
 }
