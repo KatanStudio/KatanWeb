@@ -970,9 +970,13 @@ ul {
 /* ═══════════════════════════════════════════════
    FOOTER
    ═══════════════════════════════════════════════ */
+/* ═══════════════════════════════════════════════
+   FOOTER (Centrado)
+   ═══════════════════════════════════════════════ */
 .footer {
   border-top: 1px solid var(--ghost);
-  padding: 4rem 0 3rem;
+  padding: 4rem 0 8rem;
+  /* El padding de 8rem es para dejar sitio al banner de cookies */
   background: var(--sheath);
   position: relative;
 }
@@ -980,13 +984,85 @@ ul {
 .footer__inner {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  /* 👈 Esto centra todo el bloque de contenido */
   gap: 1.5rem;
+  text-align: center;
 }
 
 /* Filas generales */
 .footer__row {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
+  /* 👈 Esto centra los links y textos en la misma línea */
+  align-items: center;
+  gap: 1rem;
+}
+
+/* Tipografía de la marca */
+.footer__brand {
+  font-family: var(--font-head);
+  font-weight: 900;
+  font-size: 1.2rem;
+  letter-spacing: -0.05em;
+  text-transform: lowercase;
+  color: var(--blade);
+}
+
+.footer__tagline {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--steel);
+}
+
+/* Elementos de contacto y texto */
+.footer__link,
+.footer__text {
+  font-size: 0.85rem;
+  color: var(--steel);
+  transition: color var(--t-fast);
+}
+
+.footer__link:hover {
+  color: var(--blade);
+}
+
+/* El punto separador al estilo Katan (Magenta) */
+.footer__dot {
+  width: 4px;
+  height: 4px;
+  background-color: var(--edge);
+  border-radius: 50%;
+  display: inline-block;
+}
+
+
+/* ═══════════════════════════════════════════════
+   FOOTER (Centrado)
+   ═══════════════════════════════════════════════ */
+.footer {
+  border-top: 1px solid var(--ghost);
+  padding: 4rem 0 8rem; /* El padding de 8rem es para dejar sitio al banner de cookies */
+  background: var(--sheath);
+  position: relative;
+}
+
+.footer__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* 👈 Esto centra todo el bloque de contenido */
+  gap: 1.5rem;
+  text-align: center;
+}
+
+/* Filas generales */
+.footer__row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* 👈 Esto centra los links y textos en la misma línea */
   align-items: center;
   gap: 1rem;
 }
@@ -1034,10 +1110,9 @@ ul {
 .footer__bottom {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
-  margin-top: 2rem;
-  padding-top: 2rem;
-  border-top: 1px solid var(--ghost);
+  align-items: center; 
+  gap: 1.5rem;
+  width: 100%;
 }
 
 .footer__copy {
@@ -1051,6 +1126,28 @@ ul {
 .footer__legal-links {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center; 
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.footer__pipe {
+  color: var(--ghost);
+  font-size: 0.8rem;
+}
+.footer__copy {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  color: var(--steel);
+  text-transform: uppercase;
+}
+
+.footer__legal-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  /* 👈 Centra los tres links legales */
   align-items: center;
   gap: 0.75rem;
 }
@@ -1069,11 +1166,10 @@ ul {
   left: 0;
   width: 100%;
   background: var(--forge);
-  border-top: 2px solid var(--edge); /* Borde superior magenta para destacar */
+  border-top: 2px solid var(--edge);
   z-index: 999;
   padding: 1.5rem 0;
-  box-shadow: 0 -10px 40px rgba(0,0,0,0.5);
-  /* Usa display: none; o clases .oculto en JS para esconderlo */
+  box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.5);
   transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
   will-change: transform;
 }
@@ -1104,7 +1200,8 @@ ul {
   font-family: var(--font-mono);
   font-size: 0.7rem;
   letter-spacing: 0.05em;
-  color: var(--spark); /* Enlace en color cian */
+  color: var(--spark);
+  /* Enlace en color cian */
   text-transform: uppercase;
   text-decoration: underline;
   text-underline-offset: 4px;
@@ -1123,13 +1220,13 @@ ul {
     justify-content: space-between;
     align-items: center;
   }
-  
+
   .cookies-banner__inner {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
   }
-  
+
   .cookies-banner__text {
     max-width: 65ch;
   }
