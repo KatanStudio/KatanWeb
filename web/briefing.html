@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Proyecto — Katan Studio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Unbounded:wght@400;700;900&family=Instrument+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <nav class="nav nav--scrolled">
+        <div class="nav__inner">
+            <a href="index.html" class="nav__brand">
+                <span class="nav__wordmark">katan</span>
+            </a>
+            <a href="index.html" class="btn btn--ghost" style="font-size: 0.7rem;">← Volver</a>
+        </div>
+    </nav>
+
+    <div class="container" style="padding-top: 8rem; max-width: 800px;">
+        <div class="legal-hero" style="border-bottom: none; padding-bottom: 1rem;">
+            <p class="kicker">// project initialization</p>
+            <h1 class="legal-h1">briefing.</h1>
+            <p class="section__sub">Datos precisos. Presupuesto exacto. Rellena esto y te enviamos la propuesta en menos
+                de 24 horas.</p>
+        </div>
+
+        <form action="" method="POST" class="katan-form">
+
+            <fieldset>
+                <legend class="kicker" style="color: var(--steel);">01 // Identificación</legend>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Nombre o Empresa <span class="accent">*</span></label>
+                        <input type="text" name="Nombre" placeholder="Ej: Acme Corp" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Email <span class="accent">*</span></label>
+                        <input type="email" name="Email" placeholder="contacto@empresa.com" required>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>¿A qué te dedicas y qué vendes? <span class="accent">*</span></label>
+                    <textarea name="Negocio" rows="3"
+                        placeholder="Ve al grano. ¿Cuál es tu producto o servicio principal?" required></textarea>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend class="kicker" style="color: var(--steel);">02 // Arquitectura</legend>
+
+                <div class="form-group">
+                    <label>¿Qué nivel de servicio necesitas? <span class="accent">*</span></label>
+                    <div class="radio-grid">
+                        <label class="radio-card">
+                            <input type="radio" name="Servicio" value="Landing Page" required>
+                            <div class="card-content">
+                                <span class="title">01 / Landing Page</span>
+                                <span class="desc">1 sola URL. Conversión pura. (Desde 350€)</span>
+                            </div>
+                        </label>
+                        <label class="radio-card">
+                            <input type="radio" name="Servicio" value="Web Corporativa">
+                            <div class="card-content">
+                                <span class="title">02 / Web Corporativa</span>
+                                <span class="desc">Multipágina. Autoridad. (Desde 750€)</span>
+                            </div>
+                        </label>
+                        <label class="radio-card">
+                            <input type="radio" name="Servicio" value="E-Commerce / App">
+                            <div class="card-content">
+                                <span class="title">03 / E-Commerce / App</span>
+                                <span class="desc">Transacciones y negocio. (Desde 1.400€)</span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Módulos de precisión adicionales (Opcional)</label>
+                    <div class="checkbox-grid">
+                        <label class="check-box"><input type="checkbox" name="Extras" value="Formulario Multipaso">
+                            Formulario Multipaso avanzado</label>
+                        <label class="check-box"><input type="checkbox" name="Extras" value="Sistema de Reservas">
+                            Sistema de Reservas / Calendario</label>
+                        <label class="check-box"><input type="checkbox" name="Extras" value="Blog CMS"> Integración de
+                            Blog (CMS estático)</label>
+                        <label class="check-box"><input type="checkbox" name="Extras" value="Multiidioma"> Arquitectura
+                            Multiidioma</label>
+                        <label class="check-box"><input type="checkbox" name="Extras" value="Copywriting"> Copywriting
+                            (Redacción de textos)</label>
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend class="kicker" style="color: var(--steel);">03 // Materiales</legend>
+
+                <div class="form-group">
+                    <label>¿Tienes identidad visual y textos preparados?</label>
+                    <select name="Materiales" required>
+                        <option value="" disabled selected>Selecciona una opción...</option>
+                        <option value="Todo listo">Tengo logo, colores, fotos y textos definitivos.</option>
+                        <option value="A medias">Tengo logo, pero necesito ayuda con textos o fotos.</option>
+                        <option value="Nada">No tengo nada, partimos de cero.</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Referencias visuales</label>
+                    <textarea name="Referencias" rows="2"
+                        placeholder="Pega aquí URLs de webs que te gusten (o que odies)."></textarea>
+                </div>
+            </fieldset>
+
+            <fieldset style="border-bottom: none;">
+                <legend class="kicker" style="color: var(--steel);">04 // Ejecución</legend>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label>Plazo estimado</label>
+                        <select name="Plazo">
+                            <option value="Estándar">Estándar (3-4 semanas)</option>
+                            <option value="Urgente">Urgente (Menos de 15 días)</option>
+                            <option value="Sin prisa">Sin prisa (Fecha flexible)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Presupuesto disponible <span class="accent">*</span></label>
+                        <select name="Presupuesto" required>
+                            <option value="" disabled selected>Selecciona horquilla...</option>
+                            <option value="Menos de 350€">Menos de 350€ (No encaja con Katan)</option>
+                            <option value="350€ - 750€">350€ - 750€</option>
+                            <option value="750€ - 1.400€">750€ - 1.400€</option>
+                            <option value="Más de 1.400€">Más de 1.400€</option>
+                        </select>
+                    </div>
+                </div>
+            </fieldset>
+
+            <button type="submit" class="btn btn--primary btn--large" style="width: 100%; margin-top: 2rem;">Enviar
+                especificaciones</button>
+
+        </form>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
