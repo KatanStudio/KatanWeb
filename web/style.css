@@ -280,7 +280,8 @@ ul {
 }
 
 .nav__link.is-active {
-  color: var(--edge); /* Se pinta de magenta */
+  color: var(--edge);
+  /* Se pinta de magenta */
   font-weight: 600;
 }
 
@@ -302,7 +303,7 @@ ul {
   padding-left: 1rem;
   background: rgba(255, 0, 128, 0.05);
 }
- 
+
 .nav__cta {
   display: none;
 }
@@ -668,6 +669,259 @@ ul {
 }
 
 /* ═══════════════════════════════════════════════
+   INTRODUCCIÓN SERVICIOS
+   ═══════════════════════════════════════════════ */
+.services-intro-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 4rem;
+  align-items: center;
+  margin-bottom: 3rem;
+}
+
+@media (min-width: 900px) {
+  .services-intro-grid {
+    grid-template-columns: 1.2fr 0.8fr;
+    /* Da un poco más de espacio al texto */
+    gap: 6rem;
+  }
+}
+
+.services-intro__p {
+  font-size: 1rem;
+  color: var(--steel);
+  line-height: 1.7;
+  margin-bottom: 2rem;
+  max-width: 65ch;
+}
+
+.services-intro__p strong {
+  color: var(--blade);
+  font-weight: 600;
+}
+
+.services-intro__h3 {
+  font-family: var(--font-head);
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--blade);
+  margin: 3rem 0 1rem;
+  text-transform: lowercase;
+}
+
+/* Lista estilo Katan */
+.services-intro__list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  margin: 2.5rem 0;
+  padding: 2rem;
+  background: var(--forge);
+  border: 1px solid var(--ghost);
+  border-left: 3px solid var(--edge);
+}
+
+.services-intro__list li {
+  font-size: 0.95rem;
+  color: var(--steel);
+  position: relative;
+  padding-left: 1.5rem;
+  line-height: 1.6;
+}
+
+.services-intro__list li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--spark);
+  /* Usamos el cian para variar */
+  font-family: var(--font-mono);
+  font-weight: bold;
+}
+
+.services-intro__list li strong {
+  color: var(--blade);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  display: block;
+  /* Pone el título en una línea y la desc. debajo */
+  margin-bottom: 0.2rem;
+}
+
+/* ── Elemento Visual Abstracto ── */
+.services-intro__visual {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  min-height: 300px;
+}
+
+.katan-abstract-art {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  aspect-ratio: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.abstract-svg {
+  width: 80%;
+  height: 80%;
+  position: relative;
+  z-index: 2;
+  animation: floatSlow 6s ease-in-out infinite;
+}
+
+.visual-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 50%;
+  height: 50%;
+  background: radial-gradient(circle, rgba(255, 0, 128, 0.15) 0%, transparent 70%);
+  filter: blur(20px);
+  z-index: 1;
+}
+
+/* Animaciones sutiles para el SVG */
+@keyframes floatSlow {
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+
+  50% {
+    transform: translateY(-10px) rotate(2deg);
+  }
+
+  100% {
+    transform: translateY(0) rotate(0deg);
+  }
+}
+
+.svg-pulse {
+  animation: pulseOpacity 3s infinite;
+}
+
+.svg-pulse-delay {
+  animation: pulseOpacity 3s infinite;
+  animation-delay: 1.5s;
+}
+
+@keyframes pulseOpacity {
+
+  0%,
+  100% {
+    opacity: 0.3;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+/* ═══════════════════════════════════════════════
+   TABLA DE ESPECIFICACIONES (SPECS)
+   ═══════════════════════════════════════════════ */
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin-top: 2rem;
+  border: 1px solid var(--ghost);
+  background: var(--sheath);
+}
+
+.specs-table {
+  width: 100%;
+  min-width: 760px;
+  /* Asegura que no se aplaste en móviles */
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.specs-table th,
+.specs-table td {
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid var(--ghost);
+  font-size: 0.95rem;
+  color: var(--blade);
+}
+
+.specs-table th {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--blade);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  background: var(--forge);
+  border-bottom: 2px solid var(--ghost);
+}
+
+.specs-table tbody tr:hover td {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+/* Columna Destacada (Profesional) */
+.specs-table .col-highlight {
+  background: rgba(255, 0, 128, 0.03);
+  /* Fondo magenta ultra sutil */
+  border-left: 1px solid rgba(255, 0, 128, 0.2);
+  border-right: 1px solid rgba(255, 0, 128, 0.2);
+}
+
+.specs-table th.col-highlight {
+  border-top: 2px solid var(--edge);
+  /* Borde superior fuerte */
+  color: var(--edge);
+  background: rgba(255, 0, 128, 0.05);
+}
+
+.specs-table tbody tr:hover td.col-highlight {
+  background: rgba(255, 0, 128, 0.06);
+}
+
+/* Tipografía de la tabla */
+.specs-table td strong {
+  color: var(--spark);
+  font-weight: 600;
+}
+
+.check-yes {
+  color: var(--edge);
+  /* Cian para los ticks */
+  font-weight: bold;
+  font-size: 1rem;
+}
+
+.check-no {
+  color: var(--steel);
+  opacity: 0.3;
+}
+
+.specs-price {
+  font-family: var(--font-head);
+  font-size: 1.25rem;
+  font-weight: 900;
+  color: var(--blade);
+  letter-spacing: -0.02em;
+}
+
+/* Ocultar borde inferior en la última fila */
+.specs-table tfoot td {
+  border-bottom: none;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5rem;
+}
+
+/* ═══════════════════════════════════════════════
    MODULES GRID
    ═══════════════════════════════════════════════ */
 .modules-grid {
@@ -771,7 +1025,8 @@ ul {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: -2.5rem -2.5rem 2rem -2.5rem; /* Compensa el padding de la tarjeta */
+  margin: -2.5rem -2.5rem 2rem -2.5rem;
+  /* Compensa el padding de la tarjeta */
   position: relative;
   overflow: hidden;
 }
@@ -797,6 +1052,7 @@ ul {
   transform: translateY(-5px);
   opacity: 1;
 }
+
 /* ═══════════════════════════════════════════════
    COMPARE
    ═══════════════════════════════════════════════ */
@@ -1042,6 +1298,7 @@ ul {
   letter-spacing: 0.15em;
   text-transform: uppercase;
 }
+
 .process-grid {
   display: grid;
   grid-template-columns: 1fr;
@@ -1055,11 +1312,12 @@ ul {
   .process-grid {
     grid-template-columns: repeat(4, 1fr);
   }
-  
+
   .process-grid::before {
     content: '';
     position: absolute;
-    top: 2.5rem; /* Altura donde están los números */
+    top: 2.5rem;
+    /* Altura donde están los números */
     left: 2rem;
     right: 2rem;
     height: 1px;
@@ -1073,7 +1331,8 @@ ul {
   border: 1px solid var(--ghost);
   padding: 2.5rem 2rem;
   position: relative;
-  z-index: 1; /* Para quedar por encima de la línea conectora */
+  z-index: 1;
+  /* Para quedar por encima de la línea conectora */
   transition: border-color var(--t-mid), transform var(--t-mid), box-shadow var(--t-mid);
 }
 
@@ -1111,7 +1370,8 @@ ul {
   font-size: 1.25rem;
   color: var(--edge);
   font-weight: 700;
-  background: var(--sheath); /* Tapa la línea de atrás */
+  background: var(--sheath);
+  /* Tapa la línea de atrás */
   padding-right: 15px;
 }
 
@@ -1119,7 +1379,8 @@ ul {
   font-family: var(--font-mono);
   font-size: 0.65rem;
   letter-spacing: 0.15em;
-  color: var(--spark); /* Cian */
+  color: var(--spark);
+  /* Cian */
   text-transform: uppercase;
   background: rgba(0, 229, 255, 0.05);
   padding: 0.25rem 0.5rem;
@@ -1133,7 +1394,7 @@ ul {
   color: var(--blade);
   margin-bottom: 1rem;
   /* 👇 ESTA LÍNEA FUERZA LA PRIMERA LETRA MAYÚSCULA 👇 */
-  text-transform: capitalize; 
+  text-transform: capitalize;
 }
 
 .process-card__desc {
@@ -1141,6 +1402,7 @@ ul {
   color: var(--steel);
   line-height: 1.7;
 }
+
 /* ═══════════════════════════════════════════════
    CTA SECTION
    ═══════════════════════════════════════════════ */
