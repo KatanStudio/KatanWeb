@@ -7,6 +7,7 @@ const NAV_LINKS = [
   { to: '/portfolio', label: 'Portfolio' },
   { to: '/nosotros', label: 'Por qué Katan' },
   { to: '/proceso', label: 'Proceso' },
+  { to: '/Faq', label: 'FAQ' },
   { to: '/contacto', label: 'Contacto' },
 ]
 
@@ -34,6 +35,7 @@ export default function Header() {
 
   useEffect(() => {
     setMenuOpen(false)
+    window.scrollTo({ top: 0, behavior: 'instant' })
   }, [location.pathname])
 
   const isActive = (to) => {

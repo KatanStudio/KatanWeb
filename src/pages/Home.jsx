@@ -137,8 +137,7 @@ export default function Home() {
               Ingeniería web de<br /><span className="hero__h1-accent">alta precisión.</span>
             </h1>
             <p className="hero__sub">
-              Tu web no es un folleto, es tu activo digital de mayor valor. Desarrollo web avanzado con código puro,
-              velocidad extrema y cero relleno.
+              Tu web no es un folleto, es el escaparate más importante de tu negocio. <br /> Creamos páginas confiables para convertir usuarios en clientes.
             </p>
             <div className="hero__actions">
               <Link to="/servicios" className="btn btn--primary btn--chamfer">Nuestros servicios</Link>
@@ -152,16 +151,16 @@ export default function Home() {
               <span className="stat__label">Carga Garantizada</span>
             </div>
             <div className="stat">
-              <span className="stat__num">100%</span>
-              <span className="stat__label">Código Propio</span>
+              <span className="stat__num">0</span>
+              <span className="stat__label">Plantillas usadas</span>
             </div>
             <div className="stat">
               <span className="stat__num">100%</span>
               <span className="stat__label">Proyectos a tiempo</span>
             </div>
             <div className="stat">
-              <span className="stat__num">10d</span>
-              <span className="stat__label">Tiempo de Entrega</span>
+              <span className="stat__num">365d</span>
+              <span className="stat__label">Soporte y mantenimiento</span>
             </div>
           </div>
         </section>
@@ -191,16 +190,18 @@ export default function Home() {
             <div className="modules-grid">
               <AnimFade className="module">
                 <span className="module__price">01</span>
-                <h3 className="module__title" style={{ textTransform: 'lowercase', margin: '0.5rem 0' }}>velocidad letal</h3>
+                <h3 className="module__title" style={{ margin: '0.5rem 0' }}>Velocidad letal</h3>
                 <p className="module__desc">
-                  Optimizamos cada línea de código para garantizar cargas inferiores a 1.5 segundos. Porque en internet,
-                  cada segundo extra de espera es un cliente que se va a tu competencia.
+
+                  ¿A quién le gusta esperar? <br /> El tiempo de tus clientes vale dinero. 
+                  Si tu web tarda en abrir, se van a la competencia. 
+                  Hacemos que no se te escape ni una sola oportunidad de venta.
                 </p>
               </AnimFade>
 
               <AnimFade className="module module--recurring">
                 <span className="module__price">02</span>
-                <h3 className="module__title" style={{ textTransform: 'lowercase', margin: '0.5rem 0' }}>código propietario</h3>
+                <h3 className="module__title" style={{ margin: '0.5rem 0' }}>Código propio</h3>
                 <p className="module__desc">
                   Sin constructores visuales limitantes, sin decenas de plugins vulnerables y sin renovaciones de licencias
                   sorpresa. El código que construimos es 100% tuyo desde el primer día.
@@ -209,10 +210,10 @@ export default function Home() {
 
               <AnimFade className="module">
                 <span className="module__price">03</span>
-                <h3 className="module__title" style={{ textTransform: 'lowercase', margin: '0.5rem 0' }}>cero burocracia</h3>
+                <h3 className="module__title" style={{ margin: '0.5rem 0' }}>Cero burocracia</h3>
                 <p className="module__desc">
-                  No tenemos "Account Managers" ni te hacemos perder el tiempo. Presupuesto cerrado en 24h. Hablas
-                  directamente con los dos ingenieros que pican tu código.
+                  No tenemos "Account Managers" ni te hacemos perder el tiempo. Presupuesto cerrado en 48h. Hablas
+                  directamente con los encargados de tu proyecto.
                 </p>
               </AnimFade>
             </div>
@@ -251,7 +252,7 @@ export default function Home() {
               <p className="kicker kicker--center">// Contáctanos</p>
               <h2 className="cta-section__h2" style={{ textTransform: 'none' }}>¿Empezamos?</h2>
               <p className="cta-section__sub">
-                Presupuesto cerrado en 24h. Sin letra pequeña. Sin reuniones eternas. Hablas directamente con los
+                Presupuesto cerrado en 48h. Sin letra pequeña. Sin reuniones eternas. Hablas directamente con los
                 desarrolladores, nosotros picamos el código.
               </p>
               <div className="cta-actions">

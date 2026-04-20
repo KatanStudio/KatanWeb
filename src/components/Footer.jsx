@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 export default function Footer() {
@@ -31,11 +31,11 @@ export default function Footer() {
         <div className="footer__bottom">
           <p className="footer__copy">© 2026 Katan Studio · Todos los derechos reservados</p>
           <div className="footer__legal-links">
-            <a href="/legal/aviso-legal.html" className="footer__link">Aviso Legal</a>
+            <Link to="/legal/aviso-legal" className="footer__link">Aviso Legal</Link>
             <span className="footer__pipe">|</span>
-            <a href="/legal/privacidad.html" className="footer__link">Política de Privacidad</a>
+            <Link to="/legal/privacidad" className="footer__link">Política de Privacidad</Link>
             <span className="footer__pipe">|</span>
-            <a href="/legal/cookies.html" className="footer__link">Política de Cookies</a>
+            <Link to="/legal/cookies" className="footer__link">Política de Cookies</Link>
           </div>
         </div>
       </div>
@@ -51,7 +51,7 @@ export default function Footer() {
               Sin rastreadores innecesarios.
             </p>
             <div className="cookies-banner__actions">
-              <a href="/legal/cookies.html" className="cookies-banner__link">Más información</a>
+              <Link to="/legal/cookies" className="cookies-banner__link">Más información</Link>
               <button
                 id="btn-aceptar-cookies"
                 className="btn btn--primary btn--chamfer"

@@ -11,7 +11,7 @@ const PROJECTS = [
     alt: 'Proyecto 1',
     tag: 'Landing Page',
     title: 'Xylos Home',
-    metric: 'Carga: 0.8s',
+    metric: 'Identidad corporativa, copywritting y maquetación de la web',
     external: true,
   },
   {
@@ -78,7 +78,7 @@ export default function Portfolio() {
               </p>
               <h2 className="section__h2" style={{ textTransform: 'none' }}>Trabajos reales.</h2>
               <p className="section__sub" style={{ margin: '1rem auto 0' }}>
-                No enseñamos plantillas ni "demos". Enseñamos negocios que facturan gracias a una arquitectura
+                Ayudamos a negocios a facturar gracias a nuestra arquitectura
                 limpia y rápida.
               </p>
             </header>

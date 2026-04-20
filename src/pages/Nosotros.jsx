@@ -21,7 +21,7 @@ export default function Nosotros() {
               <p className="section__sub" style={{ maxWidth: '60ch', fontSize: '1.1rem', marginTop: '1.5rem' }}>
                 No somos una agencia tradicional llena de burocracia, reuniones inútiles y plantillas
                 recicladas. Somos Katan: un estudio independiente formado por dos desarrolladores. Tú hablas con nosotros,
-                nosotros escribimos el código.
+                nosotros te ayudamos a llevar a cabo tu  proyecto en la web.
               </p>
             </header>
 
@@ -66,9 +66,8 @@ export default function Nosotros() {
               <h3 className="module__price" style={{ marginBottom: '1rem' }}>Nuestra experiencia en la trinchera</h3>
               <p className="module__desc" style={{ fontSize: '0.95rem' }}>
                 Llevamos a la espalda numerosos proyectos sin un solo cliente que haya tenido que recurrir a mantenimiento de
-                emergencia o negocios perdiendo dinero porque su web tarda 8 segundos en cargar o
-                porque un plugin se rompió el fin de semana.
-                <br /><br />
+                emergencia o negocios perdiendo dinero.
+                <br />
                 Por eso fundamos Katan. Para ofrecer una alternativa premium, basada en <strong> código
                   artesanal, seguridad nativa y velocidades extremas</strong>. No inventamos la rueda,
                 simplemente la construimos con la máxima precisión.
@@ -102,7 +101,7 @@ export default function Nosotros() {
                     { title: 'Carga <1.5s', desc: 'Código limpio, cero plugins innecesarios. Lo que tarda tu web es lo que pierde tu negocio.' },
                     { title: '100% tuyo, sin licencias', desc: 'El código te lo entregamos. Sin renovaciones anuales, sin dependencia de terceros.' },
                     { title: 'Seguridad blindada', desc: 'Sin plugins vulnerables. Sin actualizaciones que rompen la web un lunes por la mañana.' },
-                    { title: 'Precio cerrado desde el día 1', desc: 'El presupuesto que firmas es el que aparece en la factura. Sin letra pequeña.' },
+                    { title: 'Precio cerrado desde el comienzo', desc: 'El presupuesto que firmas es el que aparece en la factura. Sin letra pequeña.' },
                   ].map((row) => (
                     <div key={row.title} className="compare__row">
                       <span className="compare__icon compare__icon--yes">✓</span>
@@ -123,7 +122,7 @@ export default function Nosotros() {
                   {[
                     { title: '3–8s de carga media', desc: 'Plugins encadenados, temas genéricos, hosting compartido. Google te penaliza en silencio.' },
                     { title: 'Dependencia de licencias', desc: 'Tema premium, plugin de formularios, plugin de SEO, plugin de caché… cada uno con su renovación.' },
-                    { title: '43% de la web usa WP', desc: 'El target favorito de los atacantes. Una vulnerabilidad afecta a millones de sitios a la vez.' },
+                    { title: '43% de la web usa WordPress o plantillas genéricas', desc: 'El target favorito de los atacantes. Una vulnerabilidad afecta a millones de sitios a la vez.' },
                     { title: 'Scope creep garantizado', desc: 'El presupuesto inicial crece con cada "solo añade este plugin" que aparece en el camino.' },
                   ].map((row) => (
                     <div key={row.title} className="compare__row">
@@ -138,8 +137,8 @@ export default function Nosotros() {
               </div>
             </div>
 
-            <blockquote className="pull-quote">
-              <p>"Tu web actual tarda 8 segundos en cargar. La nuestra tarda menos de 1.5. La diferencia no es diseño — es código."</p>
+            <blockquote className="pull-quote" >
+              <p>"Hacemos que tu página se convierta en una herramienta útil para tu día a día, atrayendo a las personas que de verdad buscan tus servicios."</p>
             </blockquote>
           </div>
         </section>

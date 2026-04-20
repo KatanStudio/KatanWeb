@@ -32,15 +32,15 @@ export default function Servicios() {
                 <ul className="services-intro__list">
                   <li>
                     <strong>Vendes un servicio único o captas posibles clientes:</strong>
-                    Tu sistema es la <span style={{ color: 'var(--blade)', fontWeight: 600 }}>Landing Page</span>. Una única URL diseñada matemáticamente para la conversión pura. Cero distracciones, un solo objetivo.
+                    Tu sistema es la <span style={{ color: 'var(--blade)', fontWeight: 600 }}>Landing Page</span>. Una única página diseñada matemáticamente para la conversión pura. Cero distracciones, un solo objetivo.
                   </li>
                   <li>
-                    <strong>Buscas autoridad y posicionamiento SEO:</strong>
-                    Tu sistema es la <span style={{ color: 'var(--blade)', fontWeight: 600 }}>Web Corporativa</span>. Tu sede digital completa. Múltiples páginas, arquitectura profunda y un blog integrado para dominar Google en tu sector.
+                    <strong>Buscas imagen profesional y aparecer en las búsquedas:</strong>
+                    Tu sistema es la <span style={{ color: 'var(--blade)', fontWeight: 600 }}>Web Corporativa</span>, tu oficina en internet. Varias secciones para detallar todo lo que haces, transmitir confianza y conseguir que Google te recomiende en tu sector.
                   </li>
                   <li>
-                    <strong>Tu objetivo es transaccionar en automático:</strong>
-                    Tu sistema es el <span style={{ color: 'var(--blade)', fontWeight: 600 }}>E-Commerce &amp; App</span>. Una máquina de ventas robusta, con pasarelas de pago integradas y control total de tu inventario sin pagar comisiones a terceros.
+                    <strong>Quieres generar mientras duermes:</strong>
+                    Tu sistema es el <span style={{ color: 'var(--blade)', fontWeight: 600 }}>E-Commerce &amp; App</span>. Una máquina de ventas robusta, con pasarelas de pago integradas con cobros seguros y control total de lo que tienes en el almacén.
                   </li>
                 </ul>
 
@@ -93,8 +93,8 @@ export default function Servicios() {
                   <span className="service-card__num">01</span>
                   <span className="service-card__tag">/ Landing Page</span>
                 </div>
-                <h3 className="service-card__title">landing<br />page</h3>
-                <p className="service-card__desc">Ideal para profesionales y negocios que necesitan una presencia online sólida, rápida y orientada a la conversión.</p>
+                <h3 className="service-card__title">Landing<br />Page</h3>
+                <p className="service-card__desc">Ideal para profesionales y negocios que necesitan una presencia online sólida, rápida y orientada a generar clientes.</p>
                 <ul className="service-card__features">
                   <li>1 a 3 páginas (Inicio, Servicios, Contacto)</li>
                   <li>Diseño responsive UI/UX a medida</li>
@@ -130,8 +130,8 @@ export default function Servicios() {
                   <span className="service-card__num">02</span>
                   <span className="service-card__tag">/ Web Corporativa</span>
                 </div>
-                <h3 className="service-card__title">web<br />corporativa</h3>
-                <p className="service-card__desc">Para empresas que necesitan una sede digital completa, con blog, SEO avanzado y múltiples secciones estructuradas.</p>
+                <h3 className="service-card__title">Web<br />Corporativa</h3>
+                <p className="service-card__desc">Para empresas que necesitan una sede digital completa, con blog, posicionamiento avanzado y múltiples secciones estructuradas.</p>
                 <ul className="service-card__features">
                   <li>5 a 10 páginas diseñadas a medida</li>
                   <li>Blog integrado y categorizado</li>
@@ -169,8 +169,8 @@ export default function Servicios() {
                   <span className="service-card__num">03</span>
                   <span className="service-card__tag">/ E-Commerce &amp; App</span>
                 </div>
-                <h3 className="service-card__title">e-commerce<br />&amp; app</h3>
-                <p className="service-card__desc">Solución completa para vender online. Catálogo ilimitado, pasarela de pagos y gestión de envíos sin fricción.</p>
+                <h3 className="service-card__title">E-commerce<br />&amp; App</h3>
+                <p className="service-card__desc">Solución completa para vender online. Catálogo ilimitado, pasarela de pagos y gestión de envíos.</p>
                 <ul className="service-card__features">
                   <li>Catálogo de productos escalable</li>
                   <li>Pasarela de pago (Stripe, PayPal, Redsys)</li>
@@ -208,7 +208,7 @@ export default function Servicios() {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr><td><strong>Número de páginas</strong></td><td>Hasta 5 URLs</td><td className="col-highlight">Hasta 10 URLs</td><td>Ilimitadas</td></tr>
+                  <tr><td><strong>Número de páginas</strong></td><td>Hasta 5 páginas</td><td className="col-highlight">Hasta 10 páginas</td><td>Ilimitadas</td></tr>
                   <tr><td><strong>Diseño a medida</strong></td><td>100% Personalizado</td><td className="col-highlight">100% Personalizado</td><td>100% Personalizado</td></tr>
                   <tr><td><strong>Diseño Responsive</strong></td><td><span className="check-yes">✓</span></td><td className="col-highlight"><span className="check-yes">✓</span></td><td><span className="check-yes">✓</span></td></tr>
                   <tr><td><strong>SEO On-Page</strong></td><td>Básico</td><td className="col-highlight">Avanzado (Schema)</td><td>Avanzado + Rich Snippets</td></tr>
@@ -248,7 +248,7 @@ export default function Servicios() {
                 { title: 'Integraciones API', desc: 'Conectamos con HubSpot, Notion, Mailchimp o Slack. Los contactos van directo a tu flujo, sin intervención manual.', price: '100–200 €' },
                 { title: 'Diseño de logotipo', desc: 'Identidad visual completa: logo, tipografías y paleta de colores. Tu marca con personalidad propia desde el día 1.', price: 'Desde 150 €' },
                 { title: 'Multiidioma', desc: 'Tu web en otro idioma. Traducción técnica del sitio manteniendo la velocidad de carga, sin plugins de terceros.', price: 'Desde 120 €/idioma' },
-                { title: 'Mantenimiento & Hosting', desc: 'Servidores CDN global, SSL activo y cambios de texto incluidos. Tú solo te preocupas del negocio.', price: '250–350 €/año' },
+                { title: 'Mantenimiento', desc: 'Servidores CDN global, SSL activo y cambios de texto incluidos. Tú solo te preocupas del negocio.', price: '250–350 €/año' },
               ].map((mod) => (
                 <div key={mod.title} className="module">
                   <Link to="/contacto" className="module__link">
