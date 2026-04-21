@@ -3,6 +3,9 @@ import { Helmet } from 'react-helmet-async'
 import { Link } from 'react-router-dom'
 import Header from '../components/Header.jsx'
 import Footer from '../components/Footer.jsx'
+import HeroCarousel from '../components/HeroCarousel.jsx'
+
+
 
 // ── Service data ────────────────────────────────────────────────
 const SERVICES = [
@@ -238,13 +241,8 @@ export default function Servicios() {
 
       <main>
         {/* ── Hero interactivo ── */}
-<section className="section" id="servicios-selector" style={{ paddingTop: '8rem', borderTop: 'none' }}>
-  <div className="container">
-    <header className="sectionheader" style={{ marginBottom: '2rem' }}>
-      
-    </header>
-    <ServiceSelector />
-  </div>
+<section id="servicios-selector" style={{ paddingTop: '0', borderTop: 'none' }}>
+  <HeroCarousel />
 </section>
 
         {/* ── Cards detalle (se mantienen) ── */}
