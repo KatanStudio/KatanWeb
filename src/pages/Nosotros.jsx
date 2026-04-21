@@ -37,7 +37,7 @@ export default function Nosotros() {
                   </div>
                   <h3 className="service-card__title" style={{ margin: '1.5rem 0 0.5rem' }}>Adrián Lozano</h3>
                   <p className="service-card__desc">
-                    Graduado en ADE (UCLM) y desarrollador web (DAW). Como responsable de UI/UX y Negocio, traduzco tus 
+                    Graduado en ADE (UCLM) y desarrollador web (DAW). Como responsable de Experiencia e Interfaz de Usuario (UI/UX) y Negocio, traduzco tus 
                     objetivos comerciales a código de alto rendimiento. Mi cometido es eliminar cualquier 
                     obstáculo entre tu cliente y la venta mediante interfaces limpias y arquitectura lógica.
                   </p>
