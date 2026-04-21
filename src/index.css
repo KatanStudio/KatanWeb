@@ -2331,6 +2331,94 @@ FAQ PAGE ═══════════════════════�
 }
 
 /* ═══════════════════════════════════════════════
+   CONTACTO HERO (Página específica)
+   ═══════════════════════════════════════════════ */
+.contacto-hero {
+  position: relative;
+  /* Altura mínima para ocupar la pantalla entera restando el navbar */
+  min-height: calc(100vh - 4.5rem); 
+  display: flex;
+  align-items: center;
+  padding: 8rem 0 5rem; /* 8rem arriba para salvar el Header fixed */
+  background: var(--forge);
+  overflow: hidden;
+}
+
+.contacto-hero__bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 5%;
+}
+
+.contacto-hero__k {
+  width: clamp(250px, 45vw, 600px);
+  height: auto;
+  opacity: 0.03;
+  transform: translateX(10%); /* Desplaza un poco la K hacia el borde derecho */
+}
+
+.contacto-hero__content {
+  position: relative;
+  z-index: 2;
+  max-width: 650px; /* Acota el texto para que no sea muy ancho en escritorio */
+}
+
+.contacto-hero__h1 {
+  font-family: var(--font-head);
+  font-size: clamp(2.5rem, 6vw, 4.5rem);
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  line-height: 1.05;
+  color: var(--blade);
+  margin-bottom: 1.5rem;
+}
+
+.contacto-hero__sub {
+  font-size: 1.15rem;
+  color: var(--steel);
+  line-height: 1.6;
+  margin-bottom: 2.5rem;
+}
+
+.contacto-hero__note {
+  margin-top: 1.5rem;
+  font-size: 0.85rem;
+  color: var(--steel);
+}
+
+.contacto-hero__email {
+  color: var(--spark);
+  font-family: var(--font-mono);
+  transition: color var(--t-fast);
+}
+
+.contacto-hero__email:hover {
+  color: var(--blade);
+}
+
+/* Ajuste para móvil */
+@media (max-width: 767px) {
+  .contacto-hero {
+    min-height: auto;
+    padding: 8rem 0 6rem;
+  }
+  
+  .contacto-hero__bg {
+    justify-content: center;
+    padding-right: 0;
+  }
+  
+  .contacto-hero__k {
+    transform: translateX(0);
+  }
+}
+
+/* ═══════════════════════════════════════════════
    FOOTER
    ═══════════════════════════════════════════════ */
 .footer {

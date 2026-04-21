@@ -233,8 +233,7 @@ export default function FAQ() {
 
         {/* ── Contenido principal ── */}
         <section className="faq-page-body">
-          <div className="glow-orb orb-faq-1"></div>
-            <div className="glow-orb orb-faq-2"></div>
+        
           <div className="container faq-page-body__inner">
 
             {/* Sidebar de categorías */}
