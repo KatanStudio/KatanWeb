@@ -176,7 +176,7 @@ export default function Proceso() {
                   y en que la primera vez que te enseñamos algo ya tiene que impresionarte.
                 </p>
                 <p style={{ marginTop: '1rem' }}>
-                  Si estás en <strong>Toledo, Madrid</strong> o alrededpres, nos reunimos en persona.
+                  Si estás en <strong>Toledo, Madrid</strong> o alrededores, nos reunimos en persona.
                   Si no, por videollamada. Siempre con algo concreto que enseñarte, nunca a mano vacía.
                 </p>
               </div>
