@@ -224,27 +224,6 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="faq-section" id="faq">
-          <div className="faq__visual" aria-hidden="true">
-            <div className="glow-orb orb-faq-1"></div>
-            <div className="glow-orb orb-faq-2"></div>
-            <div className="mesh-overlay"></div>
-          </div>
-
-          <div className="container faq__container">
-            <header className="section__header" style={{ textAlign: 'center' }}>
-              <p className="section-label" style={{ justifyContent: 'center' }}>
-                <span style={{ flex: 0, marginRight: '1rem' }}>/ FAQ</span>
-              </p>
-              <h2 className="section__h2" style={{ textTransform: 'lowercase' }}>
-                preguntas<br /><span className="accent">frecuentes.</span>
-              </h2>
-            </header>
-
-            <FaqAccordion />
-          </div>
-        </section>
-
         <section className="cta-section" id="contacto">
           <div className="cta-section__glow" aria-hidden="true"></div>
           <div className="container cta-section__container">

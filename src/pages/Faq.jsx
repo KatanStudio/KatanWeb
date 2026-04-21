@@ -233,6 +233,8 @@ export default function FAQ() {
 
         {/* ── Contenido principal ── */}
         <section className="faq-page-body">
+          <div className="glow-orb orb-faq-1"></div>
+            <div className="glow-orb orb-faq-2"></div>
           <div className="container faq-page-body__inner">
 
             {/* Sidebar de categorías */}
@@ -278,6 +280,7 @@ export default function FAQ() {
                 aria-hidden={activeCategory !== 'todas'}
               >
                 <header className="faq-page-section__header">
+                  
                   <p className="section-label" style={{ marginBottom: '0.5rem' }}>00 / Vista general</p>
                   <h2 className="faq-page-section__title">Todas las preguntas</h2>
                 </header>
@@ -342,6 +345,8 @@ export default function FAQ() {
               </div>
             </div>
           </div>
+          <div className="glow-orb orb-faq-1"></div>
+            <div className="glow-orb orb-faq-2"></div>
         </section>
 
       </main>

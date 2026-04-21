@@ -406,11 +406,11 @@ ul {
 .glow-orb {
   position: absolute;
   border-radius: 50%;
-  filter: blur(100px);
+  filter: blur(600px);
   opacity: 0.5;
   mix-blend-mode: screen;
   animation: floatOrb 18s ease-in-out infinite alternate;
-   pointer-events: none;
+  pointer-events: none;
 }
 
 .orb-1 {
@@ -646,7 +646,6 @@ FAQ PAGE ═══════════════════════�
   padding: 8rem 0 5rem;
   overflow: hidden;
   background: var(--forge);
-  border-bottom: 1px solid var(--ghost);
 }
 
 .faq-page-hero__inner {
