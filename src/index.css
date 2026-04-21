@@ -3317,3 +3317,362 @@ FAQ PAGE ═══════════════════════�
   outline: 2px solid var(--edge);
   outline-offset: 3px;
 }
+
+/* ═══════════════════════════════════════════════
+   SERVICE SELECTOR (Hero Integrado)
+   ═══════════════════════════════════════════════ */
+.svc-selector {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.svc-tabs {
+  display: flex;
+  gap: 0;
+  border-bottom: none;
+  overflow-x: auto;
+  scrollbar-width: none;
+  background: var(--sheath);
+  border-radius: 8px 8px 0 0;
+  border: 1px solid var(--ghost);
+  border-bottom: none;
+}
+
+.svc-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.svc-tab {
+  flex: 1;
+  min-width: 140px;
+  padding: 1.25rem;
+  background: transparent;
+  border: none;
+  border-top: 2px solid transparent;
+  cursor: pointer;
+  transition: all var(--t-fast);
+  text-align: center;
+  color: var(--steel);
+}
+
+.svc-tab:hover {
+  background: rgba(255, 255, 255, 0.02);
+  color: var(--blade);
+}
+
+.svc-tab--active {
+  background: var(--forge);
+  border-top-color: var(--edge);
+  color: var(--blade);
+}
+
+.svc-tab__label {
+  font-family: var(--font-head);
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+/* Panel Visual a pantalla completa */
+.svc-panel {
+  position: relative;
+  min-height: 500px;
+  border-radius: 0 0 12px 12px;
+  overflow: hidden;
+  border: 1px solid var(--ghost);
+  animation: svcFadeIn 0.5s ease both;
+  display: flex;
+}
+
+@keyframes svcFadeIn {
+  from { opacity: 0; transform: scale(0.98); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+.svc-panel__bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.svc-panel__bg svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* Viñeteado oscuro para que el texto resalte */
+.svc-panel__overlay {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, rgba(10, 10, 15, 0.4) 0%, rgba(10, 10, 15, 0.95) 100%);
+  pointer-events: none;
+}
+
+/* Contenido interno (Posicionamiento Absoluto + Flex) */
+.svc-panel__content {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  padding: 2.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.svc-panel__top-left {
+  max-width: 320px;
+  margin-bottom: auto; /* Empuja el resto hacia el centro */
+}
+
+.svc-panel__intro {
+  font-size: 1.05rem;
+  color: rgba(255,255,255,0.8);
+  line-height: 1.6;
+}
+
+.svc-panel__center {
+  margin: auto; /* Se centra perfectamente en la caja sobrante */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 2rem;
+}
+
+.svc-panel__huge-title {
+  font-family: var(--font-head);
+  font-size: clamp(3rem, 7vw, 5.5rem);
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  color: var(--blade);
+  line-height: 1;
+  text-shadow: 0 10px 30px rgba(0,0,0,0.5); /* Efecto dramático */
+}
+
+.svc-panel__actions {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.svc-panel__price {
+  font-family: var(--font-mono);
+  font-size: 1.2rem;
+  color: var(--blade);
+}
+
+.svc-panel__price span {
+  font-size: 0.75rem;
+  color: var(--steel);
+}
+
+@media (min-width: 900px) {
+  .svc-panel {
+    min-height: 600px; /* Más inmersivo en escritorio */
+  }
+  .svc-panel__content {
+    padding: 3.5rem;
+  }
+}
+/* ═══════════════════════════════════════════════
+   EXTRAS MARQUEE (Sprint 02)
+   ═══════════════════════════════════════════════ */
+.extras-marquee {
+  overflow-x: clip;
+  overflow-y: visible;
+  -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+  mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+}
+
+.extras-marquee__track {
+  display: flex;
+  gap: 1rem;
+  width: max-content;
+  animation: scrollExtras 48s linear infinite;
+  align-items: flex-start;
+}
+
+.extras-marquee__track--paused {
+  animation-play-state: paused;
+}
+
+@keyframes scrollExtras {
+  from { transform: translateX(0); }
+  to   { transform: translateX(calc(-50% - 0.5rem)); }
+}
+
+.extras-badge {
+  flex-shrink: 0;
+  width: fit-content; 
+
+  /* width: max-content; */
+
+  padding: 0 20px; 
+  box-sizing: border-box;
+  background: var(--forge);
+  border: 1px solid var(--edge);
+  transition: border-color var(--t-fast), background var(--t-fast);
+}
+
+.extras-badge:hover,
+.extras-badge--open {
+  background: #11111A;
+  border-color: rgba(255, 0, 128, 0.35);
+}
+
+.extras-badge__face {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.3rem;
+  padding: 1rem 1.25rem 0.85rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+}
+
+.extras-badge__title {
+  font-family: var(--font-head);
+  font-size: 0.88rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  text-transform: lowercase;
+  color: var(--blade);
+}
+
+.extras-badge__price {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  letter-spacing: 0.08em;
+  color: var(--edge);
+}
+
+.extras-badge__body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.28s ease;
+}
+
+.extras-badge--open .extras-badge__body {
+  max-height: 160px;
+}
+
+.extras-badge__desc {
+  font-size: 0.78rem;
+  color: var(--steel);
+  line-height: 1.55;
+  padding: 0 1.25rem 0.5rem;
+}
+
+.extras-badge__cta {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--edge);
+  padding: 0.4rem 1.25rem 1rem;
+  transition: color var(--t-fast);
+}
+
+.extras-badge__cta:hover {
+  color: var(--blade);
+}
+
+/* ═══════════════════════════════════════════════
+   CONTACTO HERO
+   ═══════════════════════════════════════════════ */
+.contacto-hero {
+  position: relative;
+  padding: 9rem 0 6rem;
+  overflow: hidden;
+}
+
+.contacto-hero__bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.contacto-hero__k {
+  position: absolute;
+  right: -4rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: clamp(200px, 35vw, 420px);
+  opacity: 0.04;
+}
+
+.contacto-hero__content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.25rem;
+}
+
+.contacto-hero__h1 {
+  font-family: var(--font-head);
+  font-size: clamp(3rem, 8vw, 6rem);
+  font-weight: 900;
+  letter-spacing: -0.05em;
+  line-height: 0.95;
+  color: var(--blade);
+}
+
+.contacto-hero__sub {
+  font-size: 1rem;
+  color: var(--steel);
+  max-width: 46ch;
+  line-height: 1.65;
+}
+
+.contacto-hero__note {
+  font-size: 0.85rem;
+  color: var(--steel);
+}
+
+.contacto-hero__email {
+  color: var(--edge);
+  transition: color var(--t-fast);
+}
+
+.contacto-hero__email:hover {
+  color: var(--blade);
+}
+
+/* ═══════════════════════════════════════════════
+   RESPONSIVE — SERVICE SELECTOR + EXTRAS
+   ═══════════════════════════════════════════════ */
+@media (min-width: 900px) {
+  .svc-panel {
+    min-height: 460px;
+  }
+
+  .svc-panel__content {
+    min-height: 460px;
+    max-width: 500px;
+    padding: 3rem;
+  }
+
+  .svc-panel__overlay {
+    background: linear-gradient(
+      115deg,
+      rgba(7, 7, 15, 0.97) 0%,
+      rgba(7, 7, 15, 0.88) 28%,
+      rgba(7, 7, 15, 0.45) 52%,
+      rgba(7, 7, 15, 0.04) 100%
+    );
+  }
+
+  .svc-tab {
+    padding: 1.25rem 2rem;
+  }
+}
