@@ -76,7 +76,7 @@ export default function Portfolio() {
               <p className="section-label" style={{ justifyContent: 'center' }}>
                 <span style={{ flex: 0, marginRight: '1rem' }}>/Portfolio</span>
               </p>
-              <h2 className="section__h2" style={{ textTransform: 'none' }}>Trabajos reales.</h2>
+              <h2 className="section__h2" style={{ textTransform: 'none' }}>Nuestros clientes.</h2>
               <p className="section__sub" style={{ margin: '1rem auto 0' }}>
                 Ayudamos a negocios a facturar gracias a nuestra arquitectura
                 limpia y rápida.

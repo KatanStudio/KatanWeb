@@ -37,9 +37,9 @@ export default function Nosotros() {
                   </div>
                   <h3 className="service-card__title" style={{ margin: '1.5rem 0 0.5rem' }}>Adrián Lozano</h3>
                   <p className="service-card__desc">
-                    Graduado en ADE (UCLM) y desarrollador web (DAW). Fusiono la estrategia comercial con la
-                    ejecución técnica. Mi obsesión es que la interfaz no solo tenga un código impecable, sino
-                    que cargue en &lt;1.5s y esté diseñada matemáticamente para vender.
+                    Graduado en ADE (UCLM) y desarrollador web (DAW). Como responsable de UI/UX y Negocio, traduzco tus 
+                    objetivos comerciales a código de alto rendimiento. Mi cometido es eliminar cualquier 
+                    obstáculo entre tu cliente y la venta mediante interfaces limpias y arquitectura lógica.
                   </p>
                 </div>
               </a>
@@ -54,15 +54,16 @@ export default function Nosotros() {
                   </div>
                   <h3 className="service-card__title" style={{ margin: '1.5rem 0 0.5rem' }}>Alejandro Quintana</h3>
                   <p className="service-card__desc">
-                    Graduado en Ingeniería Informática (UCLM) y curtido en gestión de proyectos ágiles (Scrum).
-                    Especialista en la estructura profunda. Construyo arquitectura escalable, bases de datos
-                    eficientes y lógica compleja para que tu sistema funcione sin fisuras.
+                    Graduado en Ingeniería Informática (UCLM) y curtido en gestión de proyectos ágiles (Scrum). 
+                    Especialista en la estructura profunda del código. En Katan, construyo arquitecturas escalables, 
+                    bases de datos eficientes y lógica compleja. Escribo el software para que tu sistema soporte el crecimiento de 
+                    tu negocio, sin errores y sin fisuras.
                   </p>
                 </div>
               </a>
             </div>
 
-            <div className="module module--recurring" style={{ maxWidth: '1100px' }}>
+            <div className="module module--recurring" style={{ maxWidth: '100%' }}>
               <h3 className="module__price" style={{ marginBottom: '1rem' }}>Nuestra experiencia en la trinchera</h3>
               <p className="module__desc" style={{ fontSize: '0.95rem' }}>
                 Llevamos a la espalda numerosos proyectos sin un solo cliente que haya tenido que recurrir a mantenimiento de
