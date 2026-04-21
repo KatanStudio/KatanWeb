@@ -774,10 +774,13 @@ FAQ PAGE ═══════════════════════�
 
 .faq-page-nav__cat-label {
   font-family: var(--font-mono);
-  font-size: 0.58rem;
+  font-size: 0.8rem;
   letter-spacing: 0.15em;
   text-transform: uppercase;
+  font-weight: 900;
   color: var(--edge);
+  opacity: 100%;
+  
 }
 
 .faq-page-nav__item.is-active .faq-page-nav__cat-label {
@@ -788,6 +791,7 @@ FAQ PAGE ═══════════════════════�
   font-family: var(--font-body);
   font-size: 0.9rem;
   font-weight: 600;
+  text-transform: none;
   color: var(--steel);
   transition: color var(--t-fast);
 }
@@ -841,7 +845,7 @@ FAQ PAGE ═══════════════════════�
   font-weight: 900;
   color: var(--blade);
   letter-spacing: -0.04em;
-  text-transform: lowercase;
+  text-transform: none;
 }
 
 /* Mobile: mostrar todas las categorías */
@@ -1815,11 +1819,26 @@ FAQ PAGE ═══════════════════════�
 .process-card {
   background: var(--sheath);
   border: 1px solid var(--ghost);
-  padding: 2.5rem 2rem;
+  padding: 1rem 1.5rem;
   position: relative;
   z-index: 1;
-  transition: border-color var(--t-mid), transform var(--t-mid), box-shadow var(--t-mid);
+  /* Hover transitions + entrada animada */
+  transition: border-color var(--t-mid), transform var(--t-mid), box-shadow var(--t-mid),
+              opacity 0.55s ease, translate 0.55s ease;
+  opacity: 0;
+  translate: 0 28px;
 }
+
+.process-card.is-visible {
+  opacity: 1;
+  translate: 0 0;
+}
+
+.process-card.is-visible:nth-child(1) { transition-delay: 0s;    }
+.process-card.is-visible:nth-child(2) { transition-delay: 0.1s;  }
+.process-card.is-visible:nth-child(3) { transition-delay: 0.2s;  }
+.process-card.is-visible:nth-child(4) { transition-delay: 0.3s;  }
+.process-card.is-visible:nth-child(5) { transition-delay: 0.4s;  }
 
 .process-card:hover {
   border-color: rgba(255, 0, 128, 0.5);
@@ -2988,7 +3007,7 @@ FAQ PAGE ═══════════════════════�
   }
 
   .process-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(1, 1fr);
   }
 }
 
@@ -3098,11 +3117,11 @@ FAQ PAGE ═══════════════════════�
   }
 
   .process-grid {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(2, 1fr);
   }
 
   .process-grid::before {
-    content: '';
+    content: none;
     position: absolute;
     top: 2.5rem;
     left: 2rem;
@@ -3167,6 +3186,12 @@ FAQ PAGE ═══════════════════════�
   .anim-fade {
     opacity: 1;
     transform: none;
+  }
+
+  /* Cards visibles inmediatamente si el usuario prefiere sin movimiento */
+  .process-card {
+    opacity: 1;
+    translate: 0 0;
   }
 }
 

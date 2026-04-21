@@ -35,6 +35,16 @@ const FAQ_CATEGORIES = [
         question: '¿Qué pasarelas de pago incluís en los E-Commerce?',
         answer: 'Integramos la infraestructura financiera más robusta del mercado: Stripe (para cobros con tarjeta, Apple Pay y Google Pay con cero fricción) y PayPal. Si tu mercado principal es España, también te dejamos funcionando Redsys para pagos directos y Bizum.',
       },
+      {
+        num: '06',
+        question: '¿La web funcionará bien en móvil?',
+        answer: 'Siempre. Desarrollamos con una filosofía mobile-first: primero diseñamos para el móvil y luego escalamos a pantallas más grandes. No es un "extra responsivo", es parte del proceso base desde el primer día.',
+      },
+      {
+        num: '07',
+        question: '¿Qué velocidad de carga puedo esperar?',
+        answer: 'En proyectos estándar obtenemos puntuaciones de 95–100 en Google Lighthouse. Al no depender de WordPress ni plugins pesados, el código que se envía al navegador es quirúrgicamente preciso. La mayoría de nuestras webs cargan en menos de 1.2 segundos en conexiones normales.',
+      },
     ],
   },
   {
@@ -61,6 +71,11 @@ const FAQ_CATEGORIES = [
         num: '04',
         question: '¿Cómo funciona el pago?',
         answer: 'Trabajamos con un pago dividido en dos partes: 50% al firmar el presupuesto y 50% en la entrega final. Sin sorpresas, sin pagos intermedios inesperados.',
+      },
+      {
+        num: '05',
+        question: '¿Ofrecéis descuentos para startups o proyectos sin ánimo de lucro?',
+        answer: 'Valoramos cada caso. Si tienes un proyecto con impacto social claro o estás en una fase muy temprana de startup, escríbenos y lo hablamos. No tenemos una política fija de descuentos porque cada proyecto es diferente, pero nunca cerramos la conversación sin escuchar.',
       },
     ],
   },
@@ -94,6 +109,11 @@ const FAQ_CATEGORIES = [
         question: '¿Qué necesito tener preparado para empezar?',
         answer: 'Principalmente: textos de tu negocio, imágenes o fotos (si las tienes), y claridad sobre qué quieres conseguir con la web. Si no tienes algo de esto, te orientamos. Cuanto más completo llegues al briefing, más rápido y preciso será el resultado.',
       },
+      {
+        num: '06',
+        question: '¿Qué pasa si no tengo textos ni fotos todavía?',
+        answer: 'El proyecto se pausa hasta tenerlos. El plazo de 10 días empieza a contar cuando tenemos todos los materiales. Te avisamos en el briefing para que lo planifiques, pero no podemos construir sobre un vacío. Si necesitas orientación para los textos, te ayudamos a estructurarlos.',
+      },
     ],
   },
   {
@@ -121,17 +141,37 @@ const FAQ_CATEGORIES = [
         question: '¿Tenéis portfolio de proyectos anteriores?',
         answer: 'Sí. Puedes verlo en la sección Portfolio de la web. Si quieres ver algo específico o tienes preguntas sobre algún proyecto, escríbenos directamente.',
       },
+      {
+        num: '05',
+        question: '¿Firmáis un NDA si mi proyecto es confidencial?',
+        answer: 'Por supuesto. Si tu proyecto requiere confidencialidad, firmamos un acuerdo de no divulgación antes de que compartas cualquier detalle sensible. La discreción es parte del trato, no un extra.',
+      },
     ],
   },
 ]
 
-function FaqItem({ item }) {
+// Todas las preguntas aplanadas con su categoría como contexto
+const ALL_ITEMS = FAQ_CATEGORIES.flatMap((cat) =>
+  cat.items.map((item) => ({ ...item, categoryLabel: cat.label, categoryTitle: cat.title }))
+)
+
+const NAV_CATEGORIES = [
+  { id: 'todas', label: 'Todas', title: 'Todas las preguntas' },
+  ...FAQ_CATEGORIES,
+]
+
+function FaqItem({ item, showCategory = false }) {
   const [open, setOpen] = useState(false)
   return (
     <div className={`faq-item${open ? ' is-active' : ''}`}>
       <button className="faq-question" aria-expanded={open} onClick={() => setOpen(!open)}>
-        <span className="faq-num">{item.num}</span>
-        <span className="faq-text">{item.question}</span>
+        {!showCategory && <span className="faq-num">{item.num}</span>}
+        <span className="faq-text">
+          {showCategory && (
+            <span className="faq-category-tag">{item.categoryTitle}</span>
+          )}
+          {item.question}
+        </span>
         <span className="faq-icon"></span>
       </button>
       <div className="faq-answer">
@@ -141,10 +181,13 @@ function FaqItem({ item }) {
   )
 }
 
-export default function FAQ() {
-  const [activeCategory, setActiveCategory] = useState('tecnologia')
+const INITIAL_VISIBLE = 7
 
-  const totalQuestions = FAQ_CATEGORIES.reduce((acc, cat) => acc + cat.items.length, 0)
+export default function FAQ() {
+  const [activeCategory, setActiveCategory] = useState('todas')
+  const [showAll, setShowAll] = useState(false)
+
+  const totalQuestions = ALL_ITEMS.length
 
   return (
     <>
@@ -157,12 +200,12 @@ export default function FAQ() {
 
       <main>
 
-        {/* ── Hero ── */}
+        {/* ── Hero — sin mesh-overlay, solo orbs ── */}
         <section className="faq-page-hero">
           <div className="faq__visual" aria-hidden="true">
             <div className="glow-orb orb-faq-1"></div>
             <div className="glow-orb orb-faq-2"></div>
-            <div className="mesh-overlay"></div>
+            {/* mesh-overlay eliminado del hero: era demasiado invasivo */}
           </div>
           <div className="container faq-page-hero__inner">
             <div>
@@ -171,7 +214,7 @@ export default function FAQ() {
                 Todo lo que<br /><span className="accent">necesitas saber.</span>
               </h1>
               <p className="section__sub" style={{ marginTop: '1.25rem' }}>
-                Sin letra pequeña, sin evasivas. Aquí están las respuestas a todo
+                Sin evasivas. Aquí están las respuestas a todo
                 lo que suelen preguntarnos antes de arrancar un proyecto.
               </p>
             </div>
@@ -195,15 +238,26 @@ export default function FAQ() {
             {/* Sidebar de categorías */}
             <nav className="faq-page-nav" aria-label="Categorías FAQ">
               <p className="faq-page-nav__label">Categorías</p>
-              {FAQ_CATEGORIES.map((cat) => (
+
+              {NAV_CATEGORIES.map((cat) => (
                 <button
                   key={cat.id}
                   className={`faq-page-nav__item${activeCategory === cat.id ? ' is-active' : ''}`}
                   onClick={() => setActiveCategory(cat.id)}
                 >
-                  <span className="faq-page-nav__cat-label">{cat.label}</span>
-                  <span className="faq-page-nav__cat-title">{cat.title}</span>
-                  <span className="faq-page-nav__count">{cat.items.length}</span>
+                  {cat.id === 'todas' ? (
+                    <>
+                      <span className="faq-page-nav__cat-label">00 / Vista general</span>
+                      <span className="faq-page-nav__cat-title">Todas las preguntas</span>
+                      <span className="faq-page-nav__count">{totalQuestions}</span>
+                    </>
+                  ) : (
+                    <>
+                      <span className="faq-page-nav__cat-label">{cat.label}</span>
+                      <span className="faq-page-nav__cat-title">{cat.title}</span>
+                      <span className="faq-page-nav__count">{cat.items.length}</span>
+                    </>
+                  )}
                 </button>
               ))}
 
@@ -217,6 +271,34 @@ export default function FAQ() {
 
             {/* Preguntas */}
             <div className="faq-page-content">
+
+              {/* Vista: Todas */}
+              <div
+                className={`faq-page-section${activeCategory === 'todas' ? ' is-active' : ''}`}
+                aria-hidden={activeCategory !== 'todas'}
+              >
+                <header className="faq-page-section__header">
+                  <p className="section-label" style={{ marginBottom: '0.5rem' }}>00 / Vista general</p>
+                  <h2 className="faq-page-section__title">Todas las preguntas</h2>
+                </header>
+                <div className="faq-accordion">
+                  {(showAll ? ALL_ITEMS : ALL_ITEMS.slice(0, INITIAL_VISIBLE)).map((item, i) => (
+                    <FaqItem key={`all-${i}`} item={item} showCategory={true} />
+                  ))}
+                </div>
+                {!showAll && ALL_ITEMS.length > INITIAL_VISIBLE && (
+                  <div style={{ textAlign: 'center', marginTop: '2rem' }}>
+                    <button
+                      className="btn btn--ghost"
+                      onClick={() => setShowAll(true)}
+                    >
+                      Cargar más preguntas ({ALL_ITEMS.length - INITIAL_VISIBLE} restantes) →
+                    </button>
+                  </div>
+                )}
+              </div>
+
+              {/* Vistas por categoría */}
               {FAQ_CATEGORIES.map((cat) => (
                 <div
                   key={cat.id}
@@ -234,6 +316,7 @@ export default function FAQ() {
                   </div>
                 </div>
               ))}
+
             </div>
 
           </div>
