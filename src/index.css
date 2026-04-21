@@ -3000,23 +3000,6 @@ FAQ PAGE ═══════════════════════�
     --section-py: 7rem;
   }
 
-  /* Nav */
-  .nav__links {
-    display: flex;
-  }
-
-  .nav__cta {
-    display: inline-flex;
-  }
-
-  .nav__hamburger {
-    display: none;
-  }
-
-  .nav__mobile {
-    display: none !important;
-  }
-
   /* Buttons */
   .btn--ghost,
   .btn--chamfer {
@@ -3148,14 +3131,27 @@ FAQ PAGE ═══════════════════════�
 }
 
 /* ═══════════════════════════════════════════════
-   RESPONSIVE — LARGE (≥ 1200px)
+   RESPONSIVE — NAV DESKTOP (≥ 1120px)
+   Nav completo a 1120px para evitar que
+   "Por qué Katan" se parta en varias líneas
    ═══════════════════════════════════════════════ */
-@media (min-width: 1200px) {
-  .hero__content {
-    padding: 6rem 6rem 3rem 3rem;
+@media (min-width: 1120px) {
+  .nav__links {
+    display: flex;
+  }
+
+  .nav__cta {
+    display: inline-flex;
+  }
+
+  .nav__hamburger {
+    display: none;
+  }
+
+  .nav__mobile {
+    display: none !important;
   }
 }
-
 /* ═══════════════════════════════════════════════
    ACCESSIBILITY
    ═══════════════════════════════════════════════ */
