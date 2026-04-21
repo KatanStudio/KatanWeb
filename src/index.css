@@ -68,6 +68,8 @@ ul {
   max-width: var(--container);
   margin: 0 auto;
   padding: 0 1.5rem;
+  position: relative;
+  z-index: 1;
 }
 
 .accent {
@@ -93,6 +95,8 @@ ul {
 .section {
   padding: var(--section-py) 0;
   border-top: 1px solid var(--ghost);
+  position: relative;
+  isolation: isolate;
 }
 
 .section--dark {
@@ -390,6 +394,7 @@ ul {
   display: block;
   /* visible on mobile too, but orbs are dimmer */
   opacity: 0.4;
+  pointer-events: none;
 }
 
 @media (min-width: 900px) {
@@ -405,6 +410,7 @@ ul {
   opacity: 0.5;
   mix-blend-mode: screen;
   animation: floatOrb 18s ease-in-out infinite alternate;
+   pointer-events: none;
 }
 
 .orb-1 {
@@ -460,8 +466,9 @@ ul {
   inset: 0;
   background-image: radial-gradient(var(--ghost) 1.5px, transparent 1.5px);
   background-size: 24px 24px;
-  z-index: 10;
+  z-index: 0;
   opacity: 0.7;
+  pointer-events: none;
 }
 
 .hero__visual::after {
@@ -882,6 +889,51 @@ FAQ PAGE ═══════════════════════�
   }
 }
 
+
+/* ═══════════════════════════════════════════════
+   FAQ SECTION (Proceso page)
+   ═══════════════════════════════════════════════ */
+.faq-section {
+  position: relative;
+  isolation: isolate;
+  padding: var(--section-py) 0;
+  border-top: 1px solid var(--ghost);
+  background: var(--forge);
+  overflow: hidden;
+}
+
+.faq__visual {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.faq__container {
+  position: relative;
+  z-index: 1;
+}
+
+.orb-faq-1 {
+  width: 50vw;
+  height: 50vw;
+  background-color: var(--edge);
+  top: -20%;
+  right: -10%;
+  animation-delay: -3s;
+  animation-duration: 20s;
+}
+
+.orb-faq-2 {
+  width: 40vw;
+  height: 40vw;
+  background-color: var(--spark);
+  bottom: -10%;
+  left: -5%;
+  animation-delay: -8s;
+  animation-duration: 24s;
+}
 
 /* ── Acordeón FAQ ── */
 .faq-accordion {
