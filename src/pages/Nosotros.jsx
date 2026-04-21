@@ -37,7 +37,7 @@ export default function Nosotros() {
                   </div>
                   <h3 className="service-card__title" style={{ margin: '1.5rem 0 0.5rem' }}>Adrián Lozano</h3>
                   <p className="service-card__desc">
-                    Graduado en ADE (UCLM) y desarrollador web (DAW). Como responsable de UI/UX y Negocio, traduzco tus 
+                    Graduado en ADE (UCLM) y desarrollador web (DAW). Como responsable de Experiencia e Interfaz de Usuario (UI/UX) y Negocio, traduzco tus 
                     objetivos comerciales a código de alto rendimiento. Mi cometido es eliminar cualquier 
                     obstáculo entre tu cliente y la venta mediante interfaces limpias y arquitectura lógica.
                   </p>
@@ -65,11 +65,11 @@ export default function Nosotros() {
 
             <div className="module module--recurring" style={{ maxWidth: '100%' }}>
               <h3 className="module__price" style={{ marginBottom: '1rem' }}>Nuestra experiencia en la trinchera</h3>
-              <p className="module__desc" style={{ fontSize: '0.95rem' }}>
+              <p className="module__desc" style={{ fontSize: '1.2rem' }}>
                 Llevamos a la espalda numerosos proyectos sin un solo cliente que haya tenido que recurrir a mantenimiento de
                 emergencia o negocios perdiendo dinero.
-                <br />
-                Por eso fundamos Katan. Para ofrecer una alternativa premium, basada en <strong> código
+              
+                Por eso fundamos Katan, para ofrecer una alternativa premium, basada en <strong> código
                   artesanal, seguridad nativa y velocidades extremas</strong>. No inventamos la rueda,
                 simplemente la construimos con la máxima precisión.
               </p>

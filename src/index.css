@@ -26,7 +26,7 @@
   --font-mono: 'DM Mono', monospace;
 
   --section-py: 5rem;
-  --container: 90%;
+  --container: 75%;
   --gap: 2px;
 
   --t-fast: 150ms ease;
@@ -110,7 +110,7 @@ ul {
 
 .section-label {
   font-family: var(--font-mono);
-  font-size: 0.7rem;
+  font-size: 1rem;
   letter-spacing: 0.25em;
   color: var(--edge);
   text-transform: uppercase;
@@ -138,7 +138,7 @@ ul {
 }
 
 .section__sub {
-  font-size: 1rem;
+  font-size: 1.5rem;
   color: var(--steel);
   margin-top: 1rem;
   max-width: 42ch;
@@ -1133,14 +1133,14 @@ FAQ PAGE ═══════════════════════�
 
 .service-card__num {
   font-family: var(--font-mono);
-  font-size: 0.6rem;
+  font-size: 1rem;
   color: var(--edge);
   letter-spacing: 0.2em;
 }
 
 .service-card__tag {
   font-family: var(--font-mono);
-  font-size: 0.6rem;
+  font-size: 1rem;
   color: var(--steel);
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -1160,7 +1160,7 @@ FAQ PAGE ═══════════════════════�
 }
 
 .service-card__desc {
-  font-size: 0.88rem;
+  font-size: 1.1rem;
   color: var(--steel);
   line-height: 1.7;
   flex: 1;
@@ -1174,7 +1174,7 @@ FAQ PAGE ═══════════════════════�
 
 .service-card__features li {
   font-family: var(--font-mono);
-  font-size: 0.7rem;
+  font-size: 0.85rem;
   color: var(--steel);
   letter-spacing: 0.05em;
   padding-left: 1rem;
@@ -1200,7 +1200,7 @@ FAQ PAGE ═══════════════════════�
 
 .service-card__price {
   font-family: var(--font-mono);
-  font-size: 0.75rem;
+  font-size: 1.2rem;
   color: var(--steel);
 }
 
@@ -1213,7 +1213,7 @@ FAQ PAGE ═══════════════════════�
 }
 
 .service-card__link {
-  font-size: 0.8rem;
+  font-size: 1  rem;
   font-weight: 600;
   color: var(--edge);
   transition: letter-spacing var(--t-fast);
@@ -1235,7 +1235,7 @@ FAQ PAGE ═══════════════════════�
 }
 
 .services-intro__p {
-  font-size: 1rem;
+  font-size: 1.3rem;
   color: var(--steel);
   line-height: 1.7;
   margin-bottom: 2rem;
@@ -1268,7 +1268,7 @@ FAQ PAGE ═══════════════════════�
 }
 
 .services-intro__list li {
-  font-size: 0.95rem;
+  font-size: 1.15rem;
   color: var(--steel);
   position: relative;
   padding-left: 1.5rem;
@@ -1493,7 +1493,7 @@ FAQ PAGE ═══════════════════════�
 
 .module__price {
   font-family: var(--font-head);
-  font-size: 1rem;
+  font-size: 1.5rem;
   font-weight: 900;
   color: var(--spark);
   letter-spacing: -0.03em;
@@ -1503,7 +1503,7 @@ FAQ PAGE ═══════════════════════�
 
 .module__title {
   font-family: var(--font-head);
-  font-size: 1.3rem;
+  font-size: 1.45rem;
   font-weight: 900;
   color: var(--blade);
   letter-spacing: -0.03em;
@@ -1511,7 +1511,7 @@ FAQ PAGE ═══════════════════════�
 
 .module__desc {
   font-family: var(--font-body);
-  font-size: 0.9rem;
+  font-size: 1.2rem;
   color: var(--steel);
   line-height: 1.65;
   flex: 1;
@@ -1647,13 +1647,13 @@ FAQ PAGE ═══════════════════════�
 
 .compare__row strong {
   display: block;
-  font-size: 0.88rem;
+  font-size: 1.2rem;
   color: var(--blade);
   margin-bottom: 0.25rem;
 }
 
 .compare__row p {
-  font-size: 0.8rem;
+  font-size: 1rem;
   color: var(--steel);
   line-height: 1.6;
 }
@@ -1957,7 +1957,7 @@ FAQ PAGE ═══════════════════════�
 }
 
 .proceso-philosophy__text {
-  font-size: 0.95rem;
+  font-size: 1.1rem;
   color: var(--steel);
   line-height: 1.75;
   max-width: 70ch;
@@ -2655,7 +2655,7 @@ FAQ PAGE ═══════════════════════�
   background: transparent;
   border: none;
   font-family: var(--font-mono);
-  font-size: 0.75rem;
+  font-size: 0.95rem;
   letter-spacing: 0.1em;
   color: var(--steel);
   text-transform: uppercase;
@@ -2752,7 +2752,7 @@ FAQ PAGE ═══════════════════════�
 
 .portfolio-card__tag {
   font-family: var(--font-mono);
-  font-size: 0.65rem;
+  font-size: 0.9rem;
   letter-spacing: 0.15em;
   color: var(--spark);
   text-transform: uppercase;
@@ -2760,7 +2760,7 @@ FAQ PAGE ═══════════════════════�
 
 .portfolio-card__title {
   font-family: var(--font-head);
-  font-size: 1.2rem;
+  font-size: 1.3rem;
   font-weight: 700;
   letter-spacing: -0.03em;
   text-transform: lowercase;
@@ -2769,7 +2769,7 @@ FAQ PAGE ═══════════════════════�
 
 .portfolio-card__metric {
   font-family: var(--font-mono);
-  font-size: 0.75rem;
+  font-size: 0.95rem;
   color: var(--steel);
 }
 
