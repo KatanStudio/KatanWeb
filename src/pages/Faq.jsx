@@ -345,8 +345,7 @@ export default function FAQ() {
               </div>
             </div>
           </div>
-          <div className="glow-orb orb-faq-1"></div>
-            <div className="glow-orb orb-faq-2"></div>
+        
         </section>
 
       </main>

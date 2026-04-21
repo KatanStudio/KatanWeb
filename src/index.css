@@ -79,16 +79,17 @@ ul {
 /* ── Global text styles ── */
 .kicker {
   font-family: var(--font-mono);
-  font-size: 0.65rem;
+  font-size: 1rem;
   letter-spacing: 0.25em;
   color: var(--edge);
   text-transform: uppercase;
-  margin-bottom: 1.25rem;
+  margin-bottom: 1.30rem;
 }
 
 .kicker--center {
   text-align: center;
-  margin-bottom: 1.5rem;
+  margin-top: 15px;
+  margin-bottom: 0px;
 }
 
 /* ── Section ── */
@@ -2179,7 +2180,7 @@ FAQ PAGE ═══════════════════════�
    ═══════════════════════════════════════════════ */
 .cta-section {
   position: relative;
-  padding: 8rem 0;
+  padding: 3rem 0;
   background: var(--forge);
   border-top: 1px solid var(--ghost);
   overflow: hidden;
@@ -2194,9 +2195,9 @@ FAQ PAGE ═══════════════════════�
   left: 50%;
   transform: translate(-50%, -50%);
   width: 70vw;
-  height: 70vw;
-  background: radial-gradient(circle, rgba(255, 0, 128, 0.08) 0%, rgba(0, 229, 255, 0.04) 40%, transparent 70%);
-  filter: blur(60px);
+  height: 40vw;
+  background: radial-gradient(ellipse, rgba(255, 0, 128, 0.07) 0%, rgba(0, 229, 255, 0.03) 40%, transparent 70%);
+  filter: blur(50px);
   z-index: 0;
   pointer-events: none;
 }
@@ -2216,31 +2217,36 @@ FAQ PAGE ═══════════════════════�
   -webkit-backdrop-filter: blur(12px);
   border: 1px solid var(--ghost);
   border-top: 3px solid var(--edge);
-  padding: 4rem 2rem;
-  text-align: center;
-  max-width: 1100px;
+  padding: 2.25rem 2.5rem;
   width: 100%;
-  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.6);
+  max-width: 1100px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+  /* Horizontal layout: left text + right actions */
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 3rem;
+  text-align: left;
 }
 
 .cta-section__h2 {
   font-family: var(--font-head);
-  font-size: clamp(2.2rem, 8vw, 4.5rem);
+  font-size: clamp(1.4rem, 3vw, 2.2rem);
   font-weight: 900;
   letter-spacing: -0.04em;
-  line-height: 1.0;
+  line-height: 1.05;
   color: var(--blade);
   text-transform: lowercase;
-  margin-bottom: 1.5rem;
+  margin-bottom: 0.5rem;
   word-break: break-word;
 }
 
 .cta-section__sub {
-  font-size: 1.1rem;
+  font-size: 1.25rem;
   color: var(--steel);
   line-height: 1.6;
-  max-width: 70ch;
-  margin: 0 auto 3rem auto;
+  max-width: 100ch;
+  margin: 0;
 }
 
 .cta-section__content {
@@ -2251,15 +2257,16 @@ FAQ PAGE ═══════════════════════�
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2.5rem;
+  gap: 1rem;
+  flex-shrink: 0;
 }
 
 .cta-email-box {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
-  gap: 0.5rem;
-  padding: 1.25rem 2.5rem;
+  gap: 0.75rem;
+  padding: 0.65rem 1.25rem;
   border: 1px dashed var(--ghost);
   background: rgba(0, 0, 0, 0.3);
   transition: border-color var(--t-fast);
@@ -2927,6 +2934,30 @@ FAQ PAGE ═══════════════════════�
   transition-delay: 0.3s;
 }
 
+/* CTA horizontal → vertical en móvil */
+@media (max-width: 767px) {
+  .cta-section__box {
+    grid-template-columns: 1fr;
+    text-align: center;
+    padding: 2rem 1.25rem;
+    gap: 1.75rem;
+  }
+
+  .cta-section__sub {
+    max-width: none;
+  }
+
+  .cta-actions {
+    align-items: center;
+  }
+
+  .cta-email-box {
+    flex-direction: column;
+    gap: 0.35rem;
+    padding: 0.85rem 1.5rem;
+  }
+}
+
 /* ═══════════════════════════════════════════════
    RESPONSIVE — TABLET (≥ 640px)
    ═══════════════════════════════════════════════ */
@@ -2990,7 +3021,7 @@ FAQ PAGE ═══════════════════════�
    ═══════════════════════════════════════════════ */
 @media (min-width: 768px) {
   .cta-section__box {
-    padding: 5rem 4rem;
+    padding: 2.25rem 3rem;
   }
 
   .modules-grid {

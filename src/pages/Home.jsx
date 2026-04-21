@@ -229,7 +229,7 @@ export default function Home() {
           <div className="container cta-section__container">
             <div className="cta-section__box">
               <p className="kicker kicker--center">// Contáctanos</p>
-              <h2 className="cta-section__h2" style={{ textTransform: 'none' }}>¿Empezamos?</h2>
+              <h2 className="cta-section__h2" style={{ textTransform: 'none' }}>Empecemos con una llamada.</h2>
               <p className="cta-section__sub">
                 Presupuesto cerrado en 48h. Sin letra pequeña. Sin reuniones eternas. Hablas directamente con los
                 desarrolladores, nosotros picamos el código.
