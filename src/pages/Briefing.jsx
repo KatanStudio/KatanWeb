@@ -13,21 +13,51 @@ const KatanLogo = () => (
   </svg>
 )
 
+const EXTRAS_LIST = [
+  'Copywriting (Redacción de textos)',
+  'Diseño de logotipo / Identidad visual',
+  'Sistema de Reservas',
+  'Dominio y Hosting',
+  'Mantenimiento Mensual',
+  'Pack Legal (Avisos RGPD)',
+  'Multiidioma',
+  'Integraciones (API, Mailchimp...)',
+  'Marketing (Sin publicidad)'
+];
+
+const SECTORES = [
+  'Tecnología / Software',
+  'Salud / Bienestar',
+  'Hostelería / Turismo',
+  'Comercio / Retail',
+  'Servicios B2B (Empresas)',
+  'Educación / Formación',
+  'Arte / Entretenimiento / Creativo',
+  'Construcción / Inmobiliaria',
+  'Otro'
+];
+
 export default function Briefing() {
   const [step, setStep] = useState(0);
-  const [submitted, setSubmitted] = useState(false); // Estado para la ventana de gracias
+  const [submitted, setSubmitted] = useState(false);
 
   const [formData, setFormData] = useState({
     nombre: '',
+    apellidos: '',
     email: '',
+    telefono: '',
+    empresa: '',
+    sector: '',
     negocio: '',
-    publico: '', // Nuevo
-    competidores: '', // Nuevo
+    publico: '',
+    objetivo: '', 
+    diferenciacion: '', 
+    competidores: '',
     servicio: '',
     extras: [],
     materiales: '',
     referencias: '',
-    plazo: 'Estándar',
+    plazo: '',
     presupuesto: '',
     aceptaLegal: false
   });
@@ -43,7 +73,13 @@ export default function Briefing() {
     }
   };
 
-  const nextStep = () => {
+  const nextStep = (e) => {
+    // Validar el formulario nativo de HTML5 antes de avanzar
+    const form = e.target.closest('form');
+    if (form && !form.checkValidity()) {
+      form.reportValidity(); // Muestra el tooltip rojo de "Campo obligatorio"
+      return;
+    }
     window.scrollTo({ top: 0, behavior: 'smooth' });
     setStep(step + 1);
   };
@@ -55,8 +91,6 @@ export default function Briefing() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    // Aquí conectarías con Formspree usando fetch para evitar su ventana de éxito
-    // Por ahora simulamos el envío:
     setSubmitted(true);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -103,7 +137,7 @@ export default function Briefing() {
             <p className="kicker">// kickstart</p>
             <h1 className="legal-h1" style={{textTransform: 'none'}}>Vamos a dar forma a tu idea.</h1>
             <p className="section__sub" style={{ marginBottom: '3rem' }}>Responde a unas preguntas clave para recibir tu presupuesto exacto.</p>
-            <button onClick={nextStep} className="btn btn--primary btn--large">Empezar briefing (2 min)</button>
+            <button type="button" onClick={nextStep} className="btn btn--primary btn--large">Empezar briefing (2 min)</button>
           </div>
         )}
 
@@ -125,55 +159,114 @@ export default function Briefing() {
                 <legend className="kicker">01 // Identificación</legend>
                 <div className="form-row">
                   <div className="form-group">
-                    <label>Tu nombre o marca</label>
-                    <input type="text" name="nombre" value={formData.nombre} onChange={handleChange} required placeholder="Ej: Juan Pérez" />
+                    <label>Nombre</label>
+                    <input type="text" name="nombre" value={formData.nombre} onChange={handleChange} required placeholder="Tu nombre" />
                   </div>
+                  <div className="form-group">
+                    <label>Apellidos</label>
+                    <input type="text" name="apellidos" value={formData.apellidos} onChange={handleChange} required placeholder="Tus apellidos" />
+                  </div>
+                </div>
+                <div className="form-row">
                   <div className="form-group">
                     <label>Email de contacto</label>
                     <input type="email" name="email" value={formData.email} onChange={handleChange} required placeholder="hola@tuweb.com" />
                   </div>
+                  <div className="form-group">
+                    <label>Teléfono</label>
+                    <input type="tel" name="telefono" value={formData.telefono} onChange={handleChange} required placeholder="+34 600 000 000" />
+                  </div>
+                </div>
+                <div className="form-group">
+                  <label>Nombre de la empresa o proyecto</label>
+                  <input type="text" name="empresa" value={formData.empresa} onChange={handleChange} required placeholder="El nombre de tu marca" />
                 </div>
               </fieldset>
             )}
 
-            {/* PASO 2: ESTRATEGIA (NUEVO) */}
+            {/* PASO 2: ESTRATEGIA */}
             {step === 2 && (
               <fieldset className="fade-in">
-                <legend className="kicker">02 // Modelo de Negocio</legend>
+                <legend className="kicker">02 // Estrategia de Negocio</legend>
+                
                 <div className="form-group">
-                  <label>¿A qué te dedicas exactamente?</label>
-                  <textarea name="negocio" value={formData.negocio} onChange={handleChange} required rows="2" placeholder="Describe brevemente tu actividad..."></textarea>
+                  <label>Sector principal</label>
+                  <select name="sector" value={formData.sector} onChange={handleChange} required>
+                    <option value="">Selecciona tu sector...</option>
+                    {SECTORES.map(s => <option key={s} value={s}>{s}</option>)}
+                  </select>
                 </div>
+
                 <div className="form-group">
-                  <label>¿Quién es tu cliente ideal?</label>
-                  <input type="text" name="publico" value={formData.publico} onChange={handleChange} placeholder="Ej: Empresas de tecnología, Parejas jóvenes..." />
+                  <label>¿A qué se dedica tu negocio exactamente?</label>
+                  <textarea name="negocio" value={formData.negocio} onChange={handleChange} required rows="2" placeholder="Explícanos qué vendes o qué servicio ofreces..."></textarea>
                 </div>
+
                 <div className="form-group">
-                  <label>¿Algún competidor que debamos tener en cuenta?</label>
-                  <input type="text" name="competidores" value={formData.competidores} onChange={handleChange} placeholder="Webs que compitan contigo en tu sector..." />
+                  <label>¿Cuál es el objetivo principal de la web?</label>
+                  <textarea name="objetivo" value={formData.objetivo} onChange={handleChange} required rows="2" placeholder="Ej: Conseguir contactos, vender productos online, validar una idea de negocio..."></textarea>
+                </div>
+
+                <div className="form-group">
+                  <label>¿Por qué un cliente debería elegirte a ti y no a tu competencia?</label>
+                  <textarea name="diferenciacion" value={formData.diferenciacion} onChange={handleChange} rows="2" placeholder="Tu propuesta de valor, qué te hace diferente o especial..."></textarea>
+                </div>
+
+                <div className="form-row">
+                  <div className="form-group">
+                    <label>¿Quién es tu cliente ideal?</label>
+                    <input type="text" name="publico" value={formData.publico} onChange={handleChange} placeholder="Ej: Empresas locales, parejas jóvenes..." />
+                  </div>
+                  <div className="form-group">
+                    <label>¿Competidores de referencia?</label>
+                    <input type="text" name="competidores" value={formData.competidores} onChange={handleChange} placeholder="Marcas que compitan contigo" />
+                  </div>
                 </div>
               </fieldset>
             )}
 
-            {/* PASO 3: ARQUITECTURA */}
+            {/* PASO 3: ARQUITECTURA & EXTRAS */}
             {step === 3 && (
               <fieldset className="fade-in">
                 <legend className="kicker">03 // Configuración del Sistema</legend>
+                
                 <div className="form-group">
-                  <label>Tipo de estructura principal</label>
-                  <div className="radio-grid">
+                  <label>Tipo de estructura principal (Obligatorio)</label>
+                  <div className="radio-grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))' }}>
                     <label className="radio-card">
                       <input type="radio" name="servicio" value="Landing" checked={formData.servicio === 'Landing'} onChange={handleChange} required />
-                      <div className="card-content"><span className="title">Landing Page</span><span className="desc">Conversión y ventas.</span></div>
+                      <div className="card-content"><span className="title">Landing Page</span><span className="desc">Conversión y ventas (1 pág)</span></div>
                     </label>
                     <label className="radio-card">
                       <input type="radio" name="servicio" value="Corporativa" checked={formData.servicio === 'Corporativa'} onChange={handleChange} />
-                      <div className="card-content"><span className="title">Corporativa</span><span className="desc">Imagen, secciones y reservas</span></div>
+                      <div className="card-content"><span className="title">Web Corporativa</span><span className="desc">Múltiples secciones y SEO</span></div>
                     </label>
                     <label className="radio-card">
-                      <input type="radio" name="servicio" value="E-commerce" checked={formData.servicio === 'Comercio electrónico'} onChange={handleChange} />
-                      <div className="card-content"><span className="title">Comercio electrónico</span><span className="desc">Ventas y stock</span></div>
+                      <input type="radio" name="servicio" value="E-commerce" checked={formData.servicio === 'E-commerce'} onChange={handleChange} />
+                      <div className="card-content"><span className="title">E-commerce</span><span className="desc">Catálogo y pagos online</span></div>
                     </label>
+                    <label className="radio-card">
+                      <input type="radio" name="servicio" value="Orientacion" checked={formData.servicio === 'Orientacion'} onChange={handleChange} />
+                      <div className="card-content"><span className="title">No estoy seguro</span><span className="desc">Necesito asesoramiento</span></div>
+                    </label>
+                  </div>
+                </div>
+
+                <div className="form-group" style={{ marginTop: '2.5rem' }}>
+                  <label>Servicios adicionales (Selecciona los que necesites)</label>
+                  <div className="checkbox-grid">
+                    {EXTRAS_LIST.map((ext) => (
+                      <label key={ext} className="check-box">
+                        <input 
+                          type="checkbox" 
+                          name="extras" 
+                          value={ext} 
+                          checked={formData.extras.includes(ext)} 
+                          onChange={handleChange} 
+                        />
+                        <span>{ext}</span>
+                      </label>
+                    ))}
                   </div>
                 </div>
               </fieldset>
@@ -184,17 +277,18 @@ export default function Briefing() {
               <fieldset className="fade-in">
                 <legend className="kicker">04 // Activos y Referencias</legend>
                 <div className="form-group">
-                  <label>Estado de los materiales</label>
+                  <label>¿Qué materiales tienes preparados actualmente?</label>
                   <select name="materiales" value={formData.materiales} onChange={handleChange} required>
-                    <option value="">Selecciona...</option>
-                    <option value="Listo">Tengo todo (Logo, textos, fotos)</option>
-                    <option value="Parcial">Tengo logo pero necesito textos</option>
-                    <option value="Nada">No tengo nada todavía</option>
+                    <option value="">Selecciona una opción...</option>
+                    <option value="Todo">Tengo de todo (Logotipo, colores, textos escritos y fotos/vídeos)</option>
+                    <option value="Faltan Textos/Fotos">Tengo logotipo y colores, pero me faltan los textos o las fotos</option>
+                    <option value="Falta Identidad">Tengo los textos/fotos, pero necesito diseño de logotipo</option>
+                    <option value="Nada">No tengo nada, tenemos que empezar desde cero</option>
                   </select>
                 </div>
                 <div className="form-group">
                   <label>Referencias visuales (URLs)</label>
-                  <textarea name="referencias" value={formData.referencias} onChange={handleChange} rows="2" placeholder="Webs que te gusten estéticamente..."></textarea>
+                  <textarea name="referencias" value={formData.referencias} onChange={handleChange} rows="3" placeholder="Péganos enlaces a webs que te gusten por su diseño, colores o estructura..."></textarea>
                 </div>
               </fieldset>
             )}
@@ -205,27 +299,36 @@ export default function Briefing() {
                 <legend className="kicker">05 // Lanzamiento</legend>
                 <div className="form-row">
                   <div className="form-group">
-                    <label>Inversión prevista</label>
+                    <label>Inversión prevista para este proyecto</label>
                     <select name="presupuesto" value={formData.presupuesto} onChange={handleChange} required>
-                      <option value="">Selecciona horquilla...</option>
+                      <option value="">Selecciona una horquilla...</option>
                       <option value="350-750">350€ - 750€</option>
                       <option value="750-1500">750€ - 1.500€</option>
-                      <option value="1500+">+1.500€</option>
+                      <option value="1500-3000">1.500€ - 3.000€</option>
+                      <option value="3000+">+ 3.000€</option>
                     </select>
                   </div>
                   <div className="form-group">
-                    <label>Urgencia</label>
-                    <select name="plazo" value={formData.plazo} onChange={handleChange}>
-                      <option value="Estándar">Estándar (3-4 semanas)</option>
-                      <option value="Urgente">Urgente (Prioritario)</option>
+                    <label>Nivel de urgencia</label>
+                    <select name="plazo" value={formData.plazo} onChange={handleChange} required>
+                      <option value="">Selecciona urgencia...</option>
+                      <option value="Tranquilo">Tranquilo (Sin prisa, prioridad a la calidad)</option>
+                      <option value="Normal">Normal (Flujo de trabajo estándar)</option>
+                      <option value="Prioritario">Prioritario (Lo necesito lo antes posible)</option>
                     </select>
+                    <p style={{fontSize: '0.75rem', color: 'var(--steel)', marginTop: '0.5rem', lineHeight: '1.4'}}>
+                      * <strong>Sé sincero.</strong> Indicar "Sin prisa" no significa que vayamos a retrasar tu proyecto, simplemente nos da flexibilidad para organizar los recursos.
+                    </p>
                   </div>
                 </div>
+                
                 <div style={{ marginTop: '2rem', padding: '1.5rem', background: 'var(--sheath)', borderRadius: '8px', border: '1px solid var(--ghost)' }}>
-                  <label className="check-box" style={{ display: 'flex', gap: '1rem', cursor: 'pointer' }}>
-                    <input type="checkbox" name="aceptaLegal" checked={formData.aceptaLegal} onChange={handleChange} required />
-                    <span style={{ fontSize: '0.8rem', color: 'var(--steel)' }}>He leído y acepto la <Link to="/politica-de-privacidad" style={{ color: 'var(--spark)', textDecoration: 'underline' }}>Política de Privacidad</Link>. 
-                        Comprendo que Katan Studio tratará mis datos con la finalidad de gestionar mi solicitud de presupuesto, basado en mi consentimiento.</span>
+                  <label className="check-box" style={{ display: 'flex', gap: '1rem', cursor: 'pointer', alignItems: 'flex-start' }}>
+                    <input type="checkbox" name="aceptaLegal" checked={formData.aceptaLegal} onChange={handleChange} required style={{ marginTop: '0.2rem' }} />
+                    <span style={{ fontSize: '0.85rem', color: 'var(--steel)', lineHeight: '1.5' }}>
+                      He leído y acepto la <Link to="/politica-de-privacidad" style={{ color: 'var(--spark)', textDecoration: 'underline' }}>Política de Privacidad</Link>. 
+                      Comprendo que Katan Studio tratará mis datos con la finalidad de gestionar mi solicitud de presupuesto, basado en mi consentimiento.
+                    </span>
                   </label>
                 </div>
               </fieldset>
@@ -236,7 +339,7 @@ export default function Briefing() {
               {step < 5 ? (
                 <button type="button" onClick={nextStep} className="btn btn--primary" style={{ flex: 2 }}>Siguiente paso</button>
               ) : (
-                <button type="submit" className="btn btn--primary" style={{ flex: 2, background: 'var(--spark)', border: 'none', color: 'white' }}>Finalizar y enviar briefing</button>
+                <button type="submit" className="btn btn--primary" style={{ flex: 2, background: 'var(--spark)', border: 'none', color: '#000' }}>Finalizar y enviar briefing</button>
               )}
             </div>
           </form>

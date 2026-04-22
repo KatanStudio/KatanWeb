@@ -17,12 +17,15 @@ export default function Contacto() {
         <section className="contacto-hero" id="contacto">
           <div className="contacto-hero__bg" aria-hidden="true">
             <svg className="contacto-hero__k" viewBox="0 0 96 96" fill="none" aria-hidden="true">
-              <path d="M0 0 H96 V82 L82 96 H0 Z" fill="#FF0080" />
+              {/* Fondo: ahora transparente para evitar el bloque rojo sólido */}
+              <path d="M0 0 H96 V82 L82 96 H0 Z" fill="transparent" />
               <path d="M82 96 L96 82" stroke="#FF0080" strokeWidth="2" />
-              <rect x="26" y="22" width="7" height="52" fill="#FF0080" />
-              <path d="M33 48 L63 22 H72 L42 48 Z" fill="#FF0080" />
-              <path d="M33 48 L63 74 H72 L42 48 Z" fill="#FF0080" />
-              <circle cx="33" cy="48" r="3.5" fill="#FF0080" />
+
+              {/* La "K" desplazada a la izquierda (X=6 en lugar de 26) */}
+              <rect x="6" y="22" width="7" height="52" fill="#FF0080" />
+              <path d="M13 48 L43 22 H52 L22 48 Z" fill="#FF0080" />
+              <path d="M13 48 L43 74 H52 L22 48 Z" fill="#FF0080" />
+              <circle cx="13" cy="48" r="3.5" fill="#FF0080" />
             </svg>
           </div>
           <div className="container">
