@@ -26,8 +26,8 @@ export default function Nosotros() {
             </header>
 
             <div className="services-grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', marginBottom: '4rem' }}>
-              <a href="https://www.linkedin.com/in/adrián-lozano" target="_blank" rel="noreferrer">
-                <div className="service-card">
+              <a href="https://www.linkedin.com/in/adrián-lozano" target="_blank" rel="noreferrer" style={{ display: 'block', height: '100%' }}>
+                <div className="service-card" style={{ height: '100%' }}>
                   <div className="service-card__top">
                     <span className="service-card__num">_dev.01</span>
                     <span className="service-card__tag">Negocio &amp; UI/UX</span>
@@ -43,8 +43,8 @@ export default function Nosotros() {
                   </p>
                 </div>
               </a>
-              <a href="https://www.linkedin.com/in/alejandro-quintana-rodriguez/" target="_blank" rel="noreferrer">
-                <div className="service-card">
+              <a href="https://www.linkedin.com/in/alejandro-quintana-rodriguez/" target="_blank" rel="noreferrer" style={{ display: 'block', height: '100%' }}>
+                <div className="service-card" style={{ height: '100%' }}>
                   <div className="service-card__top">
                     <span className="service-card__num">_dev.02</span>
                     <span className="service-card__tag">Arquitectura &amp; Lógica</span>

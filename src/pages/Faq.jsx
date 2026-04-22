@@ -70,7 +70,7 @@ const FAQ_CATEGORIES = [
       {
         num: '04',
         question: '¿Cómo funciona el pago?',
-        answer: 'Trabajamos con un pago dividido en dos partes: 50% al firmar el presupuesto y 50% en la entrega final. Sin sorpresas, sin pagos intermedios inesperados.',
+        answer: 'Dependiendo del tamaño del proyecto, dividimos el pago en: \n\n• Dos plazos: 50% al inicio y 50% a la entrega del proyecto \n\n• Tres plazos: 33% al inicio, 34% en el ecuador y 33% a la entrega del proyecto. \n\n Siempre con precio cerrado desde el primer día: sin costes ocultos, sin sorpresas y sin facturas inesperadas a mitad de camino.',
       },
       {
         num: '05',
@@ -86,34 +86,34 @@ const FAQ_CATEGORIES = [
     items: [
       {
         num: '01',
-        question: '¿Realmente podéis entregar un proyecto en 10 días?',
-        answer: 'Sí, para Landing Pages y proyectos bien definidos. Nuestro proceso empieza con una llamada corta y un briefing detallado. Si tú tienes claro tu proyecto y los materiales listos, nosotros somos muy eficientes ejecutando. Sin tiempos muertos ni reuniones innecesarias.',
+        question: '¿Podéis entregar un proyecto en 10 días?',
+        answer: 'Sí, pero depende de la escala:\n\n• Para Landing Pages y webs acotadas es totalmente viable. Para proyectos complejos, priorizamos la robustez sobre la velocidad.\n\n• Somos muy ágiles porque eliminamos la burocracia. Si tú tienes claros los objetivos y los materiales listos tras el briefing, nosotros ejecutamos sin tiempos muertos ni reuniones inútiles.',
       },
       {
         num: '02',
         question: '¿Qué pasa si el diseño inicial no me gusta?',
-        answer: 'No dejamos margen al azar. Nuestro proceso incluye una reunión de arranque donde te enseñamos una demo antes de escribir una sola línea de código definitiva. Dependiendo de tu plan, tienes entre 1 y 5 rondas de revisiones incluidas. No avanzamos al desarrollo hasta que la interfaz esté exactamente como tu negocio necesita.',
+        answer: 'No dejamos margen al azar. \n\nNuestro proceso incluye una reunión de arranque donde te enseñamos una demo antes de escribir una sola línea de código definitiva. \n\nDependiendo de tu plan, tienes entre 1 y 5 rondas de revisiones incluidas. No avanzamos al desarrollo hasta que la interfaz esté exactamente como tu negocio necesita.',
       },
       {
         num: '03',
         question: '¿Podré ver la web antes de que esté terminada?',
-        answer: 'Sí, desde el principio del desarrollo tienes acceso a un enlace de preview privado donde puedes ver el avance en tiempo real. No esperas a la entrega final para saber cómo va quedando.',
+        answer: 'Sí, desde el principio del desarrollo tienes acceso a un enlace de preview privado o a reuniones donde puedes ver el avance. No esperas a la entrega final para saber cómo va quedando.',
       },
       {
         num: '04',
         question: '¿Hacéis reuniones presenciales?',
-        answer: 'Sí. Si estás en Toledo, Madrid, Ciudad Real o zonas cercanas, preferimos quedar en persona. Creemos que hay decisiones que se toman mejor mirándose a los ojos. La primera toma de contacto es una llamada corta, pero la reunión de arranque del proyecto la hacemos presencialmente siempre que sea posible.',
+        answer: 'Sí. Si estás en Toledo, Madrid o alrededores, preferimos quedar en persona. Creemos que hay decisiones que se toman mejor mirándose a los ojos. La primera toma de contacto es una llamada corta, pero la reunión de arranque del proyecto la hacemos presencialmente siempre que sea posible.',
       },
       {
         num: '05',
         question: '¿Qué necesito tener preparado para empezar?',
-        answer: 'Principalmente: textos de tu negocio, imágenes o fotos (si las tienes), y claridad sobre qué quieres conseguir con la web. Si no tienes algo de esto, te orientamos. Cuanto más completo llegues al briefing, más rápido y preciso será el resultado.',
+        answer: 'Principalmente: \n\n• Textos de tu negocio \n\n• Imágenes o fotos (si las tienes) \n\n• Claridad sobre qué quieres conseguir con la web. Si no tienes algo de esto, te orientamos. \n\n Cuanto más completo llegues al briefing, más rápido y preciso será el resultado.',
       },
       {
         num: '06',
-        question: '¿Qué pasa si no tengo textos ni fotos todavía?',
-        answer: 'El proyecto se pausa hasta tenerlos. El plazo de 10 días empieza a contar cuando tenemos todos los materiales. Te avisamos en el briefing para que lo planifiques, pero no podemos construir sobre un vacío. Si necesitas orientación para los textos, te ayudamos a estructurarlos.',
-      },
+        question: '¿Qué pasa si no tengo los textos o imágenes listos?',
+        answer: 'No te preocupes. Podemos avanzar con la estructura y la maquetación visual de la web mientras tú preparas el contenido, adaptando la entrega final a tu ritmo.\n\nAdemás, si te atascas o prefieres no encargarte de esto, ofrecemos servicios de copywriting como módulo extra. Nosotros nos ocupamos de redactar los textos orientados a la venta y de integrarlos en el diseño para que tú no tengas que hacer nada.',
+      }
     ],
   },
   {
@@ -124,7 +124,7 @@ const FAQ_CATEGORIES = [
       {
         num: '01',
         question: '¿Por qué sois diferentes a una agencia de marketing tradicional?',
-        answer: 'Porque no somos una agencia, somos un estudio de ingeniería web. Con nosotros no pagas el sueldo de comerciales, ni de "Account Managers", ni oficinas céntricas. Hablas directamente con Adrián y Alejandro, los desarrolladores que van a construir tu activo digital. Pagas exclusivamente por calidad y rendimiento.',
+        answer: 'Porque no somos una agencia, somos un estudio de ingeniería web. Hablas directamente con Adrián y Alejandro, los desarrolladores que van a construir tu activo digital. Pagas exclusivamente por calidad y rendimiento.',
       },
       {
         num: '02',
@@ -134,7 +134,7 @@ const FAQ_CATEGORIES = [
       {
         num: '03',
         question: '¿Dónde estáis ubicados?',
-        answer: 'Somos de Toledo. Trabajamos con clientes de toda España de forma remota, pero hacemos reuniones presenciales en Toledo, Madrid, Ciudad Real y zonas cercanas. Si estás por aquí, te invitamos a un café.',
+        answer: 'Somos de Toledo. Trabajamos con clientes de toda España de forma remota, pero hacemos reuniones presenciales en Toledo, Madrid y zonas cercanas. Si estás por aquí, te invitamos a un café.',
       },
       {
         num: '04',
@@ -167,9 +167,7 @@ function FaqItem({ item, showCategory = false }) {
       <button className="faq-question" aria-expanded={open} onClick={() => setOpen(!open)}>
         {!showCategory && <span className="faq-num">{item.num}</span>}
         <span className="faq-text">
-          {showCategory && (
-            <span className="faq-category-tag">{item.categoryTitle}</span>
-          )}
+          
           {item.question}
         </span>
         <span className="faq-icon"></span>
@@ -233,7 +231,7 @@ export default function FAQ() {
 
         {/* ── Contenido principal ── */}
         <section className="faq-page-body">
-        
+
           <div className="container faq-page-body__inner">
 
             {/* Sidebar de categorías */}
@@ -279,7 +277,7 @@ export default function FAQ() {
                 aria-hidden={activeCategory !== 'todas'}
               >
                 <header className="faq-page-section__header">
-                  
+
                   <p className="section-label" style={{ marginBottom: '0.5rem' }}>00 / Vista general</p>
                   <h2 className="faq-page-section__title">Todas las preguntas</h2>
                 </header>
@@ -344,7 +342,7 @@ export default function FAQ() {
               </div>
             </div>
           </div>
-        
+
         </section>
 
       </main>

@@ -43,7 +43,7 @@ const STEPS = [
     time: 'Entrega definitiva',
     title: 'Corte final',
     desc: 'La web publicada, el dominio configurado, Core Web Vitals en verde y el código entregado al 100%. Cerramos con una última reunión/llamada de onboarding para que controles todo.',
-    detail: 'Te entregamos acceso completo al hosting, al repositorio y una guía de uso si tienes panel de administración. Nada queda e n el aire.',
+    detail: 'Te entregamos acceso completo al hosting y una guía de uso si tienes panel de administración. Nada queda en el aire y, si tuvieras problemas, nos encargaríamos con el servicio de mantenimiento.',
     icon: '🚀',
   },
 ]
@@ -52,7 +52,7 @@ const COMM_ITEMS = [
   {
     label: 'pRIMERA Toma de contacto',
     channel: 'Llamada de 15–20 min',
-    desc: 'Explicamos el proceso y el briefing. Sin compromiso. Sin presentaciones largas.',
+    desc: 'Explicamos el proceso y el formulario. Sin compromiso ni presentaciones largas.',
     color: 'var(--spark)',
   },
   {
@@ -64,7 +64,7 @@ const COMM_ITEMS = [
   {
     label: 'Revisiones',
     channel: 'Rondas estructuradas',
-    desc: 'Los cambios se agrupan por ronda, no por mensaje suelto. Así el trabajo tiene foco y calidad.',
+    desc: 'Los cambios se agrupan por ronda, no por mensajes sueltos. Así el trabajo tiene foco y calidad.',
     color: 'var(--spark)',
   },
   {

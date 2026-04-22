@@ -1082,6 +1082,7 @@ FAQ PAGE ═══════════════════════�
   color: var(--steel);
   line-height: 1.75;
   padding: 0 1.25rem 0 calc(1.5rem + 20px + 1.25rem);
+  white-space: pre-line; /* <-- AÑADE ESTO */
 }
 
 .faq-item.is-active .faq-answer>p {
@@ -1911,13 +1912,13 @@ FAQ PAGE ═══════════════════════�
 }
 
 .process-card__desc {
-  font-size: 0.88rem;
+  font-size: 1.1rem;
   color: var(--steel);
   line-height: 1.7;
 }
 
 .process-card__detail {
-  font-size: 0.8rem;
+  font-size: 0.95rem;
   color: rgba(138, 155, 180, 0.7);
   line-height: 1.65;
   margin-top: 0.75rem;
@@ -2041,7 +2042,7 @@ FAQ PAGE ═══════════════════════�
 
 .comm-item__label {
   font-family: var(--font-mono);
-  font-size: 0.6rem;
+  font-size: 0.8rem;
   letter-spacing: 0.2em;
   text-transform: uppercase;
   color: var(--steel);
@@ -2049,14 +2050,14 @@ FAQ PAGE ═══════════════════════�
 
 .comm-item__channel {
   font-family: var(--font-head);
-  font-size: 1rem;
+  font-size: 1.26rem;
   font-weight: 900;
   color: var(--blade);
   letter-spacing: -0.02em;
 }
 
 .comm-item__desc {
-  font-size: 0.85rem;
+  font-size: 1.1rem;
   color: var(--steel);
   line-height: 1.65;
   margin-top: 0.5rem;
@@ -2086,7 +2087,7 @@ FAQ PAGE ═══════════════════════�
 
 .proceso-presencial-banner__tag {
   font-family: var(--font-mono);
-  font-size: 0.65rem;
+  font-size: 0.75rem;
   letter-spacing: 0.2em;
   color: var(--spark);
   text-transform: uppercase;
@@ -2094,7 +2095,7 @@ FAQ PAGE ═══════════════════════�
 }
 
 .proceso-presencial-banner__text {
-  font-size: 0.95rem;
+  font-size: 1.2rem;
   color: var(--steel);
   line-height: 1.7;
   max-width: 65ch;
@@ -2102,7 +2103,7 @@ FAQ PAGE ═══════════════════════�
 
 .proceso-presencial-banner__text strong {
   color: var(--blade);
-  font-weight: 600;
+  font-weight: 700;
 }
 
 .proceso-presencial-banner__zones {
@@ -2113,7 +2114,7 @@ FAQ PAGE ═══════════════════════�
 
 .proceso-city-tag {
   font-family: var(--font-mono);
-  font-size: 0.65rem;
+  font-size: 0.85rem;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--spark);
@@ -2161,7 +2162,7 @@ FAQ PAGE ═══════════════════════�
 
 .requisito-item__num {
   font-family: var(--font-mono);
-  font-size: 0.65rem;
+  font-size: 0.95rem;
   color: var(--edge);
   letter-spacing: 0.2em;
   padding-top: 0.25rem;
@@ -2169,7 +2170,7 @@ FAQ PAGE ═══════════════════════�
 
 .requisito-item__title {
   font-family: var(--font-head);
-  font-size: 1rem;
+  font-size: 1.2rem;
   font-weight: 900;
   color: var(--blade);
   letter-spacing: -0.02em;
@@ -2177,7 +2178,7 @@ FAQ PAGE ═══════════════════════�
 }
 
 .requisito-item__desc {
-  font-size: 0.88rem;
+  font-size: 1rem;
   color: var(--steel);
   line-height: 1.7;
 }
@@ -4645,12 +4646,13 @@ FAQ PAGE ═══════════════════════�
 /* Barra de progreso para AutoPlay */
 .svc-sw__prog-bar {
   position: absolute;
-  bottom: -2px; /* Se coloca justo encima del borde base */
+  bottom: 0px; /* Se coloca justo encima del borde base */
   left: 0;
   height: 2px;
   width: 0%;
   z-index: 10;
   animation: svc-progress 6s linear forwards; /* Cambia de slide cada 6 segundos */
+
 }
 
 /* Pausar si el usuario pone el ratón encima */
