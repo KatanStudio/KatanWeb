@@ -46,12 +46,13 @@ export default function Briefing() {
     apellidos: '',
     email: '',
     telefono: '',
+    prefijo: '+34',
     empresa: '',
     sector: '',
     negocio: '',
     publico: '',
-    objetivo: '', 
-    diferenciacion: '', 
+    objetivo: '',
+    diferenciacion: '',
     competidores: '',
     servicio: '',
     extras: [],
@@ -83,7 +84,7 @@ export default function Briefing() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
     setStep(step + 1);
   };
-  
+
   const prevStep = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
     setStep(step - 1);
@@ -108,7 +109,7 @@ export default function Briefing() {
           </div>
           <h1 className="legal-h1">¡Briefing recibido!</h1>
           <p className="section__sub" style={{ maxWidth: '500px', margin: '0 auto 2rem' }}>
-            Gracias por confiar en Katan. Hemos recibido tus especificaciones y nuestro equipo las está analizando. 
+            Gracias por confiar en Katan. Hemos recibido tus especificaciones y nuestro equipo las está analizando.
             Te enviaremos una propuesta detallada en menos de 48 horas.
           </p>
           <Link to="/" className="btn btn--primary">Volver al inicio</Link>
@@ -131,11 +132,11 @@ export default function Briefing() {
       </nav>
 
       <div className="container" style={{ paddingTop: '2rem', maxWidth: '800px', minHeight: '70vh' }}>
-        
+
         {step === 0 && (
           <div className="intro-screen" style={{ textAlign: 'center', padding: '4rem 0' }}>
             <p className="kicker">// kickstart</p>
-            <h1 className="legal-h1" style={{textTransform: 'none'}}>Vamos a dar forma a tu idea.</h1>
+            <h1 className="legal-h1" style={{ textTransform: 'none' }}>Vamos a dar forma a tu idea.</h1>
             <p className="section__sub" style={{ marginBottom: '3rem' }}>Responde a unas preguntas clave para recibir tu presupuesto exacto.</p>
             <button type="button" onClick={nextStep} className="btn btn--primary btn--large">Empezar briefing (2 min)</button>
           </div>
@@ -172,179 +173,208 @@ export default function Briefing() {
                     <label>Email de contacto</label>
                     <input type="email" name="email" value={formData.email} onChange={handleChange} required placeholder="hola@tuweb.com" />
                   </div>
-                  <div className="form-group">
-                    <label>Teléfono</label>
-                    <input type="tel" name="telefono" value={formData.telefono} onChange={handleChange} required placeholder="+34 600 000 000" />
-                  </div>
+                    <div className="form-group">
+                      <label>Teléfono</label>
+                      <div style={{ display: 'flex', gap: '0.5rem' }}>
+                        <select
+                          name="prefijo"
+                          value={formData.prefijo}
+                          onChange={handleChange}
+                          style={{ width: '120px', flexShrink: 0 }}
+                        >
+                          <option value="+34">🇪🇸 +34</option>
+                          <option value="+1">🇺🇸 +1</option>
+                          <option value="+44">🇬🇧 +44</option>
+                          <option value="+52">🇲🇽 +52</option>
+                          <option value="+54">🇦🇷 +54</option>
+                          <option value="+57">🇨🇴 +57</option>
+                          <option value="+56">🇨🇱 +56</option>
+                          <option value="+51">🇵🇪 +51</option>
+                        </select>
+                        <input
+                          type="tel"
+                          name="telefono"
+                          value={formData.telefono}
+                          onChange={(e) => {
+                            // Esta línea filtra todo lo que no sea número o espacio en tiempo real
+                            const valorFiltrado = e.target.value.replace(/[^0-9\s]/g, '');
+                            handleChange({ target: { name: 'telefono', value: valorFiltrado, type: 'text' } });
+                          }}
+                          required
+                          placeholder="600 000 000"
+                          style={{ flex: 1 }}
+                        />
+                      </div>
+                     </div>
                 </div>
                 <div className="form-group">
                   <label>Nombre de la empresa o proyecto</label>
                   <input type="text" name="empresa" value={formData.empresa} onChange={handleChange} required placeholder="El nombre de tu marca" />
                 </div>
               </fieldset>
-            )}
-
-            {/* PASO 2: ESTRATEGIA */}
-            {step === 2 && (
-              <fieldset className="fade-in">
-                <legend className="kicker">02 // Estrategia de Negocio</legend>
-                
-                <div className="form-group">
-                  <label>Sector principal</label>
-                  <select name="sector" value={formData.sector} onChange={handleChange} required>
-                    <option value="">Selecciona tu sector...</option>
-                    {SECTORES.map(s => <option key={s} value={s}>{s}</option>)}
-                  </select>
-                </div>
-
-                <div className="form-group">
-                  <label>¿A qué se dedica tu negocio exactamente?</label>
-                  <textarea name="negocio" value={formData.negocio} onChange={handleChange} required rows="2" placeholder="Explícanos qué vendes o qué servicio ofreces..."></textarea>
-                </div>
-
-                <div className="form-group">
-                  <label>¿Cuál es el objetivo principal de la web?</label>
-                  <textarea name="objetivo" value={formData.objetivo} onChange={handleChange} required rows="2" placeholder="Ej: Conseguir contactos, vender productos online, validar una idea de negocio..."></textarea>
-                </div>
-
-                <div className="form-group">
-                  <label>¿Por qué un cliente debería elegirte a ti y no a tu competencia?</label>
-                  <textarea name="diferenciacion" value={formData.diferenciacion} onChange={handleChange} rows="2" placeholder="Tu propuesta de valor, qué te hace diferente o especial..."></textarea>
-                </div>
-
-                <div className="form-row">
-                  <div className="form-group">
-                    <label>¿Quién es tu cliente ideal?</label>
-                    <input type="text" name="publico" value={formData.publico} onChange={handleChange} placeholder="Ej: Empresas locales, parejas jóvenes..." />
-                  </div>
-                  <div className="form-group">
-                    <label>¿Competidores de referencia?</label>
-                    <input type="text" name="competidores" value={formData.competidores} onChange={handleChange} placeholder="Marcas que compitan contigo" />
-                  </div>
-                </div>
-              </fieldset>
-            )}
-
-            {/* PASO 3: ARQUITECTURA & EXTRAS */}
-            {step === 3 && (
-              <fieldset className="fade-in">
-                <legend className="kicker">03 // Configuración del Sistema</legend>
-                
-                <div className="form-group">
-                  <label>Tipo de estructura principal (Obligatorio)</label>
-                  <div className="radio-grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))' }}>
-                    <label className="radio-card">
-                      <input type="radio" name="servicio" value="Landing" checked={formData.servicio === 'Landing'} onChange={handleChange} required />
-                      <div className="card-content"><span className="title">Landing Page</span><span className="desc">Conversión y ventas (1 pág)</span></div>
-                    </label>
-                    <label className="radio-card">
-                      <input type="radio" name="servicio" value="Corporativa" checked={formData.servicio === 'Corporativa'} onChange={handleChange} />
-                      <div className="card-content"><span className="title">Web Corporativa</span><span className="desc">Múltiples secciones y SEO</span></div>
-                    </label>
-                    <label className="radio-card">
-                      <input type="radio" name="servicio" value="E-commerce" checked={formData.servicio === 'E-commerce'} onChange={handleChange} />
-                      <div className="card-content"><span className="title">E-commerce</span><span className="desc">Catálogo y pagos online</span></div>
-                    </label>
-                    <label className="radio-card">
-                      <input type="radio" name="servicio" value="Orientacion" checked={formData.servicio === 'Orientacion'} onChange={handleChange} />
-                      <div className="card-content"><span className="title">No estoy seguro</span><span className="desc">Necesito asesoramiento</span></div>
-                    </label>
-                  </div>
-                </div>
-
-                <div className="form-group" style={{ marginTop: '2.5rem' }}>
-                  <label>Servicios adicionales (Selecciona los que necesites)</label>
-                  <div className="checkbox-grid">
-                    {EXTRAS_LIST.map((ext) => (
-                      <label key={ext} className="check-box">
-                        <input 
-                          type="checkbox" 
-                          name="extras" 
-                          value={ext} 
-                          checked={formData.extras.includes(ext)} 
-                          onChange={handleChange} 
-                        />
-                        <span>{ext}</span>
-                      </label>
-                    ))}
-                  </div>
-                </div>
-              </fieldset>
-            )}
-
-            {/* PASO 4: MATERIALES */}
-            {step === 4 && (
-              <fieldset className="fade-in">
-                <legend className="kicker">04 // Activos y Referencias</legend>
-                <div className="form-group">
-                  <label>¿Qué materiales tienes preparados actualmente?</label>
-                  <select name="materiales" value={formData.materiales} onChange={handleChange} required>
-                    <option value="">Selecciona una opción...</option>
-                    <option value="Todo">Tengo de todo (Logotipo, colores, textos escritos y fotos/vídeos)</option>
-                    <option value="Faltan Textos/Fotos">Tengo logotipo y colores, pero me faltan los textos o las fotos</option>
-                    <option value="Falta Identidad">Tengo los textos/fotos, pero necesito diseño de logotipo</option>
-                    <option value="Nada">No tengo nada, tenemos que empezar desde cero</option>
-                  </select>
-                </div>
-                <div className="form-group">
-                  <label>Referencias visuales (URLs)</label>
-                  <textarea name="referencias" value={formData.referencias} onChange={handleChange} rows="3" placeholder="Péganos enlaces a webs que te gusten por su diseño, colores o estructura..."></textarea>
-                </div>
-              </fieldset>
-            )}
-
-            {/* PASO 5: CIERRE Y LEGAL */}
-            {step === 5 && (
-              <fieldset className="fade-in" style={{ border: 'none' }}>
-                <legend className="kicker">05 // Lanzamiento</legend>
-                <div className="form-row">
-                  <div className="form-group">
-                    <label>Inversión prevista para este proyecto</label>
-                    <select name="presupuesto" value={formData.presupuesto} onChange={handleChange} required>
-                      <option value="">Selecciona una horquilla...</option>
-                      <option value="350-750">350€ - 750€</option>
-                      <option value="750-1500">750€ - 1.500€</option>
-                      <option value="1500-3000">1.500€ - 3.000€</option>
-                      <option value="3000+">+ 3.000€</option>
-                    </select>
-                  </div>
-                  <div className="form-group">
-                    <label>Nivel de urgencia</label>
-                    <select name="plazo" value={formData.plazo} onChange={handleChange} required>
-                      <option value="">Selecciona urgencia...</option>
-                      <option value="Tranquilo">Tranquilo (Sin prisa, prioridad a la calidad)</option>
-                      <option value="Normal">Normal (Flujo de trabajo estándar)</option>
-                      <option value="Prioritario">Prioritario (Lo necesito lo antes posible)</option>
-                    </select>
-                    <p style={{fontSize: '0.75rem', color: 'var(--steel)', marginTop: '0.5rem', lineHeight: '1.4'}}>
-                      * <strong>Sé sincero.</strong> Indicar "Sin prisa" no significa que vayamos a retrasar tu proyecto, simplemente nos da flexibilidad para organizar los recursos.
-                    </p>
-                  </div>
-                </div>
-                
-                <div style={{ marginTop: '2rem', padding: '1.5rem', background: 'var(--sheath)', borderRadius: '8px', border: '1px solid var(--ghost)' }}>
-                  <label className="check-box" style={{ display: 'flex', gap: '1rem', cursor: 'pointer', alignItems: 'flex-start' }}>
-                    <input type="checkbox" name="aceptaLegal" checked={formData.aceptaLegal} onChange={handleChange} required style={{ marginTop: '0.2rem' }} />
-                    <span style={{ fontSize: '0.85rem', color: 'var(--steel)', lineHeight: '1.5' }}>
-                      He leído y acepto la <Link to="/politica-de-privacidad" style={{ color: 'var(--spark)', textDecoration: 'underline' }}>Política de Privacidad</Link>. 
-                      Comprendo que Katan Studio tratará mis datos con la finalidad de gestionar mi solicitud de presupuesto, basado en mi consentimiento.
-                    </span>
-                  </label>
-                </div>
-              </fieldset>
-            )}
-
-            <div className="form-actions" style={{ display: 'flex', gap: '1rem', marginTop: '3rem' }}>
-              <button type="button" onClick={prevStep} className="btn btn--ghost" style={{ flex: 1 }}>← Atrás</button>
-              {step < 5 ? (
-                <button type="button" onClick={nextStep} className="btn btn--primary" style={{ flex: 2 }}>Siguiente paso</button>
-              ) : (
-                <button type="submit" className="btn btn--primary" style={{ flex: 2, background: 'var(--spark)', border: 'none', color: '#000' }}>Finalizar y enviar briefing</button>
-              )}
-            </div>
-          </form>
         )}
-      </div>
+
+        {/* PASO 2: ESTRATEGIA */}
+        {step === 2 && (
+          <fieldset className="fade-in">
+            <legend className="kicker">02 // Estrategia de Negocio</legend>
+
+            <div className="form-group">
+              <label>Sector principal</label>
+              <select name="sector" value={formData.sector} onChange={handleChange} required>
+                <option value="">Selecciona tu sector...</option>
+                {SECTORES.map(s => <option key={s} value={s}>{s}</option>)}
+              </select>
+            </div>
+
+            <div className="form-group">
+              <label>¿A qué se dedica tu negocio exactamente?</label>
+              <textarea name="negocio" value={formData.negocio} onChange={handleChange} required rows="2" placeholder="Explícanos qué vendes o qué servicio ofreces..."></textarea>
+            </div>
+
+            <div className="form-group">
+              <label>¿Cuál es el objetivo principal de la web?</label>
+              <textarea name="objetivo" value={formData.objetivo} onChange={handleChange} required rows="2" placeholder="Ej: Conseguir contactos, vender productos online, validar una idea de negocio..."></textarea>
+            </div>
+
+            <div className="form-group">
+              <label>¿Por qué un cliente debería elegirte a ti y no a tu competencia?</label>
+              <textarea name="diferenciacion" value={formData.diferenciacion} onChange={handleChange} rows="2" placeholder="Tu propuesta de valor, qué te hace diferente o especial..."></textarea>
+            </div>
+
+            <div className="form-row">
+              <div className="form-group">
+                <label>¿Quién es tu cliente ideal?</label>
+                <input type="text" name="publico" value={formData.publico} onChange={handleChange} placeholder="Ej: Empresas locales, parejas jóvenes..." />
+              </div>
+              <div className="form-group">
+                <label>¿Competidores de referencia?</label>
+                <input type="text" name="competidores" value={formData.competidores} onChange={handleChange} placeholder="Marcas que compitan contigo" />
+              </div>
+            </div>
+          </fieldset>
+        )}
+
+        {/* PASO 3: ARQUITECTURA & EXTRAS */}
+        {step === 3 && (
+          <fieldset className="fade-in">
+            <legend className="kicker">03 // Configuración del Sistema</legend>
+
+            <div className="form-group">
+              <label>Tipo de estructura principal (Obligatorio)</label>
+              <div className="radio-grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))' }}>
+                <label className="radio-card">
+                  <input type="radio" name="servicio" value="Landing" checked={formData.servicio === 'Landing'} onChange={handleChange} required />
+                  <div className="card-content"><span className="title">Landing Page</span><span className="desc">Conversión y ventas (1 pág)</span></div>
+                </label>
+                <label className="radio-card">
+                  <input type="radio" name="servicio" value="Corporativa" checked={formData.servicio === 'Corporativa'} onChange={handleChange} />
+                  <div className="card-content"><span className="title">Web Corporativa</span><span className="desc">Múltiples secciones y SEO</span></div>
+                </label>
+                <label className="radio-card">
+                  <input type="radio" name="servicio" value="E-commerce" checked={formData.servicio === 'E-commerce'} onChange={handleChange} />
+                  <div className="card-content"><span className="title">E-commerce</span><span className="desc">Catálogo y pagos online</span></div>
+                </label>
+                <label className="radio-card">
+                  <input type="radio" name="servicio" value="Orientacion" checked={formData.servicio === 'Orientacion'} onChange={handleChange} />
+                  <div className="card-content"><span className="title">No estoy seguro</span><span className="desc">Necesito asesoramiento</span></div>
+                </label>
+              </div>
+            </div>
+
+            <div className="form-group" style={{ marginTop: '2.5rem' }}>
+              <label>Servicios adicionales (Selecciona los que necesites)</label>
+              <div className="checkbox-grid">
+                {EXTRAS_LIST.map((ext) => (
+                  <label key={ext} className="check-box">
+                    <input
+                      type="checkbox"
+                      name="extras"
+                      value={ext}
+                      checked={formData.extras.includes(ext)}
+                      onChange={handleChange}
+                    />
+                    <span>{ext}</span>
+                  </label>
+                ))}
+              </div>
+            </div>
+          </fieldset>
+        )}
+
+        {/* PASO 4: MATERIALES */}
+        {step === 4 && (
+          <fieldset className="fade-in">
+            <legend className="kicker">04 // Activos y Referencias</legend>
+            <div className="form-group">
+              <label>¿Qué materiales tienes preparados actualmente?</label>
+              <select name="materiales" value={formData.materiales} onChange={handleChange} required>
+                <option value="">Selecciona una opción...</option>
+                <option value="Todo">Tengo de todo (Logotipo, colores, textos escritos y fotos/vídeos)</option>
+                <option value="Faltan Textos/Fotos">Tengo logotipo y colores, pero me faltan los textos o las fotos</option>
+                <option value="Falta Identidad">Tengo los textos/fotos, pero necesito diseño de logotipo</option>
+                <option value="Nada">No tengo nada, tenemos que empezar desde cero</option>
+              </select>
+            </div>
+            <div className="form-group">
+              <label>Referencias visuales (URLs)</label>
+              <textarea name="referencias" value={formData.referencias} onChange={handleChange} rows="3" placeholder="Péganos enlaces a webs que te gusten por su diseño, colores o estructura..."></textarea>
+            </div>
+          </fieldset>
+        )}
+
+        {/* PASO 5: CIERRE Y LEGAL */}
+        {step === 5 && (
+          <fieldset className="fade-in" style={{ border: 'none' }}>
+            <legend className="kicker">05 // Lanzamiento</legend>
+            <div className="form-row">
+              <div className="form-group">
+                <label>Inversión prevista para este proyecto</label>
+                <select name="presupuesto" value={formData.presupuesto} onChange={handleChange} required>
+                  <option value="">Selecciona una horquilla...</option>
+                  <option value="350-750">350€ - 750€</option>
+                  <option value="750-1500">750€ - 1.500€</option>
+                  <option value="1500-3000">1.500€ - 3.000€</option>
+                  <option value="3000+">+ 3.000€</option>
+                </select>
+              </div>
+              <div className="form-group">
+                <label>Nivel de urgencia</label>
+                <select name="plazo" value={formData.plazo} onChange={handleChange} required>
+                  <option value="">Selecciona urgencia...</option>
+                  <option value="Tranquilo">Tranquilo (Sin prisa, prioridad a la calidad)</option>
+                  <option value="Normal">Normal (Flujo de trabajo estándar)</option>
+                  <option value="Prioritario">Prioritario (Lo necesito lo antes posible)</option>
+                </select>
+                <p style={{ fontSize: '0.75rem', color: 'var(--steel)', marginTop: '0.5rem', lineHeight: '1.4' }}>
+                  * <strong>Sé sincero.</strong> Indicar "Sin prisa" no significa que vayamos a retrasar tu proyecto, simplemente nos da flexibilidad para organizar los recursos.
+                </p>
+              </div>
+            </div>
+
+            <div style={{ marginTop: '2rem', padding: '1.5rem', background: 'var(--sheath)', borderRadius: '8px', border: '1px solid var(--ghost)' }}>
+              <label className="check-box" style={{ display: 'flex', gap: '1rem', cursor: 'pointer', alignItems: 'flex-start' }}>
+                <input type="checkbox" name="aceptaLegal" checked={formData.aceptaLegal} onChange={handleChange} required style={{ marginTop: '0.2rem' }} />
+                <span style={{ fontSize: '0.85rem', color: 'var(--steel)', lineHeight: '1.5' }}>
+                  He leído y acepto la <Link to="/politica-de-privacidad" style={{ color: 'var(--spark)', textDecoration: 'underline' }}>Política de Privacidad</Link>.
+                  Comprendo que Katan Studio tratará mis datos con la finalidad de gestionar mi solicitud de presupuesto, basado en mi consentimiento.
+                </span>
+              </label>
+            </div>
+          </fieldset>
+        )}
+
+        <div className="form-actions" style={{ display: 'flex', gap: '1rem', marginTop: '3rem' }}>
+          <button type="button" onClick={prevStep} className="btn btn--ghost" style={{ flex: 1 }}>← Atrás</button>
+          {step < 5 ? (
+            <button type="button" onClick={nextStep} className="btn btn--primary" style={{ flex: 2 }}>Siguiente paso</button>
+          ) : (
+            <button type="submit" className="btn btn--primary" style={{ flex: 2, background: 'var(--spark)', border: 'none', color: '#000' }}>Finalizar y enviar briefing</button>
+          )}
+        </div>
+      </form>
+        )}
+    </div >
     </>
   )
 }

@@ -2559,9 +2559,10 @@ FAQ PAGE ═══════════════════════�
 
 .katan-form input[type="text"],
 .katan-form input[type="email"],
+.katan-form input[type="tel"],
 .katan-form textarea,
 .katan-form select {
-  width: 100%;
+ width: 100%;
   background: var(--sheath);
   border: 1px solid var(--ghost);
   color: var(--blade);
