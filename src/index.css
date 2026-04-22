@@ -2407,6 +2407,7 @@ FAQ PAGE ═══════════════════════�
 
 .contacto-hero__email {
   color: var(--spark);
+  font-size: 0.85rem;
   font-family: var(--font-mono);
   transition: color var(--t-fast);
 }
@@ -2559,7 +2560,7 @@ FAQ PAGE ═══════════════════════�
 
 .katan-form input[type="text"],
 .katan-form input[type="email"],
-.katan-form input[type="tel"],
+.katan-form input[type="tel"], 
 .katan-form textarea,
 .katan-form select {
  width: 100%;
@@ -3659,7 +3660,7 @@ FAQ PAGE ═══════════════════════�
 }
 
 .contacto-hero__email {
-  color: var(--edge);
+  color: var(--spark);
   transition: color var(--t-fast);
 }
 
