@@ -155,24 +155,36 @@ const ALL_ITEMS = FAQ_CATEGORIES.flatMap((cat) =>
   cat.items.map((item) => ({ ...item, categoryLabel: cat.label, categoryTitle: cat.title }))
 )
 
+// 1. Ordenamos alfabéticamente por la pregunta
+  .sort((a, b) => a.question.localeCompare(b.question))
+  // 2. Mapeamos para añadir un número global correlativo (01, 02, 03...)
+  .map((item, index) => ({
+    ...item,
+    globalNum: String(index + 1).padStart(2, '0')
+  }));
+
 const NAV_CATEGORIES = [
   { id: 'todas', label: 'Todas', title: 'Todas las preguntas' },
   ...FAQ_CATEGORIES,
 ]
 
-function FaqItem({ item, showCategory = false }) {
+function FaqItem({ item }) {
   const [open, setOpen] = useState(false)
+  
+  // Usamos el número global si existe (Vista Todas), o el normal (Vista Categorías)
+  const displayNum = item.globalNum || item.num;
+
   return (
     <div className={`faq-item${open ? ' is-active' : ''}`}>
       <button className="faq-question" aria-expanded={open} onClick={() => setOpen(!open)}>
-        {!showCategory && <span className="faq-num">{item.num}</span>}
+        <span className="faq-num">{displayNum}</span>
         <span className="faq-text">
-          
           {item.question}
         </span>
         <span className="faq-icon"></span>
       </button>
       <div className="faq-answer">
+        {/* Aquí mantén la lógica que decidieras usar para las negritas/saltos de línea */}
         <p>{item.answer}</p>
       </div>
     </div>
