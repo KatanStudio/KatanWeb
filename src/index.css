@@ -3676,3 +3676,395 @@ FAQ PAGE ═══════════════════════�
     padding: 1.25rem 2rem;
   }
 }
+/* ═══════════════════════════════════════════════
+   SERVICES 3D CAROUSEL
+   Añadir al final de index.css
+   ═══════════════════════════════════════════════ */
+
+/* ── Wrapper ── */
+.svc3d {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2.5rem;
+  padding: 1rem 0 0.5rem;
+  /* Reservamos espacio vertical para el 3D */
+  perspective: 1200px;
+}
+
+/* ── Stage: contiene las 4 cards superpuestas ── */
+.svc3d__stage {
+  position: relative;
+  width: 100%;
+  /* Altura fija para que las cards 3D no colapsen el layout */
+  height: 720px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── Cada card: posicionada absolute en el centro ── */
+.svc3d__card {
+  position: absolute;
+  width: clamp(280px, 30vw, 380px);
+  background: var(--sheath);
+  border: 1px solid var(--ghost);
+  padding: 2rem 2.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  /* Transición suave 3D */
+  transition:
+    transform 0.48s cubic-bezier(0.34, 1.10, 0.64, 1),
+    opacity 0.38s ease,
+    filter 0.38s ease,
+    border-color 0.28s ease;
+  will-change: transform, opacity;
+  transform-style: preserve-3d;
+  cursor: default;
+  user-select: none;
+  /* Barra lateral izquierda */
+  border-left: 3px solid transparent;
+}
+
+/* Cards no activas son clicables */
+.svc3d__card:not(.svc3d__card--active) {
+  cursor: pointer;
+}
+
+/* Card activa: borde acento */
+.svc3d__card--active {
+  border-color: rgba(255, 0, 128, 0.4);
+  border-left-color: var(--edge);
+  background: var(--ghost);
+  box-shadow:
+    0 32px 80px rgba(0, 0, 0, 0.7),
+    0 0 0 1px rgba(255, 0, 128, 0.15),
+    inset 0 1px 0 rgba(255,255,255,0.03);
+}
+
+.svc3d__card--featured.svc3d__card--active {
+  border-left-color: var(--edge);
+}
+
+.svc3d__card--extras.svc3d__card--active {
+  border-color: rgba(0, 229, 255, 0.35);
+  border-left-color: var(--spark);
+  box-shadow:
+    0 32px 80px rgba(0, 0, 0, 0.7),
+    0 0 0 1px rgba(0, 229, 255, 0.1);
+}
+
+/* ── Wireframe illustration ── */
+.svc3d__wireframe {
+  height: 110px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--forge);
+  border: 1px solid var(--ghost);
+  padding: 1rem;
+  margin-bottom: 0.25rem;
+  overflow: hidden;
+  position: relative;
+}
+
+.svc3d__wireframe::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 40%, rgba(10,10,15,0.6) 100%);
+  pointer-events: none;
+}
+
+.svc3d__wireframe svg {
+  width: auto;
+  height: 100%;
+  max-height: 86px;
+  transition: transform 0.3s ease;
+}
+
+.svc3d__card--active:hover .svc3d__wireframe svg {
+  transform: translateY(-4px) scale(1.04);
+}
+
+/* ── Header ── */
+.svc3d__top {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+}
+
+.svc3d__num {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  color: var(--edge);
+  letter-spacing: 0.2em;
+}
+
+.svc3d__tag {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--steel);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* ── Title ── */
+.svc3d__title {
+  font-family: var(--font-head);
+  font-size: clamp(1.3rem, 2.5vw, 1.85rem);
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  line-height: 0.95;
+  color: var(--blade);
+}
+
+/* ── Desc ── */
+.svc3d__desc {
+  font-size: 0.9rem;
+  color: var(--steel);
+  line-height: 1.65;
+}
+
+/* ── Features list ── */
+.svc3d__features {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  list-style: none;
+}
+
+.svc3d__features li {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--steel);
+  letter-spacing: 0.03em;
+  padding-left: 1rem;
+  position: relative;
+  line-height: 1.4;
+}
+
+.svc3d__features li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: var(--edge);
+  font-size: 0.6rem;
+  top: 1px;
+}
+
+.svc3d__features--extras li::before {
+  color: var(--spark);
+}
+
+.svc3d__features-more {
+  color: var(--spark) !important;
+  font-style: italic;
+  padding-left: 0 !important;
+}
+
+.svc3d__features-more::before {
+  display: none !important;
+}
+
+/* ── Footer ── */
+.svc3d__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 1rem;
+  border-top: 1px solid var(--ghost);
+  margin-top: auto;
+}
+
+.svc3d__price {
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  color: var(--steel);
+}
+
+.svc3d__price strong {
+  font-family: var(--font-head);
+  font-size: 1rem;
+  font-weight: 900;
+  color: var(--blade);
+  letter-spacing: -0.03em;
+}
+
+.svc3d__price-note {
+  font-size: 0.62rem;
+  color: var(--steel);
+}
+
+.svc3d__cta {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--edge);
+  transition: letter-spacing var(--t-fast), color var(--t-fast);
+}
+
+.svc3d__cta:hover {
+  letter-spacing: 0.05em;
+}
+
+/* ── Click hint overlay ── */
+.svc3d__click-hint {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity var(--t-fast);
+  pointer-events: none;
+}
+
+.svc3d__card:not(.svc3d__card--active):hover .svc3d__click-hint {
+  opacity: 1;
+}
+
+.svc3d__click-hint span {
+  font-family: var(--font-mono);
+  font-size: 1.5rem;
+  color: rgba(255,255,255,0.7);
+  background: rgba(10, 10, 15, 0.75);
+  border: 1px solid rgba(255,255,255,0.1);
+  width: 3rem;
+  height: 3rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(8px);
+}
+
+/* ── Controls ── */
+.svc3d__controls {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.svc3d__arrow {
+  width: 2.75rem;
+  height: 2.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--sheath);
+  border: 1px solid var(--ghost);
+  color: var(--blade);
+  font-size: 1.1rem;
+  cursor: pointer;
+  font-family: var(--font-mono);
+  transition: border-color var(--t-fast), color var(--t-fast), background var(--t-fast), transform var(--t-fast);
+}
+
+.svc3d__arrow:hover:not(:disabled) {
+  border-color: var(--edge);
+  color: var(--edge);
+  background: rgba(255, 0, 128, 0.06);
+  transform: scale(1.08);
+}
+
+.svc3d__arrow:disabled {
+  opacity: 0.25;
+  cursor: not-allowed;
+}
+
+/* ── Dots ── */
+.svc3d__dots {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.svc3d__dot {
+  width: 28px;
+  height: 3px;
+  background: var(--ghost);
+  border: none;
+  cursor: pointer;
+  transition: background var(--t-mid), width var(--t-mid), transform var(--t-mid);
+  border-radius: 1px;
+}
+
+.svc3d__dot--active {
+  width: 52px;
+  background: var(--edge);
+}
+
+.svc3d__dot--extras.svc3d__dot--active {
+  background: var(--spark);
+}
+
+.svc3d__dot:hover:not(.svc3d__dot--active) {
+  background: var(--steel);
+  transform: scaleY(1.5);
+}
+
+/* ── Hint label ── */
+.svc3d__hint {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  color: var(--steel);
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.svc3d__hint-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  transition: background var(--t-mid);
+}
+
+.svc3d__hint-next {
+  color: rgba(138, 155, 180, 0.5);
+}
+
+/* ═══════════════════════════════════════════════
+   RESPONSIVE
+   ═══════════════════════════════════════════════ */
+
+/* Móvil: stage más bajo, cards más pequeñas */
+@media (max-width: 640px) {
+  .svc3d__stage {
+    height: 580px;
+  }
+
+  .svc3d__card {
+    width: clamp(260px, 82vw, 320px);
+    padding: 1.5rem 1.75rem;
+  }
+
+  /* En móvil las cards laterales se van más al lado */
+  .svc3d__wireframe {
+    height: 90px;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 900px) {
+  .svc3d__stage {
+    height: 660px;
+  }
+
+  .svc3d__card {
+    width: clamp(280px, 45vw, 360px);
+  }
+}
+
+/* Desktop grande: más espacio */
+@media (min-width: 1200px) {
+  .svc3d__stage {
+    height: 740px;
+  }
+
+  .svc3d__card {
+    width: 360px;
+  }
+}

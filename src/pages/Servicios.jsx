@@ -4,8 +4,7 @@ import { Link } from 'react-router-dom'
 import Header from '../components/Header.jsx'
 import Footer from '../components/Footer.jsx'
 import HeroCarousel from '../components/HeroCarousel.jsx'
-
-
+import ServicesCarousel from '../components/ServicesCarousel.jsx'
 
 // ── Service data ────────────────────────────────────────────────
 const SERVICES = [
@@ -51,7 +50,6 @@ const EXTRAS = [
   { title: 'Mantenimiento & Hosting', desc: 'CDN global, SSL activo y cambios de texto incluidos. Tú solo piensas en tu negocio.', price: '250–350 €/año' },
 ]
 
-// ── SVG Demos (fondos de pantalla completa) ──────────────────────
 function LandingDemo() {
   return (
     <svg viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid slice" width="100%" height="100%" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -62,10 +60,8 @@ function LandingDemo() {
         </pattern>
       </defs>
       <rect width="1200" height="600" fill="url(#ld-grid)" />
-      {/* Brillos inmersivos */}
       <circle cx="600" cy="300" r="400" fill="#FF0080" fillOpacity="0.04" />
       <circle cx="600" cy="300" r="200" fill="#FF0080" fillOpacity="0.08" />
-      {/* UI Abstracta Centrada */}
       <rect x="150" y="60" width="900" height="50" rx="6" fill="#0B0B16" stroke="#1E1E2A" />
       <rect x="180" y="80" width="40" height="10" rx="2" fill="#FF0080" />
       <rect x="940" y="75" width="80" height="20" rx="4" fill="#FF0080" fillOpacity="0.8" />
@@ -83,7 +79,6 @@ function CorporativaDemo() {
       <rect width="1200" height="600" fill="url(#ld-grid)" />
       <circle cx="300" cy="400" r="350" fill="#00E5FF" fillOpacity="0.03" />
       <circle cx="900" cy="200" r="350" fill="#FF0080" fillOpacity="0.03" />
-      {/* UI Abstracta Estructurada */}
       <rect x="150" y="60" width="900" height="50" rx="6" fill="#0B0B16" stroke="#1E1E2A" />
       <rect x="150" y="160" width="400" height="30" rx="4" fill="#16162A" />
       <rect x="150" y="210" width="200" height="16" rx="4" fill="#16162A" />
@@ -100,13 +95,11 @@ function EcommerceDemo() {
       <rect width="1200" height="600" fill="#07070F" />
       <rect width="1200" height="600" fill="url(#ld-grid)" />
       <circle cx="600" cy="300" r="400" fill="#FF0080" fillOpacity="0.04" />
-      {/* UI Abstracta Tienda */}
       <rect x="150" y="60" width="900" height="50" rx="6" fill="#0B0B16" stroke="#1E1E2A" />
       <rect x="850" y="75" width="120" height="20" rx="4" fill="#16162A" />
       <circle cx="1010" cy="85" r="10" fill="#FF0080" />
       <rect x="150" y="150" width="200" height="380" rx="6" fill="#0B0B16" stroke="#1E1E2A" />
       <rect x="180" y="190" width="120" height="12" rx="2" fill="#16162A" />
-      <rect x="180" y="230" width="140" height="8" rx="2" fill="#16162A" />
       <rect x="390" y="150" width="200" height="260" rx="6" fill="#0E0E1C" stroke="#1E1E2A" />
       <rect x="610" y="150" width="200" height="260" rx="6" fill="#0E0E1C" stroke="#FF0080" strokeOpacity="0.4" />
       <rect x="830" y="150" width="200" height="260" rx="6" fill="#0E0E1C" stroke="#1E1E2A" />
@@ -114,57 +107,30 @@ function EcommerceDemo() {
   )
 }
 
-
-
-// ── Service Selector ─────────────────────────────────────────────
 function ServiceSelector() {
   const [active, setActive] = useState(0)
   const [animKey, setAnimKey] = useState(0)
-
-  const handleSelect = (i) => {
-    if (i === active) return
-    setActive(i)
-    setAnimKey(k => k + 1)
-  }
-
+  const handleSelect = (i) => { if (i === active) return; setActive(i); setAnimKey(k => k + 1) }
   const svc = SERVICES[active]
-
   return (
     <div className="svc-selector">
-      {/* Navegación unificada */}
-      <div className="svc-tabs" role="tablist" aria-label="Tipo de servicio">
+      <div className="svc-tabs" role="tablist">
         {SERVICES.map((s, i) => (
-          <button
-            key={s.id}
-            role="tab"
-            aria-selected={active === i}
+          <button key={s.id} role="tab" aria-selected={active === i}
             className={`svc-tab${active === i ? ' svc-tab--active' : ''}`}
-            onClick={() => handleSelect(i)}
-          >
+            onClick={() => handleSelect(i)}>
             <span className="svc-tab__label">{s.label}</span>
           </button>
         ))}
       </div>
-
-      {/* Hero Visual Principal */}
       <div className="svc-panel" key={animKey} role="tabpanel">
-        <div className="svc-panel__bg" aria-hidden="true">
-          {svc.demo}
-        </div>
-        
-        {/* Viñeteado para asegurar legibilidad */}
+        <div className="svc-panel__bg" aria-hidden="true">{svc.demo}</div>
         <div className="svc-panel__overlay" aria-hidden="true" />
-        
         <div className="svc-panel__content">
-          {/* Arriba a la izquierda (Kicker + Desc) */}
           <div className="svc-panel__top-left">
-            <p className="kicker" style={{ color: 'var(--spark)', marginBottom: '1rem' }}>
-              {svc.num} // {svc.label}
-            </p>
+            <p className="kicker" style={{ color: 'var(--spark)', marginBottom: '1rem' }}>{svc.num} // {svc.label}</p>
             <p className="svc-panel__intro">{svc.desc}</p>
           </div>
-
-          {/* Centro (Gran Título) */}
           <div className="svc-panel__center">
             <h3 className="svc-panel__huge-title">{svc.label}</h3>
             <div className="svc-panel__actions">
@@ -178,25 +144,13 @@ function ServiceSelector() {
   )
 }
 
-// ── Extras carousel ─────────────────────────────────────────────
 function ExtraBadge({ title, desc, price, onEnter, onLeave }) {
   const [open, setOpen] = useState(false)
-
-  const handleEnter = () => { setOpen(true); onEnter() }
-  const handleLeave = () => { setOpen(false); onLeave() }
-  const handleClick = () => {
-    const next = !open
-    setOpen(next)
-    if (next) onEnter(); else onLeave()
-  }
-
   return (
-    <div
-      className={`extras-badge${open ? ' extras-badge--open' : ''}`}
-      onMouseEnter={handleEnter}
-      onMouseLeave={handleLeave}
-    >
-      <button className="extras-badge__face" onClick={handleClick} aria-expanded={open}>
+    <div className={`extras-badge${open ? ' extras-badge--open' : ''}`}
+      onMouseEnter={() => { setOpen(true); onEnter() }}
+      onMouseLeave={() => { setOpen(false); onLeave() }}>
+      <button className="extras-badge__face" onClick={() => { const n = !open; setOpen(n); if (n) onEnter(); else onLeave() }} aria-expanded={open}>
         <span className="extras-badge__title">{title}</span>
         <span className="extras-badge__price">{price}</span>
       </button>
@@ -214,21 +168,14 @@ function ExtrasMarquee() {
     <div className="extras-marquee">
       <div className={`extras-marquee__track${paused ? ' extras-marquee__track--paused' : ''}`}>
         {[...EXTRAS, ...EXTRAS].map((e, i) => (
-          <ExtraBadge
-            key={i}
-            title={e.title}
-            desc={e.desc}
-            price={e.price}
-            onEnter={() => setPaused(true)}
-            onLeave={() => setPaused(false)}
-          />
+          <ExtraBadge key={i} title={e.title} desc={e.desc} price={e.price}
+            onEnter={() => setPaused(true)} onLeave={() => setPaused(false)} />
         ))}
       </div>
     </div>
   )
 }
 
-// ── Page ────────────────────────────────────────────────────────
 export default function Servicios() {
   return (
     <>
@@ -236,140 +183,23 @@ export default function Servicios() {
         <title>Servicios — Katan Studio</title>
         <meta name="description" content="Katan Studio — Landing Pages, Webs Corporativas y E-Commerce a medida. Código propio, precio cerrado." />
       </Helmet>
-
       <Header />
-
       <main>
-        {/* ── Hero interactivo ── */}
-<section id="servicios-selector" style={{ paddingTop: '0', borderTop: 'none' }}>
-  <HeroCarousel />
-</section>
+        <section id="servicios-selector" style={{ paddingTop: '0', borderTop: 'none' }}>
+          <HeroCarousel />
+        </section>
 
-        {/* ── Cards detalle (se mantienen) ── */}
         <section className="section section--dark" id="servicios">
           <div className="container">
             <header className="section__header">
               <p className="section-label">/Servicios</p>
               <h2 className="section__h2" style={{ textTransform: 'none' }}>Lo que construimos</h2>
             </header>
-
-            <div className="services-grid">
-              <article className="service-card" data-index="01">
-                <div className="service-wireframe">
-                  <svg viewBox="0 0 100 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect x="15" y="10" width="70" height="100" rx="3" stroke="var(--steel)" strokeWidth="1" fill="var(--sheath)" />
-                    <rect x="20" y="16" width="15" height="3" rx="1.5" fill="var(--ghost)" />
-                    <rect x="70" y="15" width="10" height="5" rx="2" fill="var(--edge)" />
-                    <rect x="20" y="25" width="60" height="25" rx="2" fill="var(--ghost)" />
-                    <rect x="20" y="55" width="16" height="16" rx="2" fill="var(--ghost)" />
-                    <rect x="42" y="55" width="16" height="16" rx="2" fill="var(--ghost)" />
-                    <rect x="64" y="55" width="16" height="16" rx="2" fill="var(--ghost)" />
-                    <rect x="20" y="78" width="60" height="6" rx="2" fill="var(--ghost)" />
-                    <rect x="20" y="98" width="25" height="5" rx="2" fill="var(--edge)" />
-                  </svg>
-                </div>
-                <div className="service-card__top">
-                  <span className="service-card__num">01</span>
-                  <span className="service-card__tag">/ Landing Page</span>
-                </div>
-                <h3 className="service-card__title">Landing<br />Page</h3>
-                <p className="service-card__desc">Ideal para profesionales y negocios que necesitan una presencia online sólida, rápida y orientada a generar clientes.</p>
-                <ul className="service-card__features">
-                  <li>1 a 3 páginas (Inicio, Servicios, Contacto)</li>
-                  <li>Diseño responsive UI/UX a medida</li>
-                  <li>Formulario de contacto funcional</li>
-                  <li>SEO on-page básico integrado</li>
-                  <li>Integración con Google Analytics</li>
-                  <li>Alta velocidad (PageSpeed &gt;90)</li>
-                  <li>1 ronda de revisiones</li>
-                  <li>Entrega en 2-3 semanas</li>
-                </ul>
-                <div className="service-card__footer">
-                  <span className="service-card__price">Desde <strong>350,00 €</strong> <span style={{ fontSize: '0.65rem', color: 'var(--steel)' }}>+ IVA</span></span>
-                  <Link to="/contacto" className="service-card__link">Solicitar →</Link>
-                </div>
-              </article>
-
-              <article className="service-card service-card--featured" data-index="02">
-                <div className="service-wireframe">
-                  <svg viewBox="0 0 100 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect x="15" y="10" width="70" height="100" rx="3" stroke="var(--steel)" strokeWidth="1" fill="var(--sheath)" />
-                    <rect x="30" y="15" width="40" height="6" rx="3" fill="var(--ghost)" />
-                    <circle cx="40" cy="18" r="1.5" fill="var(--steel)" />
-                    <circle cx="50" cy="18" r="1.5" fill="var(--steel)" />
-                    <circle cx="60" cy="18" r="1.5" fill="var(--steel)" />
-                    <rect x="20" y="28" width="25" height="8" rx="2" fill="var(--ghost)" />
-                    <rect x="52" y="28" width="28" height="25" rx="2" fill="var(--ghost)" />
-                    <rect x="20" y="60" width="60" height="12" rx="2" fill="var(--ghost)" />
-                    <rect x="20" y="78" width="27" height="18" rx="2" fill="var(--ghost)" />
-                    <rect x="53" y="78" width="27" height="18" rx="2" fill="var(--edge)" />
-                  </svg>
-                </div>
-                <div className="service-card__top">
-                  <span className="service-card__num">02</span>
-                  <span className="service-card__tag">/ Web Corporativa</span>
-                </div>
-                <h3 className="service-card__title">Web<br />Corporativa</h3>
-                <p className="service-card__desc">Para empresas que necesitan una sede digital completa, con blog, posicionamiento avanzado y múltiples secciones estructuradas.</p>
-                <ul className="service-card__features">
-                  <li>5 a 10 páginas diseñadas a medida</li>
-                  <li>Blog integrado y categorizado</li>
-                  <li>SEO avanzado (Schema, XML, Core Vitals)</li>
-                  <li>Formularios avanzados (reservas/presupuestos)</li>
-                  <li>Multiidioma (hasta 2 idiomas)</li>
-                  <li>Analytics + Search Console</li>
-                  <li>3 rondas de revisiones</li>
-                  <li>Entrega en 4-6 semanas</li>
-                </ul>
-                <div className="service-card__footer">
-                  <span className="service-card__price">Desde <strong>750,00 €</strong> <span style={{ fontSize: '0.65rem', color: 'var(--steel)' }}>+ IVA</span></span>
-                  <Link to="/contacto" className="service-card__link">Solicitar →</Link>
-                </div>
-              </article>
-
-              <article className="service-card" data-index="03">
-                <div className="service-wireframe">
-                  <svg viewBox="0 0 100 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <rect x="15" y="10" width="70" height="100" rx="3" stroke="var(--steel)" strokeWidth="1" fill="var(--sheath)" />
-                    <rect x="20" y="15" width="15" height="3" rx="1.5" fill="var(--ghost)" />
-                    <path d="M 68 14 h 1.5 l 1.5 4 h 5 l 1 -3.5 h -6.5" stroke="var(--spark)" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" />
-                    <circle cx="72" cy="19.5" r="0.8" fill="var(--spark)" />
-                    <circle cx="76" cy="19.5" r="0.8" fill="var(--spark)" />
-                    <rect x="20" y="25" width="15" height="75" rx="2" fill="var(--ghost)" />
-                    <rect x="40" y="25" width="18" height="18" rx="2" fill="var(--ghost)" />
-                    <rect x="62" y="25" width="18" height="18" rx="2" fill="var(--ghost)" />
-                    <rect x="40" y="48" width="18" height="18" rx="2" fill="var(--ghost)" />
-                    <rect x="62" y="48" width="18" height="18" rx="2" fill="var(--ghost)" />
-                    <rect x="40" y="71" width="18" height="18" rx="2" fill="var(--ghost)" />
-                    <rect x="62" y="71" width="18" height="18" rx="2" fill="var(--ghost)" />
-                  </svg>
-                </div>
-                <div className="service-card__top">
-                  <span className="service-card__num">03</span>
-                  <span className="service-card__tag">/ E-Commerce &amp; App</span>
-                </div>
-                <h3 className="service-card__title">E-commerce<br />&amp; App</h3>
-                <p className="service-card__desc">Solución completa para vender online. Catálogo ilimitado, pasarela de pagos y gestión de envíos.</p>
-                <ul className="service-card__features">
-                  <li>Catálogo de productos escalable</li>
-                  <li>Pasarela de pago (Stripe, PayPal, Redsys)</li>
-                  <li>Panel de administración intuitivo</li>
-                  <li>SEO técnico de producto (Rich Snippets)</li>
-                  <li>Emails transaccionales automatizados</li>
-                  <li>Multiidioma (hasta 3 idiomas)</li>
-                  <li>5 rondas de revisiones</li>
-                  <li>Entrega en 8-10 semanas</li>
-                </ul>
-                <div className="service-card__footer">
-                  <span className="service-card__price">Desde <strong>2.000,00 €</strong> <span style={{ fontSize: '0.65rem', color: 'var(--steel)' }}>+ IVA</span></span>
-                  <Link to="/contacto" className="service-card__link">Solicitar →</Link>
-                </div>
-              </article>
-            </div>
+            {/* Carrusel 3D — componente en src/components/ServicesCarousel.jsx */}
+            <ServicesCarousel />
           </div>
         </section>
 
-        {/* ── Specs table ── */}
         <section className="section" id="specs" style={{ paddingTop: '2rem' }}>
           <div className="container">
             <header className="section__header" style={{ marginBottom: '2.5rem' }}>
@@ -406,7 +236,6 @@ export default function Servicios() {
           </div>
         </section>
 
-        {/* ── Extras rediseñados ── */}
         <section className="section section--dark" id="modulos">
           <div className="container">
             <header className="section__header">
@@ -414,12 +243,10 @@ export default function Servicios() {
               <h2 className="section__h2">Módulos adicionales</h2>
               <p className="section__sub">Precio fijo por módulo. Sin sorpresas. Contrátalos con tu web o después.</p>
             </header>
-
             <ExtrasMarquee />
           </div>
         </section>
       </main>
-
       <Footer />
     </>
   )
