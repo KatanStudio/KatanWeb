@@ -198,12 +198,15 @@ ul {
   font-size: 0.95rem;
   clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px));
   border-radius: 0;
-  transition: background var(--t-mid), transform var(--t-mid), clip-path var(--t-mid);
+  /* PERF: eliminado clip-path de la transición — animar clip-path fuerza
+     repaint completo en cada frame. Solo animamos transform y background. */
+  transition: background var(--t-mid), transform var(--t-mid), opacity var(--t-mid);
 }
 
 .btn--chamfer:hover {
   background: #ff2694;
   opacity: 1;
+  /* PERF: clip-path estático en hover, sin transición */
   clip-path: polygon(0 0, calc(100% - 18px) 0, 100% 18px, 100% 100%, 18px 100%, 0 calc(100% - 18px));
 }
 
@@ -227,8 +230,12 @@ ul {
   right: 0;
   z-index: 100;
   background: transparent;
-  transition: background var(--t-mid), border-color var(--t-mid), backdrop-filter var(--t-mid);
+  transition: background var(--t-mid), border-color var(--t-mid);
+  /* PERF: backdrop-filter solo se aplica en --scrolled; quitamos la transición
+     de backdrop-filter del estado base para no activar el compositor innecesariamente */
   border-bottom: 1px solid transparent;
+  /* PERF: contain:layout evita que el nav cause reflows en el resto del documento */
+  contain: layout;
 }
 
 .nav--scrolled {
@@ -407,59 +414,63 @@ ul {
 .glow-orb {
   position: absolute;
   border-radius: 50%;
-  filter: blur(600px);
-  opacity: 0.5;
+  /* PERF: blur reducido de 600px → 120px. El blur enorme era el mayor culpable.
+     Se usa contain: strict + will-change para aislar el repaint en su propia capa GPU */
+  filter: blur(120px);
+  opacity: 0.45;
   mix-blend-mode: screen;
-  animation: floatOrb 18s ease-in-out infinite alternate;
+  animation: floatOrb 22s ease-in-out infinite alternate;
   pointer-events: none;
+  will-change: transform;
+  contain: strict;
+  transform: translateZ(0);
+}
+
+/* PERF: En móvil quitamos mix-blend-mode (muy costoso) y reducimos tamaño */
+@media (max-width: 768px) {
+  .glow-orb {
+    mix-blend-mode: normal;
+    filter: blur(60px);
+    opacity: 0.25;
+  }
+  .orb-3 { display: none; }
 }
 
 .orb-1 {
-  width: 50vw;
-  height: 50vw;
+  width: 40vw;
+  height: 40vw;
   background-color: var(--edge);
   top: -10%;
   left: 0%;
   animation-delay: 0s;
-  animation-duration: 18s;
-}
-
-.orb-2 {
-  width: 55vw;
-  height: 55vw;
-  background-color: var(--spark);
-  bottom: -20%;
-  right: -10%;
-  animation-delay: -5s;
   animation-duration: 22s;
 }
 
+.orb-2 {
+  width: 45vw;
+  height: 45vw;
+  background-color: var(--spark);
+  bottom: -20%;
+  right: -10%;
+  animation-delay: -7s;
+  animation-duration: 28s;
+}
+
 .orb-3 {
-  width: 40vw;
-  height: 40vw;
+  width: 32vw;
+  height: 32vw;
   background-color: #7000FF;
   top: 20%;
   left: 40%;
-  animation-delay: -10s;
-  animation-duration: 25s;
+  animation-delay: -14s;
+  animation-duration: 32s;
 }
 
 @keyframes floatOrb {
-  0% {
-    transform: translate(0, 0) scale(1);
-  }
-
-  33% {
-    transform: translate(8vw, -5vw) scale(1.1);
-  }
-
-  66% {
-    transform: translate(-5vw, 8vw) scale(0.9);
-  }
-
-  100% {
-    transform: translate(0, 0) scale(1);
-  }
+  /* PERF: solo translate3d — se mantiene 100% en GPU, nunca toca el CPU layout */
+  0%   { transform: translate3d(0, 0, 0) scale(1); }
+  50%  { transform: translate3d(4vw, -3vw, 0) scale(1.05); }
+  100% { transform: translate3d(-3vw, 5vw, 0) scale(0.97); }
 }
 
 .mesh-overlay {
@@ -541,6 +552,8 @@ ul {
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   border-top: 1px solid rgba(255, 255, 255, 0.05);
+  /* PERF: contain:layout aísla el backdrop-filter en su propio stacking context */
+  contain: layout;
 }
 
 .stat {
@@ -3539,18 +3552,22 @@ FAQ PAGE ═══════════════════════�
 
 .extras-badge__title {
   font-family: var(--font-head);
-  font-size: 0.88rem;
+  font-size: 1.2rem;
   font-weight: 700;
   letter-spacing: -0.02em;
-  text-transform: lowercase;
+  text-transform: none;
   color: var(--blade);
 }
 
 .extras-badge__price {
   font-family: var(--font-mono);
-  font-size: 0.62rem;
+  font-size: 0.92rem;
   letter-spacing: 0.08em;
   color: var(--edge);
+  background-color: var(--edge);
+  color: var(--blade); 
+  padding: 0.15rem 0.4rem; 
+  border-radius: 3px;
 }
 
 .extras-badge__body {
@@ -3564,7 +3581,7 @@ FAQ PAGE ═══════════════════════�
 }
 
 .extras-badge__desc {
-  font-size: 0.78rem;
+  font-size: 1rem;
   color: var(--steel);
   line-height: 1.55;
   padding: 0 1.25rem 0.5rem;
@@ -3573,7 +3590,7 @@ FAQ PAGE ═══════════════════════�
 .extras-badge__cta {
   display: inline-block;
   font-family: var(--font-mono);
-  font-size: 0.65rem;
+  font-size: 0.95rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--edge);
@@ -4066,5 +4083,731 @@ FAQ PAGE ═══════════════════════�
 
   .svc3d__card {
     width: 360px;
+  }
+}
+/* ═══════════════════════════════════════════════
+   SERVICIOS REFACTOR — CSS ADDITIONS
+   Append this block to the end of index.css
+   ═══════════════════════════════════════════════ */
+
+
+/* ─────────────────────────────────────────────
+   TICKET 1: SERVICE SWITCHER (.svc-sw)
+   ───────────────────────────────────────────── */
+
+/* Outer wrapper */
+.svc-sw {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  /* PERF: contain:layout evita que los repaints internos (orbes, partículas)
+     se propaguen al resto del documento */
+  contain: layout;
+  position: relative;
+}
+
+/* ── Tab row ── */
+.svc-sw__tabs {
+  display: flex;
+  gap: 0;
+  border-bottom: 1px solid var(--ghost);
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.svc-sw__tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.svc-sw__tab {
+  flex: 1;
+  min-width: 150px;
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 1.1rem 1.5rem;
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px; /* overlap border-bottom of parent */
+  cursor: pointer;
+  color: var(--steel);
+  font-family: var(--font-body);
+  transition: color var(--t-mid), border-color var(--t-mid), background var(--t-mid);
+  text-align: left;
+  white-space: nowrap;
+}
+
+.svc-sw__tab:hover {
+  color: var(--blade);
+  background: rgba(255, 255, 255, 0.02);
+}
+
+/* ── Tab activa: le quitamos el borde rosa sólido y ponemos un "carril" sutil ── */
+.svc-sw__tab--active {
+  color: var(--blade);
+  border-bottom-color: rgba(255, 255, 255, 0.1); /* Carril de fondo oscuro */
+  background: rgba(255, 0, 128, 0.03);
+}
+
+/* ── Barra de progreso ── */
+.svc-sw__prog-bar {
+  position: absolute;
+  /* El borde inferior de la pestaña mide 2px. 
+     Para pisarlo exactamente, la barra debe medir 2px y estar en bottom: -2px */
+  bottom: -2px; 
+  left: 0;
+  height: 2px;
+  width: 0%;
+  z-index: 10;
+  animation: svc-progress 6s linear forwards;
+}
+.svc-sw__tab-num {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  color: var(--edge);
+  letter-spacing: 0.2em;
+  opacity: 0.7;
+  transition: opacity var(--t-fast);
+}
+
+.svc-sw__tab--active .svc-sw__tab-num {
+  opacity: 1;
+}
+
+.svc-sw__tab-label {
+  font-family: var(--font-head);
+  font-size: 0.88rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+/* ── Content panel — fade-in on tab change ── */
+.svc-sw__panel {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3rem;
+  padding: 3rem 0 1rem;
+  animation: swFadeIn 0.38s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+@keyframes swFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ── Left column: copy ── */
+.svc-sw__left {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  justify-content: center;
+}
+
+.svc-sw__title {
+  font-family: var(--font-head);
+  font-size: clamp(2.4rem, 5vw, 3.75rem);
+  font-weight: 900;
+  letter-spacing: -0.05em;
+  line-height: 1.0;
+  color: var(--blade);
+}
+
+.svc-sw__desc {
+  font-size: 1.05rem;
+  color: var(--steel);
+  line-height: 1.7;
+  max-width: 46ch;
+}
+
+/* Feature list */
+.svc-sw__features {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  list-style: none;
+}
+
+.svc-sw__features li {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--steel);
+  letter-spacing: 0.02em;
+  padding-left: 1.25rem;
+  position: relative;
+  line-height: 1.5;
+}
+
+.svc-sw__features li::before {
+  content: '→';
+  position: absolute;
+  left: 0;
+  color: var(--edge);
+  font-size: 0.62rem;
+  top: 2px;
+}
+
+/* Price + CTA row */
+.svc-sw__footer {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  padding-top: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.svc-sw__price-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.1rem;
+}
+
+.svc-sw__price {
+  font-family: var(--font-head);
+  font-size: clamp(1.75rem, 3.5vw, 2.25rem);
+  font-weight: 900;
+  letter-spacing: -0.05em;
+  color: var(--blade);
+  line-height: 1;
+}
+
+.svc-sw__price-note {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  color: var(--steel);
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+/* ── Right column: mockup ── */
+.svc-sw__right {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+/* The framed SVG container */
+.svc-sw__mockup {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: var(--sheath);
+  border: 1px solid var(--ghost);
+  overflow: hidden;
+  /* subtle inner glow on top edge */
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+}
+
+/* Decorative chamfer corners */
+.svc-sw__corner {
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.svc-sw__corner--tl {
+  top: 0;
+  left: 0;
+  border-top: 2px solid var(--edge);
+  border-left: 2px solid var(--edge);
+}
+
+.svc-sw__corner--br {
+  bottom: 0;
+  right: 0;
+  border-bottom: 2px solid var(--edge);
+  border-right: 2px solid var(--edge);
+}
+
+/* Floating price badge under mockup */
+.svc-sw__price-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  align-self: flex-start;
+  background: var(--ghost);
+  border: 1px solid rgba(255, 0, 128, 0.2);
+  padding: 0.5rem 1rem;
+}
+
+.svc-sw__price-badge-num {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--edge);
+  letter-spacing: 0.05em;
+  font-weight: 700;
+}
+
+.svc-sw__price-badge-tag {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  color: var(--steel);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+/* ── Responsive — Tablet ── */
+@media (min-width: 768px) {
+  .svc-sw__panel {
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    padding: 4rem 0 1rem;
+  }
+
+  .svc-sw__right {
+    /* keeps mockup top-aligned with the left column kicker */
+    padding-top: 0.5rem;
+  }
+}
+
+@media (min-width: 1100px) {
+  .svc-sw__panel {
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 5rem;
+  }
+}
+
+/* ── Mobile: stack tabs vertically if very narrow ── */
+@media (max-width: 480px) {
+  .svc-sw__tab {
+    min-width: auto;
+    padding: 0.9rem 1rem;
+  }
+
+  .svc-sw__tab-label {
+    font-size: 0.78rem;
+  }
+}
+
+
+/* ─────────────────────────────────────────────
+   TICKET 3: EXTRAS GRID (.extras-grid / .extra-card)
+   ───────────────────────────────────────────── */
+
+.extras-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  /* 1px gap trick: set the wrapper bg to ghost and gap to 1px
+     to get hairline grid lines without explicit borders */
+  gap: 1px;
+  background: var(--ghost);
+  border: 1px solid var(--ghost);
+}
+
+.extra-card {
+  background: var(--forge);
+  padding: 1.75rem 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  /* Individual transparent border so hover can light it up */
+  border: 1px solid transparent;
+  outline: none;
+  /* Hover lift + glow */
+  transition:
+    background var(--t-mid),
+    border-color var(--t-mid),
+    transform var(--t-mid),
+    box-shadow var(--t-mid);
+  position: relative;
+  z-index: 0;
+}
+
+.extra-card:hover {
+  background: var(--sheath);
+  border-color: var(--edge);
+  transform: translateY(-4px);
+  box-shadow:
+    0 8px 32px rgba(255, 0, 128, 0.12),
+    0 0 0 1px rgba(255, 0, 128, 0.18);
+  z-index: 1;
+}
+
+/* Top-edge accent line on hover */
+.extra-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--edge);
+  transition: width var(--t-mid);
+}
+
+.extra-card:hover::before {
+  width: 100%;
+}
+
+/* Icon box */
+.extra-card__icon {
+  width: 2.25rem;
+  height: 2.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  background: rgba(255, 0, 128, 0.07);
+  border: 1px solid rgba(255, 0, 128, 0.14);
+  color: var(--edge);
+  transition:
+    background var(--t-mid),
+    border-color var(--t-mid),
+    color var(--t-mid);
+}
+
+.extra-card:hover .extra-card__icon {
+  background: rgba(255, 0, 128, 0.14);
+  border-color: rgba(255, 0, 128, 0.3);
+}
+
+.extra-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  flex: 1;
+}
+
+.extra-card__title {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--blade);
+  letter-spacing: -0.01em;
+}
+
+.extra-card__desc {
+  font-size: 0.83rem;
+  color: var(--steel);
+  line-height: 1.6;
+}
+
+/* Price — separated by a hairline */
+.extra-card__price {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  color: var(--edge);
+  text-transform: uppercase;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--ghost);
+  transition: color var(--t-fast);
+}
+
+.extra-card:hover .extra-card__price {
+  color: var(--blade);
+}
+
+/* Hint line below the grid */
+.extras-grid__cta-hint {
+  margin-top: 1.5rem;
+  font-family: var(--font-mono);
+  font-size: 1.2rem;
+  color: var(--steel);
+  letter-spacing: 0.05em;
+  text-align: right;
+}
+
+/* ── Responsive grid breakpoints ── */
+@media (min-width: 480px) {
+  .extras-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 900px) {
+  .extras-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1200px) {
+  .extras-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+
+/* ─────────────────────────────────────────────
+   TICKET 5: CTA FINAL (.cta-final)
+   ───────────────────────────────────────────── */
+
+.cta-final {
+  position: relative;
+  overflow: hidden;
+  background: var(--forge);
+  text-align: center;
+}
+
+/* Ambient radial glow in the background */
+.cta-final__glow {
+  position: absolute;
+  inset: 0;
+  /* PERF: eliminado filter:blur(40px) — un blur sobre un gradiente de pantalla
+     completa es muy costoso. El gradiente solo ya logra el efecto suave. */
+  background: radial-gradient(
+    ellipse 70% 60% at 50% 55%,
+    rgba(255, 0, 128, 0.06) 0%,
+    rgba(0, 229, 255, 0.03) 40%,
+    transparent 70%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+.cta-final .container {
+  position: relative;
+  z-index: 1;
+}
+
+.cta-final__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.cta-final__label {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.25em;
+  color: var(--edge);
+  text-transform: uppercase;
+}
+
+.cta-final__h2 {
+  font-family: var(--font-head);
+  font-size: clamp(1.9rem, 5.5vw, 3.75rem);
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  line-height: 1.08;
+  color: var(--blade);
+  max-width: 18ch;
+}
+
+.cta-final__sub {
+  font-size: 1.05rem;
+  color: var(--steel);
+  line-height: 1.7;
+  max-width: 44ch;
+  margin-top: -0.25rem;
+}
+
+.cta-final__actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+  margin-top: 0.5rem;
+}
+
+/* Social proof strip */
+.cta-final__proof {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.75rem;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.1em;
+  color: var(--steel);
+  text-transform: uppercase;
+  margin-top: 0.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--ghost);
+  width: 100%;
+  max-width: 700px;
+}
+
+.cta-final__proof-dot {
+  width: 3px;
+  height: 3px;
+  background: var(--edge);
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* ─────────────────────────────────────────────
+   ANIMACIONES DEL SERVICE SWITCHER
+   ───────────────────────────────────────────── */
+
+/* Barra de progreso para AutoPlay */
+.svc-sw__prog-bar {
+  position: absolute;
+  bottom: -2px; /* Se coloca justo encima del borde base */
+  left: 0;
+  height: 2px;
+  width: 0%;
+  z-index: 10;
+  animation: svc-progress 6s linear forwards; /* Cambia de slide cada 6 segundos */
+}
+
+/* Pausar si el usuario pone el ratón encima */
+.svc-sw.is-paused .svc-sw__prog-bar {
+  animation-play-state: paused !important;
+}
+
+@keyframes svc-progress {
+  from { width: 0%; }
+  to { width: 100%; }
+}
+
+/* Sistema de Partículas ("Puntitos") */
+.hc-particles {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.hc-particle {
+  position: absolute;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  /* PERF: eliminado filter de la animación — filter:blur en animación fuerza
+     un repaint por frame en cada uno de los 24 elementos simultáneos.
+     El efecto visual es prácticamente idéntico sin él. */
+  animation: particle-fly var(--dur, 0.8s) forwards ease-out;
+  will-change: transform, opacity;
+}
+
+@keyframes particle-fly {
+  0% {
+    transform: translate(-50%, -50%) translate(0, 0) scale(1);
+    opacity: var(--ops, 0.8);
+  }
+  100% {
+    transform: translate(-50%, -50%) translate(var(--dx, 0), var(--dy, 0)) scale(0);
+    opacity: 0;
+  }
+}
+/* ─────────────────────────────────────────────
+   ORBES DE FONDO (VERSIÓN OPTIMIZADA PARA RENDIMIENTO)
+   ───────────────────────────────────────────── */
+.svc-sw__bg {
+  position: absolute;
+  width: 100vw;
+  height: 140%;
+  top: -20%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: -1;
+  pointer-events: none;
+  overflow: hidden;
+  mask-image: radial-gradient(ellipse at center, black 50%, transparent 90%);
+  -webkit-mask-image: radial-gradient(ellipse at center, black 50%, transparent 90%);
+}
+
+.svc-sw__orb {
+  position: absolute;
+  border-radius: 50%;
+  /* PERF: will-change + translateZ → capa GPU propia */
+  will-change: transform;
+  transform: translateZ(0);
+  transition: background 1.2s ease;
+  /* PERF: mix-blend-mode: plus-lighter era el mayor causante de lentitud.
+     Cambiado a 'screen' que es mucho más barato y visualmente similar */
+  mix-blend-mode: screen;
+  contain: layout style;
+}
+
+/* Orbe 1 */
+.svc-sw__orb--1 {
+  width: 600px;
+  height: 600px;
+  top: -150px;
+  right: -5%;
+  opacity: 0.2;
+  /* PERF: blur reducido de 120px → 80px */
+  filter: blur(80px);
+  animation: orbSW1 18s ease-in-out infinite alternate;
+}
+
+/* Orbe 2 */
+.svc-sw__orb--2 {
+  width: 550px;
+  height: 550px;
+  bottom: -150px;
+  left: -10%;
+  opacity: 0.15;
+  filter: blur(90px);
+  animation: orbSW2 24s ease-in-out infinite alternate-reverse;
+}
+
+/* Orbe 3 */
+.svc-sw__orb--3 {
+  width: 450px;
+  height: 450px;
+  top: 20%;
+  left: 30%;
+  opacity: 0.12;
+  filter: blur(70px);
+  animation: orbSW3 30s ease-in-out infinite alternate;
+}
+
+/* PERF: solo translate3d — 100% GPU, sin layout shifts */
+@keyframes orbSW1 {
+  0%   { transform: translate3d(0, 0, 0) scale(1); }
+  100% { transform: translate3d(-100px, 70px, 0) scale(1.15); }
+}
+@keyframes orbSW2 {
+  0%   { transform: translate3d(0, 0, 0) scale(1); }
+  100% { transform: translate3d(80px, -70px, 0) scale(1.08); }
+}
+@keyframes orbSW3 {
+  0%   { transform: translate3d(0, 0, 0) scale(1); }
+  100% { transform: translate3d(-40px, -30px, 0) scale(1.04); }
+}
+
+/* PERF: móvil — mix-blend-mode normal, tamaño y blur mínimos */
+@media (max-width: 768px) {
+  .svc-sw__orb {
+    mix-blend-mode: normal;
+  }
+
+  .svc-sw__orb--1, .svc-sw__orb--2 {
+    width: 300px; height: 300px;
+    filter: blur(50px);
+    opacity: 0.12;
+  }
+
+  .svc-sw__orb--3 {
+    display: none;
+  }
+}
+/* ─────────────────────────────────────────────
+   PERF: prefers-reduced-motion
+   Desactiva todas las animaciones para usuarios que lo solicitan.
+   También mejora el rendimiento en dispositivos lentos que suelen
+   activar esta preferencia automáticamente.
+   ───────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .glow-orb,
+  .svc-sw__orb--1,
+  .svc-sw__orb--2,
+  .svc-sw__orb--3,
+  .tech-marquee__track,
+  .extras-marquee__track {
+    animation: none !important;
   }
 }
