@@ -399,7 +399,7 @@ ul {
   width: 100%;
   height: 100%;
   z-index: 0;
-  overflow: hidden;
+  overflow: visible; /* no recortar orbes que se salen del contenedor */
   display: block;
   /* visible on mobile too, but orbs are dimmer */
   opacity: 0.4;
@@ -415,15 +415,13 @@ ul {
 .glow-orb {
   position: absolute;
   border-radius: 50%;
-  /* PERF: blur reducido de 600px → 120px. El blur enorme era el mayor culpable.
-     Se usa contain: strict + will-change para aislar el repaint en su propia capa GPU */
   filter: blur(120px);
   opacity: 0.45;
   mix-blend-mode: screen;
   animation: floatOrb 22s ease-in-out infinite alternate;
   pointer-events: none;
   will-change: transform;
-  contain: strict;
+  /* contain: strict eliminado — recortaba los orbes fuera del viewport en móvil */
   transform: translateZ(0);
 }
 
@@ -431,10 +429,25 @@ ul {
 @media (max-width: 768px) {
   .glow-orb {
     mix-blend-mode: normal;
-    filter: blur(60px);
-    opacity: 0.25;
+    filter: blur(80px);
+    opacity: 0.35;
   }
   .orb-3 { display: none; }
+
+  /* Reposicionar orbes para que sean visibles en pantallas pequeñas */
+  .orb-1 {
+    width: 70vw;
+    height: 70vw;
+    top: -5%;
+    left: -15%;
+  }
+
+  .orb-2 {
+    width: 65vw;
+    height: 65vw;
+    bottom: -5%;
+    right: -15%;
+  }
 }
 
 .orb-1 {
@@ -772,6 +785,8 @@ FAQ PAGE ═══════════════════════�
   text-align: left;
   transition: border-color var(--t-fast), background var(--t-fast);
   border-left: 2px solid transparent;
+  /* Evitar que el cambio de borde en hover desplace el layout */
+  box-sizing: border-box;
 }
 
 .faq-page-nav__item:hover {
@@ -882,11 +897,21 @@ FAQ PAGE ═══════════════════════�
     align-items: center;
     gap: 0.5rem;
     padding: 0.5rem 0.85rem;
+    /* Borde siempre de 2px a la izquierda para no causar reflow al activar */
     border: 1px solid var(--ghost);
     border-left: 2px solid transparent;
+    box-sizing: border-box;
+  }
+
+  /* Override explícito del hover de desktop para que no cambie dimensiones */
+  .faq-page-nav__item:hover {
+    background: var(--sheath);
+    border-color: var(--ghost);
+    border-left-color: var(--steel);
   }
 
   .faq-page-nav__item.is-active {
+    border-color: var(--ghost);
     border-left-color: var(--edge);
   }
 
@@ -2421,16 +2446,24 @@ FAQ PAGE ═══════════════════════�
 @media (max-width: 767px) {
   .contacto-hero {
     min-height: auto;
-    padding: 8rem 0 6rem;
+    padding: 7rem 0 5rem;
+    /* No cortar el h1 */
+    overflow: visible;
   }
   
   .contacto-hero__bg {
     justify-content: center;
     padding-right: 0;
+    overflow: hidden;
   }
   
   .contacto-hero__k {
     transform: translateX(0);
+  }
+
+  .contacto-hero__h1 {
+    font-size: clamp(2.25rem, 12vw, 3.5rem);
+    line-height: 1.05;
   }
 }
 
@@ -3522,6 +3555,60 @@ FAQ PAGE ═══════════════════════�
   to   { transform: translateX(calc(-50% - 0.5rem)); }
 }
 
+/* ── Móvil: carrusel táctil nativo en lugar del marquee automático ── */
+@media (max-width: 767px) {
+  .extras-marquee {
+    overflow-x: auto;
+    overflow-y: visible;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+    /* Quitar el fade lateral en móvil para que se vea el scroll */
+    -webkit-mask-image: none;
+    mask-image: none;
+    padding: 0 1rem 1rem;
+    /* Mostrar scrollbar sutil para que el usuario sepa que puede deslizar */
+    scrollbar-width: thin;
+    scrollbar-color: var(--ghost) transparent;
+  }
+
+  .extras-marquee::-webkit-scrollbar {
+    height: 4px;
+  }
+
+  .extras-marquee::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  .extras-marquee::-webkit-scrollbar-thumb {
+    background: var(--ghost);
+    border-radius: 2px;
+  }
+
+  .extras-marquee__track {
+    /* Parar la animación automática en móvil */
+    animation: none !important;
+    width: max-content;
+    gap: 0.75rem;
+  }
+
+  .extras-badge {
+    /* Ancho fijo adaptado a móvil: caben 1.5 badges en pantalla */
+    width: clamp(220px, 72vw, 280px);
+    scroll-snap-align: start;
+    padding: 0;
+  }
+
+  .extras-badge__body {
+    /* En móvil al hacer tap se despliega completamente sin restricción */
+    max-height: 0;
+    transition: max-height 0.3s ease;
+  }
+
+  .extras-badge--open .extras-badge__body {
+    max-height: 200px;
+  }
+}
+
 .extras-badge {
   flex-shrink: 0;
   width: fit-content; 
@@ -3612,7 +3699,9 @@ FAQ PAGE ═══════════════════════�
 .contacto-hero {
   position: relative;
   padding: 9rem 0 6rem;
-  overflow: hidden;
+  /* overflow: hidden causa que se corte el h1 en móvil;
+     usamos clip-path en el bg en su lugar si hace falta decoración */
+  overflow: visible;
 }
 
 .contacto-hero__bg {
@@ -3641,11 +3730,14 @@ FAQ PAGE ═══════════════════════�
 
 .contacto-hero__h1 {
   font-family: var(--font-head);
-  font-size: clamp(3rem, 8vw, 6rem);
+  font-size: clamp(2.5rem, 8vw, 6rem);
   font-weight: 900;
   letter-spacing: -0.05em;
-  line-height: 0.95;
+  line-height: 1.05;
   color: var(--blade);
+  /* Evitar que el texto quede cortado por overflow:hidden del padre */
+  overflow: visible;
+  padding-top: 0.1em;
 }
 
 .contacto-hero__sub {
@@ -4711,7 +4803,7 @@ FAQ PAGE ═══════════════════════�
   transform: translateX(-50%);
   z-index: -1;
   pointer-events: none;
-  overflow: hidden;
+  overflow: visible; /* no recortar orbes en móvil */
   mask-image: radial-gradient(ellipse at center, black 50%, transparent 90%);
   -webkit-mask-image: radial-gradient(ellipse at center, black 50%, transparent 90%);
 }
@@ -4719,14 +4811,11 @@ FAQ PAGE ═══════════════════════�
 .svc-sw__orb {
   position: absolute;
   border-radius: 50%;
-  /* PERF: will-change + translateZ → capa GPU propia */
   will-change: transform;
   transform: translateZ(0);
   transition: background 1.2s ease;
-  /* PERF: mix-blend-mode: plus-lighter era el mayor causante de lentitud.
-     Cambiado a 'screen' que es mucho más barato y visualmente similar */
   mix-blend-mode: screen;
-  contain: layout style;
+  /* contain: layout style eliminado — recortaba los orbes en móvil */
 }
 
 /* Orbe 1 */
@@ -4783,10 +4872,20 @@ FAQ PAGE ═══════════════════════�
     mix-blend-mode: normal;
   }
 
-  .svc-sw__orb--1, .svc-sw__orb--2 {
-    width: 300px; height: 300px;
+  .svc-sw__orb--1 {
+    width: 260px; height: 260px;
     filter: blur(50px);
-    opacity: 0.12;
+    opacity: 0.18;
+    top: -10%;
+    left: -5%;
+  }
+
+  .svc-sw__orb--2 {
+    width: 260px; height: 260px;
+    filter: blur(50px);
+    opacity: 0.14;
+    bottom: -10%;
+    right: -5%;
   }
 
   .svc-sw__orb--3 {
@@ -4874,6 +4973,57 @@ FAQ PAGE ═══════════════════════�
 #specs .container {
   position: relative;
   z-index: 2;
+}
+
+/* Contenedor de orbes de specs */
+.specs__visual {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: visible;
+}
+
+/* Orbe 1 specs: arriba-izquierda */
+.orb-specs-1 {
+  width: 45vw;
+  height: 45vw;
+  background-color: var(--edge);
+  top: -15%;
+  left: -10%;
+  opacity: 0.08;
+  animation-delay: -5s;
+  animation-duration: 26s;
+}
+
+/* Orbe 2 specs: abajo-derecha */
+.orb-specs-2 {
+  width: 40vw;
+  height: 40vw;
+  background-color: var(--spark);
+  bottom: -10%;
+  right: -8%;
+  opacity: 0.06;
+  animation-delay: -12s;
+  animation-duration: 30s;
+}
+
+@media (max-width: 767px) {
+  .orb-specs-1 {
+    width: 80vw;
+    height: 80vw;
+    top: -5%;
+    left: -20%;
+    opacity: 0.12;
+  }
+
+  .orb-specs-2 {
+    width: 70vw;
+    height: 70vw;
+    bottom: -5%;
+    right: -20%;
+    opacity: 0.10;
+  }
 }
 
 /* ═══════════════════════════════════════════════
@@ -5159,3 +5309,80 @@ FAQ PAGE ═══════════════════════�
     display: inline;
   }
 }
+/* ==========================================================================
+   FIXES RESPONSIVE KATAN STUDIO - AÑADIR AL FINAL DEL ARCHIVO
+   ========================================================================== */
+
+
+
+/* 2. FIX CARRUSEL SERVICIOS ADICIONALES (EXTRAS)
+   Se adapta a la pantalla, se centra al hacer swipe y despliega todo el texto */
+@media (max-width: 767px) {
+  .extras-marquee {
+    scroll-snap-type: x mandatory;
+    padding: 0 1rem 2rem; /* Más aire abajo para la sombra */
+  }
+  .extras-marquee__track {
+    gap: 1rem;
+  }
+  .extras-badge {
+    width: 85vw; /* Ocupa casi todo el ancho, dejando ver un poco del siguiente */
+    max-width: 320px;
+    scroll-snap-align: center;
+    white-space: normal; /* El texto fluye natural */
+  }
+  .extras-badge--open .extras-badge__body {
+    max-height: 800px; /* Expansión generosa para que no se corte el texto */
+  }
+}
+
+/* 3. FIX ORBES SECCIÓN ESPECIFICACIONES */
+@media (max-width: 767px) {
+  .orb-specs-1, .orb-specs-2 {
+    opacity: 0.4;
+    filter: blur(45px);
+  }
+}
+
+/* 4. FIX SALTO DE LAYOUT EN CATEGORÍAS FAQ
+   Fijamos los bordes rígidamente para que el flexbox no recalcule anchos al hacer click */
+.faq-page-nav__item {
+  border-style: solid !important;
+  border-width: 1px 1px 1px 2px !important;
+  border-color: var(--ghost) var(--ghost) var(--ghost) transparent !important;
+}
+.faq-page-nav__item.is-active {
+  border-color: var(--ghost) var(--ghost) var(--ghost) var(--edge) !important;
+}
+
+/* 5. FIX PÁGINA CONTACTO "EMPEZAMOS"
+   Centramos todo en móvil y usamos un clamp() más contenido para evitar overflow */
+@media (max-width: 767px) {
+  .contacto-hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .contacto-hero__content {
+    align-items: center;
+    text-align: center;
+    width: 100%;
+  }
+  .contacto-hero__h1 {
+    font-size: clamp(2rem, 11vw, 1rem); /* Escala suave sin romper la pantalla */
+    word-break: break-word; /* Prevención por si la palabra no cabe */
+    padding-top: 0;
+  }
+  .contacto-hero__sub {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .contacto-hero__k {
+    opacity: 0.02;
+    right: 50%;
+    transform: translateX(50%) translateY(-50%); /* Centra la K gigante de fondo */
+  }
+}
+

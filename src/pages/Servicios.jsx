@@ -377,15 +377,26 @@ const ExtraBadge = memo(function ExtraBadge({ title, desc, price, onEnter, onLea
 
 function ExtrasMarquee() {
   const [paused, setPaused] = useState(false)
-  // PERF: useCallback estabiliza las referencias de onEnter/onLeave.
-  // Sin esto, memo() en ExtraBadge no funciona — recibe props nuevas en cada render.
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 767px)')
+    setIsMobile(mq.matches)
+    const handler = (e) => setIsMobile(e.matches)
+    mq.addEventListener('change', handler)
+    return () => mq.removeEventListener('change', handler)
+  }, [])
+
   const handleEnter = useCallback(() => setPaused(true), [])
   const handleLeave = useCallback(() => setPaused(false), [])
+
+  // En móvil solo mostramos el array original (sin duplicar)
+  const items = isMobile ? EXTRAS : [...EXTRAS, ...EXTRAS]
+
   return (
     <div className="extras-marquee">
       <div className={`extras-marquee__track${paused ? ' extras-marquee__track--paused' : ''}`}>
-        {/* Duplicamos el array para lograr el efecto infinito sin cortes */}
-        {[...EXTRAS, ...EXTRAS].map((e, i) => (
+        {items.map((e, i) => (
           <ExtraBadge
             key={i}
             title={e.title}
@@ -466,6 +477,11 @@ export default function Servicios() {
 
         {/* ── TICKET 4: Specs Table (unchanged) ───────────────────────────── */}
         <section className="section section--dark" id="specs" style={{ paddingTop: '2rem' }}>
+          {/* Orbes de fondo */}
+          <div className="specs__visual" aria-hidden="true">
+            <div className="glow-orb orb-specs-1"></div>
+            <div className="glow-orb orb-specs-2"></div>
+          </div>
           <div className="container">
             <header className="section__header" style={{ marginBottom: '2.5rem' }}>
               <h2
