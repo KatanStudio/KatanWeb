@@ -461,7 +461,7 @@ export default function Servicios() {
         </section>
 
         {/* ── TICKET 4: Specs Table (unchanged) ───────────────────────────── */}
-        <section className="section" id="specs" style={{ paddingTop: '2rem' }}>
+        <section className="section section--dark" id="specs" style={{ paddingTop: '2rem' }}>
           <div className="container">
             <header className="section__header" style={{ marginBottom: '2.5rem' }}>
               <h2
