@@ -182,82 +182,84 @@ export default function Briefing() {
                         onChange={handleChange}
                         style={{ width: '180px', flexShrink: 0 }}
                       >
-                        {/* Principales / Por defecto */}
-                        <option value="+34">🇪🇸 España (+34)</option>
-                        <option value="+376">🇦🇩 Andorra (+376)</option>
-                        <option value="+351">🇵🇹 Portugal (+351)</option>
-                        <option value="+33">🇫🇷 Francia (+33)</option>
-                        <option value="+39">🇮🇹 Italia (+39)</option>
-                        <option value="+49">🇩🇪 Alemania (+49)</option>
-                        <option value="+44">🇬🇧 Reino Unido (+44)</option>
-                        <option value="+353">🇮🇪 Irlanda (+353)</option>
+                        <optgroup label="EUROPA">
+                          <option value="+34">🇪🇸 España (+34)</option>
+                          <option value="+376">🇦🇩 Andorra (+376)</option>
+                          <option value="+351">🇵🇹 Portugal (+351)</option>
+                          <option value="+33">🇫🇷 Francia (+33)</option>
+                          <option value="+39">🇮🇹 Italia (+39)</option>
+                          <option value="+49">🇩🇪 Alemania (+49)</option>
+                          <option value="+44">🇬🇧 Reino Unido (+44)</option>
+                          <option value="+353">🇮🇪 Irlanda (+353)</option>
+                          <option value="+355">🇦🇱 Albania (+355)</option>
+                          <option value="+43">🇦🇹 Austria (+43)</option>
+                          <option value="+32">🇧🇪 Bélgica (+32)</option>
+                          <option value="+375">🇧🇾 Bielorrusia (+375)</option>
+                          <option value="+387">🇧🇦 Bosnia y Herc. (+387)</option>
+                          <option value="+359">🇧🇬 Bulgaria (+359)</option>
+                          <option value="+357">🇨🇾 Chipre (+357)</option>
+                          <option value="+385">🇭🇷 Croacia (+385)</option>
+                          <option value="+45">🇩🇰 Dinamarca (+45)</option>
+                          <option value="+421">🇸🇰 Eslovaquia (+421)</option>
+                          <option value="+386">🇸🇮 Eslovenia (+386)</option>
+                          <option value="+372">🇪🇪 Estonia (+372)</option>
+                          <option value="+358">🇫🇮 Finlandia (+358)</option>
+                          <option value="+995">🇬🇪 Georgia (+995)</option>
+                          <option value="+30">🇬🇷 Grecia (+30)</option>
+                          <option value="+36">🇭🇺 Hungría (+36)</option>
+                          <option value="+354">🇮🇸 Islandia (+354)</option>
+                          <option value="+371">🇱🇻 Letonia (+371)</option>
+                          <option value="+423">🇱🇮 Liechtenstein (+423)</option>
+                          <option value="+370">🇱🇹 Lituania (+370)</option>
+                          <option value="+352">🇱🇺 Luxemburgo (+352)</option>
+                          <option value="+389">🇲🇰 Macedonia del Norte (+389)</option>
+                          <option value="+356">🇲🇹 Malta (+356)</option>
+                          <option value="+373">🇲🇩 Moldavia (+373)</option>
+                          <option value="+377">🇲🇨 Mónaco (+377)</option>
+                          <option value="+382">🇲🇪 Montenegro (+382)</option>
+                          <option value="+47">🇳🇴 Noruega (+47)</option>
+                          <option value="+31">🇳🇱 Países Bajos (+31)</option>
+                          <option value="+48">🇵🇱 Polonia (+48)</option>
+                          <option value="+420">🇨🇿 Rep. Checa (+420)</option>
+                          <option value="+40">🇷🇴 Rumanía (+40)</option>
+                          <option value="+378">🇸🇲 San Marino (+378)</option>
+                          <option value="+381">🇷🇸 Serbia (+381)</option>
+                          <option value="+46">🇸🇪 Suecia (+46)</option>
+                          <option value="+41">🇨🇭 Suiza (+41)</option>
+                          <option value="+380">🇺🇦 Ucrania (+380)</option>
+                          <option value="+379">🇻🇦 Vaticano (+379)</option>
+                        </optgroup>
 
-                        {/* Resto de Europa */}
-                        <option value="+355">🇦🇱 Albania (+355)</option>
-                        <option value="+43">🇦🇹 Austria (+43)</option>
-                        <option value="+32">🇧🇪 Bélgica (+32)</option>
-                        <option value="+375">🇧🇾 Bielorrusia (+375)</option>
-                        <option value="+387">🇧🇦 Bosnia y Herc. (+387)</option>
-                        <option value="+359">🇧🇬 Bulgaria (+359)</option>
-                        <option value="+357">🇨🇾 Chipre (+357)</option>
-                        <option value="+385">🇭🇷 Croacia (+385)</option>
-                        <option value="+45">🇩🇰 Dinamarca (+45)</option>
-                        <option value="+421">🇸🇰 Eslovaquia (+421)</option>
-                        <option value="+386">🇸🇮 Eslovenia (+386)</option>
-                        <option value="+372">🇪🇪 Estonia (+372)</option>
-                        <option value="+358">🇫🇮 Finlandia (+358)</option>
-                        <option value="+995">🇬🇪 Georgia (+995)</option>
-                        <option value="+30">🇬🇷 Grecia (+30)</option>
-                        <option value="+36">🇭🇺 Hungría (+36)</option>
-                        <option value="+354">🇮🇸 Islandia (+354)</option>
-                        <option value="+371">🇱🇻 Letonia (+371)</option>
-                        <option value="+423">🇱🇮 Liechtenstein (+423)</option>
-                        <option value="+370">🇱🇹 Lituania (+370)</option>
-                        <option value="+352">🇱🇺 Luxemburgo (+352)</option>
-                        <option value="+389">🇲🇰 Macedonia del Norte (+389)</option>
-                        <option value="+356">🇲🇹 Malta (+356)</option>
-                        <option value="+373">🇲🇩 Moldavia (+373)</option>
-                        <option value="+377">🇲🇨 Mónaco (+377)</option>
-                        <option value="+382">🇲🇪 Montenegro (+382)</option>
-                        <option value="+47">🇳🇴 Noruega (+47)</option>
-                        <option value="+31">🇳🇱 Países Bajos (+31)</option>
-                        <option value="+48">🇵🇱 Polonia (+48)</option>
-                        <option value="+420">🇨🇿 Rep. Checa (+420)</option>
-                        <option value="+40">🇷🇴 Rumanía (+40)</option>
-                        <option value="+378">🇸🇲 San Marino (+378)</option>
-                        <option value="+381">🇷🇸 Serbia (+381)</option>
-                        <option value="+46">🇸🇪 Suecia (+46)</option>
-                        <option value="+41">🇨🇭 Suiza (+41)</option>
-                        <option value="+380">🇺🇦 Ucrania (+380)</option>
-                        <option value="+379">🇻🇦 Vaticano (+379)</option>
+                        <optgroup label="NORTEAMÉRICA">
+                          <option value="+1">🇺🇸 USA (+1)</option>
+                          <option value="+1">🇨🇦 Canadá (+1)</option>
+                          <option value="+52">🇲🇽 México (+52)</option>
+                        </optgroup>
 
-                        {/* Norteamérica */}
-                        <option value="+1">🇨🇦 Canadá (+1)</option>
-                        <option value="+52">🇲🇽 México (+52)</option>
-                        <option value="+1">🇺🇸 USA (+1)</option>
+                        <optgroup label="CENTROAMÉRICA Y CARIBE">
+                          <option value="+506">🇨🇷 Costa Rica (+506)</option>
+                          <option value="+53">🇨🇺 Cuba (+53)</option>
+                          <option value="+503">🇸🇻 El Salvador (+503)</option>
+                          <option value="+502">🇬🇹 Guatemala (+502)</option>
+                          <option value="+504">🇭🇳 Honduras (+504)</option>
+                          <option value="+505">🇳🇮 Nicaragua (+505)</option>
+                          <option value="+507">🇵🇦 Panamá (+507)</option>
+                          <option value="+1">🇵🇷 Puerto Rico (+1)</option>
+                          <option value="+1">🇩🇴 Rep. Dominicana (+1)</option>
+                        </optgroup>
 
-                        {/* Centroamérica y Caribe */}
-                        <option value="+506">🇨🇷 Costa Rica (+506)</option>
-                        <option value="+53">🇨🇺 Cuba (+53)</option>
-                        <option value="+503">🇸🇻 El Salvador (+503)</option>
-                        <option value="+502">🇬🇹 Guatemala (+502)</option>
-                        <option value="+504">🇭🇳 Honduras (+504)</option>
-                        <option value="+505">🇳🇮 Nicaragua (+505)</option>
-                        <option value="+507">🇵🇦 Panamá (+507)</option>
-                        <option value="+1">🇵🇷 Puerto Rico (+1)</option>
-                        <option value="+1">🇩🇴 Rep. Dominicana (+1)</option>
-
-                        {/* Sudamérica */}
-                        <option value="+54">🇦🇷 Argentina (+54)</option>
-                        <option value="+591">🇧🇴 Bolivia (+591)</option>
-                        <option value="+55">🇧🇷 Brasil (+55)</option>
-                        <option value="+56">🇨🇱 Chile (+56)</option>
-                        <option value="+57">🇨🇴 Colombia (+57)</option>
-                        <option value="+593">🇪🇨 Ecuador (+593)</option>
-                        <option value="+595">🇵🇾 Paraguay (+595)</option>
-                        <option value="+51">🇵🇪 Perú (+51)</option>
-                        <option value="+598">🇺🇾 Uruguay (+598)</option>
-                        <option value="+58">🇻🇪 Venezuela (+58)</option>
+                        <optgroup label="SUDAMÉRICA">
+                          <option value="+54">🇦🇷 Argentina (+54)</option>
+                          <option value="+591">🇧🇴 Bolivia (+591)</option>
+                          <option value="+55">🇧🇷 Brasil (+55)</option>
+                          <option value="+56">🇨🇱 Chile (+56)</option>
+                          <option value="+57">🇨🇴 Colombia (+57)</option>
+                          <option value="+593">🇪🇨 Ecuador (+593)</option>
+                          <option value="+595">🇵🇾 Paraguay (+595)</option>
+                          <option value="+51">🇵🇪 Perú (+51)</option>
+                          <option value="+598">🇺🇾 Uruguay (+598)</option>
+                          <option value="+58">🇻🇪 Venezuela (+58)</option>
+                        </optgroup>
                       </select>
                       <input
                         type="tel"
