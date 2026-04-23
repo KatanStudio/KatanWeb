@@ -152,7 +152,7 @@ const SERVICES = [
 // EXTRAS DATA — icon (lucide-react), title, desc, price
 // ─────────────────────────────────────────────────────────────────────────────
 const EXTRAS = [
-  { icon: Globe, title: 'Dominio registrado', desc: 'Gestión, renovación y configuración del servidor incluida.', price: 'Desde 15€/año'},
+  { icon: Globe, title: 'Dominio registrado', desc: 'Gestión, renovación y configuración del servidor incluida.', price: 'Desde 15€/año' },
   { icon: Mail, title: 'Email corporativo', desc: 'Correo con tu dominio en Google Workspace u Outlook.', price: 'Desde 35 €/año' },
   { icon: FilePlus, title: 'Página adicional', desc: 'Contenido SEO-optimizado con total coherencia visual.', price: 'Desde 50 €/pág.' },
   { icon: ListFilter, title: 'Formulario Multipaso', desc: 'Formulario especializado para filtrar clientes.', price: 'Desde 90 €' },
@@ -293,15 +293,7 @@ function ServiceSwitcher() {
             ))}
           </ul>
 
-          <div className="svc-sw__footer">
-            <div className="svc-sw__price-wrap">
-              <span className="svc-sw__price">{svc.price}</span>
-              <span className="svc-sw__price-note">+ IVA</span>
-            </div>
-            <Link to="/contacto" className="btn btn--chamfer btn--large" style={{ background: SVC_COLORS[active] }}>
-              Solicitar Presupuesto →
-            </Link>
-          </div>
+
         </div>
 
         {/* RIGHT: mockup visual */}
@@ -332,9 +324,14 @@ function ServiceSwitcher() {
               ))}
             </div>
           </div>
-          <div className="svc-sw__price-badge">
-            <span className="svc-sw__price-badge-num">{svc.price}</span>
-            <span className="svc-sw__price-badge-tag">precio cerrado + IVA</span>
+          <div className="svc-sw__footer">
+            <div className="svc-sw__price-wrap">
+              <span className="svc-sw__price">{svc.price}</span>
+              <span className="svc-sw__price-note">+ IVA</span>
+            </div>
+            <Link to="/contacto" className="btn btn--chamfer btn--large" style={{ background: SVC_COLORS[active] }}>
+              Solicitar Presupuesto →
+            </Link>
           </div>
         </div>
       </div>
@@ -451,14 +448,16 @@ export default function Servicios() {
           {/* El carrusel va fuera del container para ocupar todo el ancho */}
           <ExtrasMarquee />
 
-          <div className="container">
-            <p className="extras-grid__cta-hint" style={{ marginTop: '2.5rem', textAlign: 'center' }}>
-              ¿No ves lo que buscas?{' '}
-              <a href="mailto:katan.webs@gmail.com" style={{ color: 'var(--edge)' }}>
-  Escríbenos →
-</a>
+          <div className="container" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '3.5rem' }}>
+            <p className="section__sub" style={{ marginBottom: '1.5rem', textAlign: 'center', fontSize: '1.4rem' }}>
+              ¿No encuentras el servicio exacto o necesitas algo a medida?
             </p>
+            <a href="mailto:katan.webs@gmail.com" className="btn btn--ghost">
+              Cuéntanos tu idea →
+            </a>
           </div>
+
+
         </section>
 
         {/* ── TICKET 4: Specs Table (unchanged) ───────────────────────────── */}

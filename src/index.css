@@ -278,6 +278,7 @@ ul {
 
 .nav__links {
   display: none;
+  align-items: center;
   gap: 2.5rem;
 }
 
@@ -4263,6 +4264,7 @@ FAQ PAGE ═══════════════════════�
   gap: 2rem;
   padding-top: 0.5rem;
   flex-wrap: wrap;
+  padding-top: 1.5rem; /* Un poco más de aire por arriba */
 }
 
 .svc-sw__price-wrap {
