@@ -173,208 +173,276 @@ export default function Briefing() {
                     <label>Email de contacto</label>
                     <input type="email" name="email" value={formData.email} onChange={handleChange} required placeholder="hola@tuweb.com" />
                   </div>
-                    <div className="form-group">
-                      <label>Teléfono</label>
-                      <div style={{ display: 'flex', gap: '0.5rem' }}>
-                        <select
-                          name="prefijo"
-                          value={formData.prefijo}
-                          onChange={handleChange}
-                          style={{ width: '120px', flexShrink: 0 }}
-                        >
-                          <option value="+34">🇪🇸 +34</option>
-                          <option value="+1">🇺🇸 +1</option>
-                          <option value="+44">🇬🇧 +44</option>
-                          <option value="+52">🇲🇽 +52</option>
-                          <option value="+54">🇦🇷 +54</option>
-                          <option value="+57">🇨🇴 +57</option>
-                          <option value="+56">🇨🇱 +56</option>
-                          <option value="+51">🇵🇪 +51</option>
-                        </select>
-                        <input
-                          type="tel"
-                          name="telefono"
-                          value={formData.telefono}
-                          onChange={(e) => {
-                            // Esta línea filtra todo lo que no sea número o espacio en tiempo real
-                            const valorFiltrado = e.target.value.replace(/[^0-9\s]/g, '');
-                            handleChange({ target: { name: 'telefono', value: valorFiltrado, type: 'text' } });
-                          }}
-                          required
-                          placeholder="600 000 000"
-                          style={{ flex: 1 }}
-                        />
-                      </div>
-                     </div>
+                  <div className="form-group">
+                    <label>Teléfono</label>
+                    <div style={{ display: 'flex', gap: '0.5rem' }}>
+                      <select
+                        name="prefijo"
+                        value={formData.prefijo}
+                        onChange={handleChange}
+                        style={{ width: '180px', flexShrink: 0 }}
+                      >
+                        {/* Principales / Por defecto */}
+                        <option value="+34">🇪🇸 España (+34)</option>
+                        <option value="+376">🇦🇩 Andorra (+376)</option>
+                        <option value="+351">🇵🇹 Portugal (+351)</option>
+                        <option value="+33">🇫🇷 Francia (+33)</option>
+                        <option value="+39">🇮🇹 Italia (+39)</option>
+                        <option value="+49">🇩🇪 Alemania (+49)</option>
+                        <option value="+44">🇬🇧 Reino Unido (+44)</option>
+                        <option value="+353">🇮🇪 Irlanda (+353)</option>
+
+                        {/* Resto de Europa */}
+                        <option value="+355">🇦🇱 Albania (+355)</option>
+                        <option value="+43">🇦🇹 Austria (+43)</option>
+                        <option value="+32">🇧🇪 Bélgica (+32)</option>
+                        <option value="+375">🇧🇾 Bielorrusia (+375)</option>
+                        <option value="+387">🇧🇦 Bosnia y Herc. (+387)</option>
+                        <option value="+359">🇧🇬 Bulgaria (+359)</option>
+                        <option value="+357">🇨🇾 Chipre (+357)</option>
+                        <option value="+385">🇭🇷 Croacia (+385)</option>
+                        <option value="+45">🇩🇰 Dinamarca (+45)</option>
+                        <option value="+421">🇸🇰 Eslovaquia (+421)</option>
+                        <option value="+386">🇸🇮 Eslovenia (+386)</option>
+                        <option value="+372">🇪🇪 Estonia (+372)</option>
+                        <option value="+358">🇫🇮 Finlandia (+358)</option>
+                        <option value="+995">🇬🇪 Georgia (+995)</option>
+                        <option value="+30">🇬🇷 Grecia (+30)</option>
+                        <option value="+36">🇭🇺 Hungría (+36)</option>
+                        <option value="+354">🇮🇸 Islandia (+354)</option>
+                        <option value="+371">🇱🇻 Letonia (+371)</option>
+                        <option value="+423">🇱🇮 Liechtenstein (+423)</option>
+                        <option value="+370">🇱🇹 Lituania (+370)</option>
+                        <option value="+352">🇱🇺 Luxemburgo (+352)</option>
+                        <option value="+389">🇲🇰 Macedonia del Norte (+389)</option>
+                        <option value="+356">🇲🇹 Malta (+356)</option>
+                        <option value="+373">🇲🇩 Moldavia (+373)</option>
+                        <option value="+377">🇲🇨 Mónaco (+377)</option>
+                        <option value="+382">🇲🇪 Montenegro (+382)</option>
+                        <option value="+47">🇳🇴 Noruega (+47)</option>
+                        <option value="+31">🇳🇱 Países Bajos (+31)</option>
+                        <option value="+48">🇵🇱 Polonia (+48)</option>
+                        <option value="+420">🇨🇿 Rep. Checa (+420)</option>
+                        <option value="+40">🇷🇴 Rumanía (+40)</option>
+                        <option value="+378">🇸🇲 San Marino (+378)</option>
+                        <option value="+381">🇷🇸 Serbia (+381)</option>
+                        <option value="+46">🇸🇪 Suecia (+46)</option>
+                        <option value="+41">🇨🇭 Suiza (+41)</option>
+                        <option value="+380">🇺🇦 Ucrania (+380)</option>
+                        <option value="+379">🇻🇦 Vaticano (+379)</option>
+
+                        {/* Norteamérica */}
+                        <option value="+1">🇨🇦 Canadá (+1)</option>
+                        <option value="+52">🇲🇽 México (+52)</option>
+                        <option value="+1">🇺🇸 USA (+1)</option>
+
+                        {/* Centroamérica y Caribe */}
+                        <option value="+506">🇨🇷 Costa Rica (+506)</option>
+                        <option value="+53">🇨🇺 Cuba (+53)</option>
+                        <option value="+503">🇸🇻 El Salvador (+503)</option>
+                        <option value="+502">🇬🇹 Guatemala (+502)</option>
+                        <option value="+504">🇭🇳 Honduras (+504)</option>
+                        <option value="+505">🇳🇮 Nicaragua (+505)</option>
+                        <option value="+507">🇵🇦 Panamá (+507)</option>
+                        <option value="+1">🇵🇷 Puerto Rico (+1)</option>
+                        <option value="+1">🇩🇴 Rep. Dominicana (+1)</option>
+
+                        {/* Sudamérica */}
+                        <option value="+54">🇦🇷 Argentina (+54)</option>
+                        <option value="+591">🇧🇴 Bolivia (+591)</option>
+                        <option value="+55">🇧🇷 Brasil (+55)</option>
+                        <option value="+56">🇨🇱 Chile (+56)</option>
+                        <option value="+57">🇨🇴 Colombia (+57)</option>
+                        <option value="+593">🇪🇨 Ecuador (+593)</option>
+                        <option value="+595">🇵🇾 Paraguay (+595)</option>
+                        <option value="+51">🇵🇪 Perú (+51)</option>
+                        <option value="+598">🇺🇾 Uruguay (+598)</option>
+                        <option value="+58">🇻🇪 Venezuela (+58)</option>
+                      </select>
+                      <input
+                        type="tel"
+                        name="telefono"
+                        value={formData.telefono}
+                        onChange={(e) => {
+                          // Esta línea filtra todo lo que no sea número o espacio en tiempo real
+                          const valorFiltrado = e.target.value.replace(/[^0-9\s]/g, '');
+                          handleChange({ target: { name: 'telefono', value: valorFiltrado, type: 'text' } });
+                        }}
+                        required
+                        placeholder="600 000 000"
+                        style={{ flex: 1 }}
+                      />
+                    </div>
+                  </div>
                 </div>
                 <div className="form-group">
                   <label>Nombre de la empresa o proyecto</label>
                   <input type="text" name="empresa" value={formData.empresa} onChange={handleChange} required placeholder="El nombre de tu marca" />
                 </div>
               </fieldset>
-        )}
+            )}
 
-        {/* PASO 2: ESTRATEGIA */}
-        {step === 2 && (
-          <fieldset className="fade-in">
-            <legend className="kicker">02 // Estrategia de Negocio</legend>
+            {/* PASO 2: ESTRATEGIA */}
+            {step === 2 && (
+              <fieldset className="fade-in">
+                <legend className="kicker">02 // Estrategia de Negocio</legend>
 
-            <div className="form-group">
-              <label>Sector principal</label>
-              <select name="sector" value={formData.sector} onChange={handleChange} required>
-                <option value="">Selecciona tu sector...</option>
-                {SECTORES.map(s => <option key={s} value={s}>{s}</option>)}
-              </select>
-            </div>
+                <div className="form-group">
+                  <label>Sector principal</label>
+                  <select name="sector" value={formData.sector} onChange={handleChange} required>
+                    <option value="">Selecciona tu sector...</option>
+                    {SECTORES.map(s => <option key={s} value={s}>{s}</option>)}
+                  </select>
+                </div>
 
-            <div className="form-group">
-              <label>¿A qué se dedica tu negocio exactamente?</label>
-              <textarea name="negocio" value={formData.negocio} onChange={handleChange} required rows="2" placeholder="Explícanos qué vendes o qué servicio ofreces..."></textarea>
-            </div>
+                <div className="form-group">
+                  <label>¿A qué se dedica tu negocio exactamente?</label>
+                  <textarea name="negocio" value={formData.negocio} onChange={handleChange} required rows="2" placeholder="Explícanos qué vendes o qué servicio ofreces..."></textarea>
+                </div>
 
-            <div className="form-group">
-              <label>¿Cuál es el objetivo principal de la web?</label>
-              <textarea name="objetivo" value={formData.objetivo} onChange={handleChange} required rows="2" placeholder="Ej: Conseguir contactos, vender productos online, validar una idea de negocio..."></textarea>
-            </div>
+                <div className="form-group">
+                  <label>¿Cuál es el objetivo principal de la web?</label>
+                  <textarea name="objetivo" value={formData.objetivo} onChange={handleChange} required rows="2" placeholder="Ej: Conseguir contactos, vender productos online, validar una idea de negocio..."></textarea>
+                </div>
 
-            <div className="form-group">
-              <label>¿Por qué un cliente debería elegirte a ti y no a tu competencia?</label>
-              <textarea name="diferenciacion" value={formData.diferenciacion} onChange={handleChange} rows="2" placeholder="Tu propuesta de valor, qué te hace diferente o especial..."></textarea>
-            </div>
+                <div className="form-group">
+                  <label>¿Por qué un cliente debería elegirte a ti y no a tu competencia?</label>
+                  <textarea name="diferenciacion" value={formData.diferenciacion} onChange={handleChange} rows="2" placeholder="Tu propuesta de valor, qué te hace diferente o especial..."></textarea>
+                </div>
 
-            <div className="form-row">
-              <div className="form-group">
-                <label>¿Quién es tu cliente ideal?</label>
-                <input type="text" name="publico" value={formData.publico} onChange={handleChange} placeholder="Ej: Empresas locales, parejas jóvenes..." />
-              </div>
-              <div className="form-group">
-                <label>¿Competidores de referencia?</label>
-                <input type="text" name="competidores" value={formData.competidores} onChange={handleChange} placeholder="Marcas que compitan contigo" />
-              </div>
-            </div>
-          </fieldset>
-        )}
+                <div className="form-row">
+                  <div className="form-group">
+                    <label>¿Quién es tu cliente ideal?</label>
+                    <input type="text" name="publico" value={formData.publico} onChange={handleChange} placeholder="Ej: Empresas locales, parejas jóvenes..." />
+                  </div>
+                  <div className="form-group">
+                    <label>¿Competidores de referencia?</label>
+                    <input type="text" name="competidores" value={formData.competidores} onChange={handleChange} placeholder="Marcas que compitan contigo" />
+                  </div>
+                </div>
+              </fieldset>
+            )}
 
-        {/* PASO 3: ARQUITECTURA & EXTRAS */}
-        {step === 3 && (
-          <fieldset className="fade-in">
-            <legend className="kicker">03 // Configuración del Sistema</legend>
+            {/* PASO 3: ARQUITECTURA & EXTRAS */}
+            {step === 3 && (
+              <fieldset className="fade-in">
+                <legend className="kicker">03 // Configuración del Sistema</legend>
 
-            <div className="form-group">
-              <label>Tipo de estructura principal (Obligatorio)</label>
-              <div className="radio-grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))' }}>
-                <label className="radio-card">
-                  <input type="radio" name="servicio" value="Landing" checked={formData.servicio === 'Landing'} onChange={handleChange} required />
-                  <div className="card-content"><span className="title">Landing Page</span><span className="desc">Conversión y ventas (1 pág)</span></div>
-                </label>
-                <label className="radio-card">
-                  <input type="radio" name="servicio" value="Corporativa" checked={formData.servicio === 'Corporativa'} onChange={handleChange} />
-                  <div className="card-content"><span className="title">Web Corporativa</span><span className="desc">Múltiples secciones y SEO</span></div>
-                </label>
-                <label className="radio-card">
-                  <input type="radio" name="servicio" value="E-commerce" checked={formData.servicio === 'E-commerce'} onChange={handleChange} />
-                  <div className="card-content"><span className="title">E-commerce</span><span className="desc">Catálogo y pagos online</span></div>
-                </label>
-                <label className="radio-card">
-                  <input type="radio" name="servicio" value="Orientacion" checked={formData.servicio === 'Orientacion'} onChange={handleChange} />
-                  <div className="card-content"><span className="title">No estoy seguro</span><span className="desc">Necesito asesoramiento</span></div>
-                </label>
-              </div>
-            </div>
+                <div className="form-group">
+                  <label>Tipo de estructura principal (Obligatorio)</label>
+                  <div className="radio-grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))' }}>
+                    <label className="radio-card">
+                      <input type="radio" name="servicio" value="Landing" checked={formData.servicio === 'Landing'} onChange={handleChange} required />
+                      <div className="card-content"><span className="title">Landing Page</span><span className="desc">Conversión y ventas (1 pág)</span></div>
+                    </label>
+                    <label className="radio-card">
+                      <input type="radio" name="servicio" value="Corporativa" checked={formData.servicio === 'Corporativa'} onChange={handleChange} />
+                      <div className="card-content"><span className="title">Web Corporativa</span><span className="desc">Múltiples secciones y SEO</span></div>
+                    </label>
+                    <label className="radio-card">
+                      <input type="radio" name="servicio" value="E-commerce" checked={formData.servicio === 'E-commerce'} onChange={handleChange} />
+                      <div className="card-content"><span className="title">E-commerce</span><span className="desc">Catálogo y pagos online</span></div>
+                    </label>
+                    <label className="radio-card">
+                      <input type="radio" name="servicio" value="Orientacion" checked={formData.servicio === 'Orientacion'} onChange={handleChange} />
+                      <div className="card-content"><span className="title">No estoy seguro</span><span className="desc">Necesito asesoramiento</span></div>
+                    </label>
+                  </div>
+                </div>
 
-            <div className="form-group" style={{ marginTop: '2.5rem' }}>
-              <label>Servicios adicionales (Selecciona los que necesites)</label>
-              <div className="checkbox-grid">
-                {EXTRAS_LIST.map((ext) => (
-                  <label key={ext} className="check-box">
-                    <input
-                      type="checkbox"
-                      name="extras"
-                      value={ext}
-                      checked={formData.extras.includes(ext)}
-                      onChange={handleChange}
-                    />
-                    <span>{ext}</span>
+                <div className="form-group" style={{ marginTop: '2.5rem' }}>
+                  <label>Servicios adicionales (Selecciona los que necesites)</label>
+                  <div className="checkbox-grid">
+                    {EXTRAS_LIST.map((ext) => (
+                      <label key={ext} className="check-box">
+                        <input
+                          type="checkbox"
+                          name="extras"
+                          value={ext}
+                          checked={formData.extras.includes(ext)}
+                          onChange={handleChange}
+                        />
+                        <span>{ext}</span>
+                      </label>
+                    ))}
+                  </div>
+                </div>
+              </fieldset>
+            )}
+
+            {/* PASO 4: MATERIALES */}
+            {step === 4 && (
+              <fieldset className="fade-in">
+                <legend className="kicker">04 // Activos y Referencias</legend>
+                <div className="form-group">
+                  <label>¿Qué materiales tienes preparados actualmente?</label>
+                  <select name="materiales" value={formData.materiales} onChange={handleChange} required>
+                    <option value="">Selecciona una opción...</option>
+                    <option value="Todo">Tengo de todo (Logotipo, colores, textos escritos y fotos/vídeos)</option>
+                    <option value="Faltan Textos/Fotos">Tengo logotipo y colores, pero me faltan los textos o las fotos</option>
+                    <option value="Falta Identidad">Tengo los textos/fotos, pero necesito diseño de logotipo</option>
+                    <option value="Nada">No tengo nada, tenemos que empezar desde cero</option>
+                  </select>
+                </div>
+                <div className="form-group">
+                  <label>Referencias visuales (URLs)</label>
+                  <textarea name="referencias" value={formData.referencias} onChange={handleChange} rows="3" placeholder="Péganos enlaces a webs que te gusten por su diseño, colores o estructura..."></textarea>
+                </div>
+              </fieldset>
+            )}
+
+            {/* PASO 5: CIERRE Y LEGAL */}
+            {step === 5 && (
+              <fieldset className="fade-in" style={{ border: 'none' }}>
+                <legend className="kicker">05 // Lanzamiento</legend>
+                <div className="form-row">
+                  <div className="form-group">
+                    <label>Inversión prevista para este proyecto</label>
+                    <select name="presupuesto" value={formData.presupuesto} onChange={handleChange} required>
+                      <option value="">Selecciona una horquilla...</option>
+                      <option value="350-750">350€ - 750€</option>
+                      <option value="750-1500">750€ - 1.500€</option>
+                      <option value="1500-3000">1.500€ - 3.000€</option>
+                      <option value="3000+">+ 3.000€</option>
+                    </select>
+                  </div>
+                  <div className="form-group">
+                    <label>Nivel de urgencia</label>
+                    <select name="plazo" value={formData.plazo} onChange={handleChange} required>
+                      <option value="">Selecciona urgencia...</option>
+                      <option value="Tranquilo">Tranquilo (Sin prisa, prioridad a la calidad)</option>
+                      <option value="Normal">Normal (Flujo de trabajo estándar)</option>
+                      <option value="Prioritario">Prioritario (Lo necesito lo antes posible)</option>
+                    </select>
+                    <p style={{ fontSize: '0.75rem', color: 'var(--steel)', marginTop: '0.5rem', lineHeight: '1.4' }}>
+                      * <strong>Sé sincero.</strong> Indicar "Sin prisa" no significa que vayamos a retrasar tu proyecto, simplemente nos da flexibilidad para organizar los recursos.
+                    </p>
+                  </div>
+                </div>
+
+                <div style={{ marginTop: '2rem', padding: '1.5rem', background: 'var(--sheath)', borderRadius: '8px', border: '1px solid var(--ghost)' }}>
+                  <label className="check-box" style={{ display: 'flex', gap: '1rem', cursor: 'pointer', alignItems: 'flex-start' }}>
+                    <input type="checkbox" name="aceptaLegal" checked={formData.aceptaLegal} onChange={handleChange} required style={{ marginTop: '0.2rem' }} />
+                    <span style={{ fontSize: '0.85rem', color: 'var(--steel)', lineHeight: '1.5' }}>
+                      He leído y acepto la <Link to="/politica-de-privacidad" style={{ color: 'var(--spark)', textDecoration: 'underline' }}>Política de Privacidad</Link>.
+                      Comprendo que Katan Studio tratará mis datos con la finalidad de gestionar mi solicitud de presupuesto, basado en mi consentimiento.
+                    </span>
                   </label>
-                ))}
-              </div>
-            </div>
-          </fieldset>
-        )}
+                </div>
+              </fieldset>
+            )}
 
-        {/* PASO 4: MATERIALES */}
-        {step === 4 && (
-          <fieldset className="fade-in">
-            <legend className="kicker">04 // Activos y Referencias</legend>
-            <div className="form-group">
-              <label>¿Qué materiales tienes preparados actualmente?</label>
-              <select name="materiales" value={formData.materiales} onChange={handleChange} required>
-                <option value="">Selecciona una opción...</option>
-                <option value="Todo">Tengo de todo (Logotipo, colores, textos escritos y fotos/vídeos)</option>
-                <option value="Faltan Textos/Fotos">Tengo logotipo y colores, pero me faltan los textos o las fotos</option>
-                <option value="Falta Identidad">Tengo los textos/fotos, pero necesito diseño de logotipo</option>
-                <option value="Nada">No tengo nada, tenemos que empezar desde cero</option>
-              </select>
+            <div className="form-actions" style={{ display: 'flex', gap: '1rem', marginTop: '3rem' }}>
+              <button type="button" onClick={prevStep} className="btn btn--ghost" style={{ flex: 1 }}>← Atrás</button>
+              {step < 5 ? (
+                <button type="button" onClick={nextStep} className="btn btn--primary" style={{ flex: 2 }}>Siguiente paso</button>
+              ) : (
+                <button type="submit" className="btn btn--primary" style={{ flex: 2, background: 'var(--spark)', border: 'none', color: '#000' }}>Finalizar y enviar briefing</button>
+              )}
             </div>
-            <div className="form-group">
-              <label>Referencias visuales (URLs)</label>
-              <textarea name="referencias" value={formData.referencias} onChange={handleChange} rows="3" placeholder="Péganos enlaces a webs que te gusten por su diseño, colores o estructura..."></textarea>
-            </div>
-          </fieldset>
+          </form>
         )}
-
-        {/* PASO 5: CIERRE Y LEGAL */}
-        {step === 5 && (
-          <fieldset className="fade-in" style={{ border: 'none' }}>
-            <legend className="kicker">05 // Lanzamiento</legend>
-            <div className="form-row">
-              <div className="form-group">
-                <label>Inversión prevista para este proyecto</label>
-                <select name="presupuesto" value={formData.presupuesto} onChange={handleChange} required>
-                  <option value="">Selecciona una horquilla...</option>
-                  <option value="350-750">350€ - 750€</option>
-                  <option value="750-1500">750€ - 1.500€</option>
-                  <option value="1500-3000">1.500€ - 3.000€</option>
-                  <option value="3000+">+ 3.000€</option>
-                </select>
-              </div>
-              <div className="form-group">
-                <label>Nivel de urgencia</label>
-                <select name="plazo" value={formData.plazo} onChange={handleChange} required>
-                  <option value="">Selecciona urgencia...</option>
-                  <option value="Tranquilo">Tranquilo (Sin prisa, prioridad a la calidad)</option>
-                  <option value="Normal">Normal (Flujo de trabajo estándar)</option>
-                  <option value="Prioritario">Prioritario (Lo necesito lo antes posible)</option>
-                </select>
-                <p style={{ fontSize: '0.75rem', color: 'var(--steel)', marginTop: '0.5rem', lineHeight: '1.4' }}>
-                  * <strong>Sé sincero.</strong> Indicar "Sin prisa" no significa que vayamos a retrasar tu proyecto, simplemente nos da flexibilidad para organizar los recursos.
-                </p>
-              </div>
-            </div>
-
-            <div style={{ marginTop: '2rem', padding: '1.5rem', background: 'var(--sheath)', borderRadius: '8px', border: '1px solid var(--ghost)' }}>
-              <label className="check-box" style={{ display: 'flex', gap: '1rem', cursor: 'pointer', alignItems: 'flex-start' }}>
-                <input type="checkbox" name="aceptaLegal" checked={formData.aceptaLegal} onChange={handleChange} required style={{ marginTop: '0.2rem' }} />
-                <span style={{ fontSize: '0.85rem', color: 'var(--steel)', lineHeight: '1.5' }}>
-                  He leído y acepto la <Link to="/politica-de-privacidad" style={{ color: 'var(--spark)', textDecoration: 'underline' }}>Política de Privacidad</Link>.
-                  Comprendo que Katan Studio tratará mis datos con la finalidad de gestionar mi solicitud de presupuesto, basado en mi consentimiento.
-                </span>
-              </label>
-            </div>
-          </fieldset>
-        )}
-
-        <div className="form-actions" style={{ display: 'flex', gap: '1rem', marginTop: '3rem' }}>
-          <button type="button" onClick={prevStep} className="btn btn--ghost" style={{ flex: 1 }}>← Atrás</button>
-          {step < 5 ? (
-            <button type="button" onClick={nextStep} className="btn btn--primary" style={{ flex: 2 }}>Siguiente paso</button>
-          ) : (
-            <button type="submit" className="btn btn--primary" style={{ flex: 2, background: 'var(--spark)', border: 'none', color: '#000' }}>Finalizar y enviar briefing</button>
-          )}
-        </div>
-      </form>
-        )}
-    </div >
+      </div >
     </>
   )
 }
