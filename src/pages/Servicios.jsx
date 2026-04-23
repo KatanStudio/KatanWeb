@@ -98,6 +98,7 @@ const SERVICES = [
     id: 'landing',
     num: '01',
     label: 'Landing Page',
+    short: 'LP',
     desc: 'Presencia digital afilada. Una página diseñada para captar la atención y convertir visitantes en clientes desde el primer momento.',
     price: 'Desde 350 €',
     features: [
@@ -115,6 +116,7 @@ const SERVICES = [
     id: 'corporativa',
     num: '02',
     label: 'Web Corporativa',
+    short: 'WC',
     desc: 'La sede digital completa de tu empresa. Blog, múltiples secciones y posicionamiento avanzado para escalar tu autoridad online.',
     price: 'Desde 750 €',
     features: [
@@ -133,6 +135,7 @@ const SERVICES = [
     id: 'ecommerce',
     num: '03',
     label: 'E-Commerce & App',
+    short: 'EC&A',
     desc: 'Solución completa para vender online. Catálogo ilimitado, pasarela de pagos y gestión de pedidos bajo un panel propio.',
     price: 'Desde 2.000 €',
     features: [
@@ -271,7 +274,8 @@ function ServiceSwitcher() {
               />
             )}
             <span className="svc-sw__tab-num">{s.num}</span>
-            <span className="svc-sw__tab-label">{s.label}</span>
+            <span className="svc-sw__tab-label svc-sw__tab-label--full">{s.label}</span>
+            <span className="svc-sw__tab-label svc-sw__tab-label--short">{s.short}</span>
           </button>
         ))}
       </div>

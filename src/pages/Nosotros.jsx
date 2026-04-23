@@ -25,7 +25,7 @@ export default function Nosotros() {
               </p>
             </header>
 
-            <div className="services-grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', marginBottom: '4rem' }}>
+            <div className="services-grid nosotros-team-grid" style={{ marginBottom: '4rem' }}>
               <a href="https://www.linkedin.com/in/adrián-lozano" target="_blank" rel="noreferrer" style={{ display: 'block', height: '100%' }}>
                 <div className="service-card" style={{ height: '100%' }}>
                   <div className="service-card__top">

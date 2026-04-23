@@ -142,6 +142,9 @@ function useStaggerReveal(containerRef, childSelector = '.process-card') {
 export default function Proceso() {
   const gridRef = useRef(null)
   useStaggerReveal(gridRef, '.process-card')
+  const [activeStep, setActiveStep] = useState(0)
+  const prevStep = () => setActiveStep(i => Math.max(0, i - 1))
+  const nextStep = () => setActiveStep(i => Math.min(STEPS.length - 1, i + 1))
 
   return (
     <>
@@ -186,8 +189,8 @@ export default function Proceso() {
               </div>
             </div>
 
-            {/* ── Steps ── */}
-            <div className="process-grid" style={{ marginTop: '4rem' }} ref={gridRef}>
+            {/* ── Steps (desktop grid) ── */}
+            <div className="process-grid process-grid--desktop" style={{ marginTop: '4rem' }} ref={gridRef}>
               {STEPS.map((step) => (
                 <div key={step.num} className={`process-card${step.highlight ? ' process-card--highlight' : ''}`}>
                   <div className="process-card__header">
@@ -202,6 +205,49 @@ export default function Proceso() {
                   <p className="process-card__detail">{step.detail}</p>
                 </div>
               ))}
+            </div>
+
+            {/* ── Steps (mobile carousel) ── */}
+            <div className="process-carousel" style={{ marginTop: '4rem' }}>
+              <div className="process-carousel__stage">
+                <button
+                  className="process-carousel__arrow process-carousel__arrow--prev"
+                  onClick={prevStep}
+                  disabled={activeStep === 0}
+                  aria-label="Paso anterior"
+                >‹</button>
+
+                <div className={`process-card process-card--carousel is-visible${STEPS[activeStep].highlight ? ' process-card--highlight' : ''}`}>
+                  <div className="process-card__header">
+                    <span className="process-card__num">{STEPS[activeStep].num}</span>
+                    <span className="process-card__time">{STEPS[activeStep].time}</span>
+                  </div>
+                  <h4 className="process-card__title">
+                    <span className="process-card__icon">{STEPS[activeStep].icon}</span>
+                    {STEPS[activeStep].title}
+                  </h4>
+                  <p className="process-card__desc">{STEPS[activeStep].desc}</p>
+                  <p className="process-card__detail">{STEPS[activeStep].detail}</p>
+                </div>
+
+                <button
+                  className="process-carousel__arrow process-carousel__arrow--next"
+                  onClick={nextStep}
+                  disabled={activeStep === STEPS.length - 1}
+                  aria-label="Paso siguiente"
+                >›</button>
+              </div>
+
+              <div className="process-carousel__dots">
+                {STEPS.map((_, i) => (
+                  <button
+                    key={i}
+                    className={`process-carousel__dot${i === activeStep ? ' process-carousel__dot--active' : ''}`}
+                    onClick={() => setActiveStep(i)}
+                    aria-label={`Ir al paso ${i + 1}`}
+                  >{i + 1}</button>
+                ))}
+              </div>
             </div>
           </div>
         </section>
