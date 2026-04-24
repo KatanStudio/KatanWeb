@@ -297,7 +297,16 @@ function ServiceSwitcher() {
             ))}
           </ul>
 
-
+          {/* Footer aquí también para móvil (en desktop se oculta via CSS) */}
+          <div className="svc-sw__footer svc-sw__footer--mobile">
+            <div className="svc-sw__price-wrap">
+              <span className="svc-sw__price">{svc.price}</span>
+              <span className="svc-sw__price-note">+ IVA</span>
+            </div>
+            <Link to="/contacto" className="btn btn--chamfer btn--large" style={{ background: SVC_COLORS[active] }}>
+              Solicitar Presupuesto →
+            </Link>
+          </div>
         </div>
 
         {/* RIGHT: mockup visual */}
@@ -328,7 +337,8 @@ function ServiceSwitcher() {
               ))}
             </div>
           </div>
-          <div className="svc-sw__footer">
+          {/* Footer original — solo visible en desktop */}
+          <div className="svc-sw__footer svc-sw__footer--desktop">
             <div className="svc-sw__price-wrap">
               <span className="svc-sw__price">{svc.price}</span>
               <span className="svc-sw__price-note">+ IVA</span>
@@ -378,6 +388,8 @@ const ExtraBadge = memo(function ExtraBadge({ title, desc, price, onEnter, onLea
 function ExtrasMarquee() {
   const [paused, setPaused] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
+  const [activeIndex, setActiveIndex] = useState(0)
+  const marqueeRef = useRef(null)
 
   useEffect(() => {
     const mq = window.matchMedia('(max-width: 767px)')
@@ -387,6 +399,21 @@ function ExtrasMarquee() {
     return () => mq.removeEventListener('change', handler)
   }, [])
 
+  // Actualizar dot activo al hacer scroll
+  useEffect(() => {
+    if (!isMobile) return
+    const el = marqueeRef.current
+    if (!el) return
+    const handleScroll = () => {
+      // ancho del badge = scroll container - padding*2 - gap
+      const badgeWidth = el.clientWidth - 72 + 10 // approx badge + gap
+      const idx = Math.round(el.scrollLeft / badgeWidth)
+      setActiveIndex(Math.max(0, Math.min(idx, EXTRAS.length - 1)))
+    }
+    el.addEventListener('scroll', handleScroll, { passive: true })
+    return () => el.removeEventListener('scroll', handleScroll)
+  }, [isMobile])
+
   const handleEnter = useCallback(() => setPaused(true), [])
   const handleLeave = useCallback(() => setPaused(false), [])
 
@@ -394,19 +421,35 @@ function ExtrasMarquee() {
   const items = isMobile ? EXTRAS : [...EXTRAS, ...EXTRAS]
 
   return (
-    <div className="extras-marquee">
-      <div className={`extras-marquee__track${paused ? ' extras-marquee__track--paused' : ''}`}>
-        {items.map((e, i) => (
-          <ExtraBadge
-            key={i}
-            title={e.title}
-            desc={e.desc}
-            price={e.price}
-            onEnter={handleEnter}
-            onLeave={handleLeave}
-          />
-        ))}
+    <div>
+      <div
+        ref={marqueeRef}
+        className="extras-marquee"
+      >
+        <div className={`extras-marquee__track${paused ? ' extras-marquee__track--paused' : ''}`}>
+          {items.map((e, i) => (
+            <ExtraBadge
+              key={i}
+              title={e.title}
+              desc={e.desc}
+              price={e.price}
+              onEnter={handleEnter}
+              onLeave={handleLeave}
+            />
+          ))}
+        </div>
       </div>
+      {/* Barra de progreso — solo visible en móvil via CSS */}
+      {isMobile && (
+        <div className="extras-progress" aria-hidden="true">
+          {EXTRAS.map((_, i) => (
+            <div
+              key={i}
+              className={`extras-progress__dot${i === activeIndex ? ' extras-progress__dot--active' : ''}`}
+            />
+          ))}
+        </div>
+      )}
     </div>
   )
 }
@@ -443,13 +486,18 @@ export default function Servicios() {
               </h1>
               <p className="section__sub">
                 Cada proyecto, precio cerrado. Sin sorpresas.
-              </p>
+              </p><p className="section__sub">
+                ¿No sabes qué se adapta mejor a tu negocio?
+              </p> <br />
+              <a href="mailto:katan.webs@gmail.com" className="btn btn--ghost">
+              Escribenos y te asesoramos gratis →
+            </a>
             </header>
             <ServiceSwitcher />
           </div>
         </section>
         {/* ── TICKET 3: Extras Marquee ────────────────────────────────────────── */}
-        <section className="section section--dark" id="modulos" style={{ overflowX: 'hidden' }}>
+        <section className="section section--dark" id="modulos">
           <div className="container">
             <header className="section__header" style={{ marginBottom: '3rem' }}>
               <p className="section-label">/Extras</p>
@@ -620,11 +668,12 @@ export default function Servicios() {
 
               {/* Social proof strip */}
               <div className="cta-final__proof">
-                <span>+40 proyectos entregados</span>
+                <span>Proyectos entregados a tiempo</span>
                 <span className="cta-final__proof-dot" />
                 <span>PageSpeed &gt; 95 garantizado</span>
                 <span className="cta-final__proof-dot" />
                 <span>Código sin dependencias innecesarias</span>
+                <span className="cta-final__proof-dot" />
               </div>
             </div>
           </div>

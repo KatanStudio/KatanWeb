@@ -5,7 +5,8 @@
 .contacto-hero {
   position: relative;
   padding: 9rem 0 6rem;
-  overflow: visible;
+  /* overflow visible causa scroll horizontal por la K decorativa */
+  overflow: hidden;
 }
 
 .contacto-hero__bg {
@@ -21,6 +22,8 @@
   transform: translateY(-50%);
   width: clamp(200px, 35vw, 420px);
   opacity: 0.04;
+  /* No puede generar scroll horizontal */
+  max-width: 60vw;
 }
 
 .contacto-hero__content {
@@ -34,7 +37,8 @@
 
 .contacto-hero__h1 {
   font-family: var(--font-head);
-  font-size: clamp(2.5rem, 8vw, 6rem);
+  /* Escala continua: ~1.6rem en 320px → ~6rem en 960px+, sin saltos */
+  font-size: clamp(1.6rem, 4vw + 1rem, 6rem);
   font-weight: 900;
   letter-spacing: -0.05em;
   line-height: 1.05;

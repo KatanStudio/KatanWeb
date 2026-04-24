@@ -567,23 +567,31 @@
 }
 
 @media (max-width: 768px) {
+  /* El bg no puede desbordar hacia abajo en móvil */
+  .svc-sw__bg {
+    overflow: hidden;
+    height: 100%;
+    top: 0;
+  }
+
   .svc-sw__orb {
     mix-blend-mode: normal;
   }
 
   .svc-sw__orb--1 {
-    width: 260px; height: 260px;
+    width: 200px; height: 200px;
     filter: blur(50px);
     opacity: 0.18;
-    top: -10%;
+    top: 0;
     left: -5%;
   }
 
+  /* Orbe-2: lo subimos para que quede dentro del panel, no debajo */
   .svc-sw__orb--2 {
-    width: 260px; height: 260px;
+    width: 200px; height: 200px;
     filter: blur(50px);
     opacity: 0.14;
-    bottom: -10%;
+    bottom: 10%;
     right: -5%;
   }
 
@@ -592,7 +600,82 @@
   }
 }
 
+/* ── Hero section: recortar espacio inferior en móvil ── */
+@media (max-width: 767px) {
+  #servicios-selector {
+    padding-bottom: 0 !important;
+  }
+}
+
 /* ── svc-sw responsive ── */
+
+/* Móvil: mockup como fondo semitransparente, sin espacio muerto */
+@media (max-width: 767px) {
+  .svc-sw__panel {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    padding: 2rem 0 0;
+    position: relative;
+    /* El panel contiene el __right absoluto */
+    overflow: hidden;
+  }
+
+  /* __left al frente, ocupa todo el ancho */
+  .svc-sw__left {
+    position: relative;
+    z-index: 2;
+  }
+
+  /* Footer dentro del __left: visible en móvil */
+  .svc-sw__footer--mobile {
+    display: flex;
+    padding-top: 1.5rem;
+  }
+
+  /* Footer dentro del __right: oculto en móvil */
+  .svc-sw__footer--desktop {
+    display: none;
+  }
+
+  /* __right: absoluto, cubre todo el panel como fondo */
+  .svc-sw__right {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    gap: 0;
+    pointer-events: none;
+  }
+
+  /* Mockup: fondo completo, opacidad baja, degradado para legibilidad */
+  .svc-sw__mockup {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    aspect-ratio: unset;
+    opacity: 0.15;
+    -webkit-mask-image: linear-gradient(to bottom, transparent 5%, black 30%, black 65%, transparent 100%);
+    mask-image: linear-gradient(to bottom, transparent 5%, black 30%, black 65%, transparent 100%);
+  }
+
+  /* Esquinas decorativas: ocultas en el fondo */
+  .svc-sw__corner {
+    display: none;
+  }
+}
+
+/* Desktop: footer del __right visible, footer del __left oculto */
+@media (min-width: 768px) {
+  .svc-sw__footer--mobile {
+    display: none;
+  }
+
+  .svc-sw__footer--desktop {
+    display: flex;
+  }
+}
+
 @media (min-width: 768px) {
   .svc-sw__panel {
     grid-template-columns: 1fr 1fr;
@@ -637,45 +720,7 @@
   to   { transform: translateX(calc(-50% - 0.5rem)); }
 }
 
-@media (max-width: 767px) {
-  .extras-marquee {
-    overflow-x: auto;
-    overflow-y: visible;
-    -webkit-overflow-scrolling: touch;
-    scroll-snap-type: x mandatory;
-    -webkit-mask-image: none;
-    mask-image: none;
-    padding: 0 1rem 1rem;
-    scrollbar-width: thin;
-    scrollbar-color: var(--ghost) transparent;
-  }
-
-  .extras-marquee::-webkit-scrollbar { height: 4px; }
-  .extras-marquee::-webkit-scrollbar-track { background: transparent; }
-  .extras-marquee::-webkit-scrollbar-thumb { background: var(--ghost); border-radius: 2px; }
-
-  .extras-marquee__track {
-    animation: none !important;
-    width: max-content;
-    gap: 0.75rem;
-  }
-
-  .extras-badge {
-    width: clamp(220px, 72vw, 280px);
-    scroll-snap-align: start;
-    padding: 0;
-  }
-
-  .extras-badge__body {
-    max-height: 0;
-    transition: max-height 0.3s ease;
-  }
-
-  .extras-badge--open .extras-badge__body {
-    max-height: 200px;
-  }
-}
-
+/* ── Extras Badge — base (desktop) ── */
 .extras-badge {
   flex-shrink: 0;
   width: fit-content;
@@ -684,6 +729,108 @@
   background: var(--forge);
   border: 1px solid var(--edge);
   transition: border-color var(--t-fast), background var(--t-fast);
+}
+
+@media (max-width: 767px) {
+  /*
+   * En móvil el marquee se convierte en scroll container.
+   * El track tiene width fijo = N * ancho_badge + gaps,
+   * pero los badges usan flex-shrink:0 + ancho basado en el
+   * scroll container (no en 100vw) mediante un truco:
+   * ponemos el track como display:flex normal sin width:max-content
+   * y dejamos que cada badge ocupe el 100% del scroll viewport.
+   */
+  .extras-marquee {
+    overflow-x: scroll;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scroll-snap-type: x mandatory;
+    -webkit-mask-image: none;
+    mask-image: none;
+    scrollbar-width: none;
+    /* padding lateral: deja asomar el badge siguiente/anterior */
+    padding: 0 28px 0.75rem;
+    /* el snap arranca desde el inicio del padding */
+    scroll-padding-left: 28px;
+  }
+
+  .extras-marquee::-webkit-scrollbar { display: none; }
+
+  .extras-marquee__track {
+    animation: none !important;
+    display: flex;
+    gap: 10px;
+    width: auto;
+    align-items: flex-start;
+  }
+
+  .extras-badge {
+    /* badge ligeramente más estrecho que el viewport para que asomen los vecinos */
+    min-width: calc(100vw - 72px);
+    max-width: calc(100vw - 72px);
+    flex-shrink: 0;
+    scroll-snap-align: start;
+    padding: 0;
+    overflow: hidden;
+  }
+
+  .extras-badge__face {
+    /* hereda el 100% del badge, padding visual cómodo */
+    width: 100%;
+    box-sizing: border-box;
+    /* el padding de la regla base (1rem 1.25rem) aplica aquí — no hace falta sobreescribir */
+  }
+
+  .extras-badge__body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+    /* CRÍTICO: forzar que el body no desborde el badge */
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .extras-badge--open .extras-badge__body {
+    max-height: 200px;
+  }
+
+  .extras-badge__desc {
+    /* el texto se envuelve dentro del ancho del badge */
+    white-space: normal;
+    word-break: break-word;
+    overflow-wrap: break-word;
+    padding: 0 1.25rem 0.5rem;
+  }
+
+  .extras-badge__cta {
+    padding: 0.4rem 1.25rem 1rem;
+    display: block;
+  }
+
+  /* ── Barra de progreso del carrusel ── */
+  .extras-progress {
+    display: flex;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 1rem;
+    padding: 0 28px;
+  }
+
+  .extras-progress__dot {
+    height: 3px;
+    border-radius: 2px;
+    background: var(--ghost);
+    flex: 1;
+    max-width: 32px;
+    transition: background 0.25s ease, flex 0.25s ease;
+  }
+
+  .extras-progress__dot--active {
+    background: var(--edge);
+    flex: 2;
+    max-width: 52px;
+  }
 }
 
 .extras-badge:hover,
