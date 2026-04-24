@@ -1,0 +1,212 @@
+/* ═══════════════════════════════════════════════
+   CONTACTO — Hero y Formulario
+   ═══════════════════════════════════════════════ */
+
+.contacto-hero {
+  position: relative;
+  padding: 9rem 0 6rem;
+  overflow: visible;
+}
+
+.contacto-hero__bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.contacto-hero__k {
+  position: absolute;
+  right: -4rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: clamp(200px, 35vw, 420px);
+  opacity: 0.04;
+}
+
+.contacto-hero__content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.25rem;
+}
+
+.contacto-hero__h1 {
+  font-family: var(--font-head);
+  font-size: clamp(2.5rem, 8vw, 6rem);
+  font-weight: 900;
+  letter-spacing: -0.05em;
+  line-height: 1.05;
+  color: var(--blade);
+  overflow: visible;
+  padding-top: 0.1em;
+}
+
+.contacto-hero__sub {
+  font-size: 1rem;
+  color: var(--steel);
+  max-width: 46ch;
+  line-height: 1.65;
+}
+
+.contacto-hero__note {
+  font-size: 0.85rem;
+  color: var(--steel);
+}
+
+.contacto-hero__email {
+  color: var(--spark);
+  transition: color var(--t-fast);
+}
+
+.contacto-hero__email:hover {
+  color: var(--blade);
+}
+
+/* ── Formulario ── */
+.katan-form {
+  margin-bottom: 1rem;
+}
+
+.katan-form fieldset {
+  border: none;
+  border-bottom: 1px solid var(--ghost);
+  padding: 3rem 0;
+  margin: 0;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--blade);
+}
+
+.katan-form input[type="text"],
+.katan-form input[type="email"],
+.katan-form input[type="tel"],
+.katan-form textarea,
+.katan-form select {
+  width: 100%;
+  background: var(--sheath);
+  border: 1px solid var(--ghost);
+  color: var(--blade);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  padding: 1rem;
+  border-radius: 0;
+  transition: border-color var(--t-fast), box-shadow var(--t-fast);
+}
+
+.katan-form textarea {
+  resize: vertical;
+}
+
+.katan-form input:focus,
+.katan-form textarea:focus,
+.katan-form select:focus {
+  outline: none;
+  border-color: var(--edge);
+  box-shadow: 0 0 0 1px var(--edge);
+}
+
+.radio-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.radio-card {
+  position: relative;
+  cursor: pointer;
+}
+
+.radio-card input {
+  position: absolute;
+  opacity: 0;
+}
+
+.radio-card .card-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1.5rem;
+  background: var(--sheath);
+  border: 1px solid var(--ghost);
+  transition: all var(--t-fast);
+}
+
+.radio-card .title {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--blade);
+  font-weight: 600;
+}
+
+.radio-card .desc {
+  font-size: 0.75rem;
+  color: var(--steel);
+}
+
+.radio-card input:checked + .card-content {
+  border-color: var(--edge);
+  background: rgba(255, 0, 128, 0.05);
+}
+
+.radio-card input:checked + .card-content .title {
+  color: var(--edge);
+}
+
+.checkbox-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.check-box {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.85rem;
+  color: var(--steel);
+  cursor: pointer;
+}
+
+.check-box input {
+  accent-color: var(--edge);
+  width: 1rem;
+  height: 1rem;
+}
+
+/* ── Responsive ── */
+@media (min-width: 640px) {
+  .form-row {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .checkbox-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (min-width: 768px) {
+  .radio-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
