@@ -52,7 +52,7 @@ const PROJECTS = [
     alt: 'Proyecto 5',
     tag: 'Landing Page',
     title: 'Portfolio Diseñadora',
-    metric: 'Maquetación y Migración Base Datos y Web',
+    metric: 'Maquetación Web',
     external: true,
   },
 ]
