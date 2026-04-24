@@ -4,6 +4,17 @@ import Header from '../components/Header.jsx'
 import Footer from '../components/Footer.jsx'
 
 const PROJECTS = [
+
+  {
+    href: 'https://viananails.com/',
+    category: 'ecommerce',
+    img: '../../public/img/VianaNails.png',
+    alt: 'Proyecto 2',
+    tag: 'E-Commerce',
+    title: 'Viana Nails',
+    metric: 'Maquetación y Migración Base Datos y Web',
+    external: true,
+  },
   {
     href: 'https://xyloshome.com',
     category: 'landing',
@@ -17,20 +28,10 @@ const PROJECTS = [
   {
     href: '#',
     category: 'corporate',
-    img: 'https://via.placeholder.com/800x600/14141A/F0F4F8?text=Mockup+Proyecto+2',
-    alt: 'Proyecto 2',
-    tag: 'Web Corporativa',
-    title: 'Estudio Arquitectura',
-    metric: 'SEO Técnico | Arquitectura CMS',
-    external: false,
-  },
-  {
-    href: '#',
-    category: 'ecommerce',
-    img: 'https://via.placeholder.com/800x600/14141A/F0F4F8?text=Mockup+Proyecto+3',
+    img: '../../public/img/Katan.png',
     alt: 'Proyecto 3',
-    tag: 'E-Commerce',
-    title: 'Nova Tech Store',
+    tag: 'Web Corporativa',
+    title: 'Katan',
     metric: 'Pasarela Custom | 0% Fricción',
     external: false,
   },
@@ -40,9 +41,19 @@ const PROJECTS = [
     img: 'https://via.placeholder.com/800x600/14141A/F0F4F8?text=Mockup+Proyecto+4',
     alt: 'Proyecto 4',
     tag: 'Landing Page',
-    title: 'Clínica Dental Madrid',
+    title: 'Estudio música',
     metric: 'Sistema de Reservas Integrado',
     external: false,
+  },
+  {
+    href: '#',
+    category: 'landing',
+    img: 'https://via.placeholder.com/800x600/14141A/F0F4F8?text=Mockup+Proyecto+5',
+    alt: 'Proyecto 5',
+    tag: 'Landing Page',
+    title: 'Portfolio Diseñadora',
+    metric: 'Maquetación y Migración Base Datos y Web',
+    external: true,
   },
 ]
 

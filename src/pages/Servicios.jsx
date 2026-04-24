@@ -228,7 +228,6 @@ function SpecsCarousel() {
       >←</button>
 
       <div className="specs-carousel__nav-center">
-        <span className="specs-carousel__nav-label">{SPECS_COLS[active]}</span>
         <div className="specs-carousel__dots" role="tablist">
           {SPECS_COLS.map((col, i) => (
             <button
