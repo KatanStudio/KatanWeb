@@ -140,6 +140,182 @@
   }
 }
 
+/* ── Specs Table: responsive toggle ── */
+.specs-carousel { display: none; }
+
+@media (max-width: 767px) {
+  .table-responsive { display: none !important; }
+  .specs-carousel   { display: block; }
+}
+
+/* ── Specs Carousel ── */
+.specs-carousel {
+  border: 1px solid var(--ghost);
+  background: var(--sheath);
+  margin-top: 2rem;
+  overflow: hidden;
+}
+
+/* 2-column grid: labels | values */
+.specs-carousel__grid {
+  display: grid;
+  grid-template-columns: 42% 58%;
+}
+
+/* Base cell */
+.specs-carousel__cell {
+  padding: 0.7rem 0.75rem;
+  border-bottom: 1px solid var(--ghost);
+  font-size: 0.82rem;
+  color: var(--blade);
+  word-break: break-word;
+  hyphens: auto;
+  line-height: 1.45;
+}
+
+/* Header cells (th row) */
+.specs-carousel__cell--th-label,
+.specs-carousel__cell--th {
+  background: var(--forge);
+  border-bottom: 2px solid var(--ghost);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--steel);
+  padding: 0.85rem 0.75rem;
+}
+
+/* Highlighted header (Corporativa) */
+.specs-carousel__cell--highlight-th {
+  border-top: 2px solid var(--edge);
+  color: var(--edge) !important;
+  background: rgba(255, 0, 128, 0.05);
+}
+
+/* Label cells — always visible, right border as separator */
+.specs-carousel__cell--label {
+  border-right: 1px solid var(--ghost);
+  background: rgba(255, 255, 255, 0.01);
+}
+
+.specs-carousel__cell--label strong {
+  color: var(--spark);
+  font-weight: 600;
+  font-size: 0.78rem;
+}
+
+/* Highlighted value cells (Corporativa column) */
+.specs-carousel__cell--highlight {
+  background: rgba(255, 0, 128, 0.03);
+}
+
+/* ── Slide-in animations ── */
+@keyframes specsFromRight {
+  from { opacity: 0; transform: translateX(20px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes specsFromLeft {
+  from { opacity: 0; transform: translateX(-20px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+.specs-carousel__val--from-right {
+  animation: specsFromRight 0.26s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+.specs-carousel__val--from-left {
+  animation: specsFromLeft 0.26s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+}
+
+/* Navigation bar */
+.specs-carousel__nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 0.875rem;
+  background: var(--forge);
+  border-bottom: 1px solid var(--ghost);
+  gap: 0.75rem;
+}
+
+/* La nav inferior lleva borde arriba en vez de abajo */
+.specs-carousel__nav:last-child {
+  border-bottom: none;
+  border-top: 1px solid var(--ghost);
+}
+
+.specs-carousel__nav-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.45rem;
+  flex: 1;
+}
+
+.specs-carousel__nav-label {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--steel);
+}
+
+.specs-carousel__dots {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+}
+
+.specs-carousel__dot {
+  width: 22px;
+  height: 3px;
+  background: var(--ghost);
+  border: none;
+  cursor: pointer;
+  border-radius: 1px;
+  transition: background var(--t-mid), width var(--t-mid);
+  padding: 0;
+}
+
+.specs-carousel__dot--active {
+  width: 42px;
+  background: var(--edge);
+}
+
+.specs-carousel__dot:hover:not(.specs-carousel__dot--active) {
+  background: var(--steel);
+}
+
+/* Arrow buttons */
+.specs-carousel__arrow {
+  width: 2.1rem;
+  height: 2.1rem;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--sheath);
+  border: 1px solid var(--ghost);
+  color: var(--blade);
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: border-color var(--t-fast), color var(--t-fast), background var(--t-fast);
+}
+
+.specs-carousel__arrow:hover:not(:disabled) {
+  border-color: var(--edge);
+  color: var(--edge);
+  background: rgba(255, 0, 128, 0.06);
+}
+
+.specs-carousel__arrow:disabled {
+  opacity: 0.22;
+  cursor: not-allowed;
+}
+
 /* ── Specs Table ── */
 .table-responsive {
   width: 100%;

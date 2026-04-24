@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, memo, useCallback } from 'react'
+import { useState, useEffect, useRef, memo, useCallback, Fragment } from 'react'
 import { Helmet } from 'react-helmet-async'
 import { Link } from 'react-router-dom'
 import {
@@ -168,6 +168,131 @@ const EXTRAS = [
   { icon: Languages, title: 'Multiidioma', desc: 'Tu web en otro idioma sin plugins con traductor especializado. Velocidad preservada.', price: 'Desde 120 €/idioma' },
   { icon: Server, title: 'Mantenimiento & Hosting', desc: 'CDN global, SSL activo y cambios de texto incluidos.', price: '250–350 €/año' },
 ]
+
+// ─────────────────────────────────────────────────────────────────────────────
+// SPECS TABLE DATA & CAROUSEL (mobile)
+// ─────────────────────────────────────────────────────────────────────────────
+const Y = <span className="check-yes">✓</span>
+const N = <span className="check-no">—</span>
+
+const SPECS_COLS = ['01 / Landing', '02 / Corporativa', '03 / E-Commerce']
+
+const SPECS_ROWS = [
+  { label: 'Número de páginas',        values: ['Hasta 5 páginas',         'Hasta 10 páginas',              'Ilimitadas'] },
+  { label: 'Diseño a medida',           values: ['100% Personalizado',      '100% Personalizado',            '100% Personalizado'] },
+  { label: 'Diseño Responsive',         values: [Y,                          Y,                               Y] },
+  { label: 'SEO On-Page',               values: ['Básico',                   'Avanzado (Schema)',             'Avanzado + Rich Snippets'] },
+  { label: 'Blog Integrado',            values: [N,                          Y,                               Y] },
+  { label: 'Multiidioma',               values: [N,                          'Hasta 2 idiomas',               'Hasta 3 idiomas'] },
+  { label: 'Formularios de contacto',   values: ['1 formulario',             'Avanzados / Múltiples',         'Avanzados / Múltiples'] },
+  { label: 'Analítica Web',             values: ['Google Analytics',         'Analytics + Search Console',   'Analytics + SC + E-comm'] },
+  { label: 'Core Web Vitals',           values: ['Optimizado (>90)',         'Premium (>95)',                 'Premium'] },
+  { label: 'Catálogo & Pasarela',       values: [N,                          N,                               'Ilimitado (Stripe / PayPal)'] },
+  { label: 'Panel de administración',   values: [N,                          'Gestor básico (CMS)',           'Completo (Pedidos, stock)'] },
+  { label: 'Rondas de revisiones',      values: ['1 ronda',                  '3 rondas',                     '5 rondas'] },
+  { label: 'Soporte post-lanzamiento',  values: ['15 días',                  '30 días',                      '60 días'] },
+]
+
+function SpecsCarousel() {
+  const [active, setActive]   = useState(0)
+  const [dir, setDir]         = useState(1)
+  const [animKey, setAnimKey] = useState(0)
+  const touchStartX           = useRef(null)
+
+  const navigate = (next) => {
+    if (next < 0 || next > 2) return
+    setDir(next > active ? 1 : -1)
+    setActive(next)
+    setAnimKey(k => k + 1)
+  }
+
+  const handleTouchStart = (e) => { touchStartX.current = e.touches[0].clientX }
+  const handleTouchEnd   = (e) => {
+    if (touchStartX.current === null) return
+    const diff = touchStartX.current - e.changedTouches[0].clientX
+    if (diff > 50)  navigate(active + 1)
+    else if (diff < -50) navigate(active - 1)
+    touchStartX.current = null
+  }
+
+  const animClass   = dir > 0 ? 'specs-carousel__val--from-right' : 'specs-carousel__val--from-left'
+  const isHighlight = active === 1
+
+  const Nav = () => (
+    <div className="specs-carousel__nav">
+      <button
+        className="specs-carousel__arrow"
+        onClick={() => navigate(active - 1)}
+        disabled={active === 0}
+        aria-label="Anterior"
+      >←</button>
+
+      <div className="specs-carousel__nav-center">
+        <span className="specs-carousel__nav-label">{SPECS_COLS[active]}</span>
+        <div className="specs-carousel__dots" role="tablist">
+          {SPECS_COLS.map((col, i) => (
+            <button
+              key={i}
+              role="tab"
+              aria-selected={i === active}
+              aria-label={col}
+              className={`specs-carousel__dot${i === active ? ' specs-carousel__dot--active' : ''}`}
+              onClick={() => navigate(i)}
+            />
+          ))}
+        </div>
+      </div>
+
+      <button
+        className="specs-carousel__arrow"
+        onClick={() => navigate(active + 1)}
+        disabled={active === 2}
+        aria-label="Siguiente"
+      >→</button>
+    </div>
+  )
+
+  return (
+    <div
+      className="specs-carousel"
+      onTouchStart={handleTouchStart}
+      onTouchEnd={handleTouchEnd}
+    >
+      {/* ── Navigation superior ── */}
+      <Nav />
+
+      <div className="specs-carousel__grid">
+
+        {/* ── Header row ── */}
+        <div className="specs-carousel__cell specs-carousel__cell--th-label" />
+        <div
+          key={`h-${animKey}`}
+          className={`specs-carousel__cell specs-carousel__cell--th${isHighlight ? ' specs-carousel__cell--highlight-th' : ''} ${animClass}`}
+        >
+          {SPECS_COLS[active]}
+        </div>
+
+        {/* ── Data rows ── */}
+        {SPECS_ROWS.map((row, i) => (
+          <Fragment key={i}>
+            <div className="specs-carousel__cell specs-carousel__cell--label">
+              <strong>{row.label}</strong>
+            </div>
+            <div
+              key={`v-${animKey}-${i}`}
+              className={`specs-carousel__cell${isHighlight ? ' specs-carousel__cell--highlight' : ''} ${animClass}`}
+            >
+              {row.values[active]}
+            </div>
+          </Fragment>
+        ))}
+      </div>
+
+      {/* ── Navigation inferior ── */}
+      <Nav />
+    </div>
+  )
+}
 
 // ─────────────────────────────────────────────────────────────────────────────
 // TICKET 1 — INTERACTIVE SERVICE SWITCHER (Con Auto-Play y Partículas)
@@ -542,6 +667,8 @@ export default function Servicios() {
                 Comparativa técnica detallada de nuestros niveles de arquitectura.
               </p>
             </header>
+
+            <SpecsCarousel />
 
             <div className="table-responsive">
               <table className="specs-table">
