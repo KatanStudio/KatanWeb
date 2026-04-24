@@ -196,8 +196,11 @@ const INITIAL_VISIBLE = 7
 export default function FAQ() {
   const [activeCategory, setActiveCategory] = useState('todas')
   const [showAll, setShowAll] = useState(false)
-
   const totalQuestions = ALL_ITEMS.length
+
+  const handleCategoryChange = (id) => {
+    setActiveCategory(id)
+  }
 
   return (
     <>
@@ -246,15 +249,15 @@ export default function FAQ() {
 
           <div className="container faq-page-body__inner">
 
-            {/* Sidebar de categorías */}
-            <nav className="faq-page-nav" aria-label="Categorías FAQ">
+            {/* Sidebar de categorías — desktop */}
+            <nav className="faq-page-nav faq-page-nav--desktop" aria-label="Categorías FAQ">
               <p className="faq-page-nav__label">Categorías</p>
 
               {NAV_CATEGORIES.map((cat) => (
                 <button
                   key={cat.id}
                   className={`faq-page-nav__item${activeCategory === cat.id ? ' is-active' : ''}`}
-                  onClick={() => setActiveCategory(cat.id)}
+                  onClick={() => handleCategoryChange(cat.id)}
                 >
                   {cat.id === 'todas' ? (
                     <>
@@ -279,6 +282,28 @@ export default function FAQ() {
                 </Link>
               </div>
             </nav>
+
+            {/* Desplegable de categorías — móvil */}
+            <div className="faq-page-nav faq-page-nav--mobile" aria-label="Categorías FAQ">
+              <p className="faq-page-nav__label">Categorías</p>
+              <div className="faq-page-select-wrap">
+                <select
+                  className="faq-page-select"
+                  value={activeCategory}
+                  onChange={(e) => handleCategoryChange(e.target.value)}
+                  aria-label="Seleccionar categoría"
+                >
+                  {NAV_CATEGORIES.map((cat) => (
+                    <option key={cat.id} value={cat.id}>
+                      {cat.id === 'todas'
+                        ? `Todas las preguntas (${totalQuestions})`
+                        : `${cat.title} (${cat.items.length})`}
+                    </option>
+                  ))}
+                </select>
+                <span className="faq-page-select__arrow" aria-hidden="true">↓</span>
+              </div>
+            </div>
 
             {/* Preguntas */}
             <div className="faq-page-content">

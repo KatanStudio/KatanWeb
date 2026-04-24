@@ -207,56 +207,61 @@
   text-transform: none;
 }
 
-/* Mobile: pill nav */
+/* Desktop: mostrar sidebar, ocultar select */
+.faq-page-nav--mobile { display: none; }
+.faq-page-nav--desktop { display: flex; }
+
+/* Móvil: ocultar sidebar, mostrar select */
 @media (max-width: 899px) {
-  .faq-page-nav {
+  .faq-page-nav--desktop { display: none; }
+
+  .faq-page-nav--mobile {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
     position: static;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 0.5rem;
   }
 
-  .faq-page-nav__label {
+  /* ── Select wrapper ── */
+  .faq-page-select-wrap {
+    position: relative;
     width: 100%;
-    border-bottom: 1px solid var(--ghost);
-    padding-bottom: 0.75rem;
   }
 
-  .faq-page-nav__item {
-    flex-direction: row;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.5rem 0.85rem;
+  .faq-page-select {
+    width: 100%;
+    appearance: none;
+    -webkit-appearance: none;
+    background: var(--sheath);
     border: 1px solid var(--ghost);
-    border-left: 2px solid transparent;
+    border-left: 2px solid var(--edge);
+    color: var(--blade);
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    font-weight: 600;
+    padding: 0.9rem 2.5rem 0.9rem 1rem;
+    cursor: pointer;
+    border-radius: 0;
+    transition: border-color var(--t-fast), background var(--t-fast);
     box-sizing: border-box;
   }
 
-  .faq-page-nav__item:hover {
-    background: var(--sheath);
-    border-color: var(--ghost);
-    border-left-color: var(--steel);
+  .faq-page-select:focus {
+    outline: none;
+    border-color: var(--edge);
+    box-shadow: 0 0 0 1px var(--edge);
   }
 
-  .faq-page-nav__item.is-active {
-    border-color: var(--ghost);
-    border-left-color: var(--edge);
-  }
-
-  .faq-page-nav__cat-label {
-    display: none;
-  }
-
-  .faq-page-nav__cat-title {
-    font-size: 0.82rem;
-  }
-
-  .faq-page-nav__count {
-    display: none;
-  }
-
-  .faq-page-nav__cta {
-    display: none;
+  /* Flecha personalizada */
+  .faq-page-select__arrow {
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--edge);
+    font-size: 0.8rem;
+    pointer-events: none;
+    font-family: var(--font-mono);
   }
 }
 

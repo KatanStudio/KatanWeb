@@ -136,15 +136,15 @@
 }
 
 /* ── Responsive ── */
-@media (min-width: 768px) {
+@media (min-width: 626px) {
   .portfolio-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
 
-@media (min-width: 400px) and (max-width: 767px) {
+@media (min-width: 400px) and (max-width: 626px) {
   .portfolio-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(1, 1fr);
     gap: 0.75rem;
   }
 
