@@ -209,7 +209,20 @@ export default function Proceso() {
 
             {/* ── Steps (mobile carousel) ── */}
             <div className="process-carousel" style={{ marginTop: '4rem' }}>
-              <div className="process-carousel__stage">
+              <div className={`process-card process-card--carousel is-visible${STEPS[activeStep].highlight ? ' process-card--highlight' : ''}`}>
+                <div className="process-card__header">
+                  <span className="process-card__num">{STEPS[activeStep].num}</span>
+                  <span className="process-card__time">{STEPS[activeStep].time}</span>
+                </div>
+                <h4 className="process-card__title">
+                  <span className="process-card__icon">{STEPS[activeStep].icon}</span>
+                  {STEPS[activeStep].title}
+                </h4>
+                <p className="process-card__desc">{STEPS[activeStep].desc}</p>
+                <p className="process-card__detail">{STEPS[activeStep].detail}</p>
+              </div>
+
+              <div className="process-carousel__dots">
                 <button
                   className="process-carousel__arrow process-carousel__arrow--prev"
                   onClick={prevStep}
@@ -217,28 +230,6 @@ export default function Proceso() {
                   aria-label="Paso anterior"
                 >‹</button>
 
-                <div className={`process-card process-card--carousel is-visible${STEPS[activeStep].highlight ? ' process-card--highlight' : ''}`}>
-                  <div className="process-card__header">
-                    <span className="process-card__num">{STEPS[activeStep].num}</span>
-                    <span className="process-card__time">{STEPS[activeStep].time}</span>
-                  </div>
-                  <h4 className="process-card__title">
-                    <span className="process-card__icon">{STEPS[activeStep].icon}</span>
-                    {STEPS[activeStep].title}
-                  </h4>
-                  <p className="process-card__desc">{STEPS[activeStep].desc}</p>
-                  <p className="process-card__detail">{STEPS[activeStep].detail}</p>
-                </div>
-
-                <button
-                  className="process-carousel__arrow process-carousel__arrow--next"
-                  onClick={nextStep}
-                  disabled={activeStep === STEPS.length - 1}
-                  aria-label="Paso siguiente"
-                >›</button>
-              </div>
-
-              <div className="process-carousel__dots">
                 {STEPS.map((_, i) => (
                   <button
                     key={i}
@@ -247,6 +238,13 @@ export default function Proceso() {
                     aria-label={`Ir al paso ${i + 1}`}
                   >{i + 1}</button>
                 ))}
+
+                <button
+                  className="process-carousel__arrow process-carousel__arrow--next"
+                  onClick={nextStep}
+                  disabled={activeStep === STEPS.length - 1}
+                  aria-label="Paso siguiente"
+                >›</button>
               </div>
             </div>
           </div>
