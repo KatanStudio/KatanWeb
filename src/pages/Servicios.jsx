@@ -480,10 +480,10 @@ function ServiceSwitcher() {
 // ── TICKET 3: Extras Carousel (Marquee) ──────────────────────────────────────
 // PERF: memo() evita que todos los badges del marquee se re-rendericen
 // cuando uno solo cambia su estado open/close
-const ExtraBadge = memo(function ExtraBadge({ title, desc, price, open, onToggle, onMouseEnter, onMouseLeave }) {
+const ExtraBadge = memo(function ExtraBadge({ title, desc, price, open, onToggle, onMouseEnter, onMouseLeave, isMobile }) {
   return (
     <div
-      className={`extras-badge${open ? ' extras-badge--open' : ''}`}
+      className={`extras-badge${open ? " extras-badge--open" : ""}${isMobile ? " extras-badge--mobile" : ""}`}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
     >
@@ -535,12 +535,22 @@ function ExtrasMarquee() {
   if (isMobile) {
     const extra = EXTRAS[activeIndex]
     const animClass = animDir > 0 ? 'em-card--from-right' : 'em-card--from-left'
+    // Ventana deslizante de dots: máx 5 visibles, activo siempre centrado
+    const WINDOW = 5
+    const half = Math.floor(WINDOW / 2)
+    const total = EXTRAS.length
+    let winStart = Math.max(0, activeIndex - half)
+    let winEnd   = winStart + WINDOW
+    if (winEnd > total) { winEnd = total; winStart = Math.max(0, total - WINDOW) }
+    const visibleDots = Array.from({ length: total }, (_, i) => i).slice(winStart, winEnd)
+
     return (
       <div className="em-wrap">
+        {/* Nav superior */}
         <div className="em-nav">
           <button className="em-arrow" onClick={() => navigateMobile(activeIndex - 1)} disabled={activeIndex === 0} aria-label="Anterior">←</button>
           <div className="em-dots" role="tablist">
-            {EXTRAS.map((_, i) => (
+            {visibleDots.map((i) => (
               <button key={i} role="tab" aria-selected={i === activeIndex}
                 className={`em-dot${i === activeIndex ? ' em-dot--active' : ''}`}
                 onClick={() => navigateMobile(i)} aria-label={EXTRAS[i].title} />
@@ -548,15 +558,20 @@ function ExtrasMarquee() {
           </div>
           <button className="em-arrow" onClick={() => navigateMobile(activeIndex + 1)} disabled={activeIndex === EXTRAS.length - 1} aria-label="Siguiente">→</button>
         </div>
+
+        {/* Card animada */}
         <div className="em-stage">
           <div key={animKey} className={`em-card ${animClass}`}>
             <ExtraBadge
               title={extra.title} desc={extra.desc} price={extra.price}
-              open={openIndex === activeIndex}
-              onToggle={() => handleToggle(activeIndex)}
+              open={true}
+              onToggle={undefined}
+              isMobile={true}
             />
           </div>
         </div>
+
+        {/* Nav inferior */}
         <div className="em-nav em-nav--bottom">
           <button className="em-arrow" onClick={() => navigateMobile(activeIndex - 1)} disabled={activeIndex === 0} aria-label="Anterior">←</button>
           <span className="em-counter">{activeIndex + 1} / {EXTRAS.length}</span>
