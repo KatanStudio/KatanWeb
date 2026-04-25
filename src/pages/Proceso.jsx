@@ -96,7 +96,7 @@ const REQUIREMENTS = [
   {
     num: '03',
     title: 'Gestión del dominio',
-    desc: 'Si ya tienes tu dominio web comprado, solo necesitaremos un acceso temporal para enlazarlo. Si aún no tienes uno, despreocúpate: nosotros nos encargamos de buscarlo, registrarlo y configurarlo todo.',
+    desc: 'Si ya tienes tu dominio web comprado, solo necesitaremos un acceso temporal para enlazarlo. De todas formas, si aún no tienes uno, despreocúpate: nosotros nos encargamos de buscarlo, registrarlo y configurarlo todo.',
   },
   {
     num: '04',
@@ -107,14 +107,15 @@ const REQUIREMENTS = [
 
 const CLAIMS = [
   'Precio cerrado desde el día 1',
-  'Sin extras sorpresa',
-  '2 rondas de revisión incluidas',
-  'Código propio y entrega completa',
+  'Canal directo con nosotros',
+  'Rondas de revisión estructuradas',
+  'Te acompañamos en el lanzamiento Web',
 ]
 
 export default function Proceso() {
   const [activeStep, setActiveStep] = useState(null)
   const [carouselStep, setCarouselStep] = useState(0)
+  const [openReq, setOpenReq] = useState(null)   // ← dentro del componente
   const prevStep = () => setCarouselStep(i => Math.max(0, i - 1))
   const nextStep = () => setCarouselStep(i => Math.min(STEPS.length - 1, i + 1))
 
@@ -130,36 +131,18 @@ export default function Proceso() {
       <main>
 
         {/* ── Hero de sección ── */}
-        <section className="section" id="proceso">
+        <section className="section section--orbs" id="proceso">
+          <div className="glow-orb orb-page-1" aria-hidden="true" />
+          <div className="glow-orb orb-page-2" aria-hidden="true" />
           <div className="container">
             <header className="section__header">
               <p className="section-label">05 / Proceso</p>
-              <h2 className="section__h2" style={{ textTransform: 'none' }}>Del brief al<br />corte final</h2>
+              <h2 className="section__h2" style={{ textTransform: 'none' }}>Del formulario al<br /><span className="accent">lanzamiento.</span></h2>
               <p className="section__sub">
                 Sin burocracia, sin reuniones vacías. Cada contacto tiene un propósito claro
                 y lo hacemos en persona siempre que podemos.
               </p>
             </header>
-
-            {/* ── Filosofía de contacto ── */}
-            <div className="proceso-philosophy">
-              <div className="proceso-philosophy__text">
-                <p className="section-label" style={{ marginBottom: '1rem' }}>/Nuestra forma de trabajar</p>
-                <p>
-                  No somos de las agencias que te mandan un PDF con el proceso y luego desaparecen
-                  detrás de un gestor de clientes. Creemos en el contacto directo, en las reuniones con propósito
-                  y en que la primera vez que te enseñamos algo ya tiene que impresionarte.
-                </p>
-                <p style={{ marginTop: '1rem' }}>
-                  Si estás en <strong>Toledo, Madrid</strong> o alrededores, nos reunimos en persona.
-                  Si no, por videollamada. Siempre con algo concreto que enseñarte, nunca a mano vacía.
-                </p>
-              </div>
-              <div className="proceso-philosophy__badge">
-                <span className="proceso-badge-num">0</span>
-                <span className="proceso-badge-label">Intermediarios<br />directo a los creadores</span>
-              </div>
-            </div>
 
             {/* ── Timeline ── */}
             <div
@@ -244,53 +227,32 @@ export default function Proceso() {
                 </div>
               ))}
             </div>
-          </div>
-        </section>
 
-        {/* ── Comunicación ── */}
-        <section className="section section--dark" id="comunicacion">
-          <div className="container">
-            <header className="section__header">
-              <p className="section-label">/Cómo nos comunicamos</p>
-              <h2 className="section__h2" style={{ textTransform: 'none' }}>
-                Siempre sabes<br /><span className="accent">con quién hablas.</span>
-              </h2>
-              <p className="section__sub">
-                Sin Account Managers. Sin tickets de soporte. Hablas directamente con
-                los dos ingenieros que construyen tu proyecto.
-              </p>
-            </header>
-
-            <div className="comm-grid">
-              {COMM_ITEMS.map((item, i) => (
-                <div key={i} className="comm-item" style={{ '--comm-color': item.color }}>
-                  <span className="comm-item__label">{item.label}</span>
-                  <span className="comm-item__channel">{item.channel}</span>
-                  <p className="comm-item__desc">{item.desc}</p>
-                </div>
-              ))}
-            </div>
-
-            <div className="proceso-presencial-banner">
-              <div className="proceso-presencial-banner__content">
-                <p className="proceso-presencial-banner__tag">// Reuniones presenciales</p>
-                <p className="proceso-presencial-banner__text">
-                  Si tu empresa está en <strong>Toledo, Madrid</strong> o cualquier
-                  zona cercana, nos reunimos en persona. Creemos que hay decisiones que se toman
-                  mejor mirándose a los ojos y con un café delante.
+            {/* ── Filosofía de contacto ── */}
+            <div className="proceso-philosophy">
+              <div className="proceso-philosophy__text">
+                <p className="section-label" style={{ marginBottom: '1rem' }}>/Nuestra forma de trabajar</p>
+                <p>
+                  No somos de las agencias que te mandan un PDF con el proceso y luego desaparecen
+                  detrás de un gestor de clientes. Creemos en el contacto directo, en las reuniones con propósito
+                  y en que la primera vez que te enseñamos algo ya tiene que impresionarte.
+                </p>
+                <p style={{ marginTop: '1rem' }}>
+                  Si estás en <strong>Toledo, Madrid</strong> o alrededores, nos reunimos en persona.
+                  Si no, por videollamada. Siempre con algo concreto que enseñarte, nunca a mano vacía.
                 </p>
               </div>
-              <div className="proceso-presencial-banner__zones">
-                {['Toledo', 'Madrid', 'Ciudad Real', 'Talavera', 'y más'].map(city => (
-                  <span key={city} className="proceso-city-tag">{city}</span>
-                ))}
+              <div className="proceso-philosophy__badge">
+                <span className="proceso-badge-num">0</span>
+                <span className="proceso-badge-label">Intermediarios<br />directo a los creadores</span>
               </div>
             </div>
           </div>
         </section>
 
+
         {/* ── Lo que necesitamos de ti ── */}
-        <section className="section" id="requisitos">
+        <section className="section section--gradient-bg" id="requisitos">
           <div className="container">
             <header className="section__header">
               <p className="section-label">/Lo que necesitamos de ti</p>
@@ -303,17 +265,42 @@ export default function Proceso() {
               </p>
             </header>
 
+            {/* Desktop ≥1200px: grid con hover reveal */}
             <div className="requisitos-grid">
               {REQUIREMENTS.map((req) => (
                 <div key={req.num} className="requisito-item">
                   <span className="requisito-item__num">{req.num}</span>
-                  <div>
-                    <h4 className="requisito-item__title">{req.title}</h4>
-                    <p className="requisito-item__desc">{req.desc}</p>
+                  <h4 className="requisito-item__title">{req.title}</h4>
+                  <p className="requisito-item__desc">{req.desc}</p>
+                </div>
+              ))}
+            </div>
+
+            {/* Mobile <1200px: acordeón */}
+            <div className="requisitos-accordion">
+              {REQUIREMENTS.map((req, i) => (
+                <div
+                  key={req.num}
+                  className={`requisito-acc__item${openReq === i ? ' requisito-acc__item--open' : ''}`}
+                >
+                  <button
+                    className="requisito-acc__trigger"
+                    onClick={() => setOpenReq(openReq === i ? null : i)}
+                    aria-expanded={openReq === i}
+                  >
+                    <span className="requisito-acc__num">{req.num}</span>
+                    <span className="requisito-acc__title">{req.title}</span>
+                    <span className="requisito-acc__icon" aria-hidden="true">+</span>
+                  </button>
+                  <div className="requisito-acc__body">
+                    <div className="requisito-acc__body-inner">
+                      <p className="requisito-acc__desc">{req.desc}</p>
+                    </div>
                   </div>
                 </div>
               ))}
             </div>
+
           </div>
         </section>
 

@@ -14,8 +14,10 @@ export default function Contacto() {
       <Header />
 
       <main>
-        <section className="contacto-hero" id="contacto">
+        <section className="contacto-hero" id="contacto" style={{ textAlign: 'center' }}>
           <div className="contacto-hero__bg" aria-hidden="true">
+            <div className="glow-orb orb-page-1" />
+            <div className="glow-orb orb-page-2" />
             <svg className="contacto-hero__k" viewBox="0 0 96 96" fill="none" aria-hidden="true">
               {/* Fondo: ahora transparente para evitar el bloque rojo sólido */}
               <path d="M0 0 H96 V82 L82 96 H0 Z" fill="transparent" />
@@ -30,7 +32,7 @@ export default function Contacto() {
           </div>
           <div className="container">
             <div className="contacto-hero__content">
-              <p className="kicker">// Respuesta en 24h</p>
+              <p className="kicker kicker--center">// Respuesta en 24h</p>
               <h1 className="contacto-hero__h1" style={{ textTransform: 'none' }}>¿Empezamos?</h1>
               <p className="contacto-hero__sub">Presupuesto cerrado antes de empezar. Sin letra pequeña. Sin reuniones eternas.</p>
               <Link to="/briefing" className="btn btn--chamfer btn--large">Solicitar presupuesto</Link>

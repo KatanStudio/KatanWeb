@@ -152,7 +152,7 @@
 }
 
 /* ── Mobile ── */
-@media (max-width: 767px) {
+@media (max-width: 1200px) {
   .cta-section__box {
     grid-template-columns: 1fr;
     text-align: center;

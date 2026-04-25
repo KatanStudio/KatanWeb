@@ -2,7 +2,7 @@
    PROCESO PAGE
    ═══════════════════════════════════════════════ */
 
-/* ── Process step list (componente reutilizable) ── */
+/* ── Process step list ── */
 .process {
   display: flex;
   flex-direction: column;
@@ -86,6 +86,7 @@
   background: var(--sheath);
   border: 1px solid var(--ghost);
   border-left: 3px solid var(--edge);
+  margin-top: 50px;
 }
 
 .proceso-philosophy__text {
@@ -133,7 +134,6 @@
     justify-content: space-between;
     gap: 3rem;
   }
-
   .proceso-philosophy__badge {
     align-items: flex-end;
     text-align: right;
@@ -148,10 +148,9 @@
   display: flex;
   gap: 2px;
   position: relative;
-  padding-top: 0.75rem; /* room for the connector dot */
+  padding-top: 0.75rem;
 }
 
-/* Horizontal track line */
 .proceso-timeline::before {
   content: '';
   position: absolute;
@@ -164,7 +163,6 @@
   z-index: 0;
 }
 
-/* ── Step card ── */
 .proceso-step {
   flex: 1;
   min-width: 0;
@@ -201,7 +199,6 @@
   outline-offset: 2px;
 }
 
-/* Subtle gradient bg per step (decorative, below content) */
 .proceso-step::before {
   content: '';
   position: absolute;
@@ -238,7 +235,6 @@
   background: radial-gradient(ellipse at 50% 100%, rgba(240, 244, 248, 0.04) 0%, transparent 65%);
 }
 
-/* Connector dot */
 .proceso-step__dot {
   display: block;
   position: absolute;
@@ -267,7 +263,6 @@
   box-shadow: 0 0 10px rgba(0, 229, 255, 0.55);
 }
 
-/* Content wrapper (above ::before gradient) */
 .proceso-step__inner {
   position: relative;
   z-index: 1;
@@ -321,12 +316,11 @@
 }
 
 .proceso-step__micro {
-  font-size: 0.8rem;
+  font-size: 1rem;
   color: var(--steel);
   line-height: 1.5;
 }
 
-/* Expandable body — grid-rows trick for smooth height animation */
 .proceso-step__body {
   display: grid;
   grid-template-rows: 0fr;
@@ -644,7 +638,6 @@
     justify-content: space-between;
     gap: 3rem;
   }
-
   .proceso-presencial-banner__zones {
     flex-direction: column;
     align-items: flex-end;
@@ -652,84 +645,190 @@
   }
 }
 
-/* ── Requisitos grid ── */
+/* ══════════════════════════════════════════════
+   REQUISITOS — grid (desktop ≥ 1200px)
+   ══════════════════════════════════════════════ */
+
+/* Grid: oculto por defecto, visible solo en desktop */
 .requisitos-grid {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--gap);
+  display: none;
 }
 
+/* Card hover-reveal */
 .requisito-item {
-  display: grid;
-  grid-template-columns: 3rem 1fr;
-  gap: 1.5rem;
-  align-items: start;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 220px;
   background: var(--sheath);
   border: 1px solid var(--ghost);
   padding: 2rem;
-  transition: border-color var(--t-mid);
+  cursor: default;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .requisito-item:hover {
-  border-color: rgba(255, 0, 128, 0.3);
+  border-color: rgba(255, 0, 128, 0.35);
+  box-shadow: 0 6px 28px rgba(0, 0, 0, 0.35);
 }
 
+/* Número — esquina superior izquierda */
 .requisito-item__num {
+  position: absolute;
+  top: 1.25rem;
+  left: 1.5rem;
   font-family: var(--font-mono);
-  font-size: 0.95rem;
+  font-size: 0.75rem;
   color: var(--edge);
   letter-spacing: 0.2em;
-  padding-top: 0.25rem;
+  opacity: 0.7;
 }
 
+/* Título — centrado, sube en hover */
 .requisito-item__title {
   font-family: var(--font-head);
-  font-size: 1.2rem;
+  font-size: clamp(1.3rem, 2vw, 1.6rem);
   font-weight: 900;
   color: var(--blade);
-  letter-spacing: -0.02em;
-  margin-bottom: 0.5rem;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+  text-align: center;
+  margin: 0;
+  transform: translateY(0);
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), color 0.3s ease;
 }
 
+.requisito-item:hover .requisito-item__title {
+  transform: translateY(-3.8rem);
+  color: var(--edge);
+}
+
+/* Descripción — aparece desde abajo en hover */
 .requisito-item__desc {
-  font-size: 1rem;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+  padding: 1.25rem 1.5rem 1.5rem;
+  font-size: 0.95rem;
   color: var(--steel);
-  line-height: 1.7;
+  line-height: 1.65;
+  opacity: 0;
+  transform: translateY(0.75rem);
+  transition:
+    opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-@media (min-width: 640px) {
-  .requisitos-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
+.requisito-item:hover .requisito-item__desc {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* ══════════════════════════════════════════════
-   RESPONSIVE — MOBILE / TABLET
+   REQUISITOS — acordeón (< 1200px, mobile-first)
    ══════════════════════════════════════════════ */
 
-@media (max-width: 899px) {
-  .process {
-    flex-direction: column;
-  }
+/* Acordeón: visible por defecto */
+.requisitos-accordion {
+  display: block;
+}
 
+.requisito-acc__item {
+  border-bottom: 1px solid var(--ghost);
+}
+
+.requisito-acc__item:first-child {
+  border-top: 1px solid var(--ghost);
+}
+
+.requisito-acc__trigger {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.25rem 0;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+}
+
+.requisito-acc__num {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--edge);
+  letter-spacing: 0.2em;
+  flex-shrink: 0;
+}
+
+.requisito-acc__title {
+  font-family: var(--font-head);
+  font-size: 1.1rem;
+  font-weight: 900;
+  color: var(--blade);
+  letter-spacing: -0.02em;
+  flex: 1;
+}
+
+.requisito-acc__icon {
+  font-size: 1.4rem;
+  color: var(--steel);
+  line-height: 1;
+  flex-shrink: 0;
+  transition: transform 0.3s ease, color 0.2s;
+}
+
+.requisito-acc__item--open .requisito-acc__icon {
+  transform: rotate(45deg);
+  color: var(--edge);
+}
+
+/* grid-rows trick — igual que timeline y FAQ */
+.requisito-acc__body {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.requisito-acc__item--open .requisito-acc__body {
+  grid-template-rows: 1fr;
+}
+
+.requisito-acc__body-inner {
+  overflow: hidden;
+  min-height: 0;
+}
+
+.requisito-acc__desc {
+  font-size: 1rem;
+  color: var(--steel);
+  line-height: 1.7;
+  padding-bottom: 1.25rem;
+}
+
+/* ══════════════════════════════════════════════
+   RESPONSIVE
+   ══════════════════════════════════════════════ */
+
+@media (max-width: 1200px) {
   .proceso-timeline {
     display: none;
   }
-
   .process-carousel {
     display: block;
   }
-
   .proceso-claims {
     display: none;
   }
-
   .proceso-claims__item {
     border-right: none;
     border-bottom: 1px solid var(--ghost);
     min-width: unset;
   }
-
   .proceso-claims__item:last-child {
     border-bottom: none;
   }
@@ -740,7 +839,6 @@
     flex-direction: row;
     align-items: stretch;
   }
-
   .process__step {
     flex: 1;
     grid-template-columns: 1fr;
@@ -749,11 +847,9 @@
     border-bottom: none;
     border-right: 1px solid var(--ghost);
   }
-
   .process__step--last {
     border-right: none;
   }
-
   .process__num-wrap {
     flex-direction: row;
     align-items: center;
@@ -761,8 +857,19 @@
     padding-bottom: 1rem;
     border-bottom: 1px solid var(--ghost);
   }
-
   .process__line {
+    display: none;
+  }
+}
+
+/* A partir de 1200px: grid visible, acordeón oculto */
+@media (min-width: 1200px) {
+  .requisitos-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--gap);
+  }
+  .requisitos-accordion {
     display: none;
   }
 }
