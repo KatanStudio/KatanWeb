@@ -4,6 +4,9 @@ import { Helmet } from 'react-helmet-async'
 import Header from '../components/Header.jsx'
 import Footer from '../components/Footer.jsx'
 
+
+const [openReq, setOpenReq] = useState(null)
+
 const STEPS = [
   {
     num: '01',
@@ -115,8 +118,8 @@ const CLAIMS = [
 export default function Proceso() {
   const [activeStep, setActiveStep] = useState(null)
   const [carouselStep, setCarouselStep] = useState(0)
+  const [openReq, setOpenReq] = useState(null)
   const prevStep = () => setCarouselStep(i => Math.max(0, i - 1))
-  const nextStep = () => setCarouselStep(i => Math.min(STEPS.length - 1, i + 1))
 
   return (
     <>
@@ -290,33 +293,60 @@ export default function Proceso() {
           </div>
         </section>
 
-        {/* ── Lo que necesitamos de ti ── */}
-        <section className="section" id="requisitos">
-          <div className="container">
-            <header className="section__header">
-              <p className="section-label">/Lo que necesitamos de ti</p>
-              <h2 className="section__h2" style={{ textTransform: 'none' }}>
-                El proyecto es<br /><span className="accent">un equipo.</span>
-              </h2>
-              <p className="section__sub">
-                Para entregar en los dias pactados necesitamos que el cliente también sea ágil.
-                Aquí están las únicas cosas que te pedimos.
-              </p>
-            </header>
+       {/* ── Lo que necesitamos de ti ── */}
+<section className="section" id="requisitos">
+  <div className="container">
+    <header className="section__header">
+      <p className="section-label">/Lo que necesitamos de ti</p>
+      <h2 className="section__h2" style={{ textTransform: 'none' }}>
+        El proyecto es<br /><span className="accent">un equipo.</span>
+      </h2>
+      <p className="section__sub">
+        Para entregar en los dias pactados necesitamos que el cliente también sea ágil.
+        Aquí están las únicas cosas que te pedimos.
+      </p>
+    </header>
 
-            <div className="requisitos-grid">
-              {REQUIREMENTS.map((req) => (
-                <div key={req.num} className="requisito-item">
-                  <span className="requisito-item__num">{req.num}</span>
-                  <div>
-                    <h4 className="requisito-item__title">{req.title}</h4>
-                    <p className="requisito-item__desc">{req.desc}</p>
-                  </div>
-                </div>
-              ))}
+    {/* Desktop: grid con hover */}
+    <div className="requisitos-grid">
+      {REQUIREMENTS.map((req) => (
+        <div key={req.num} className="requisito-item">
+          <span className="requisito-item__num">{req.num}</span>
+          <div>
+            <h4 className="requisito-item__title">{req.title}</h4>
+            <p className="requisito-item__desc">{req.desc}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    {/* Mobile: acordeón */}
+    <div className="requisitos-accordion">
+      {REQUIREMENTS.map((req, i) => (
+        <div
+          key={req.num}
+          className={`requisito-acc__item${openReq === i ? ' requisito-acc__item--open' : ''}`}
+        >
+          <button
+            className="requisito-acc__trigger"
+            onClick={() => setOpenReq(openReq === i ? null : i)}
+            aria-expanded={openReq === i}
+          >
+            <span className="requisito-acc__num">{req.num}</span>
+            <span className="requisito-acc__title">{req.title}</span>
+            <span className="requisito-acc__icon" aria-hidden="true">+</span>
+          </button>
+          <div className="requisito-acc__body">
+            <div className="requisito-acc__body-inner">
+              <p className="requisito-acc__desc">{req.desc}</p>
             </div>
           </div>
-        </section>
+        </div>
+      ))}
+    </div>
+
+  </div>
+</section>
 
         {/* ── CTA ── */}
         <section className="cta-section">
