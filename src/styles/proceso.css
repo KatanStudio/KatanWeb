@@ -140,6 +140,12 @@
     text-align: right;
   }
 }
+  @media (max-width: 1000px){
+    .proceso-philosophy{
+      margin: 0px 36px 60px;
+    }
+  }
+
 
 /* ══════════════════════════════════════════════
    TIMELINE
