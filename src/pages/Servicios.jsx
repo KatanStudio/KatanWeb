@@ -370,7 +370,7 @@ function ServiceSwitcher() {
     >
 
 
-      {/* ── Fondo con orbes animados (NUEVO) ── */}
+      {/* ── Fondo con orbes animados — solo desktop (en móvil los gestiona PageOrbs) ── */}
       <div className="svc-sw__bg" aria-hidden="true">
         <div className="svc-sw__orb svc-sw__orb--1" style={{ background: SVC_COLORS[active] || 'var(--edge)' }} />
         <div className="svc-sw__orb svc-sw__orb--2" style={{ background: SVC_COLORS[active] || 'var(--edge)' }} />
@@ -480,24 +480,14 @@ function ServiceSwitcher() {
 // ── TICKET 3: Extras Carousel (Marquee) ──────────────────────────────────────
 // PERF: memo() evita que todos los badges del marquee se re-rendericen
 // cuando uno solo cambia su estado open/close
-const ExtraBadge = memo(function ExtraBadge({ title, desc, price, onEnter, onLeave }) {
-  const [open, setOpen] = useState(false)
-
-  const handleEnter = () => { setOpen(true); onEnter() }
-  const handleLeave = () => { setOpen(false); onLeave() }
-  const handleClick = () => {
-    const next = !open
-    setOpen(next)
-    if (next) onEnter(); else onLeave()
-  }
-
+const ExtraBadge = memo(function ExtraBadge({ title, desc, price, open, onToggle, onMouseEnter, onMouseLeave }) {
   return (
     <div
       className={`extras-badge${open ? ' extras-badge--open' : ''}`}
-      onMouseEnter={handleEnter}
-      onMouseLeave={handleLeave}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
     >
-      <button className="extras-badge__face" onClick={handleClick} aria-expanded={open}>
+      <button className="extras-badge__face" onClick={onToggle} aria-expanded={open}>
         <span className="extras-badge__title">{title}</span>
         <span className="extras-badge__price">{price}</span>
       </button>
@@ -510,70 +500,88 @@ const ExtraBadge = memo(function ExtraBadge({ title, desc, price, onEnter, onLea
 })
 
 function ExtrasMarquee() {
-  const [paused, setPaused] = useState(false)
-  const [isMobile, setIsMobile] = useState(false)
+  const [paused, setPaused]           = useState(false)
+  const [isMobile, setIsMobile]       = useState(false)
   const [activeIndex, setActiveIndex] = useState(0)
-  const marqueeRef = useRef(null)
+  const [openIndex, setOpenIndex]     = useState(null)
+  const [animDir, setAnimDir]         = useState(1)
+  const [animKey, setAnimKey]         = useState(0)
 
   useEffect(() => {
-    const mq = window.matchMedia('(max-width: 767px)')
+    const mq = window.matchMedia('(max-width: 768px)')
     setIsMobile(mq.matches)
     const handler = (e) => setIsMobile(e.matches)
     mq.addEventListener('change', handler)
     return () => mq.removeEventListener('change', handler)
   }, [])
 
-  // Actualizar dot activo al hacer scroll
-  useEffect(() => {
-    if (!isMobile) return
-    const el = marqueeRef.current
-    if (!el) return
-    const handleScroll = () => {
-      // ancho del badge = scroll container - padding*2 - gap
-      const badgeWidth = el.clientWidth - 72 + 10 // approx badge + gap
-      const idx = Math.round(el.scrollLeft / badgeWidth)
-      setActiveIndex(Math.max(0, Math.min(idx, EXTRAS.length - 1)))
-    }
-    el.addEventListener('scroll', handleScroll, { passive: true })
-    return () => el.removeEventListener('scroll', handleScroll)
-  }, [isMobile])
+  const navigateMobile = useCallback((next) => {
+    if (next < 0 || next >= EXTRAS.length) return
+    setAnimDir(next > activeIndex ? 1 : -1)
+    setActiveIndex(next)
+    setOpenIndex(null)
+    setAnimKey(k => k + 1)
+  }, [activeIndex])
 
-  const handleEnter = useCallback(() => setPaused(true), [])
-  const handleLeave = useCallback(() => setPaused(false), [])
+  const handleToggle = useCallback((i) => {
+    setOpenIndex(prev => {
+      const closing = prev === i
+      if (closing && document.activeElement instanceof HTMLElement) document.activeElement.blur()
+      return closing ? null : i
+    })
+  }, [])
 
-  // En móvil solo mostramos el array original (sin duplicar)
-  const items = isMobile ? EXTRAS : [...EXTRAS, ...EXTRAS]
+  // MÓVIL: carrusel con flechas
+  if (isMobile) {
+    const extra = EXTRAS[activeIndex]
+    const animClass = animDir > 0 ? 'em-card--from-right' : 'em-card--from-left'
+    return (
+      <div className="em-wrap">
+        <div className="em-nav">
+          <button className="em-arrow" onClick={() => navigateMobile(activeIndex - 1)} disabled={activeIndex === 0} aria-label="Anterior">←</button>
+          <div className="em-dots" role="tablist">
+            {EXTRAS.map((_, i) => (
+              <button key={i} role="tab" aria-selected={i === activeIndex}
+                className={`em-dot${i === activeIndex ? ' em-dot--active' : ''}`}
+                onClick={() => navigateMobile(i)} aria-label={EXTRAS[i].title} />
+            ))}
+          </div>
+          <button className="em-arrow" onClick={() => navigateMobile(activeIndex + 1)} disabled={activeIndex === EXTRAS.length - 1} aria-label="Siguiente">→</button>
+        </div>
+        <div className="em-stage">
+          <div key={animKey} className={`em-card ${animClass}`}>
+            <ExtraBadge
+              title={extra.title} desc={extra.desc} price={extra.price}
+              open={openIndex === activeIndex}
+              onToggle={() => handleToggle(activeIndex)}
+            />
+          </div>
+        </div>
+        <div className="em-nav em-nav--bottom">
+          <button className="em-arrow" onClick={() => navigateMobile(activeIndex - 1)} disabled={activeIndex === 0} aria-label="Anterior">←</button>
+          <span className="em-counter">{activeIndex + 1} / {EXTRAS.length}</span>
+          <button className="em-arrow" onClick={() => navigateMobile(activeIndex + 1)} disabled={activeIndex === EXTRAS.length - 1} aria-label="Siguiente">→</button>
+        </div>
+      </div>
+    )
+  }
 
+  // DESKTOP: marquee animado original
+  const desktopItems = [...EXTRAS, ...EXTRAS]
   return (
     <div>
-      <div
-        ref={marqueeRef}
-        className="extras-marquee"
-      >
+      <div className="extras-marquee">
         <div className={`extras-marquee__track${paused ? ' extras-marquee__track--paused' : ''}`}>
-          {items.map((e, i) => (
-            <ExtraBadge
-              key={i}
-              title={e.title}
-              desc={e.desc}
-              price={e.price}
-              onEnter={handleEnter}
-              onLeave={handleLeave}
+          {desktopItems.map((e, i) => (
+            <ExtraBadge key={i} title={e.title} desc={e.desc} price={e.price}
+              open={openIndex === i}
+              onToggle={() => handleToggle(i)}
+              onMouseEnter={() => { setOpenIndex(i); setPaused(true) }}
+              onMouseLeave={() => { setOpenIndex(null); setPaused(false) }}
             />
           ))}
         </div>
       </div>
-      {/* Barra de progreso — solo visible en móvil via CSS */}
-      {isMobile && (
-        <div className="extras-progress" aria-hidden="true">
-          {EXTRAS.map((_, i) => (
-            <div
-              key={i}
-              className={`extras-progress__dot${i === activeIndex ? ' extras-progress__dot--active' : ''}`}
-            />
-          ))}
-        </div>
-      )}
     </div>
   )
 }
@@ -593,6 +601,17 @@ export default function Servicios() {
       </Helmet>
 
       <Header />
+
+      {/*
+        Orbes de ambiente para móvil — position: fixed para cubrir toda la página.
+        En desktop están desactivados via CSS (los gestiona .svc-sw__bg en su sección).
+        Usamos mix-blend-mode: screen + pointer-events: none para que no bloqueen
+        ninguna interacción ni oscurezcan el texto sobre fondos oscuros.
+      */}
+      <div className="page-orbs" aria-hidden="true">
+        <div className="page-orbs__orb page-orbs__orb--1" />
+        <div className="page-orbs__orb page-orbs__orb--2" />
+      </div>
 
       <main>
 
