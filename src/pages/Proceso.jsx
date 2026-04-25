@@ -141,26 +141,6 @@ export default function Proceso() {
               </p>
             </header>
 
-            {/* ── Filosofía de contacto ── */}
-            <div className="proceso-philosophy">
-              <div className="proceso-philosophy__text">
-                <p className="section-label" style={{ marginBottom: '1rem' }}>/Nuestra forma de trabajar</p>
-                <p>
-                  No somos de las agencias que te mandan un PDF con el proceso y luego desaparecen
-                  detrás de un gestor de clientes. Creemos en el contacto directo, en las reuniones con propósito
-                  y en que la primera vez que te enseñamos algo ya tiene que impresionarte.
-                </p>
-                <p style={{ marginTop: '1rem' }}>
-                  Si estás en <strong>Toledo, Madrid</strong> o alrededores, nos reunimos en persona.
-                  Si no, por videollamada. Siempre con algo concreto que enseñarte, nunca a mano vacía.
-                </p>
-              </div>
-              <div className="proceso-philosophy__badge">
-                <span className="proceso-badge-num">0</span>
-                <span className="proceso-badge-label">Intermediarios<br />directo a los creadores</span>
-              </div>
-            </div>
-
             {/* ── Timeline ── */}
             <div
               className={`proceso-timeline${activeStep !== null ? ' proceso-timeline--has-active' : ''}`}
@@ -247,6 +227,26 @@ export default function Proceso() {
           </div>
         </section>
 
+           {/* ── Filosofía de contacto ── */}
+            <div className="proceso-philosophy">
+              <div className="proceso-philosophy__text">
+                <p className="section-label" style={{ marginBottom: '1rem' }}>/Nuestra forma de trabajar</p>
+                <p>
+                  No somos de las agencias que te mandan un PDF con el proceso y luego desaparecen
+                  detrás de un gestor de clientes. Creemos en el contacto directo, en las reuniones con propósito
+                  y en que la primera vez que te enseñamos algo ya tiene que impresionarte.
+                </p>
+                <p style={{ marginTop: '1rem' }}>
+                  Si estás en <strong>Toledo, Madrid</strong> o alrededores, nos reunimos en persona.
+                  Si no, por videollamada. Siempre con algo concreto que enseñarte, nunca a mano vacía.
+                </p>
+              </div>
+              <div className="proceso-philosophy__badge">
+                <span className="proceso-badge-num">0</span>
+                <span className="proceso-badge-label">Intermediarios<br />directo a los creadores</span>
+              </div>
+            </div>
+            
         {/* ── Comunicación ── */}
         <section className="section section--dark" id="comunicacion">
           <div className="container">
