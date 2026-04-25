@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import { Helmet } from 'react-helmet-async'
 import '../styles/team-carousel.css'
 import Header from '../components/Header.jsx'
@@ -7,15 +7,6 @@ import Footer from '../components/Footer.jsx'
 const TEAM = [
   {
     num: '_dev.01',
-    tag: 'Negocio & UI/UX',
-    name: 'Adrián Lozano',
-    img: '/img/FotoAdrian.jpg',
-    href: 'https://www.linkedin.com/in/adrián-lozano',
-    desc: 'Graduado en ADE (UCLM) y desarrollador web (DAW). Como responsable de Experiencia e Interfaz de Usuario (UI/UX) y Negocio, traduzco tus objetivos comerciales a código de alto rendimiento. Mi cometido es eliminar cualquier obstáculo entre tu cliente y la venta mediante interfaces limpias y arquitectura lógica.',
-    imgSide: 'left',
-  },
-  {
-    num: '_dev.02',
     tag: 'Arquitectura & Lógica',
     name: 'Alejandro Quintana',
     img: '/img/FotoAlejandro.jpg',
@@ -23,12 +14,28 @@ const TEAM = [
     desc: 'Graduado en Ingeniería Informática (UCLM) y curtido en gestión de proyectos ágiles (Scrum). Especialista en la estructura profunda del código. En Katan, construyo arquitecturas escalables, bases de datos eficientes y lógica compleja. Escribo el software para que tu sistema soporte el crecimiento de tu negocio, sin errores y sin fisuras.',
     imgSide: 'right',
   },
+  {
+    num: '_dev.02',
+    tag: 'Negocio & UI/UX',
+    name: 'Adrián Lozano',
+    img: '/img/FotoAdrian.jpg',
+    href: 'https://www.linkedin.com/in/adrián-lozano',
+    desc: 'Graduado en ADE (UCLM) y desarrollador web (DAW). Como responsable de Experiencia e Interfaz de Usuario (UI/UX) y Negocio, traduzco tus objetivos comerciales a código de alto rendimiento. Mi cometido es eliminar cualquier obstáculo entre tu cliente y la venta mediante interfaces limpias y arquitectura lógica.',
+    imgSide: 'left',
+  }
 ]
 
 export default function Nosotros() {
   const [active, setActive] = useState(0)
   const [animKey, setAnimKey] = useState(0)
   const [animDir, setAnimDir] = useState(1)
+
+  // Mobile swipe state
+  const [mobileActive, setMobileActive] = useState(0)
+  const [mobileAnimKey, setMobileAnimKey] = useState(0)
+  const [mobileAnimDir, setMobileAnimDir] = useState(1)
+  const touchStartX = useRef(null)
+  const touchStartY = useRef(null)
 
   const navigate = (next) => {
     if (next < 0 || next >= TEAM.length) return
@@ -37,7 +44,32 @@ export default function Nosotros() {
     setAnimKey(k => k + 1)
   }
 
+  const mobileNavigate = (next) => {
+    if (next < 0 || next >= TEAM.length) return
+    setMobileAnimDir(next > mobileActive ? 1 : -1)
+    setMobileActive(next)
+    setMobileAnimKey(k => k + 1)
+  }
+
+  const handleTouchStart = (e) => {
+    touchStartX.current = e.touches[0].clientX
+    touchStartY.current = e.touches[0].clientY
+  }
+
+  const handleTouchEnd = (e) => {
+    if (touchStartX.current === null) return
+    const dx = e.changedTouches[0].clientX - touchStartX.current
+    const dy = e.changedTouches[0].clientY - touchStartY.current
+    // Only swipe if horizontal movement dominates
+    if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 44) {
+      mobileNavigate(dx < 0 ? mobileActive + 1 : mobileActive - 1)
+    }
+    touchStartX.current = null
+    touchStartY.current = null
+  }
+
   const member = TEAM[active]
+  const mobileMember = TEAM[mobileActive]
 
   return (
     <>
@@ -122,23 +154,82 @@ export default function Nosotros() {
                 >→</button>
               </div>
 
-              {/* Mobile fallback: cards apiladas */}
-              <div className="team-mobile">
-                {TEAM.map((m) => (
-                  <a key={m.num} href={m.href} target="_blank" rel="noreferrer" style={{ display: 'block' }}>
-                    <div className="service-card">
-                      <div className="service-card__top">
-                        <span className="service-card__num">{m.num}</span>
-                        <span className="service-card__tag">{m.tag}</span>
-                      </div>
-                      <div className="team-img-wrap">
-                        <img src={m.img} alt={m.name} className="team-img" width="120" height="120" />
-                      </div>
-                      <h3 className="service-card__title" style={{ margin: '1.5rem 0 0.5rem' }}>{m.name}</h3>
-                      <p className="service-card__desc">{m.desc}</p>
+              {/* Mobile carousel: swipeable */}
+              <div
+                className="team-mobile"
+                onTouchStart={handleTouchStart}
+                onTouchEnd={handleTouchEnd}
+              >
+                <div
+                  className="team-mobile__card"
+                  key={mobileAnimKey}
+                  data-dir={mobileAnimDir > 0 ? '1' : '-1'}
+                >
+                  {/* Foto con overlay */}
+                  <a
+                    href={mobileMember.href}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="team-mobile__img-wrap"
+                    aria-label={`LinkedIn de ${mobileMember.name}`}
+                  >
+                    <img
+                      src={mobileMember.img}
+                      alt={mobileMember.name}
+                      className="team-mobile__img"
+                    />
+                    <div className="team-mobile__img-overlay" />
+                    <div className="team-mobile__img-badge">
+                      <span className="team-mobile__num">{mobileMember.num}</span>
                     </div>
                   </a>
-                ))}
+
+                  {/* Contenido */}
+                  <div className="team-mobile__body">
+                    <p className="team-mobile__tag">{mobileMember.tag}</p>
+                    <h3 className="team-mobile__name">{mobileMember.name}</h3>
+                    <p className="team-mobile__desc">{mobileMember.desc}</p>
+                    <a
+                      href={mobileMember.href}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="team-mobile__link"
+                    >
+                      Ver LinkedIn →
+                    </a>
+                  </div>
+                </div>
+
+                {/* Controles móvil */}
+                <div className="team-mobile__controls">
+                  <button
+                    className="team-mobile__arrow"
+                    onClick={() => mobileNavigate(mobileActive - 1)}
+                    disabled={mobileActive === 0}
+                    aria-label="Anterior"
+                  >←</button>
+
+                  <div className="team-mobile__dots">
+                    {TEAM.map((_, i) => (
+                      <button
+                        key={i}
+                        className={`team-mobile__dot${i === mobileActive ? ' team-mobile__dot--active' : ''}`}
+                        onClick={() => mobileNavigate(i)}
+                        aria-label={TEAM[i].name}
+                      />
+                    ))}
+                  </div>
+
+                  <button
+                    className="team-mobile__arrow"
+                    onClick={() => mobileNavigate(mobileActive + 1)}
+                    disabled={mobileActive === TEAM.length - 1}
+                    aria-label="Siguiente"
+                  >→</button>
+                </div>
+
+                {/* Hint de swipe — solo primera vez */}
+                <p className="team-mobile__hint" aria-hidden="true">desliza para navegar</p>
               </div>
 
             </div>
