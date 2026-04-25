@@ -70,7 +70,9 @@ export default function Portfolio() {
       <Header />
 
       <main>
-        <section className="section" id="portfolio">
+        <section className="section section--orbs" id="portfolio">
+          <div className="glow-orb orb-page-1" aria-hidden="true" />
+          <div className="glow-orb orb-page-2" aria-hidden="true" />
           <div className="container">
             <header className="section__header" style={{ textAlign: 'center' }}>
               <p className="section-label" style={{ justifyContent: 'center' }}>

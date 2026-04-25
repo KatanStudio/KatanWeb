@@ -124,6 +124,9 @@ export default function Briefing() {
         <title>Briefing — Katan Studio</title>
       </Helmet>
 
+      <main style={{ position: 'relative', overflow: 'hidden' }}>
+      <div className="glow-orb orb-page-1" aria-hidden="true" />
+      <div className="glow-orb orb-page-2" aria-hidden="true" />
       <nav className="nav nav--scrolled">
         <div className="nav__inner">
           <Link to="/" className="nav__brand"><KatanLogo /><span className="nav__wordmark">katan</span></Link>
@@ -445,6 +448,7 @@ export default function Briefing() {
           </form>
         )}
       </div >
+      </main>
     </>
   )
 }

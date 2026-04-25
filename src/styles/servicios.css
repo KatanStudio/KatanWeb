@@ -639,7 +639,7 @@
   height: 2px;
   width: 0%;
   z-index: 10;
-  animation: svc-progress 6s linear forwards;
+  animation: svc-progress 9s linear forwards;
 }
 
 .svc-sw.is-paused .svc-sw__prog-bar {
@@ -899,8 +899,8 @@
 /* ── Extras Badge — base (desktop) ── */
 .extras-badge {
   flex-shrink: 0;
-  width: fit-content;
-  padding: 0 20px;
+  width: 200px;
+  padding: 0;
   box-sizing: border-box;
   background: var(--forge);
   border: 1px solid var(--edge);

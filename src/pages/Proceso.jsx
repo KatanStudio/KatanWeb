@@ -131,7 +131,9 @@ export default function Proceso() {
       <main>
 
         {/* ── Hero de sección ── */}
-        <section className="section" id="proceso">
+        <section className="section section--orbs" id="proceso">
+          <div className="glow-orb orb-page-1" aria-hidden="true" />
+          <div className="glow-orb orb-page-2" aria-hidden="true" />
           <div className="container">
             <header className="section__header">
               <p className="section-label">05 / Proceso</p>
@@ -250,7 +252,7 @@ export default function Proceso() {
 
 
         {/* ── Lo que necesitamos de ti ── */}
-        <section className="section" id="requisitos">
+        <section className="section section--gradient-bg" id="requisitos">
           <div className="container">
             <header className="section__header">
               <p className="section-label">/Lo que necesitamos de ti</p>
