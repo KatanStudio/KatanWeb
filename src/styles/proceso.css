@@ -714,7 +714,7 @@
    RESPONSIVE — MOBILE / TABLET
    ══════════════════════════════════════════════ */
 
-@media (max-width: 899px) {
+@media (max-width: 1200px) {
   .process {
     flex-direction: column;
   }
