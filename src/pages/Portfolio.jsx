@@ -81,13 +81,15 @@ export default function Portfolio() {
       <Header />
 
       <main>
-        <section className="section" id="portfolio">
+        <section className="section section--orbs" id="portfolio">
+          <div className="glow-orb orb-page-1" aria-hidden="true" />
+          <div className="glow-orb orb-page-2" aria-hidden="true" />
           <div className="container">
             <header className="section__header" style={{ textAlign: 'center' }}>
               <p className="section-label" style={{ justifyContent: 'center' }}>
                 <span style={{ flex: 0, marginRight: '1rem' }}>/Portfolio</span>
               </p>
-              <h2 className="section__h2" style={{ textTransform: 'none' }}>Nuestros clientes.</h2>
+              <h2 className="section__h2" style={{ textTransform: 'none' }}>Nuestros <span className="accent"> clientes.</span></h2>
               <p className="section__sub" style={{ margin: '1rem auto 0' }}>
                 Ayudamos a negocios a facturar gracias a nuestra arquitectura
                 limpia y rápida.

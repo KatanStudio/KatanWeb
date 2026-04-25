@@ -295,7 +295,7 @@
   width: 50vw;
   height: 50vw;
   background-color: var(--edge);
-  top: -20%;
+  top: 40%;
   right: -10%;
   animation-delay: -3s;
   animation-duration: 20s;
@@ -305,7 +305,7 @@
   width: 40vw;
   height: 40vw;
   background-color: var(--spark);
-  bottom: -10%;
+  top: -120%;
   left: -5%;
   animation-delay: -8s;
   animation-duration: 24s;

@@ -3,7 +3,8 @@
     "allow": [
       "Bash(git -C /c/Users/User/Desktop/Proyectos/Katan/KatanWeb log --oneline)",
       "Bash(npm install *)",
-      "Bash(npm run *)"
+      "Bash(npm run *)",
+      "Bash(npx vite *)"
     ]
   }
 }

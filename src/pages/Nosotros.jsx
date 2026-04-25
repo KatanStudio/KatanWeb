@@ -13,7 +13,9 @@ export default function Nosotros() {
       <Header />
 
       <main>
-        <section className="section" id="el-estudio">
+        <section className="section section--orbs" id="el-estudio">
+          <div className="glow-orb orb-page-1" aria-hidden="true" />
+          <div className="glow-orb orb-page-2" aria-hidden="true" />
           <div className="container">
             <header className="section__header">
               <p className="section-label">/El Estudio</p>
@@ -77,7 +79,7 @@ export default function Nosotros() {
           </div>
         </section>
 
-        <section className="section" id="diferenciador">
+        <section className="section section--gradient-bg" id="diferenciador">
           <div className="container">
             <header className="section__header">
               <p className="section-label">/Método</p>

@@ -159,3 +159,46 @@
   outline: 2px solid var(--edge);
   outline-offset: 3px;
 }
+
+/* ══════════════════════════════════════════════
+   PAGE ORBS — reutilizables en cualquier sección
+   ══════════════════════════════════════════════ */
+
+/* La sección necesita overflow:hidden para recortar los orbes */
+.section--orbs {
+  overflow: hidden;
+}
+
+.orb-page-1 {
+  width: 45vw;
+  height: 45vw;
+  background-color: var(--edge);
+  top: 25%;
+  right: -8%;
+  animation-delay: -4s;
+  animation-duration: 24s;
+}
+
+.orb-page-2 {
+  width: 38vw;
+  height: 38vw;
+  background-color: var(--spark);
+  top: -8%;
+  left: -5%;
+  animation-delay: -12s;
+  animation-duration: 30s;
+}
+
+/* ── Fondo degradado oscuro (igual que #modulos en Servicios) ── */
+.section--gradient-bg {
+  background: linear-gradient(to bottom, var(--ghost) 0%, var(--forge) 100%);
+}
+
+.section--gradient-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(255, 0, 128, 0.05) 0%, transparent 80%);
+  pointer-events: none;
+  z-index: 0;
+}
