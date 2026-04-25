@@ -407,6 +407,135 @@
   opacity: 0.8;
 }
 
+/* ── Process carousel (mobile) ── */
+.process-carousel {
+  display: none;
+}
+
+.process-card {
+  background: var(--sheath);
+  border: 1px solid var(--ghost);
+  padding: 1rem 1.5rem;
+  position: relative;
+  opacity: 1;
+  transition: border-color var(--t-mid), box-shadow var(--t-mid);
+}
+
+.process-card--carousel {
+  min-width: 0;
+}
+
+.process-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+
+.process-card__num {
+  font-family: var(--font-mono);
+  font-size: 1.25rem;
+  color: var(--edge);
+  font-weight: 700;
+  padding-right: 15px;
+}
+
+.process-card__time {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  color: var(--spark);
+  text-transform: uppercase;
+  background: rgba(0, 229, 255, 0.05);
+  padding: 0.25rem 0.5rem;
+  border: 1px solid rgba(0, 229, 255, 0.2);
+}
+
+.process-card__title {
+  font-family: var(--font-head);
+  font-size: 1.4rem;
+  font-weight: 900;
+  color: var(--blade);
+  margin-bottom: 1rem;
+}
+
+.process-card__desc {
+  font-size: 1.1rem;
+  color: var(--steel);
+  line-height: 1.7;
+}
+
+.process-card__detail {
+  font-size: 0.95rem;
+  color: rgba(138, 155, 180, 0.7);
+  line-height: 1.65;
+  margin-top: 0.75rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--ghost);
+  font-style: italic;
+}
+
+.process-card--highlight {
+  border-color: rgba(0, 229, 255, 0.35);
+  background: rgba(0, 229, 255, 0.03);
+}
+
+.process-carousel__dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1.25rem;
+}
+
+.process-carousel__dot {
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 1px solid var(--ghost);
+  color: var(--steel);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  cursor: pointer;
+  border-radius: 2px;
+  transition: border-color 0.2s, color 0.2s, background 0.2s;
+}
+
+.process-carousel__dot--active {
+  background: var(--spark);
+  border-color: var(--spark);
+  color: #000;
+}
+
+.process-carousel__arrow {
+  flex-shrink: 0;
+  width: 2.5rem;
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--sheath);
+  border: 1px solid var(--ghost);
+  color: var(--blade);
+  font-size: 1.6rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+  border-radius: 2px;
+}
+
+.process-carousel__arrow:disabled {
+  opacity: 0.25;
+  cursor: default;
+}
+
+.process-carousel__arrow:not(:disabled):hover {
+  border-color: var(--spark);
+  color: var(--spark);
+}
+
 /* ── Comunicación grid ── */
 .comm-grid {
   display: grid;
@@ -579,55 +708,20 @@
    ══════════════════════════════════════════════ */
 
 @media (max-width: 899px) {
-  /* Desktop process step list */
   .process {
     flex-direction: column;
   }
 
-  /* ── Timeline: vertical accordion ── */
   .proceso-timeline {
-    flex-direction: column;
-    padding-top: 0;
-    padding-left: 1.5rem;
-    gap: 2px;
+    display: none;
   }
 
-  /* Override: vertical connecting line */
-  .proceso-timeline::before {
-    top: 0.5rem;
-    bottom: 0.5rem;
-    left: 1.5rem;
-    right: auto;
-    width: 1px;
-    height: auto;
-    background: linear-gradient(180deg, transparent, var(--ghost) 5%, var(--ghost) 95%, transparent);
+  .process-carousel {
+    display: block;
   }
 
-  /* Dot repositioned to sit on vertical line (left: 0 of card = line position) */
-  .proceso-step__dot {
-    top: 1.6rem;
-    left: 0;
-  }
-
-  .proceso-step {
-    opacity: 1 !important; /* no dimming on mobile */
-    cursor: pointer;
-  }
-
-  /* Active step on mobile: colored left border instead of border-color */
-  .proceso-step--active {
-    border-left-color: rgba(255, 0, 128, 0.6);
-    box-shadow: none;
-  }
-
-  .proceso-step--highlight.proceso-step--active {
-    border-left-color: rgba(0, 229, 255, 0.6);
-    box-shadow: none;
-  }
-
-  /* Claims: stack vertically */
   .proceso-claims {
-    flex-direction: column;
+    display: none;
   }
 
   .proceso-claims__item {
