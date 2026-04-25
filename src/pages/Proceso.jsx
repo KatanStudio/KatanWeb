@@ -34,7 +34,7 @@ const STEPS = [
     num: '04',
     time: 'Día 3 en adelante',
     title: 'Desarrollo',
-    micro: 'Código propio, avances privados, 2 revisiones.',
+    micro: 'Código propio, avances privados, mínimo 2 revisiones.',
     desc: 'Construimos tu sistema en código propio. Tienes posibilidad de ver un avance privado y dos rondas de revisión estructuradas incluidas.',
     detail: 'Las revisiones van por rondas, no por mensajes sueltos. Esto nos permite trabajar con foco y entregarte cambios de golpe, no a cuentagotas.',
     highlight: true,
@@ -114,6 +114,9 @@ const CLAIMS = [
 
 export default function Proceso() {
   const [activeStep, setActiveStep] = useState(null)
+  const [carouselStep, setCarouselStep] = useState(0)
+  const prevStep = () => setCarouselStep(i => Math.max(0, i - 1))
+  const nextStep = () => setCarouselStep(i => Math.min(STEPS.length - 1, i + 1))
 
   return (
     <>
@@ -192,6 +195,44 @@ export default function Proceso() {
                   </div>
                 </article>
               ))}
+            </div>
+
+            {/* ── Carousel (mobile only) ── */}
+            <div className="process-carousel" style={{ marginTop: '4rem' }}>
+              <div className={`process-card process-card--carousel is-visible${STEPS[carouselStep].highlight ? ' process-card--highlight' : ''}`}>
+                <div className="process-card__header">
+                  <span className="process-card__num">{STEPS[carouselStep].num}</span>
+                  <span className="process-card__time">{STEPS[carouselStep].time}</span>
+                </div>
+                <h4 className="process-card__title">{STEPS[carouselStep].title}</h4>
+                <p className="process-card__desc">{STEPS[carouselStep].desc}</p>
+                <p className="process-card__detail">{STEPS[carouselStep].detail}</p>
+              </div>
+
+              <div className="process-carousel__dots">
+                <button
+                  className="process-carousel__arrow process-carousel__arrow--prev"
+                  onClick={prevStep}
+                  disabled={carouselStep === 0}
+                  aria-label="Paso anterior"
+                >‹</button>
+
+                {STEPS.map((_, i) => (
+                  <button
+                    key={i}
+                    className={`process-carousel__dot${i === carouselStep ? ' process-carousel__dot--active' : ''}`}
+                    onClick={() => setCarouselStep(i)}
+                    aria-label={`Ir al paso ${i + 1}`}
+                  >{i + 1}</button>
+                ))}
+
+                <button
+                  className="process-carousel__arrow process-carousel__arrow--next"
+                  onClick={nextStep}
+                  disabled={carouselStep === STEPS.length - 1}
+                  aria-label="Paso siguiente"
+                >›</button>
+              </div>
             </div>
 
             {/* ── Claims ── */}
