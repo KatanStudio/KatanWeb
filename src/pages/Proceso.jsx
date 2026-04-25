@@ -34,7 +34,7 @@ const STEPS = [
     num: '04',
     time: 'Día 3 en adelante',
     title: 'Desarrollo',
-    micro: 'Código propio, avances privados, 2 revisiones.',
+    micro: 'Código propio, avances privados, mínimo 2 revisiones.',
     desc: 'Construimos tu sistema en código propio. Tienes posibilidad de ver un avance privado y dos rondas de revisión estructuradas incluidas.',
     detail: 'Las revisiones van por rondas, no por mensajes sueltos. Esto nos permite trabajar con foco y entregarte cambios de golpe, no a cuentagotas.',
     highlight: true,

@@ -312,7 +312,7 @@
 
 .proceso-step__title {
   font-family: var(--font-head);
-  font-size: clamp(0.88rem, 1.4vw, 1.1rem);
+  font-size: clamp(1.4rem, 1.4vw, 1.1rem);
   font-weight: 900;
   color: var(--blade);
   letter-spacing: -0.03em;
