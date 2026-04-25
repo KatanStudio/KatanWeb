@@ -1,8 +1,44 @@
+import { useState } from 'react'
 import { Helmet } from 'react-helmet-async'
+import '../styles/team-carousel.css'
 import Header from '../components/Header.jsx'
 import Footer from '../components/Footer.jsx'
 
+const TEAM = [
+  {
+    num: '_dev.01',
+    tag: 'Negocio & UI/UX',
+    name: 'Adrián Lozano',
+    img: '/img/FotoAdrian.jpg',
+    href: 'https://www.linkedin.com/in/adrián-lozano',
+    desc: 'Graduado en ADE (UCLM) y desarrollador web (DAW). Como responsable de Experiencia e Interfaz de Usuario (UI/UX) y Negocio, traduzco tus objetivos comerciales a código de alto rendimiento. Mi cometido es eliminar cualquier obstáculo entre tu cliente y la venta mediante interfaces limpias y arquitectura lógica.',
+    imgSide: 'left',
+  },
+  {
+    num: '_dev.02',
+    tag: 'Arquitectura & Lógica',
+    name: 'Alejandro Quintana',
+    img: '/img/FotoAlejandro.jpg',
+    href: 'https://www.linkedin.com/in/alejandro-quintana-rodriguez/',
+    desc: 'Graduado en Ingeniería Informática (UCLM) y curtido en gestión de proyectos ágiles (Scrum). Especialista en la estructura profunda del código. En Katan, construyo arquitecturas escalables, bases de datos eficientes y lógica compleja. Escribo el software para que tu sistema soporte el crecimiento de tu negocio, sin errores y sin fisuras.',
+    imgSide: 'right',
+  },
+]
+
 export default function Nosotros() {
+  const [active, setActive] = useState(0)
+  const [animKey, setAnimKey] = useState(0)
+  const [animDir, setAnimDir] = useState(1)
+
+  const navigate = (next) => {
+    if (next < 0 || next >= TEAM.length) return
+    setAnimDir(next > active ? 1 : -1)
+    setActive(next)
+    setAnimKey(k => k + 1)
+  }
+
+  const member = TEAM[active]
+
   return (
     <>
       <Helmet>
@@ -27,42 +63,84 @@ export default function Nosotros() {
               </p>
             </header>
 
-            <div className="services-grid nosotros-team-grid" style={{ marginBottom: '4rem' }}>
-              <a href="https://www.linkedin.com/in/adrián-lozano" target="_blank" rel="noreferrer" style={{ display: 'block', height: '100%' }}>
-                <div className="service-card" style={{ height: '100%' }}>
-                  <div className="service-card__top">
-                    <span className="service-card__num">_dev.01</span>
-                    <span className="service-card__tag">Negocio &amp; UI/UX</span>
+            {/* ── Team carousel: desktop only ── */}
+            <div className="team-carousel" style={{ marginBottom: '4rem' }}>
+
+              {/* Slide animado */}
+              <div className="team-carousel__stage" key={animKey}
+                data-dir={animDir > 0 ? 'right' : 'left'}
+                data-img={member.imgSide}
+              >
+                {/* Foto grande */}
+                <a href={member.href} target="_blank" rel="noreferrer"
+                  className={`team-carousel__img-wrap team-carousel__img-wrap--${member.imgSide}`}
+                >
+                  <div className="team-carousel__img-frame">
+                    <img src={member.img} alt={member.name} className="team-carousel__img" />
+                    <div className="team-carousel__img-glow" />
                   </div>
-                  <div className="team-img-wrap">
-                    <img src="/img/FotoAdrian.jpg" alt="Adrián Lozano" className="team-img" width="120" height="120" />
+                </a>
+
+                {/* Texto */}
+                <div className={`team-carousel__text team-carousel__text--${member.imgSide}`}>
+                  <div className="team-carousel__top">
+                    <span className="service-card__num">{member.num}</span>
+                    <span className="service-card__tag">{member.tag}</span>
                   </div>
-                  <h3 className="service-card__title" style={{ margin: '1.5rem 0 0.5rem' }}>Adrián Lozano</h3>
-                  <p className="service-card__desc">
-                    Graduado en ADE (UCLM) y desarrollador web (DAW). Como responsable de Experiencia e Interfaz de Usuario (UI/UX) y Negocio, traduzco tus 
-                    objetivos comerciales a código de alto rendimiento. Mi cometido es eliminar cualquier 
-                    obstáculo entre tu cliente y la venta mediante interfaces limpias y arquitectura lógica.
-                  </p>
+                  <h3 className="team-carousel__name">{member.name}</h3>
+                  <p className="team-carousel__desc">{member.desc}</p>
+                  <a href={member.href} target="_blank" rel="noreferrer" className="team-carousel__link">
+                    Ver LinkedIn →
+                  </a>
                 </div>
-              </a>
-              <a href="https://www.linkedin.com/in/alejandro-quintana-rodriguez/" target="_blank" rel="noreferrer" style={{ display: 'block', height: '100%' }}>
-                <div className="service-card" style={{ height: '100%' }}>
-                  <div className="service-card__top">
-                    <span className="service-card__num">_dev.02</span>
-                    <span className="service-card__tag">Arquitectura &amp; Lógica</span>
-                  </div>
-                  <div className="team-img-wrap">
-                    <img src="/img/FotoAlejandro.jpg" alt="Alejandro Quintana" className="team-img" width="120" height="120" />
-                  </div>
-                  <h3 className="service-card__title" style={{ margin: '1.5rem 0 0.5rem' }}>Alejandro Quintana</h3>
-                  <p className="service-card__desc">
-                    Graduado en Ingeniería Informática (UCLM) y curtido en gestión de proyectos ágiles (Scrum). 
-                    Especialista en la estructura profunda del código. En Katan, construyo arquitecturas escalables, 
-                    bases de datos eficientes y lógica compleja. Escribo el software para que tu sistema soporte el crecimiento de 
-                    tu negocio, sin errores y sin fisuras.
-                  </p>
+              </div>
+
+              {/* Controles */}
+              <div className="team-carousel__controls">
+                <button
+                  className="team-carousel__arrow"
+                  onClick={() => navigate(active - 1)}
+                  disabled={active === 0}
+                  aria-label="Anterior"
+                >←</button>
+
+                <div className="team-carousel__dots">
+                  {TEAM.map((_, i) => (
+                    <button key={i}
+                      className={`team-carousel__dot${i === active ? ' team-carousel__dot--active' : ''}`}
+                      onClick={() => navigate(i)}
+                      aria-label={TEAM[i].name}
+                    />
+                  ))}
                 </div>
-              </a>
+
+                <button
+                  className="team-carousel__arrow"
+                  onClick={() => navigate(active + 1)}
+                  disabled={active === TEAM.length - 1}
+                  aria-label="Siguiente"
+                >→</button>
+              </div>
+
+              {/* Mobile fallback: cards apiladas */}
+              <div className="team-mobile">
+                {TEAM.map((m) => (
+                  <a key={m.num} href={m.href} target="_blank" rel="noreferrer" style={{ display: 'block' }}>
+                    <div className="service-card">
+                      <div className="service-card__top">
+                        <span className="service-card__num">{m.num}</span>
+                        <span className="service-card__tag">{m.tag}</span>
+                      </div>
+                      <div className="team-img-wrap">
+                        <img src={m.img} alt={m.name} className="team-img" width="120" height="120" />
+                      </div>
+                      <h3 className="service-card__title" style={{ margin: '1.5rem 0 0.5rem' }}>{m.name}</h3>
+                      <p className="service-card__desc">{m.desc}</p>
+                    </div>
+                  </a>
+                ))}
+              </div>
+
             </div>
 
             <div className="module module--recurring" style={{ maxWidth: '100%' }}>
