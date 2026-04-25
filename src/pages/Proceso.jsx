@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { Helmet } from 'react-helmet-async'
 import Header from '../components/Header.jsx'
@@ -8,49 +8,50 @@ const STEPS = [
   {
     num: '01',
     time: 'Día 0',
-    title: 'Llamada inicial',
+    title: 'Llamada Inicial',
+    micro: '15 min sin compromiso. Resolvemos tus dudas.',
     desc: 'Una llamada corta de 15–20 minutos. Sin presentaciones de empresa ni PowerPoints. Te explicamos cómo funciona el briefing (formulario), qué información necesitamos y resolvemos tus dudas antes de que lo rellenes.',
     detail: 'El objetivo no es venderte nada, es asegurarnos de que tienes todo claro para que el briefing sea útil de verdad. Tú rellenas el formulario cuando quieras, sin presión.',
-    icon: '📞',
   },
   {
     num: '02',
     time: 'Día 1',
-    title: 'Formulario + propuesta',
-    desc: 'Con el formulario en mano, analizamos tu proyecto y en menos de 48 horas te mandamos arquitectura, alcance,  precio cerrado y las fechas orientadas. Lo que firmas el Día 1 es lo que pagas al terminar.',
+    title: 'Formulario + Propuesta',
+    micro: 'Arquitectura, precio cerrado y plazos en 48 h.',
+    desc: 'Con el formulario en mano, analizamos tu proyecto y en menos de 48 horas te mandamos arquitectura, alcance, precio cerrado y las fechas orientadas. Lo que firmas el Día 1 es lo que pagas al terminar.',
     detail: 'Precio fijo. Sin letra pequeña. Sin "esto es un extra". Si algo cambia de alcance durante el proyecto, lo hablamos antes de ejecutarlo, nunca después.',
-    icon: '📋',
+    highlight: true,
   },
   {
     num: '03',
     time: 'Días 2–4',
-    title: 'Reunión de arranque',
+    title: 'Reunión De Arranque',
+    micro: 'Presencial o por vídeo. Llegamos con demos.',
     desc: 'Aquí es donde nos juntamos en persona si estás en Toledo, Madrid o alrededores. Si no es posible presencialmente, lo hacemos por videollamada.',
     detail: 'Llegamos con demostraciones para que veas la dirección visual desde el primer momento. Hablamos del diseño, estructura y cualquier detalle que necesite ajuste antes de meternos de lleno en el código.',
-    icon: '🤝',
-    highlight: true,
   },
   {
     num: '04',
     time: 'Día 3 en adelante',
     title: 'Desarrollo',
+    micro: 'Código propio, avances privados, 2 revisiones.',
     desc: 'Construimos tu sistema en código propio. Tienes posibilidad de ver un avance privado y dos rondas de revisión estructuradas incluidas.',
     detail: 'Las revisiones van por rondas, no por mensajes sueltos. Esto nos permite trabajar con foco y entregarte cambios de golpe, no a cuentagotas.',
-    icon: '⚙️',
+    highlight: true,
   },
   {
     num: '05',
     time: 'Entrega definitiva',
-    title: 'Corte final',
+    title: 'Corte Final',
+    micro: 'Web publicada, código entregado, cero flecos.',
     desc: 'La web publicada, el dominio configurado, Core Web Vitals en verde y el código entregado al 100%. Cerramos con una última reunión/llamada de onboarding para que controles todo.',
     detail: 'Te entregamos acceso completo al hosting y una guía de uso si tienes panel de administración. Nada queda en el aire y, si tuvieras problemas, nos encargaríamos con el servicio de mantenimiento.',
-    icon: '🚀',
   },
 ]
 
 const COMM_ITEMS = [
   {
-    label: 'pRIMERA Toma de contacto',
+    label: 'Primera toma de contacto',
     channel: 'Llamada de 15–20 min',
     desc: 'Explicamos el proceso y el formulario. Sin compromiso ni presentaciones largas.',
     color: 'var(--spark)',
@@ -104,47 +105,15 @@ const REQUIREMENTS = [
   },
 ]
 
-
-/**
- * Hook: observa un contenedor y añade .is-visible a sus hijos
- * con el selector indicado cuando entran en el viewport.
- */
-function useStaggerReveal(containerRef, childSelector = '.process-card') {
-  useEffect(() => {
-    const container = containerRef.current
-    if (!container) return
-
-    const cards = container.querySelectorAll(childSelector)
-    if (!cards.length) return
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('is-visible')
-            // Una vez visible, dejamos de observar esa card
-            observer.unobserve(entry.target)
-          }
-        })
-      },
-      {
-        threshold: 0.12,   // card visible al 12% → dispara
-        rootMargin: '0px 0px -40px 0px', // pequeño offset inferior
-      }
-    )
-
-    cards.forEach((card) => observer.observe(card))
-
-    return () => observer.disconnect()
-  }, [containerRef, childSelector])
-}
+const CLAIMS = [
+  'Precio cerrado desde el día 1',
+  'Sin extras sorpresa',
+  '2 rondas de revisión incluidas',
+  'Código propio y entrega completa',
+]
 
 export default function Proceso() {
-  const gridRef = useRef(null)
-  useStaggerReveal(gridRef, '.process-card')
-  const [activeStep, setActiveStep] = useState(0)
-  const prevStep = () => setActiveStep(i => Math.max(0, i - 1))
-  const nextStep = () => setActiveStep(i => Math.min(STEPS.length - 1, i + 1))
+  const [activeStep, setActiveStep] = useState(null)
 
   return (
     <>
@@ -189,63 +158,50 @@ export default function Proceso() {
               </div>
             </div>
 
-            {/* ── Steps (desktop grid) ── */}
-            <div className="process-grid process-grid--desktop" style={{ marginTop: '4rem' }} ref={gridRef}>
-              {STEPS.map((step) => (
-                <div key={step.num} className={`process-card${step.highlight ? ' process-card--highlight' : ''}`}>
-                  <div className="process-card__header">
-                    <span className="process-card__num">{step.num}</span>
-                    <span className="process-card__time">{step.time}</span>
+            {/* ── Timeline ── */}
+            <div
+              className={`proceso-timeline${activeStep !== null ? ' proceso-timeline--has-active' : ''}`}
+              style={{ marginTop: '4rem' }}
+              onMouseLeave={() => setActiveStep(null)}
+            >
+              {STEPS.map((step, i) => (
+                <article
+                  key={step.num}
+                  className={`proceso-step${i === activeStep ? ' proceso-step--active' : ''}${step.highlight ? ' proceso-step--highlight' : ''}`}
+                  onMouseEnter={() => setActiveStep(i)}
+                  onClick={() => setActiveStep(activeStep === i ? null : i)}
+                  onFocus={() => setActiveStep(i)}
+                  tabIndex={0}
+                  aria-expanded={i === activeStep}
+                  aria-label={`Paso ${step.num}: ${step.title}`}
+                >
+                  <span className="proceso-step__dot" aria-hidden="true" />
+                  <div className="proceso-step__inner">
+                    <div className="proceso-step__header">
+                      <span className="proceso-step__num">{step.num}</span>
+                      <span className="proceso-step__time">{step.time}</span>
+                    </div>
+                    <h3 className="proceso-step__title">{step.title}</h3>
+                    <p className="proceso-step__micro">{step.micro}</p>
+                    <div className="proceso-step__body">
+                      <div className="proceso-step__body-inner">
+                        <p className="proceso-step__desc">{step.desc}</p>
+                        <p className="proceso-step__detail">{step.detail}</p>
+                      </div>
+                    </div>
                   </div>
-                  <h4 className="process-card__title">
-                    <span className="process-card__icon">{step.icon}</span>
-                    {step.title}
-                  </h4>
-                  <p className="process-card__desc">{step.desc}</p>
-                  <p className="process-card__detail">{step.detail}</p>
-                </div>
+                </article>
               ))}
             </div>
 
-            {/* ── Steps (mobile carousel) ── */}
-            <div className="process-carousel" style={{ marginTop: '4rem' }}>
-              <div className={`process-card process-card--carousel is-visible${STEPS[activeStep].highlight ? ' process-card--highlight' : ''}`}>
-                <div className="process-card__header">
-                  <span className="process-card__num">{STEPS[activeStep].num}</span>
-                  <span className="process-card__time">{STEPS[activeStep].time}</span>
+            {/* ── Claims ── */}
+            <div className="proceso-claims">
+              {CLAIMS.map((claim, i) => (
+                <div key={i} className="proceso-claims__item">
+                  <span className="proceso-claims__mark" aria-hidden="true" />
+                  <span>{claim}</span>
                 </div>
-                <h4 className="process-card__title">
-                  <span className="process-card__icon">{STEPS[activeStep].icon}</span>
-                  {STEPS[activeStep].title}
-                </h4>
-                <p className="process-card__desc">{STEPS[activeStep].desc}</p>
-                <p className="process-card__detail">{STEPS[activeStep].detail}</p>
-              </div>
-
-              <div className="process-carousel__dots">
-                <button
-                  className="process-carousel__arrow process-carousel__arrow--prev"
-                  onClick={prevStep}
-                  disabled={activeStep === 0}
-                  aria-label="Paso anterior"
-                >‹</button>
-
-                {STEPS.map((_, i) => (
-                  <button
-                    key={i}
-                    className={`process-carousel__dot${i === activeStep ? ' process-carousel__dot--active' : ''}`}
-                    onClick={() => setActiveStep(i)}
-                    aria-label={`Ir al paso ${i + 1}`}
-                  >{i + 1}</button>
-                ))}
-
-                <button
-                  className="process-carousel__arrow process-carousel__arrow--next"
-                  onClick={nextStep}
-                  disabled={activeStep === STEPS.length - 1}
-                  aria-label="Paso siguiente"
-                >›</button>
-              </div>
+              ))}
             </div>
           </div>
         </section>
@@ -319,8 +275,6 @@ export default function Proceso() {
             </div>
           </div>
         </section>
-
-       
 
         {/* ── CTA ── */}
         <section className="cta-section">
