@@ -321,7 +321,7 @@
 }
 
 .proceso-step__micro {
-  font-size: 0.8rem;
+  font-size: 1rem;
   color: var(--steel);
   line-height: 1.5;
 }
