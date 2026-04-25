@@ -136,7 +136,7 @@ export default function Briefing() {
         {step === 0 && (
           <div className="intro-screen" style={{ textAlign: 'center', padding: '4rem 0' }}>
             <p className="kicker">// kickstart</p>
-            <h1 className="legal-h1" style={{ textTransform: 'none' }}>Vamos a dar forma a tu idea.</h1>
+            <h1 className="legal-h1" style={{ textTransform: 'none' }}>Vamos a dar forma a <span className="accent"> tu idea.</span></h1>
             <p className="section__sub" style={{ marginBottom: '3rem' }}>Responde a unas preguntas clave para recibir tu presupuesto exacto.</p>
             <button type="button" onClick={nextStep} className="btn btn--primary btn--large">Empezar briefing (2 min)</button>
           </div>

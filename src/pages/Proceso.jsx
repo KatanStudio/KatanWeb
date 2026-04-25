@@ -96,7 +96,7 @@ const REQUIREMENTS = [
   {
     num: '03',
     title: 'Gestión del dominio',
-    desc: 'Si ya tienes tu dominio web comprado, solo necesitaremos un acceso temporal para enlazarlo. Si aún no tienes uno, despreocúpate: nosotros nos encargamos de buscarlo, registrarlo y configurarlo todo.',
+    desc: 'Si ya tienes tu dominio web comprado, solo necesitaremos un acceso temporal para enlazarlo. De todas formas, si aún no tienes uno, despreocúpate: nosotros nos encargamos de buscarlo, registrarlo y configurarlo todo.',
   },
   {
     num: '04',
@@ -107,9 +107,9 @@ const REQUIREMENTS = [
 
 const CLAIMS = [
   'Precio cerrado desde el día 1',
-  'Sin extras sorpresa',
-  '2 rondas de revisión incluidas',
-  'Código propio y entrega completa',
+  'Canal directo con nosotros',
+  'Rondas de revisión estructuradas',
+  'Te acompañamos en el lanzamiento Web',
 ]
 
 export default function Proceso() {
@@ -135,7 +135,7 @@ export default function Proceso() {
           <div className="container">
             <header className="section__header">
               <p className="section-label">05 / Proceso</p>
-              <h2 className="section__h2" style={{ textTransform: 'none' }}>Del brief al<br />corte final</h2>
+              <h2 className="section__h2" style={{ textTransform: 'none' }}>Del formulario al<br /><span className="accent">lanzamiento.</span></h2>
               <p className="section__sub">
                 Sin burocracia, sin reuniones vacías. Cada contacto tiene un propósito claro
                 y lo hacemos en persona siempre que podemos.
@@ -248,47 +248,6 @@ export default function Proceso() {
           </div>
         </section>
 
-        {/* ── Comunicación ── */}
-        <section className="section section--dark" id="comunicacion">
-          <div className="container">
-            <header className="section__header">
-              <p className="section-label">/Cómo nos comunicamos</p>
-              <h2 className="section__h2" style={{ textTransform: 'none' }}>
-                Siempre sabes<br /><span className="accent">con quién hablas.</span>
-              </h2>
-              <p className="section__sub">
-                Sin Account Managers. Sin tickets de soporte. Hablas directamente con
-                los dos ingenieros que construyen tu proyecto.
-              </p>
-            </header>
-
-            <div className="comm-grid">
-              {COMM_ITEMS.map((item, i) => (
-                <div key={i} className="comm-item" style={{ '--comm-color': item.color }}>
-                  <span className="comm-item__label">{item.label}</span>
-                  <span className="comm-item__channel">{item.channel}</span>
-                  <p className="comm-item__desc">{item.desc}</p>
-                </div>
-              ))}
-            </div>
-
-            <div className="proceso-presencial-banner">
-              <div className="proceso-presencial-banner__content">
-                <p className="proceso-presencial-banner__tag">// Reuniones presenciales</p>
-                <p className="proceso-presencial-banner__text">
-                  Si tu empresa está en <strong>Toledo, Madrid</strong> o cualquier
-                  zona cercana, nos reunimos en persona. Creemos que hay decisiones que se toman
-                  mejor mirándose a los ojos y con un café delante.
-                </p>
-              </div>
-              <div className="proceso-presencial-banner__zones">
-                {['Toledo', 'Madrid', 'Ciudad Real', 'Talavera', 'y más'].map(city => (
-                  <span key={city} className="proceso-city-tag">{city}</span>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
 
         {/* ── Lo que necesitamos de ti ── */}
         <section className="section" id="requisitos">

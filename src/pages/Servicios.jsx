@@ -607,7 +607,7 @@ export default function Servicios() {
             <header className="section__header" style={{ marginBottom: '2.5rem' }}>
               <p className="section-label">/Servicios</p>
               <h1 className="section__h2" style={{ marginBottom: '0.75rem' }}>
-                Lo que construimos.
+                Lo que <span className="accent"> construimos.</span>
               </h1>
               <p className="section__sub">
                 Cada proyecto, precio cerrado. Sin sorpresas.
