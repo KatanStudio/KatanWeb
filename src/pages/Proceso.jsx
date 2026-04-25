@@ -224,10 +224,7 @@ export default function Proceso() {
                 </div>
               ))}
             </div>
-          </div>
-        </section>
-
-           {/* ── Filosofía de contacto ── */}
+             {/* ── Filosofía de contacto ── */}
             <div className="proceso-philosophy">
               <div className="proceso-philosophy__text">
                 <p className="section-label" style={{ marginBottom: '1rem' }}>/Nuestra forma de trabajar</p>
@@ -246,6 +243,10 @@ export default function Proceso() {
                 <span className="proceso-badge-label">Intermediarios<br />directo a los creadores</span>
               </div>
             </div>
+          </div>
+        </section>
+
+          
             
         {/* ── Comunicación ── */}
         <section className="section section--dark" id="comunicacion">

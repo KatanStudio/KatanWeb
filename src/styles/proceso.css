@@ -85,7 +85,8 @@
   padding: 2.5rem;
   background: var(--sheath);
   border: 1px solid var(--ghost);
-  margin: 0px 288px 100px 288px;
+  border-left: 3px solid var(--edge);
+  margin-top: 50px;
   border-left: 3px solid var(--edge);
 }
 
@@ -140,12 +141,6 @@
     text-align: right;
   }
 }
-  @media (max-width: 1000px){
-    .proceso-philosophy{
-      margin: 0px 36px 60px;
-    }
-  }
-
 
 /* ══════════════════════════════════════════════
    TIMELINE
