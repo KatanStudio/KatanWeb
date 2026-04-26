@@ -5,8 +5,10 @@
 .contacto-hero {
   position: relative;
   padding: 9rem 0 6rem;
-  /* overflow visible causa scroll horizontal por la K decorativa */
   overflow: hidden;
+  min-height: calc(100svh - 72px);
+  display: flex;
+  align-items: center;
 }
 
 .contacto-hero__bg {

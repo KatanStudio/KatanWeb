@@ -1,6 +1,7 @@
 import { Helmet } from 'react-helmet-async'
 import { Link } from 'react-router-dom'
 import { useState } from 'react'
+import Footer from '../components/Footer.jsx'
 
 const KatanLogo = () => (
   <svg className="nav__logo" width="36" height="36" viewBox="0 0 96 96" fill="none" aria-hidden="true">
@@ -99,27 +100,30 @@ export default function Briefing() {
   // VISTA DE GRACIAS
   if (submitted) {
     return (
-      <div className="container" style={{ textAlign: 'center', padding: '6rem 1rem' }}>
-        <div className="fade-in">
-          <div style={{ marginBottom: '2rem' }}>
-            <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="var(--spark)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-              <polyline points="22 4 12 14.01 9 11.01"></polyline>
-            </svg>
+      <div style={{ display: 'grid', gridTemplateRows: '1fr auto', minHeight: '100svh' }}>
+        <div className="container" style={{ textAlign: 'center', padding: '6rem 1rem' }}>
+          <div className="fade-in">
+            <div style={{ marginBottom: '2rem' }}>
+              <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="var(--spark)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+              </svg>
+            </div>
+            <h1 className="legal-h1">¡Briefing recibido!</h1>
+            <p className="section__sub" style={{ maxWidth: '500px', margin: '0 auto 2rem' }}>
+              Gracias por confiar en Katan. Hemos recibido tus especificaciones y nuestro equipo las está analizando.
+              Te enviaremos una propuesta detallada en menos de 48 horas.
+            </p>
+            <Link to="/" className="btn btn--primary">Volver al inicio</Link>
           </div>
-          <h1 className="legal-h1">¡Briefing recibido!</h1>
-          <p className="section__sub" style={{ maxWidth: '500px', margin: '0 auto 2rem' }}>
-            Gracias por confiar en Katan. Hemos recibido tus especificaciones y nuestro equipo las está analizando.
-            Te enviaremos una propuesta detallada en menos de 48 horas.
-          </p>
-          <Link to="/" className="btn btn--primary">Volver al inicio</Link>
         </div>
+        <Footer />
       </div>
     );
   }
 
   return (
-    <>
+    <div style={{ display: 'grid', gridTemplateRows: '1fr auto', minHeight: '100svh' }}>
       <Helmet>
         <title>Briefing — Katan Studio</title>
       </Helmet>
@@ -134,7 +138,7 @@ export default function Briefing() {
         </div>
       </nav>
 
-      <div className="container" style={{ paddingTop: '2rem', maxWidth: '800px', minHeight: '70vh' }}>
+      <div className="container" style={{ paddingTop: '2rem', maxWidth: '800px' }}>
 
         {step === 0 && (
           <div className="intro-screen" style={{ textAlign: 'center', padding: '4rem 0' }}>
@@ -449,6 +453,7 @@ export default function Briefing() {
         )}
       </div >
       </main>
-    </>
+      <Footer />
+    </div>
   )
 }
