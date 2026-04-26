@@ -52,7 +52,7 @@ export default function Nosotros() {
                     <span className="service-card__tag">Arquitectura &amp; Lógica</span>
                   </div>
                   <div className="team-img-wrap">
-                    <img src="/img/FotoAlejandro.jpg" alt="Alejandro Quintana" className="team-img" width="120" height="120" />
+                    <img src="/img/FotoAlejandro.png" alt="Alejandro Quintana" className="team-img" width="120" height="120" />
                   </div>
                   <h3 className="service-card__title" style={{ margin: '1.5rem 0 0.5rem' }}>Alejandro Quintana</h3>
                   <p className="service-card__desc">

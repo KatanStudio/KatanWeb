@@ -4,7 +4,7 @@ import { Link, useLocation } from 'react-router-dom'
 const NAV_LINKS = [
   { to: '/', label: 'Inicio' },
   { to: '/servicios', label: 'Servicios' },
-  { to: '/portfolio', label: 'Casos de éxito' },
+  { to: '/portfolio', label: 'Proyectos' },
   { to: '/nosotros', label: 'Por qué Katan' },
   { to: '/proceso', label: 'Proceso' },
   { to: '/Faq', label: 'FAQ' },
