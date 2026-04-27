@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useCallback, useRef, useEffect } from 'react'
 import { Helmet } from 'react-helmet-async'
 import Header from '../components/Header.jsx'
 import Footer from '../components/Footer.jsx'
@@ -64,12 +64,42 @@ const FILTERS = [
   { value: 'ecommerce', label: 'E-Commerce' },
 ]
 
+const PER_PAGE = 2
+
 export default function Portfolio() {
   const [activeFilter, setActiveFilter] = useState('all')
+  const [page, setPage] = useState(0)
+  const [mobileIndex, setMobileIndex] = useState(0)
+  const swipeRef = useRef(null)
 
   const visible = PROJECTS.filter(
     (p) => activeFilter === 'all' || p.category === activeFilter
   )
+
+  const totalPages = Math.ceil(visible.length / PER_PAGE)
+  const currentItems = visible.slice(page * PER_PAGE, (page + 1) * PER_PAGE)
+
+  const handleFilter = useCallback((value) => {
+    setActiveFilter(value)
+    setPage(0)
+    setMobileIndex(0)
+    if (swipeRef.current) swipeRef.current.scrollTo({ left: 0, behavior: 'instant' })
+  }, [])
+
+  useEffect(() => {
+    const el = swipeRef.current
+    if (!el) return
+    const handleScroll = () => {
+      const i = Math.round(el.scrollLeft / el.clientWidth)
+      setMobileIndex(Math.max(0, Math.min(i, visible.length - 1)))
+    }
+    el.addEventListener('scroll', handleScroll, { passive: true })
+    return () => el.removeEventListener('scroll', handleScroll)
+  }, [visible.length])
+
+  const scrollToCard = (i) => {
+    if (swipeRef.current) swipeRef.current.scrollTo({ left: swipeRef.current.clientWidth * i, behavior: 'smooth' })
+  }
 
   return (
     <>
@@ -102,35 +132,99 @@ export default function Portfolio() {
                   key={value}
                   className={`filter-btn${activeFilter === value ? ' is-active' : ''}`}
                   data-filter={value}
-                  onClick={() => setActiveFilter(value)}
+                  onClick={() => handleFilter(value)}
                 >
                   {label}
                 </button>
               ))}
             </div>
 
-            <div className="portfolio-grid">
-              {visible.map((project) => (
-                <a
-                  key={project.title}
-                  href={project.href}
-                  className="portfolio-card"
-                  data-category={project.category}
-                  target={project.external ? '_blank' : undefined}
-                  rel={project.external ? 'noreferrer' : undefined}
-                >
-                  <div className="portfolio-card__img-wrap">
-                    <img src={project.img} alt={project.alt} className="portfolio-card__img" />
-                    <div className="portfolio-card__overlay">
-                      <span className="btn btn--primary btn--chamfer">Ver proyecto</span>
+            {/* ── Desktop: paginación con flechas ── */}
+            <div className="portfolio-carousel">
+              <button
+                className="portfolio-carousel__arrow"
+                onClick={() => setPage(p => Math.max(0, p - 1))}
+                disabled={page === 0}
+                aria-label="Página anterior"
+              >&#8592;</button>
+              <div className="portfolio-grid">
+                {currentItems.map((project) => (
+                  <a
+                    key={project.title}
+                    href={project.href}
+                    className="portfolio-card"
+                    data-category={project.category}
+                    target={project.external ? '_blank' : undefined}
+                    rel={project.external ? 'noreferrer' : undefined}
+                  >
+                    <div className="portfolio-card__img-wrap">
+                      <img src={project.img} alt={project.alt} className="portfolio-card__img" />
+                      <div className="portfolio-card__overlay">
+                        <span className="btn btn--primary btn--chamfer">Ver proyecto</span>
+                      </div>
                     </div>
-                  </div>
-                  <div className="portfolio-card__info">
-                    <span className="portfolio-card__tag">{project.tag}</span>
-                    <h3 className="portfolio-card__title" style={{ textTransform: 'none' }}>{project.title}</h3>
-                    <p className="portfolio-card__metric">{project.metric}</p>
-                  </div>
-                </a>
+                    <div className="portfolio-card__info">
+                      <span className="portfolio-card__tag">{project.tag}</span>
+                      <h3 className="portfolio-card__title" style={{ textTransform: 'none' }}>{project.title}</h3>
+                      <p className="portfolio-card__metric">{project.metric}</p>
+                    </div>
+                  </a>
+                ))}
+              </div>
+              <button
+                className="portfolio-carousel__arrow"
+                onClick={() => setPage(p => Math.min(totalPages - 1, p + 1))}
+                disabled={page >= totalPages - 1}
+                aria-label="Página siguiente"
+              >&#8594;</button>
+            </div>
+            {totalPages > 1 && (
+              <div className="portfolio-carousel__dots">
+                {Array.from({ length: totalPages }).map((_, i) => (
+                  <button
+                    key={i}
+                    className={`portfolio-carousel__dot${i === page ? ' portfolio-carousel__dot--active' : ''}`}
+                    onClick={() => setPage(i)}
+                    aria-label={`Ir a página ${i + 1}`}
+                  >{i + 1}</button>
+                ))}
+              </div>
+            )}
+
+            {/* ── Mobile: swipe con dedo ── */}
+            <div className="portfolio-swipe" ref={swipeRef}>
+              {visible.map((project) => (
+                <div key={project.title} className="portfolio-swipe__item">
+                  <a
+                    href={project.href}
+                    className="portfolio-card"
+                    data-category={project.category}
+                    target={project.external ? '_blank' : undefined}
+                    rel={project.external ? 'noreferrer' : undefined}
+                  >
+                    <div className="portfolio-card__img-wrap">
+                      <img src={project.img} alt={project.alt} className="portfolio-card__img" />
+                      <div className="portfolio-card__overlay">
+                        <span className="btn btn--primary btn--chamfer">Ver proyecto</span>
+                      </div>
+                    </div>
+                    <div className="portfolio-card__info">
+                      <span className="portfolio-card__tag">{project.tag}</span>
+                      <h3 className="portfolio-card__title" style={{ textTransform: 'none' }}>{project.title}</h3>
+                      <p className="portfolio-card__metric">{project.metric}</p>
+                    </div>
+                  </a>
+                </div>
+              ))}
+            </div>
+            <div className="portfolio-swipe__dots">
+              {visible.map((_, i) => (
+                <button
+                  key={i}
+                  className={`portfolio-carousel__dot${i === mobileIndex ? ' portfolio-carousel__dot--active' : ''}`}
+                  onClick={() => scrollToCard(i)}
+                  aria-label={`Ir al proyecto ${i + 1}`}
+                >{i + 1}</button>
               ))}
             </div>
           </div>

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { Helmet } from 'react-helmet-async'
 import Header from '../components/Header.jsx'
@@ -114,10 +114,26 @@ const CLAIMS = [
 
 export default function Proceso() {
   const [activeStep, setActiveStep] = useState(null)
-  const [carouselStep, setCarouselStep] = useState(0)
-  const [openReq, setOpenReq] = useState(null)   // ← dentro del componente
-  const prevStep = () => setCarouselStep(i => Math.max(0, i - 1))
-  const nextStep = () => setCarouselStep(i => Math.min(STEPS.length - 1, i + 1))
+  const [openReq, setOpenReq] = useState(null)
+  const swipeRef = useRef(null)
+  const [swipeIndex, setSwipeIndex] = useState(0)
+
+  const scrollToCard = (i) => {
+    const el = swipeRef.current
+    if (!el) return
+    el.scrollTo({ left: el.clientWidth * i, behavior: 'smooth' })
+  }
+
+  useEffect(() => {
+    const el = swipeRef.current
+    if (!el) return
+    const handleScroll = () => {
+      const i = Math.round(el.scrollLeft / el.clientWidth)
+      setSwipeIndex(Math.max(0, Math.min(i, STEPS.length - 1)))
+    }
+    el.addEventListener('scroll', handleScroll, { passive: true })
+    return () => el.removeEventListener('scroll', handleScroll)
+  }, [])
 
   return (
     <>
@@ -180,42 +196,32 @@ export default function Proceso() {
               ))}
             </div>
 
-            {/* ── Carousel (mobile only) ── */}
-            <div className="process-carousel" style={{ marginTop: '4rem' }}>
-              <div className={`process-card process-card--carousel is-visible${STEPS[carouselStep].highlight ? ' process-card--highlight' : ''}`}>
-                <div className="process-card__header">
-                  <span className="process-card__num">{STEPS[carouselStep].num}</span>
-                  <span className="process-card__time">{STEPS[carouselStep].time}</span>
+            {/* ── Swipe carousel (mobile only) ── */}
+            <div className="process-swipe" ref={swipeRef} style={{ marginTop: '4rem' }}>
+              {STEPS.map((step) => (
+                <div
+                  key={step.num}
+                  className={`process-card process-card--carousel is-visible${step.highlight ? ' process-card--highlight' : ''}`}
+                >
+                  <div className="process-card__header">
+                    <span className="process-card__num">{step.num}</span>
+                    <span className="process-card__time">{step.time}</span>
+                  </div>
+                  <h4 className="process-card__title">{step.title}</h4>
+                  <p className="process-card__desc">{step.desc}</p>
+                  <p className="process-card__detail">{step.detail}</p>
                 </div>
-                <h4 className="process-card__title">{STEPS[carouselStep].title}</h4>
-                <p className="process-card__desc">{STEPS[carouselStep].desc}</p>
-                <p className="process-card__detail">{STEPS[carouselStep].detail}</p>
-              </div>
-
-              <div className="process-carousel__dots">
+              ))}
+            </div>
+            <div className="process-carousel__dots" style={{ marginTop: '1.25rem' }}>
+              {STEPS.map((_, i) => (
                 <button
-                  className="process-carousel__arrow process-carousel__arrow--prev"
-                  onClick={prevStep}
-                  disabled={carouselStep === 0}
-                  aria-label="Paso anterior"
-                >‹</button>
-
-                {STEPS.map((_, i) => (
-                  <button
-                    key={i}
-                    className={`process-carousel__dot${i === carouselStep ? ' process-carousel__dot--active' : ''}`}
-                    onClick={() => setCarouselStep(i)}
-                    aria-label={`Ir al paso ${i + 1}`}
-                  >{i + 1}</button>
-                ))}
-
-                <button
-                  className="process-carousel__arrow process-carousel__arrow--next"
-                  onClick={nextStep}
-                  disabled={carouselStep === STEPS.length - 1}
-                  aria-label="Paso siguiente"
-                >›</button>
-              </div>
+                  key={i}
+                  className={`process-carousel__dot${i === swipeIndex ? ' process-carousel__dot--active' : ''}`}
+                  onClick={() => scrollToCard(i)}
+                  aria-label={`Ir al paso ${i + 1}`}
+                >{i + 1}</button>
+              ))}
             </div>
 
             {/* ── Claims ── */}
@@ -270,8 +276,10 @@ export default function Proceso() {
               {REQUIREMENTS.map((req) => (
                 <div key={req.num} className="requisito-item">
                   <span className="requisito-item__num">{req.num}</span>
-                  <h4 className="requisito-item__title">{req.title}</h4>
-                  <p className="requisito-item__desc">{req.desc}</p>
+                  <div className="requisito-item__content">
+                    <h4 className="requisito-item__title">{req.title}</h4>
+                    <p className="requisito-item__desc">{req.desc}</p>
+                  </div>
                 </div>
               ))}
             </div>
