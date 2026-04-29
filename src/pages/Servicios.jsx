@@ -515,6 +515,8 @@ function ExtrasMarquee() {
     return () => mq.removeEventListener('change', handler)
   }, [])
 
+  const touchStartX = useRef(null)
+
   const navigateMobile = useCallback((next) => {
     if (next < 0 || next >= EXTRAS.length) return
     setAnimDir(next > activeIndex ? 1 : -1)
@@ -522,6 +524,15 @@ function ExtrasMarquee() {
     setOpenIndex(null)
     setAnimKey(k => k + 1)
   }, [activeIndex])
+
+  const handleTouchStart = (e) => { touchStartX.current = e.touches[0].clientX }
+  const handleTouchEnd   = (e) => {
+    if (touchStartX.current === null) return
+    const diff = touchStartX.current - e.changedTouches[0].clientX
+    if (diff > 50)       navigateMobile(activeIndex + 1)
+    else if (diff < -50) navigateMobile(activeIndex - 1)
+    touchStartX.current = null
+  }
 
   const handleToggle = useCallback((i) => {
     setOpenIndex(prev => {
@@ -545,10 +556,9 @@ function ExtrasMarquee() {
     const visibleDots = Array.from({ length: total }, (_, i) => i).slice(winStart, winEnd)
 
     return (
-      <div className="em-wrap">
-        {/* Nav superior */}
-        <div className="em-nav">
-          <button className="em-arrow" onClick={() => navigateMobile(activeIndex - 1)} disabled={activeIndex === 0} aria-label="Anterior">←</button>
+      <div className="em-wrap" onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
+        {/* Nav superior — solo dots/progreso, sin flechas */}
+        <div className="em-nav em-nav--dots-only">
           <div className="em-dots" role="tablist">
             {visibleDots.map((i) => (
               <button key={i} role="tab" aria-selected={i === activeIndex}
@@ -556,7 +566,6 @@ function ExtrasMarquee() {
                 onClick={() => navigateMobile(i)} aria-label={EXTRAS[i].title} />
             ))}
           </div>
-          <button className="em-arrow" onClick={() => navigateMobile(activeIndex + 1)} disabled={activeIndex === EXTRAS.length - 1} aria-label="Siguiente">→</button>
         </div>
 
         {/* Card animada */}
