@@ -444,7 +444,4 @@
   }
 }
 
-/* Nosotros team grid override */
-.nosotros-team-grid {
-  grid-template-columns: repeat(2, 1fr);
-}
+/* .nosotros-team-grid eliminado — reemplazado por TeamCarousel en Nosotros.jsx */
