@@ -134,7 +134,8 @@ export default function Briefing() {
       <nav className="nav nav--scrolled">
         <div className="nav__inner">
           <Link to="/" className="nav__brand"><KatanLogo /><span className="nav__wordmark">katan</span></Link>
-          {step > 0 && <button onClick={() => setStep(0)} className="btn btn--ghost" style={{ fontSize: '0.7rem' }}>← Cancelar</button>}
+          <Link to="/" className="nav__link" style={{ fontSize: '1rem', letterSpacing: '0.05em' }}>Inicio</Link>
+          <Link to="/contacto" className="btn btn--ghost" style={{ fontSize: '0.7rem' }}>← Cancelar</Link>
         </div>
       </nav>
 
@@ -145,7 +146,9 @@ export default function Briefing() {
             <p className="kicker">// kickstart</p>
             <h1 className="legal-h1" style={{ textTransform: 'none' }}>Vamos a dar forma a <span className="accent"> tu idea.</span></h1>
             <p className="section__sub" style={{ marginBottom: '3rem' }}>Responde a unas preguntas clave para recibir tu presupuesto exacto.</p>
-            <button type="button" onClick={nextStep} className="btn btn--primary btn--large">Empezar briefing (2 min)</button>
+            <button type="button" onClick={nextStep} className="btn btn--primary btn--large">Empezar briefing (2 min)</button> <br /> <br />
+            <Link to="/" className="btn btn--large">Volver a inicio</Link>
+
           </div>
         )}
 
@@ -456,4 +459,4 @@ export default function Briefing() {
       <Footer />
     </div>
   )
-}
+} 
