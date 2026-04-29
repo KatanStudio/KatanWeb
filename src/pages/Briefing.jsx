@@ -110,7 +110,7 @@ export default function Briefing() {
               </svg>
             </div>
             <h1 className="legal-h1">¡Briefing recibido!</h1>
-            <p className="section__sub" style={{ maxWidth: '500px', margin: '0 auto 2rem' }}>
+            <p className="section__sub" style={{ maxWidth: '500px', margin: '0 auto 3rem' }}>
               Gracias por confiar en Katan. Hemos recibido tus especificaciones y nuestro equipo las está analizando.
               Te enviaremos una propuesta detallada en menos de 48 horas.
             </p>
@@ -134,7 +134,7 @@ export default function Briefing() {
       <nav className="nav nav--scrolled">
         <div className="nav__inner">
           <Link to="/" className="nav__brand"><KatanLogo /><span className="nav__wordmark">katan</span></Link>
-          <Link to="/" className="nav__link" style={{ fontSize: '1rem', letterSpacing: '0.05em' }}>Inicio</Link>
+          {step > 0 && <Link to="/" className="nav__link" style={{ fontSize: '1rem', letterSpacing: '0.05em' }}>Inicio</Link>}
           <Link to="/contacto" className="btn btn--ghost" style={{ fontSize: '0.7rem' }}>← Cancelar</Link>
         </div>
       </nav>
@@ -145,9 +145,9 @@ export default function Briefing() {
           <div className="intro-screen" style={{ textAlign: 'center', padding: '4rem 0' }}>
             <p className="kicker">// kickstart</p>
             <h1 className="legal-h1" style={{ textTransform: 'none' }}>Vamos a dar forma a <span className="accent"> tu idea.</span></h1>
-            <p className="section__sub" style={{ marginBottom: '3rem' }}>Responde a unas preguntas clave para recibir tu presupuesto exacto.</p>
-            <button type="button" onClick={nextStep} className="btn btn--primary btn--large">Empezar briefing (2 min)</button> <br /> <br />
-            <Link to="/" className="btn btn--large">Volver a inicio</Link>
+            <p className="section__sub" style={{  margin: '0 auto 3rem'  }}>Responde a unas preguntas clave para recibir tu presupuesto exacto.</p>
+            <button type="button" onClick={nextStep} className="btn btn--primary btn--large">Empezar briefing (2 min)</button> <br />
+            <Link to="/" className="btn btn--ghost" style={{ marginTop: '1rem', display: 'inline-block' }}>Volver a inicio</Link>
 
           </div>
         )}
@@ -459,4 +459,4 @@ export default function Briefing() {
       <Footer />
     </div>
   )
-} 
+}
