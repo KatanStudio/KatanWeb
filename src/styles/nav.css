@@ -173,3 +173,14 @@
     display: none !important;
   }
 }
+
+/* Briefing nav — ocultar Inicio en móvil */
+.nav__link--inicio {
+  display: none;
+}
+
+@media (min-width: 600px) {
+  .nav__link--inicio {
+    display: inline;
+  }
+}
