@@ -402,7 +402,7 @@
 
 .svc-sw__price-note {
   font-family: var(--font-mono);
-  font-size: 0.6rem;
+  font-size: 0.89rem;
   color: var(--steel);
   letter-spacing: 0.15em;
   text-transform: uppercase;
@@ -455,7 +455,7 @@
   height: 2px;
   width: 0%;
   z-index: 10;
-  animation: svc-progress 9s linear forwards;
+  animation: svc-progress 200s linear forwards;
 }
 
 .svc-sw.is-paused .svc-sw__prog-bar {

@@ -11,8 +11,8 @@ const PROJECTS = [
     alt: 'Proyecto VianaNails',
     tag: 'E-Commerce',
     title: 'Viana Nails',
-    problem: 'Academia de manicura atrapada en una plataforma de terceros que fallaba sin parar: alumnas sin acceso a sus cursos, una gestión completamente manual que consumía horas cada semana y velocidades de carga muy altas.',
-    solution: 'Plataforma 100% a medida con tienda online, sistema de reservas, pasarela de pago propia y área privada de alumnas. Los fallos desaparecieron y la academia pasó a gestionarse sola. (AUN EN MIGRACIÓN) ',
+    problem: 'Academia de manicura atrapada en una plataforma de terceros que fallaba sin parar: alumnas sin acceso a sus cursos, una gestión completamente manual que consumía horas cada semana y navegación muy lenta.',
+    solution: 'Rediseño de plataforma 100% a medida con tienda online, sistema de reservas, pasarela de pago propia y área privada de alumnas. Los fallos desaparecieron y la academia pasó a gestionarse sola.',
     technologies: ['React', 'Vite', 'Node.js', 'PostgreSQL', 'Figma'],
     external: true,
   },
@@ -143,8 +143,7 @@ export default function Portfolio() {
               </p>
               <h2 className="section__h2" style={{ textTransform: 'none' }}>Nuestros <span className="accent"> clientes.</span></h2>
               <p className="section__sub" style={{ margin: '1rem auto 0' }}>
-                Ayudamos a negocios a facturar gracias a nuestra arquitectura
-                limpia y rápida.
+                Algunos de los negocios a los que hemos ayudado a crecer.
               </p>
             </header>
 

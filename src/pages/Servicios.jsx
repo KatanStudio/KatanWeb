@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 import {
   Globe, Mail, FilePlus, ListFilter, CalendarDays,
   BookOpen, PenLine, ShieldCheck, Plug, Palette,
-  Languages, Server,
+  Languages, Server, 
 } from 'lucide-react'
 import Header from '../components/Header.jsx'
 import Footer from '../components/Footer.jsx'
@@ -99,16 +99,16 @@ const SERVICES = [
     num: '01',
     label: 'Landing Page',
     short: 'LP',
-    desc: 'Presencia digital afilada. Una página diseñada para captar la atención y convertir visitantes en clientes desde el primer momento.',
+    desc: 'Ideal si lo que quieres es una sola página diseñada para captar la atención y convertir visitantes en clientes desde el primer momento.', //poner en negrita lo de una sola página
     price: 'Desde 350 €',
     features: [
-      '1 a 3 páginas (Inicio, Servicios, Contacto)',
-      'Diseño responsive a medida',
-      'Formulario de contacto funcional dependiendo de tus intereses.',
-      'Posicionamiento SEO on-page básico integrado',
-      'Integración con Google Analytics',
-      'Alta velocidad (PageSpeed > 90)',
-      '2 ronda de revisiones.',
+      '1 a 5 secciones (Inicio, Quiénes Somos, Servicios...)',
+      'Diseño ajustado a cualquier dispositvo.',
+      'Formulario básico de contacto.',
+      'Posicionamiento SEO básico integrado.',
+      'Integración con Google Analytics.', //añadir link a Google Analytics que lleven al faq por si no saben lo que es
+      'Alta velocidad, tu página carga en un pestañeo.', 
+      '2 ronda de revisiones correctivas.', //añadir enlace a FAQ ppara explicar la diferencia entre correctivas y evolutivas
     ],
     demo: <LandingDemo />,
   },
@@ -116,18 +116,17 @@ const SERVICES = [
     id: 'corporativa',
     num: '02',
     label: 'Web Corporativa',
-    short: 'WC',
-    desc: 'La sede digital completa de tu empresa. Blog, múltiples secciones y posicionamiento avanzado para escalar tu autoridad online.',
+    short: 'WEB',
+    desc: 'La sede digital completa de tu empresa. Blog, múltiples páginas y posicionamiento avanzado para escalar tu presencia online.', //poner en negrita lo de páginas
     price: 'Desde 750 €',
     features: [
-      '5 a 10 páginas diseñadas a medida.',
-      'Blog integrado y categorizado.',
-      'SEO avanzado (herramientas como Schema, XML, Core Vitals).',
-      'Formularios avanzados.',
-      'Reservas y panel de control de las mismas.',
-      'Multiidioma (hasta 2 idiomas).',
-      'Analytics + Search Console.',
-      '3 rondas de revisiones.',
+      'de 1 a 10 páginas diseñadas a medida.', //poner en negrita lo de páginas
+      'Blog a tu gusto con filtro de categorías.',
+      'Posicionamiento SEO avanzado integrado.',
+      'Formulario básico de contacto.',
+      'Panel de control de gestión de contenido.',
+      'Alta velocidad, sin importar la cantidad de contenido.',
+      '3 rondas de revisiones correctivas.',
     ],
     demo: <CorporativaDemo />,
   },
@@ -142,9 +141,9 @@ const SERVICES = [
       'Catálogo de productos escalable.',
       'Pasarela de pago (Stripe, PayPal, Redsys).',
       'Tu panel de administración intuitivo para actualizar a tu gusto.',
-      'SEO técnico de producto (Rich Snippets).',
-      'Emails transaccionales automatizados.',
-      '5 rondas de revisiones.',
+      'SEO técnico de producto.',
+      'Emails automatizados.',
+      '5 rondas de revisiones correctivas.',
     ],
     demo: <EcommerceDemo />,
   },
@@ -156,17 +155,18 @@ const SERVICES = [
 // ─────────────────────────────────────────────────────────────────────────────
 const EXTRAS = [
   { icon: Globe, title: 'Dominio registrado', desc: 'Gestión, renovación y configuración del servidor incluida.', price: 'Desde 15€/año' },
-  { icon: Mail, title: 'Email corporativo', desc: 'Correo con tu dominio en Google Workspace u Outlook.', price: 'Desde 35 €/año' },
-  { icon: FilePlus, title: 'Página adicional', desc: 'Contenido SEO-optimizado con total coherencia visual.', price: 'Desde 50 €/pág.' },
-  { icon: ListFilter, title: 'Formulario Multipaso', desc: 'Formulario especializado para filtrar clientes.', price: 'Desde 90 €' },
-  { icon: CalendarDays, title: 'Sistema de Reservas', desc: 'Calendario sincronizado. Los clientes reservan solos, con posibilidad de manejarlo.', price: 'Desde 190 €' },
-  { icon: BookOpen, title: 'Blog Estático', desc: 'Sección de contenidos ultra-rápida. Sin gestor de contenidos pesado.', price: 'Desde 200 €' },
-  { icon: PenLine, title: 'Copywriting', desc: 'Textos de la web a medida para que tu cliente entienda en 3 segundos.', price: 'Desde 80 €/pág.' },
-  { icon: ShieldCheck, title: 'Pack Legal', desc: 'Aviso Legal, Privacidad y Cookies adaptados al RGPD.', price: '90 €' },
-  { icon: Plug, title: 'Integraciones API', desc: 'HubSpot, Notion, Mailchimp o Slack. Cero intervención.', price: '100–200 €' },
-  { icon: Palette, title: 'Diseño de logotipo', desc: 'Logo, tipografías, paleta, tonos de uso y mockups. Identidad visual completa.', price: 'Desde 150 €' },
-  { icon: Languages, title: 'Multiidioma', desc: 'Tu web en otro idioma sin plugins con traductor especializado. Velocidad preservada.', price: 'Desde 120 €/idioma' },
-  { icon: Server, title: 'Mantenimiento & Hosting', desc: 'CDN global, SSL activo y cambios de texto incluidos.', price: '250–350 €/año' },
+  { icon: Mail, title: 'Email corporativo', desc: 'Creación de correo corporativo asociado a tu dominio.', price: 'Desde 35 €/año' },
+  { icon: FilePlus, title: 'Página adicional', desc: 'Amplia el número de páginas de tu web si superas el límite incluido.', price: 'Desde 50 €/pág.' },
+  { icon: ListFilter, title: 'Formulario Multipaso', desc: 'Formulario avanzado dedicado a filtrar clientes.', price: 'Desde 90 €' },
+  { icon: CalendarDays, title: 'Sistema de Reservas', desc: 'Calendario sincronizado. Los clientes reservan solos, con posibilidad de gestionarlo.', price: 'Desde 190 €' },
+  { icon: BookOpen, title: 'Blog Estático', desc: 'Sección de contenidos personalizada. Con panel de control incluido.', price: 'Desde 200 €' },
+  { icon: PenLine, title: 'Copywriting', desc: 'Textos de la web a medida para que tu cliente entienda tu negocio en 3 segundos.', price: 'Desde 80 €/pág.' },
+  { icon: ShieldCheck, title: 'Pack Legal', desc: 'Redacción de la documentación legal: Privacidad, Cookies y Aviso Legal, adaptados al RGPD.', price: '90 €' },
+  { icon: Plug, title: 'Integraciones API', desc: 'Integración de aplicaciones de terceros', price: '100–200 €' },
+  { icon: Palette, title: 'Identidad Corporativa', desc: 'Logo, tipografías, paleta de colores, tonos de uso y mockups. Identidad visual completa.', price: 'Desde 150 €' },
+  { icon: Languages, title: 'Multiidioma', desc: 'Tu web en otro idioma con traductor especializado, manteniendo la velocidad.', price: 'Desde 120 €/idioma' },
+  { icon: Server, title: 'Mantenimiento & Hosting', desc: 'Alojamiento en un servidor.', price: '250–350 €/año' },
+  { icon: Globe, title: 'Revisiones evolutivas', desc: 'Ideal para cuando quieres ampliar tu proyecto una vez te lo hayamos entregado.', price: '250–350 €/año' },
 ]
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -178,7 +178,7 @@ const N = <span className="check-no">—</span>
 const SPECS_COLS = ['01 / Landing', '02 / Corporativa', '03 / E-Commerce']
 
 const SPECS_ROWS = [
-  { label: 'Número de páginas',        values: ['Hasta 5 páginas',         'Hasta 10 páginas',              'Ilimitadas'] },
+  { label: 'Contenido',        values: ['Hasta 5 páginas',         'Hasta 10 páginas',              'Ilimitadas'] },
   { label: 'Diseño a medida',           values: ['100% Personalizado',      '100% Personalizado',            '100% Personalizado'] },
   { label: 'Diseño Responsive',         values: [Y,                          Y,                               Y] },
   { label: 'SEO On-Page',               values: ['Básico',                   'Avanzado (Schema)',             'Avanzado + Rich Snippets'] },
@@ -668,9 +668,9 @@ export default function Servicios() {
           <div className="container">
             <header className="section__header" style={{ marginBottom: '3rem' }}>
               <p className="section-label">/Extras</p>
-              <h2 className="section__h2">Servicios adicionales</h2>
+              <h2 className="section__h2">Servicios <span className="accent">adicionales.</span></h2>
               <p className="section__sub">
-                Precio fijo por módulo. Sin sorpresas. Contrátalos con tu web o después.
+                Precio fijo por módulo. Sin sorpresas. Elige cuando contratarlos.
               </p>
             </header>
           </div>
@@ -703,10 +703,10 @@ export default function Servicios() {
                 className="section__h2"
                 style={{ fontSize: 'clamp(1.5rem, 3vw, 2.5rem)', textTransform: 'none' }}
               >
-                Especificaciones.
+                Especificaciones <span className="accent"> técnicas.</span>
               </h2>
               <p className="section__sub">
-                Comparativa técnica detallada de nuestros niveles de arquitectura.
+                Comparativa técnica detallada de nuestros serviciones.
               </p>
             </header>
 
@@ -724,10 +724,10 @@ export default function Servicios() {
                 </thead>
                 <tbody>
                   <tr>
-                    <td><strong>Número de páginas</strong></td>
-                    <td>Hasta 5 páginas</td>
+                    <td><strong>Contenido</strong></td>
+                    <td>Hasta 5 secciones</td>
                     <td className="col-highlight">Hasta 10 páginas</td>
-                    <td>Ilimitadas</td>
+                    <td>Ilimitado</td>
                   </tr>
                   <tr>
                     <td><strong>Diseño a medida</strong></td>
@@ -756,14 +756,14 @@ export default function Servicios() {
                   <tr>
                     <td><strong>Multiidioma</strong></td>
                     <td><span className="check-no">—</span></td>
-                    <td className="col-highlight">Hasta 2 idiomas</td>
-                    <td>Hasta 3 idiomas</td>
+                    <td className="col-highlight check-no">—</td>
+                    <td>Hasta 2 idiomas</td>
                   </tr>
                   <tr>
                     <td><strong>Formularios de contacto</strong></td>
-                    <td>1 formulario</td>
-                    <td className="col-highlight">Avanzados / Múltiples</td>
-                    <td>Avanzados / Múltiples</td>
+                    <td>Formulario básico</td>
+                    <td className="col-highlight">Formulario básico</td>
+                    <td>Formulario básico</td>
                   </tr>
                   <tr>
                     <td><strong>Analítica Web</strong></td>
@@ -790,10 +790,10 @@ export default function Servicios() {
                     <td>Completo (Pedidos, stock)</td>
                   </tr>
                   <tr>
-                    <td><strong>Rondas de revisiones</strong></td>
-                    <td>1 ronda</td>
-                    <td className="col-highlight">3 rondas</td>
-                    <td>5 rondas</td>
+                    <td><strong>Rondas de revisiones </strong></td>
+                    <td>2 rondas correctivas</td>
+                    <td className="col-highlight">3 rondas correctivas</td>
+                    <td>5 rondas correctivas</td>
                   </tr>
                   <tr>
                     <td><strong>Soporte post-lanzamiento</strong></td>
@@ -822,7 +822,7 @@ export default function Servicios() {
               </h2>
 
               <p className="cta-final__sub">
-                Cuéntanos tu proyecto. Respuesta en menos de 24&nbsp;h,
+                Cuéntanos tu proyecto. Respuesta en menos de 48&nbsp;h,
                 presupuesto cerrado sin ninguna sorpresa.
               </p>
 
