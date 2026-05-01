@@ -33,7 +33,20 @@ function AnimFade({ children, className, ...props }) {
   )
 }
 
-const TECH_BADGES = ['HTML5', 'CSS3 Custom', 'JavaScript (ES6+)', 'React', 'Astro', 'Tailwind CSS', 'Node.js', 'PostgreSQL', 'Figma', 'Git']
+const TECH_BADGES = [
+  { label: 'HTML5',        slug: 'html5' },
+  { label: 'CSS3',         slug: 'css3' },
+  { label: 'JavaScript',   slug: 'javascript' },
+  { label: 'TypeScript',   slug: 'typescript' },
+  { label: 'React',        slug: 'react' },
+  { label: 'Vite',         slug: 'vite' },
+  { label: 'Astro',        slug: 'astro' },
+  { label: 'Tailwind CSS', slug: 'tailwindcss' },
+  { label: 'Node.js',      slug: 'nodedotjs' },
+  { label: 'PostgreSQL',   slug: 'postgresql' },
+  { label: 'Figma',        slug: 'figma' },
+  { label: 'Git',          slug: 'git' },
+]
 
 export default function Home() {
   return (
@@ -93,7 +106,18 @@ export default function Home() {
             <div className="tech-marquee">
               <div className="tech-marquee__track">
                 {[...TECH_BADGES, ...TECH_BADGES].map((badge, i) => (
-                  <span key={i} className="tech-badge">{badge}</span>
+                  <span key={i} className="tech-badge">
+                    <img
+                      src={`https://cdn.simpleicons.org/${badge.slug}/ffffff`}
+                      alt=""
+                      className="tech-badge__icon"
+                      width="18"
+                      height="18"
+                      loading="lazy"
+                      aria-hidden="true"
+                    />
+                    <span className="tech-badge__label">{badge.label}</span>
+                  </span>
                 ))}
               </div>
             </div>

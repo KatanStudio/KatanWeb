@@ -4,32 +4,35 @@ import Header from '../components/Header.jsx'
 import Footer from '../components/Footer.jsx'
 
 const PROJECTS = [
-
   {
     href: 'https://viananails.com/',
     category: 'ecommerce',
     img: '../../public/img/VianaNails.png',
-    alt: 'Proyecto 2',
+    alt: 'Proyecto VianaNails',
     tag: 'E-Commerce',
     title: 'Viana Nails',
-    metric: 'Maquetación y Migración Base Datos y Web',
+    problem: 'Academia de manicura que necesitaba gestionar cursos online y presenciales, con pagos integrados, usuarios y acceso a contenidos.',
+    solution: 'E-commerce completo con sistema de reservas, pasarela de pago, base de datos de alumnos con login y plataforma de visualización de cursos. Identidad visual creada por Katan.',
+    technologies: ['React', 'Vite', 'Node.js', 'PostgreSQL', 'Figma'],
     external: true,
   },
   {
     href: 'https://xyloshome.com',
     category: 'landing',
     img: '/img/XylosHome.png',
-    alt: 'Proyecto 1',
+    alt: 'Proyecto XylosHome',
     tag: 'Landing Page',
     title: 'Xylos Home',
-    metric: 'Identidad corporativa, copywritting y maquetación de la web',
+    problem: 'Fabricantes de casas modulares sin presencia digital: necesitaban explicar su modelo de negocio, darse a conocer y convertir visitas en leads.',
+    solution: 'Landing page de alto impacto visual, clara para cualquier perfil de usuario y orientada a la conversión. Identidad visual creada por Katan.',
+    technologies: ['React', 'Vite', 'Figma'],
     external: true,
   },
   {
     href: '#',
     category: 'corporate',
     img: '../../public/img/Katan.png',
-    alt: 'Proyecto 3',
+    alt: 'Proyecto Katan',
     tag: 'Web Corporativa',
     title: 'Katan',
     metric: 'Pasarela Custom | 0% Fricción',
@@ -37,12 +40,14 @@ const PROJECTS = [
   },
   {
     href: '#',
-    category: 'landing',
-    img: 'https://via.placeholder.com/800x600/14141A/F0F4F8?text=Mockup+Proyecto+4',
-    alt: 'Proyecto 4',
-    tag: 'Landing Page',
-    title: 'Estudio música',
-    metric: 'Sistema de Reservas Integrado',
+    category: 'corporate',
+    img: 'https://via.placeholder.com/800x600/14141A/F0F4F8?text=Mockup+Jenny+Records',
+    alt: 'Proyecto Jenny Records',
+    tag: 'Web Corporativa',
+    title: 'Jenny Records',
+    problem: 'Estudio de música independiente sin presencia digital ni carta de presentación.',
+    solution: 'Web corporativa con galería multimedia y sección "conócenos", desarrollada con la paleta de colores y textos predefinidos del cliente.',
+    technologies: ['React', 'TypeScript', 'Vite'],
     external: false,
   },
   {
@@ -166,7 +171,27 @@ export default function Portfolio() {
                     <div className="portfolio-card__info">
                       <span className="portfolio-card__tag">{project.tag}</span>
                       <h3 className="portfolio-card__title" style={{ textTransform: 'none' }}>{project.title}</h3>
-                      <p className="portfolio-card__metric">{project.metric}</p>
+                      {project.problem ? (
+                        <>
+                          <div className="portfolio-card__desc-block">
+                            <span className="portfolio-card__desc-label">Problema</span>
+                            <p className="portfolio-card__desc-text">{project.problem}</p>
+                          </div>
+                          <div className="portfolio-card__desc-block">
+                            <span className="portfolio-card__desc-label">Solución</span>
+                            <p className="portfolio-card__desc-text">{project.solution}</p>
+                          </div>
+                          {project.technologies && (
+                            <div className="portfolio-card__techs">
+                              {project.technologies.map(tech => (
+                                <span key={tech} className="portfolio-card__tech-chip">{tech}</span>
+                              ))}
+                            </div>
+                          )}
+                        </>
+                      ) : (
+                        <p className="portfolio-card__metric">{project.metric}</p>
+                      )}
                     </div>
                   </a>
                 ))}
@@ -211,7 +236,27 @@ export default function Portfolio() {
                     <div className="portfolio-card__info">
                       <span className="portfolio-card__tag">{project.tag}</span>
                       <h3 className="portfolio-card__title" style={{ textTransform: 'none' }}>{project.title}</h3>
-                      <p className="portfolio-card__metric">{project.metric}</p>
+                      {project.problem ? (
+                        <>
+                          <div className="portfolio-card__desc-block">
+                            <span className="portfolio-card__desc-label">Problema</span>
+                            <p className="portfolio-card__desc-text">{project.problem}</p>
+                          </div>
+                          <div className="portfolio-card__desc-block">
+                            <span className="portfolio-card__desc-label">Solución</span>
+                            <p className="portfolio-card__desc-text">{project.solution}</p>
+                          </div>
+                          {project.technologies && (
+                            <div className="portfolio-card__techs">
+                              {project.technologies.map(tech => (
+                                <span key={tech} className="portfolio-card__tech-chip">{tech}</span>
+                              ))}
+                            </div>
+                          )}
+                        </>
+                      ) : (
+                        <p className="portfolio-card__metric">{project.metric}</p>
+                      )}
                     </div>
                   </a>
                 </div>

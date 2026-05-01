@@ -131,6 +131,46 @@
   color: var(--steel);
 }
 
+.portfolio-card__desc-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.portfolio-card__desc-label {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.15em;
+  color: var(--edge);
+  text-transform: uppercase;
+}
+
+.portfolio-card__desc-text {
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--steel);
+  margin: 0;
+}
+
+.portfolio-card__techs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+  margin-top: 0.15rem;
+}
+
+.portfolio-card__tech-chip {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.05em;
+  color: var(--blade);
+  background: var(--sheath);
+  border: 1px solid var(--ghost);
+  padding: 0.15rem 0.5rem;
+  border-radius: 2px;
+  white-space: nowrap;
+}
+
 .portfolio-card.is-hidden {
   display: none;
 }
