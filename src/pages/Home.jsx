@@ -35,7 +35,7 @@ function AnimFade({ children, className, ...props }) {
 
 const TECH_BADGES = [
   { label: 'HTML5',        slug: 'html5' },
-  { label: 'CSS3',         slug: 'css3' },
+  { label: 'CSS3',         slug: 'css' },
   { label: 'JavaScript',   slug: 'javascript' },
   { label: 'TypeScript',   slug: 'typescript' },
   { label: 'React',        slug: 'react' },

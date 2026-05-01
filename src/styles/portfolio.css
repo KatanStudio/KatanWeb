@@ -284,6 +284,14 @@
     flex-shrink: 0;
     scroll-snap-align: start;
     box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .portfolio-swipe .portfolio-card {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
   }
 
   .portfolio-swipe .portfolio-card__img-wrap {
@@ -292,6 +300,7 @@
   }
 
   .portfolio-swipe .portfolio-card__info {
+    flex: 1;
     padding: 0.85rem 1rem;
     gap: 0.25rem;
   }
