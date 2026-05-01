@@ -134,7 +134,7 @@ export default function Briefing() {
       <nav className="nav nav--scrolled">
         <div className="nav__inner">
           <Link to="/" className="nav__brand"><KatanLogo /><span className="nav__wordmark">katan</span></Link>
-          {step > 0 && <Link to="/" className="nav__link nav__link--inicio" style={{ fontSize: '1rem', letterSpacing: '0.05em' }}>Inicio</Link>}
+          {step > 0 && <Link to="/" className="nav__link nav__link--inicio btn--ghost" style={{ fontSize: '1rem', letterSpacing: '0.05em' }}>Inicio</Link>}
           <Link to="/contacto" className="btn btn--ghost" style={{ fontSize: '0.7rem' }}>← Cancelar</Link>
         </div>
       </nav>
@@ -146,7 +146,7 @@ export default function Briefing() {
             <p className="kicker">// kickstart</p>
             <h1 className="legal-h1" style={{ textTransform: 'none' }}>Vamos a dar forma a <span className="accent"> tu idea.</span></h1>
             <p className="section__sub" style={{ marginBottom: '3rem', textAlign: 'center', margin: '0 auto 3rem', maxWidth: '520px' }}>Responde a unas preguntas clave para recibir tu presupuesto exacto.</p>
-            <button type="button" onClick={nextStep} className="btn btn--primary btn--large">Empezar briefing (2 min)</button> <br />
+            <button type="button" onClick={nextStep} className="btn btn--primary btn--large">Empezar formulario (4 min)</button> <br />
             <Link to="/" className="btn btn--ghost" style={{ marginTop: '1rem', display: 'inline-block' }}>Volver a inicio</Link>
 
           </div>

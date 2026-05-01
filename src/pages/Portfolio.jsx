@@ -12,7 +12,7 @@ const PROJECTS = [
     tag: 'E-Commerce',
     title: 'Viana Nails',
     problem: 'Academia de manicura que necesitaba gestionar cursos online y presenciales, con pagos integrados, usuarios y acceso a contenidos.',
-    solution: 'E-commerce completo con sistema de reservas, pasarela de pago, base de datos de alumnos con login y plataforma de visualización de cursos. Identidad visual creada por Katan.',
+    solution: 'Migración de E-commerce completo a una solucón más rapida y eficiente tras las numerosas quejas de clientes por los fallos y la lentitud.',
     technologies: ['React', 'Vite', 'Node.js', 'PostgreSQL', 'Figma'],
     external: true,
   },
@@ -23,8 +23,8 @@ const PROJECTS = [
     alt: 'Proyecto XylosHome',
     tag: 'Landing Page',
     title: 'Xylos Home',
-    problem: 'Fabricantes de casas modulares sin presencia digital: necesitaban explicar su modelo de negocio, darse a conocer y convertir visitas en leads.',
-    solution: 'Landing page de alto impacto visual, clara para cualquier perfil de usuario y orientada a la conversión. Identidad visual creada por Katan.',
+    problem: 'Fabricantes de casas modulares sin presencia digital: necesitaban explicar su modelo de negocio, darse a conocer y convertir visitas en clientes.',
+    solution: 'Landing page de alto impacto visual, clara para cualquier perfil de usuario y orientada a la conversión de potenciales clientes. Identidad visual completa creada por Katan.',
     technologies: ['React', 'Vite', 'Figma'],
     external: true,
   },
@@ -45,8 +45,8 @@ const PROJECTS = [
     alt: 'Proyecto Jenny Records',
     tag: 'Web Corporativa',
     title: 'Jenny Records',
-    problem: 'Estudio de música independiente sin presencia digital ni carta de presentación.',
-    solution: 'Web corporativa con galería multimedia y sección "conócenos", desarrollada con la paleta de colores y textos predefinidos del cliente.',
+    problem: 'Estudio de música sin presencia digital ni carta de presentación.',
+    solution: 'Web corporativa con galería multimedia y sección "conócenos", desarrollada con la identidad corporativa y textos predefinidos del cliente.',
     technologies: ['React', 'TypeScript', 'Vite'],
     external: false,
   },
@@ -217,6 +217,13 @@ export default function Portfolio() {
             )}
 
             {/* ── Mobile: swipe con dedo ── */}
+            <div className="portfolio-swipe-wrapper">
+              <button
+                className="portfolio-swipe__arrow portfolio-swipe__arrow--prev"
+                onClick={() => scrollToCard(Math.max(0, mobileIndex - 1))}
+                disabled={mobileIndex === 0}
+                aria-label="Proyecto anterior"
+              >&#8592;</button>
             <div className="portfolio-swipe" ref={swipeRef}>
               {visible.map((project) => (
                 <div key={project.title} className="portfolio-swipe__item">
@@ -261,6 +268,13 @@ export default function Portfolio() {
                   </a>
                 </div>
               ))}
+            </div>
+              <button
+                className="portfolio-swipe__arrow portfolio-swipe__arrow--next"
+                onClick={() => scrollToCard(Math.min(visible.length - 1, mobileIndex + 1))}
+                disabled={mobileIndex >= visible.length - 1}
+                aria-label="Proyecto siguiente"
+              >&#8594;</button>
             </div>
             <div className="portfolio-swipe__dots">
               {visible.map((_, i) => (
