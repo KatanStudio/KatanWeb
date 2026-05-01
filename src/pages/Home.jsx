@@ -69,7 +69,7 @@ export default function Home() {
 
           <div className="hero__content">
             <h1 className="hero__h1" style={{ textTransform: 'none' }}>
-              Ingeniería web de<br /><span className="hero__h1-accent">alta precisión.</span>
+              Creamos la web que tu negocio<br /><span className="hero__h1-accent">necesita para crecer.</span>
             </h1>
             <p className="hero__sub">
               Tu web no es un folleto, es el escaparate más importante de tu negocio. <br /> Creamos páginas confiables para convertir usuarios en clientes.
@@ -129,14 +129,14 @@ export default function Home() {
             <header className="section__header">
               <p className="section-label">/El Estándar Katan</p>
               <h2 className="section__h2">Construimos sistemas,<br /><span className="accent">no folletos.</span></h2>
-              <p className="section__sub">La mayoría de agencias te venden plantillas pesadas disfrazadas de diseño a medida.
-                Nosotros escribimos arquitectura digital diseñada para dominar tu sector.</p>
+              <p className="section__sub">La mayoría de agencias de markeitng te venden plantillas pesadas disfrazadas de diseño a medida.
+                Nosotros damos forma a tu proyecto para dominar tu sector.</p>
             </header>
 
             <div className="modules-grid">
               <AnimFade className="module">
                 <span className="module__price">01</span>
-                <h3 className="module__title" style={{ margin: '0.5rem 0' }}>Velocidad letal</h3>
+                <h3 className="module__title" style={{ margin: '0.5rem 0' }}>Velocidad extrema.</h3>
                 <p className="module__desc">
 
                   ¿A quién le gusta esperar? <br /> El tiempo de tus clientes vale dinero. 
@@ -147,18 +147,18 @@ export default function Home() {
 
               <AnimFade className="module module--recurring">
                 <span className="module__price">02</span>
-                <h3 className="module__title" style={{ margin: '0.5rem 0' }}>Código propio</h3>
+                <h3 className="module__title" style={{ margin: '0.5rem 0' }}>Código propio.</h3>
                 <p className="module__desc">
-                  Sin constructores visuales limitantes, sin decenas de plugins vulnerables y sin renovaciones de licencias
-                  sorpresa. El código que construimos es 100% tuyo desde el primer día.
+                  El código que construimos es 100% tuyo desde el primer día. Sin parches externos que se rompen o te dejan la web abierta a hackers y sin renovaciones de licencias
+                  sorpresa. 
                 </p>
               </AnimFade>
 
               <AnimFade className="module">
                 <span className="module__price">03</span>
-                <h3 className="module__title" style={{ margin: '0.5rem 0' }}>Cero burocracia</h3>
+                <h3 className="module__title" style={{ margin: '0.5rem 0' }}>Cero burocracia.</h3>
                 <p className="module__desc">
-                  No tenemos "Account Managers" ni te hacemos perder el tiempo. Presupuesto cerrado en 48h. Hablas
+                  No delegamos los proyectos a terceros ni te hacemos perder el tiempo. Presupuesto cerrado en 48h. Hablas
                   directamente con los encargados de tu proyecto.
                 </p>
               </AnimFade>
@@ -178,7 +178,7 @@ export default function Home() {
               <h2 className="cta-section__h2" style={{ textTransform: 'none' }}>Empecemos con una llamada.</h2>
               <p className="cta-section__sub">
                 Presupuesto cerrado en 48h. Sin letra pequeña. Sin reuniones eternas. Hablas directamente con los
-                desarrolladores, nosotros picamos el código.
+                desarrolladores, nosotros escribimos el código.
               </p>
               <div className="cta-actions">
                 <Link to="/contacto" className="btn btn--primary btn--large btn--chamfer">Iniciar proyecto →</Link>
