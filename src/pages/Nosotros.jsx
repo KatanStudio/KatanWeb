@@ -20,13 +20,13 @@ const TEAM = [
   },
   {
     num: '_dev.02',
-    tag: 'Arquitectura & Lógica',
+    tag: 'Gestión & Lógica',
     name: 'Alejandro Quintana',
     img: '/img/FotoAlejandro.png',
     alt: 'Alejandro Quintana',
     linkedin: 'https://www.linkedin.com/in/alejandro-quintana-rodriguez/',
     imgSide: 'right',
-    desc: 'Graduado en Ingeniería Informática (UCLM) y curtido en gestión de proyectos ágiles (Scrum). Especialista en la estructura profunda del código. En Katan, construyo arquitecturas escalables, bases de datos eficientes y lógica compleja. Escribo el software para que tu sistema soporte el crecimiento de tu negocio, sin errores y sin fisuras.',
+    desc: 'Graduado en Ingeniería Informática (UCLM) y curtido en gestión de proyectos ágiles. Me encargo de eliminar el ruido entre lo que tu negocio pide y lo se muestra en la web, transformando tus ideas en requisitos técnicos. Construyo proyectos escalables, bases de datos eficientes y lógica compleja. Escribo el software para que tu sistema soporte el crecimiento de tu negocio, sin errores y sin fisuras.',
   },
 ]
 
@@ -36,10 +36,10 @@ const TEAM = [
 // Desktop (≥900px): stage foto|texto de pantalla completa con controles
 // ─────────────────────────────────────────────────────────────────────────────
 function TeamCarousel() {
-  const [active, setActive]   = useState(0)
-  const [dir, setDir]         = useState(1)
+  const [active, setActive] = useState(0)
+  const [dir, setDir] = useState(1)
   const [animKey, setAnimKey] = useState(0)
-  const touchStartX           = useRef(null)
+  const touchStartX = useRef(null)
 
   const navigate = useCallback((next) => {
     if (next < 0 || next >= TEAM.length) return
@@ -49,10 +49,10 @@ function TeamCarousel() {
   }, [active])
 
   const handleTouchStart = (e) => { touchStartX.current = e.touches[0].clientX }
-  const handleTouchEnd   = (e) => {
+  const handleTouchEnd = (e) => {
     if (touchStartX.current === null) return
     const diff = touchStartX.current - e.changedTouches[0].clientX
-    if (diff > 50)       navigate(active + 1)
+    if (diff > 50) navigate(active + 1)
     else if (diff < -50) navigate(active - 1)
     touchStartX.current = null
   }
@@ -232,11 +232,11 @@ export default function Nosotros() {
           <div className="container">
             <header className="section__header">
               <p className="section-label">/El Estudio</p>
-              <h2 className="section__h2">La anti-agencia.<br /><span className="accent">cero intermediarios.</span></h2>
-              <p className="section__sub" style={{ maxWidth: '60ch', fontSize: '1.1rem', marginTop: '1.5rem' }}>
+              <h2 className="section__h2">La anti-agencia.<br /><span className="accent">Cero intermediarios.</span></h2>
+              <p className="section__sub" style={{ maxWidth: '60ch', fontSize: '1.1rem', marginTop: '1.5rem', color: 'white' }}>
                 No somos una agencia tradicional llena de burocracia, reuniones inútiles y plantillas
                 recicladas. Somos Katan: un estudio independiente formado por dos desarrolladores. Tú hablas con nosotros,
-                nosotros te ayudamos a llevar a cabo tu proyecto en la web.
+                y te ayudamos a llevar tu negocio a internet.
               </p>
             </header>
 
@@ -249,9 +249,8 @@ export default function Nosotros() {
                 Llevamos a la espalda numerosos proyectos sin un solo cliente que haya tenido que recurrir a mantenimiento de
                 emergencia o negocios perdiendo dinero.
 
-                Por eso fundamos Katan, para ofrecer una alternativa premium, basada en <strong> código
-                  artesanal, seguridad nativa y velocidades extremas</strong>. No inventamos la rueda,
-                simplemente la construimos con la máxima precisión.
+                Por eso fundamos Katan, para ofrecer una alternativa cercana,<strong> soluciones profesionales y acercar tu negocio al público</strong>. 
+                No reinventamos la rueda, simplemente le damos un enfoque correcto.
               </p>
             </div>
           </div>
@@ -261,7 +260,7 @@ export default function Nosotros() {
           <div className="container">
             <header className="section__header">
               <p className="section-label">/Método</p>
-              <h2 className="section__h2">código artesanal<br /><span className="accent">vs.</span> wordpress</h2>
+              <h2 className="section__h2">Katan<br /><span className="accent">vs.</span> Otras agencias</h2>
             </header>
 
             <div className="compare">
@@ -275,12 +274,12 @@ export default function Nosotros() {
                     <path d="M33 48 L63 74 H72 L42 48 Z" fill="#F0F4F8" />
                     <circle cx="33" cy="48" r="3.5" fill="#FF0080" />
                   </svg>
-                  katan studio
+                  Katan
                 </div>
                 <div className="compare__rows">
                   {[
-                    { title: 'Carga <1.5s', desc: 'Código limpio, cero plugins innecesarios. Lo que tarda tu web es lo que pierde tu negocio.' },
-                    { title: '100% tuyo, sin licencias', desc: 'El código te lo entregamos. Sin renovaciones anuales, sin dependencia de terceros.' },
+                    { title: 'Carga en un parpadeo (<1.5s)', desc: 'Código limpio que hace que la página aparezca al instante para que nadie se canse de esperar y se vaya a la competencia.' },
+                    { title: 'Código 100% tuyo, sin licencias', desc: 'Te entregamos el código sin renovaciones anuales, sin dependencia de terceros.' },
                     { title: 'Seguridad blindada', desc: 'Sin plugins vulnerables. Sin actualizaciones que rompen la web un lunes por la mañana.' },
                     { title: 'Precio cerrado desde el comienzo', desc: 'El presupuesto que firmas es el que aparece en la factura. Sin letra pequeña.' },
                   ].map((row) => (
@@ -298,10 +297,10 @@ export default function Nosotros() {
               <div className="compare__sep" aria-hidden="true"><span>vs.</span></div>
 
               <div className="compare__col compare__col--wp">
-                <div className="compare__badge compare__badge--wp">WordPress / Plantillas</div>
+                <div className="compare__badge compare__badge--wp"> Plantillas</div>
                 <div className="compare__rows">
                   {[
-                    { title: '3–8s de carga media', desc: 'Plugins encadenados, temas genéricos, hosting compartido. Google te penaliza en silencio.' },
+                    { title: '3–8s de carga media', desc: 'Una web lenta frustra a tus clientes. Si tarda más de 3 segundos, mucha gente cierra la pestaña y te olvida.' },
                     { title: 'Dependencia de licencias', desc: 'Tema premium, plugin de formularios, plugin de SEO, plugin de caché… cada uno con su renovación.' },
                     { title: '43% de la web usa WordPress o plantillas genéricas', desc: 'El target favorito de los atacantes. Una vulnerabilidad afecta a millones de sitios a la vez.' },
                     { title: 'Scope creep garantizado', desc: 'El presupuesto inicial crece con cada "solo añade este plugin" que aparece en el camino.' },
