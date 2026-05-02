@@ -8,7 +8,7 @@ const STEPS = [
   {
     num: '01',
     time: 'Día 0',
-    title: 'Llamada Inicial',
+    title: 'Llamada',
     micro: '15 min sin compromiso. Resolvemos tus dudas.',
     desc: 'Una llamada corta de 15–20 minutos. Sin presentaciones de empresa ni PowerPoints. Te explicamos cómo funciona el briefing (formulario), qué información necesitamos y resolvemos tus dudas antes de que lo rellenes.',
     detail: 'El objetivo no es venderte nada, es asegurarnos de que tienes todo claro para que el briefing sea útil de verdad. Tú rellenas el formulario cuando quieras, sin presión.',
@@ -16,17 +16,17 @@ const STEPS = [
   {
     num: '02',
     time: 'Día 1',
-    title: 'Formulario + Propuesta',
-    micro: 'Arquitectura, precio cerrado y plazos en 48 h.',
-    desc: 'Con el formulario en mano, analizamos tu proyecto y en menos de 48 horas te mandamos arquitectura, alcance, precio cerrado y las fechas orientadas. Lo que firmas el Día 1 es lo que pagas al terminar.',
+    title: 'Propuesta',
+    micro: 'Estructura, precio cerrado y plazos de entrega en 48 h.',
+    desc: 'Con el formulario en mano, analizamos tu proyecto y en menos de 48 horas te mandamos estructura, limitaciones del proyecto, precio cerrado y fechas de entrega. Lo que firmas el día 1 es lo que pagas al terminar.',
     detail: 'Precio fijo. Sin letra pequeña. Sin "esto es un extra". Si algo cambia de alcance durante el proyecto, lo hablamos antes de ejecutarlo, nunca después.',
     highlight: true,
   },
   {
     num: '03',
     time: 'Días 2–4',
-    title: 'Reunión De Arranque',
-    micro: 'Presencial o por vídeo. Llegamos con demos.',
+    title: 'Arranque',
+    micro: 'Reunión presencial o por vídeo. Llegamos con demos.',
     desc: 'Aquí es donde nos juntamos en persona si estás en Toledo, Madrid o alrededores. Si no es posible presencialmente, lo hacemos por videollamada.',
     detail: 'Llegamos con demostraciones para que veas la dirección visual desde el primer momento. Hablamos del diseño, estructura y cualquier detalle que necesite ajuste antes de meternos de lleno en el código.',
   },
@@ -35,17 +35,17 @@ const STEPS = [
     time: 'Día 3 en adelante',
     title: 'Desarrollo',
     micro: 'Código propio, avances privados, mínimo 2 revisiones.',
-    desc: 'Construimos tu sistema en código propio. Tienes posibilidad de ver un avance privado y dos rondas de revisión estructuradas incluidas.',
+    desc: 'Construimos tu sistema en código propio. Tienes posibilidad de ver un avance privado y mínimo dos rondas de revisiones correctivas incluidas.',
     detail: 'Las revisiones van por rondas, no por mensajes sueltos. Esto nos permite trabajar con foco y entregarte cambios de golpe, no a cuentagotas.',
     highlight: true,
   },
   {
     num: '05',
-    time: 'Entrega definitiva',
-    title: 'Corte Final',
+    time: 'Corte Final',
+    title: 'Entrega',
     micro: 'Web publicada, código entregado, cero flecos.',
-    desc: 'La web publicada, el dominio configurado, Core Web Vitals en verde y el código entregado al 100%. Cerramos con una última reunión/llamada de onboarding para que controles todo.',
-    detail: 'Te entregamos acceso completo al hosting y una guía de uso si tienes panel de administración. Nada queda en el aire y, si tuvieras problemas, nos encargaríamos con el servicio de mantenimiento.',
+    desc: 'La web publicada, el dominio configurado, análisis de calidad y el código entregado al 100%. Cerramos con una última reunión/llamada para que controles todo.',
+    detail: 'Te entregamos acceso completo al hosting y una guía de uso si tienes panel de administración. Nada queda en el aire y, si tuvieras problemas, nos encargaríamos del mantenimiento durante el tiempo contratado.',
   },
 ]
 
@@ -96,7 +96,7 @@ const REQUIREMENTS = [
   {
     num: '03',
     title: 'Gestión del dominio',
-    desc: 'Si ya tienes tu dominio web comprado, solo necesitaremos un acceso temporal para enlazarlo. De todas formas, si aún no tienes uno, despreocúpate: nosotros nos encargamos de buscarlo, registrarlo y configurarlo todo.',
+    desc: 'Si ya tienes tu dominio web comprado, solo necesitaremos un acceso temporal para enlazarlo. De todas formas, si aún no tienes uno, despreocúpate, ofrecemos servicios para buscarlo, registrarlo y configurarlo todo.',
   },
   {
     num: '04',
@@ -106,10 +106,10 @@ const REQUIREMENTS = [
 ]
 
 const CLAIMS = [
-  'Precio cerrado desde el día 1',
+  'Precio cerrado el día 1',
   'Canal directo con nosotros',
-  'Rondas de revisión estructuradas',
-  'Te acompañamos en el lanzamiento Web',
+  'Revisiones correctivas',
+  'Seguimiento del proceso',
 ]
 
 export default function Proceso() {
@@ -152,11 +152,10 @@ export default function Proceso() {
           <div className="glow-orb orb-page-2" aria-hidden="true" />
           <div className="container">
             <header className="section__header">
-              <p className="section-label">05 / Proceso</p>
+              <p className="section-label">/Proceso</p>
               <h2 className="section__h2" style={{ textTransform: 'none' }}>Del formulario al<br /><span className="accent">lanzamiento.</span></h2>
               <p className="section__sub">
-                Sin burocracia, sin reuniones vacías. Cada contacto tiene un propósito claro
-                y lo hacemos en persona siempre que podemos.
+                Sin burocracia, sin reuniones vacías. Cada contacto tiene un propósito claro.
               </p>
             </header>
 
@@ -241,7 +240,7 @@ export default function Proceso() {
                 <p>
                   No somos de las agencias que te mandan un PDF con el proceso y luego desaparecen
                   detrás de un gestor de clientes. Creemos en el contacto directo, en las reuniones con propósito
-                  y en que la primera vez que te enseñamos algo ya tiene que impresionarte.
+                  y en la transparencia a lo largo del proceso.
                 </p>
                 <p style={{ marginTop: '1rem' }}>
                   Si estás en <strong>Toledo, Madrid</strong> o alrededores, nos reunimos en persona.
@@ -249,8 +248,7 @@ export default function Proceso() {
                 </p>
               </div>
               <div className="proceso-philosophy__badge">
-                <span className="proceso-badge-num">0</span>
-                <span className="proceso-badge-label">Intermediarios<br />directo a los creadores</span>
+                {/* ── logo ── */}
               </div>
             </div>
           </div>

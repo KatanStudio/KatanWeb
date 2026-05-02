@@ -280,7 +280,7 @@ export default function Nosotros() {
                   {[
                     { title: 'Carga en un parpadeo (<1.5s)', desc: 'Código limpio que hace que la página aparezca al instante para que nadie se canse de esperar y se vaya a la competencia.' },
                     { title: 'Código 100% tuyo, sin licencias', desc: 'Te entregamos el código sin renovaciones anuales, sin dependencia de terceros.' },
-                    { title: 'Seguridad blindada', desc: 'Sin plugins vulnerables. Sin actualizaciones que rompen la web un lunes por la mañana.' },
+                    { title: 'Seguridad blindada', desc: 'Sin plugins vulnerables. Sin actualizaciones que rompen la web en cualquier momento.' },
                     { title: 'Precio cerrado desde el comienzo', desc: 'El presupuesto que firmas es el que aparece en la factura. Sin letra pequeña.' },
                   ].map((row) => (
                     <div key={row.title} className="compare__row">
@@ -300,10 +300,10 @@ export default function Nosotros() {
                 <div className="compare__badge compare__badge--wp"> Plantillas</div>
                 <div className="compare__rows">
                   {[
-                    { title: '3–8s de carga media', desc: 'Una web lenta frustra a tus clientes. Si tarda más de 3 segundos, mucha gente cierra la pestaña y te olvida.' },
-                    { title: 'Dependencia de licencias', desc: 'Tema premium, plugin de formularios, plugin de SEO, plugin de caché… cada uno con su renovación.' },
-                    { title: '43% de la web usa WordPress o plantillas genéricas', desc: 'El target favorito de los atacantes. Una vulnerabilidad afecta a millones de sitios a la vez.' },
-                    { title: 'Scope creep garantizado', desc: 'El presupuesto inicial crece con cada "solo añade este plugin" que aparece en el camino.' },
+                    { title: '3–8s de carga media', desc: 'Si la web lenta frustra fácilmente a tus clientes. Si tarda más de 3 segundos, mucha gente cierra la pestaña y te olvida.' },
+                    { title: 'Dependencia de licencias', desc: 'Múltiples dependencias de sistemas de terceros. Cada uno con su renovación.' },
+                    { title: 'El 43% de la web usa plantillas genéricas', desc: 'El objetivo favorito de los atacantes. Una vulnerabilidad afecta a millones de sitios a la vez.' },
+                    { title: 'Añadidos sorpresa garantizados', desc: 'El presupuesto inicial crece con cada "añade esta función" que aparece en el camino.' },
                   ].map((row) => (
                     <div key={row.title} className="compare__row">
                       <span className="compare__icon compare__icon--no">✗</span>
