@@ -324,13 +324,10 @@ const SVC_COLORS = ['#FF0080', '#FF0080', '#FF0080'];
 function ServiceSwitcher() {
   const [active, setActive] = useState(0)
   const [animKey, setAnimKey] = useState(0)
-  const [isPaused, setIsPaused] = useState(false)
   const [particles, setParticles] = useState([])
   const prevRef = useRef(null)
   const pTimerRef = useRef(null)
 
-  // PERF: useCallback evita recrear esta función en cada render, lo que
-  // a su vez evita que los botones de tab se re-rendericen innecesariamente
   const handleSelect = useCallback((i) => {
     setActive(prev => {
       if (i === prev) return prev
@@ -339,36 +336,21 @@ function ServiceSwitcher() {
     setAnimKey(k => k + 1)
   }, [])
 
-  // Efecto que lanza partículas al cambiar de slide
   useEffect(() => {
     if (prevRef.current !== null && prevRef.current !== active) {
       const color = SVC_COLORS[active] || '#FF0080'
       clearTimeout(pTimerRef.current)
       setParticles(makeParticles(color))
-      // PERF: timeout ajustado a la duración real de la animación más larga (0.7s)
       pTimerRef.current = setTimeout(() => setParticles([]), 800)
     }
     prevRef.current = active
-    // Limpiar al desmontar
     return () => clearTimeout(pTimerRef.current)
   }, [active])
 
   const svc = SERVICES[active]
 
   return (
-    <div
-      className={`svc-sw ${isPaused ? 'is-paused' : ''}`}
-      // Pausamos el auto-play SOLO si el usuario mantiene pulsado (click o touch)
-      onMouseDown={(e) => {
-        // Nos aseguramos de que sea el click principal (izquierdo)
-        if (e.button === 0) setIsPaused(true)
-      }}
-      onMouseUp={() => setIsPaused(false)}
-      onMouseLeave={() => setIsPaused(false)} // Por si hacen click, arrastran el ratón fuera y sueltan
-      onTouchStart={() => setIsPaused(true)}
-      onTouchEnd={() => setIsPaused(false)}
-    >
-
+    <div className="svc-sw">
 
       {/* ── Fondo con orbes animados — solo desktop (en móvil los gestiona PageOrbs) ── */}
       <div className="svc-sw__bg" aria-hidden="true">
@@ -386,17 +368,7 @@ function ServiceSwitcher() {
             aria-selected={active === i}
             className={`svc-sw__tab${active === i ? ' svc-sw__tab--active' : ''}`}
             onClick={() => handleSelect(i)}
-            style={{ position: 'relative' }} // Necesario para la barra de progreso
           >
-            {/* Barra de progreso de auto-play */}
-            {active === i && (
-              <div
-                key={animKey}
-                className="svc-sw__prog-bar"
-                style={{ background: SVC_COLORS[i] || 'var(--edge)' }}
-                onAnimationEnd={() => handleSelect((active + 1) % SERVICES.length)}
-              />
-            )}
             <span className="svc-sw__tab-num">{s.num}</span>
             <span className="svc-sw__tab-label svc-sw__tab-label--full">{s.label}</span>
             <span className="svc-sw__tab-label svc-sw__tab-label--short">{s.short}</span>
@@ -500,28 +472,15 @@ const ExtraBadge = memo(function ExtraBadge({ title, desc, price, open, onToggle
 })
 
 function ExtrasMarquee() {
-  const [paused, setPaused]           = useState(false)
-  const [isMobile, setIsMobile]       = useState(false)
   const [activeIndex, setActiveIndex] = useState(0)
-  const [openIndex, setOpenIndex]     = useState(null)
   const [animDir, setAnimDir]         = useState(1)
   const [animKey, setAnimKey]         = useState(0)
+  const touchStartX                   = useRef(null)
 
-  useEffect(() => {
-    const mq = window.matchMedia('(max-width: 768px)')
-    setIsMobile(mq.matches)
-    const handler = (e) => setIsMobile(e.matches)
-    mq.addEventListener('change', handler)
-    return () => mq.removeEventListener('change', handler)
-  }, [])
-
-  const touchStartX = useRef(null)
-
-  const navigateMobile = useCallback((next) => {
+  const navigate = useCallback((next) => {
     if (next < 0 || next >= EXTRAS.length) return
     setAnimDir(next > activeIndex ? 1 : -1)
     setActiveIndex(next)
-    setOpenIndex(null)
     setAnimKey(k => k + 1)
   }, [activeIndex])
 
@@ -529,46 +488,38 @@ function ExtrasMarquee() {
   const handleTouchEnd   = (e) => {
     if (touchStartX.current === null) return
     const diff = touchStartX.current - e.changedTouches[0].clientX
-    if (diff > 50)       navigateMobile(activeIndex + 1)
-    else if (diff < -50) navigateMobile(activeIndex - 1)
+    if (diff > 50)       navigate(activeIndex + 1)
+    else if (diff < -50) navigate(activeIndex - 1)
     touchStartX.current = null
   }
 
-  const handleToggle = useCallback((i) => {
-    setOpenIndex(prev => {
-      const closing = prev === i
-      if (closing && document.activeElement instanceof HTMLElement) document.activeElement.blur()
-      return closing ? null : i
-    })
-  }, [])
+  const extra     = EXTRAS[activeIndex]
+  const animClass = animDir > 0 ? 'em-card--from-right' : 'em-card--from-left'
 
-  // MÓVIL: carrusel con flechas
-  if (isMobile) {
-    const extra = EXTRAS[activeIndex]
-    const animClass = animDir > 0 ? 'em-card--from-right' : 'em-card--from-left'
-    // Ventana deslizante de dots: máx 5 visibles, activo siempre centrado
-    const WINDOW = 5
-    const half = Math.floor(WINDOW / 2)
-    const total = EXTRAS.length
-    let winStart = Math.max(0, activeIndex - half)
-    let winEnd   = winStart + WINDOW
-    if (winEnd > total) { winEnd = total; winStart = Math.max(0, total - WINDOW) }
-    const visibleDots = Array.from({ length: total }, (_, i) => i).slice(winStart, winEnd)
+  const WINDOW = 5
+  const half   = Math.floor(WINDOW / 2)
+  const total  = EXTRAS.length
+  let winStart = Math.max(0, activeIndex - half)
+  let winEnd   = winStart + WINDOW
+  if (winEnd > total) { winEnd = total; winStart = Math.max(0, total - WINDOW) }
+  const visibleDots = Array.from({ length: total }, (_, i) => i).slice(winStart, winEnd)
 
-    return (
+  const marqueeItems = [...EXTRAS, ...EXTRAS]
+
+  return (
+    <div>
+      {/* Navegador de tarjetas — siempre visible en todas las pantallas */}
       <div className="em-wrap" onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
-        {/* Nav superior — solo dots/progreso, sin flechas */}
         <div className="em-nav em-nav--dots-only">
           <div className="em-dots" role="tablist">
             {visibleDots.map((i) => (
               <button key={i} role="tab" aria-selected={i === activeIndex}
                 className={`em-dot${i === activeIndex ? ' em-dot--active' : ''}`}
-                onClick={() => navigateMobile(i)} aria-label={EXTRAS[i].title} />
+                onClick={() => navigate(i)} aria-label={EXTRAS[i].title} />
             ))}
           </div>
         </div>
 
-        {/* Card animada */}
         <div className="em-stage">
           <div key={animKey} className={`em-card ${animClass}`}>
             <ExtraBadge
@@ -580,29 +531,20 @@ function ExtrasMarquee() {
           </div>
         </div>
 
-        {/* Nav inferior */}
         <div className="em-nav em-nav--bottom">
-          <button className="em-arrow" onClick={() => navigateMobile(activeIndex - 1)} disabled={activeIndex === 0} aria-label="Anterior">←</button>
+          <button className="em-arrow" onClick={() => navigate(activeIndex - 1)} disabled={activeIndex === 0} aria-label="Anterior">←</button>
           <span className="em-counter">{activeIndex + 1} / {EXTRAS.length}</span>
-          <button className="em-arrow" onClick={() => navigateMobile(activeIndex + 1)} disabled={activeIndex === EXTRAS.length - 1} aria-label="Siguiente">→</button>
+          <button className="em-arrow" onClick={() => navigate(activeIndex + 1)} disabled={activeIndex === EXTRAS.length - 1} aria-label="Siguiente">→</button>
         </div>
       </div>
-    )
-  }
 
-  // DESKTOP: marquee animado original
-  const desktopItems = [...EXTRAS, ...EXTRAS]
-  return (
-    <div>
+      {/* Carrusel visual — solo muestra los títulos, sin precio ni desplegable */}
       <div className="extras-marquee">
-        <div className={`extras-marquee__track${paused ? ' extras-marquee__track--paused' : ''}`}>
-          {desktopItems.map((e, i) => (
-            <ExtraBadge key={i} title={e.title} desc={e.desc} price={e.price}
-              open={openIndex === i}
-              onToggle={() => handleToggle(i)}
-              onMouseEnter={() => { setOpenIndex(i); setPaused(true) }}
-              onMouseLeave={() => { setOpenIndex(null); setPaused(false) }}
-            />
+        <div className="extras-marquee__track">
+          {marqueeItems.map((e, i) => (
+            <div key={i} className="extras-badge extras-badge--visual">
+              <span className="extras-badge__title">{e.title}</span>
+            </div>
           ))}
         </div>
       </div>

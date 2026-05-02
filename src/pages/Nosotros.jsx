@@ -260,7 +260,7 @@ export default function Nosotros() {
           <div className="container">
             <header className="section__header">
               <p className="section-label">/Método</p>
-              <h2 className="section__h2">Katan<br /><span className="accent">vs.</span> Otras agencias</h2>
+              <h2 className="section__h2">Katan <span className="accent">vs.</span> Otras agencias</h2>
             </header>
 
             <div className="compare">

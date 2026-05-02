@@ -346,6 +346,8 @@
   color: var(--steel);
   line-height: 1.7;
   margin-bottom: 0.75rem;
+  text-align: justify;
+  hyphens: auto;
 }
 
 .proceso-step__detail {
@@ -356,6 +358,8 @@
   border-top: 1px solid var(--ghost);
   font-style: italic;
   padding-bottom: 0.25rem;
+  text-align: justify;
+  hyphens: auto;
 }
 
 /* ── Claims strip ── */
@@ -466,6 +470,8 @@
   font-size: 1.1rem;
   color: var(--steel);
   line-height: 1.7;
+  text-align: justify;
+  hyphens: auto;
 }
 
 .process-card__detail {
@@ -476,6 +482,8 @@
   padding-top: 0.75rem;
   border-top: 1px solid var(--ghost);
   font-style: italic;
+  text-align: justify;
+  hyphens: auto;
 }
 
 .process-card--highlight {
