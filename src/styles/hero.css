@@ -135,6 +135,14 @@
   width: 100%;
 }
 
+.hero__k-logo {
+  display: block;
+  height: 160px;
+  width: auto;
+  margin-bottom: 1.75rem;
+  opacity: 0.9;
+}
+
 .hero__h1 {
   font-family: var(--font-head);
   font-size: clamp(1.1rem, 4.8vw, 4.5rem);
@@ -268,8 +276,6 @@
 @media (max-width: 639px) {
   .hero__content {
     padding: 2.5rem 1.25rem 2rem;
-    align-items: flex-start;
-    text-align: left;
   }
 
   .hero__h1--desktop {
@@ -297,9 +303,9 @@
     max-width: none;
     width: min(1280px, calc(100vw - 6rem));
     margin: auto;
-    padding: 6rem 3rem 3rem 1.5rem;
-    align-items: flex-start;
-    text-align: left;
+    padding: 6rem 3rem 3rem;
+    align-items: center;
+    text-align: center;
   }
 
   .hero__h1 {

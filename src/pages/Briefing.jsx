@@ -119,7 +119,7 @@ export default function Briefing() {
       <div className="glow-orb orb-page-2" aria-hidden="true" />
       <nav className="nav nav--scrolled">
         <div className="nav__inner">
-          <Link to="/" className="nav__brand" aria-label="Katan Studio — Inicio"><img src="/logos/KATAN LOGO SVG (2).svg" className="nav__logo" alt="" aria-hidden="true" width="36" height="60" /></Link>
+          <Link to="/" className="nav__brand" aria-label="Katan Studio — Inicio"><img src="/logos/K LOGO SVG Blanco.svg" className="nav__logo" alt="" aria-hidden="true" /></Link>
           {step > 0 && <Link to="/" className="nav__link nav__link--inicio btn--ghost" style={{ fontSize: '1rem', letterSpacing: '0.05em' }}>Inicio</Link>}
           <Link to="/contacto" className="btn btn--ghost" style={{ fontSize: '0.7rem' }}>← Cancelar</Link>
         </div>

@@ -64,23 +64,21 @@ export default function Home() {
             <div className="glow-orb orb-1"></div>
             <div className="glow-orb orb-2"></div>
             <div className="glow-orb orb-3"></div>
-            <div className="mesh-overlay"></div>
           </div>
 
           <div className="hero__content">
-       <h1 className="hero__h1 hero__h1--desktop" style={{ textTransform: 'none' }}>
-  Creamos la web que tu negocio
-  <br />
-  <span className="hero__h1-accent">necesita para crecer.</span>
-</h1>
-
-<h1 className="hero__h1 hero__h1--mobile" style={{ textTransform: 'none' }}>
-  Creamos la web<br />
-  que tu negocio<br />
-  <span className="hero__h1-accent">necesita para</span><br />
-  <span className="hero__h1-accent">crecer.</span>
-</h1>
-            
+            <img src="/logos/KATAN LOGO SVG Blanco.svg" className="hero__k-logo" alt="Katan Studio" />
+            <h1 className="hero__h1 hero__h1--desktop" style={{ textTransform: 'none' }}>
+              Creamos la web que tu negocio
+              <br />
+              <span className="hero__h1-accent">necesita para crecer.</span>
+            </h1>
+            <h1 className="hero__h1 hero__h1--mobile" style={{ textTransform: 'none' }}>
+              Creamos la web<br />
+              que tu negocio<br />
+              <span className="hero__h1-accent">necesita para</span><br />
+              <span className="hero__h1-accent">crecer.</span>
+            </h1>
             <div className="hero__actions">
               <Link to="/servicios" className="btn btn--primary btn--chamfer">Nuestros servicios</Link>
               <Link to="/contacto" className="btn btn--ghost">Presupuesto rápido</Link>
@@ -136,7 +134,7 @@ export default function Home() {
             <header className="section__header">
               <p className="section-label">/El Estándar Katan</p>
               <h2 className="section__h2">Construimos sistemas,<br /><span className="accent">no folletos.</span></h2>
-              <p className="section__sub">La mayoría de agencias de markeitng te venden plantillas pesadas disfrazadas de diseño a medida.
+              <p className="section__sub">La mayoría de agencias de marketing  plantillas pesadas disfrazadas de diseño a medida.
                 Nosotros damos forma a tu proyecto para dominar tu sector.</p>
             </header>
 
