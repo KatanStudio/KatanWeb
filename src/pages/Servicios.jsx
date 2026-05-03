@@ -154,19 +154,19 @@ const SERVICES = [
 // EXTRAS DATA — icon (lucide-react), title, desc, price
 // ─────────────────────────────────────────────────────────────────────────────
 const EXTRAS = [
-  { icon: Globe, title: 'Dominio registrado', desc: 'Gestión, renovación y configuración del servidor incluida.', price: 'Desde 15€/año' },
-  { icon: Mail, title: 'Email corporativo', desc: 'Creación de correo corporativo asociado a tu dominio.', price: 'Desde 35 €/año' },
-  { icon: FilePlus, title: 'Página adicional', desc: 'Amplia el número de páginas de tu web si superas el límite incluido.', price: 'Desde 50 €/pág.' },
-  { icon: ListFilter, title: 'Formulario Multipaso', desc: 'Formulario avanzado dedicado a filtrar clientes.', price: 'Desde 90 €' },
-  { icon: CalendarDays, title: 'Sistema de Reservas', desc: 'Calendario sincronizado. Los clientes reservan solos, con posibilidad de gestionarlo.', price: 'Desde 190 €' },
-  { icon: BookOpen, title: 'Blog Estático', desc: 'Sección de contenidos personalizada. Con panel de control incluido.', price: 'Desde 200 €' },
-  { icon: PenLine, title: 'Copywriting', desc: 'Textos de la web a medida para que tu cliente entienda tu negocio en 3 segundos.', price: 'Desde 80 €/pág.' },
-  { icon: ShieldCheck, title: 'Pack Legal', desc: 'Redacción de la documentación legal: Privacidad, Cookies y Aviso Legal, adaptados al RGPD.', price: '90 €' },
-  { icon: Plug, title: 'Integraciones API', desc: 'Integración de aplicaciones de terceros', price: '100–200 €' },
-  { icon: Palette, title: 'Identidad Corporativa', desc: 'Logo, tipografías, paleta de colores, tonos de uso y mockups. Identidad visual completa.', price: 'Desde 150 €' },
-  { icon: Languages, title: 'Multiidioma', desc: 'Tu web en otro idioma con traductor especializado, manteniendo la velocidad.', price: 'Desde 120 €/idioma' },
-  { icon: Server, title: 'Mantenimiento & Hosting', desc: 'Alojamiento en un servidor.', price: '250–350 €/año' },
-  { icon: Globe, title: 'Revisiones evolutivas', desc: 'Ideal para cuando quieres ampliar tu proyecto una vez te lo hayamos entregado.', price: '250–350 €/año' },
+  { icon: Globe, title: 'Dominio registrado', desc: 'Gestión, renovación y configuración del servidor incluida.' },
+  { icon: Mail, title: 'Email corporativo', desc: 'Creación de correo corporativo asociado a tu dominio.' },
+  { icon: FilePlus, title: 'Página adicional', desc: 'Amplia el número de páginas de tu web si superas el límite incluido.' },
+  { icon: ListFilter, title: 'Formulario Multipaso', desc: 'Formulario avanzado dedicado a filtrar clientes.' },
+  { icon: CalendarDays, title: 'Sistema de Reservas', desc: 'Calendario sincronizado. Los clientes reservan solos, con posibilidad de gestionarlo.' },
+  { icon: BookOpen, title: 'Blog Estático', desc: 'Sección de contenidos personalizada. Con panel de control incluido.' },
+  { icon: PenLine, title: 'Copywriting', desc: 'Textos de la web a medida para que tu cliente entienda tu negocio en 3 segundos.' },
+  { icon: ShieldCheck, title: 'Pack Legal', desc: 'Redacción de la documentación legal: Privacidad, Cookies y Aviso Legal, adaptados al RGPD.' },
+  { icon: Plug, title: 'Integraciones API', desc: 'Integración de aplicaciones de terceros' },
+  { icon: Palette, title: 'Identidad Corporativa', desc: 'Logo, tipografías, paleta de colores, tonos de uso y mockups. Identidad visual completa.' },
+  { icon: Languages, title: 'Multiidioma', desc: 'Tu web en otro idioma con traductor especializado, manteniendo la velocidad.' },
+  { icon: Server, title: 'Mantenimiento & Hosting', desc: 'Alojamiento en un servidor.' },
+  { icon: Globe, title: 'Revisiones evolutivas', desc: 'Ideal para cuando quieres ampliar tu proyecto una vez te lo hayamos entregado.' },
 ]
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -452,7 +452,7 @@ function ServiceSwitcher() {
 // ── TICKET 3: Extras Carousel (Marquee) ──────────────────────────────────────
 // PERF: memo() evita que todos los badges del marquee se re-rendericen
 // cuando uno solo cambia su estado open/close
-const ExtraBadge = memo(function ExtraBadge({ title, desc, price, open, onToggle, onMouseEnter, onMouseLeave, isMobile }) {
+const ExtraBadge = memo(function ExtraBadge({ title, desc, open, onToggle, onMouseEnter, onMouseLeave, isMobile }) {
   return (
     <div
       className={`extras-badge${open ? " extras-badge--open" : ""}${isMobile ? " extras-badge--mobile" : ""}`}
@@ -461,7 +461,6 @@ const ExtraBadge = memo(function ExtraBadge({ title, desc, price, open, onToggle
     >
       <button className="extras-badge__face" onClick={onToggle} aria-expanded={open}>
         <span className="extras-badge__title">{title}</span>
-        <span className="extras-badge__price">{price}</span>
       </button>
       <div className="extras-badge__body">
         <p className="extras-badge__desc">{desc}</p>
@@ -523,7 +522,7 @@ function ExtrasMarquee() {
         <div className="em-stage">
           <div key={animKey} className={`em-card ${animClass}`}>
             <ExtraBadge
-              title={extra.title} desc={extra.desc} price={extra.price}
+              title={extra.title} desc={extra.desc}
               open={true}
               onToggle={undefined}
               isMobile={true}

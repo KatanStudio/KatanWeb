@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useCallback } from 'react'
 import { Link } from 'react-router-dom'
 import { Helmet } from 'react-helmet-async'
 import Header from '../components/Header.jsx'
@@ -13,7 +13,7 @@ const FAQ_CATEGORIES = [
       {
         num: '01',
         question: '¿Hacéis webs en WordPress o usáis plantillas?',
-        answer: 'No. Escribimos la arquitectura digital desde cero usando tecnologías modernas (React, Astro, HTML/CSS puro). Esto nos permite garantizar velocidades de carga de milisegundos, seguridad total y una escalabilidad que WordPress no puede ofrecer sin llenarse de plugins.',
+        answer: 'No. Escribimos la arquitectura digital desde cero usando tecnologías modernas (React, NodeJS...). Esto nos permite garantizar velocidades de carga de milisegundos, seguridad total y una escalabilidad que WordPress no puede ofrecer sin llenarse de plugins.',
       },
       {
         num: '02',
@@ -23,12 +23,12 @@ const FAQ_CATEGORIES = [
       {
         num: '03',
         question: '¿Qué pasa si mi negocio crece y necesito más funciones?',
-        answer: 'Al desarrollar con código propio y arquitectura escalable, tu sistema no tiene techo. Podemos añadir bases de datos, pasarelas de pago, intranets o aplicaciones complejas en el futuro sin tener que tirar tu web actual a la basura.',
+        answer: 'Al desarrollar con código propio y arquitectura escalable, tu sistema no tiene techo. En Katan ofrecemos un servicio adicional de revisiones evolutivas por si quisieras ampliar el proyecto una vez entregado, sin tener que tirar tu web actual a la basura.',
       },
       {
         num: '04',
         question: '¿Mi web estará optimizada para salir en Google?',
-        answer: 'Sí, desde la primera línea de código. A diferencia de otras agencias que te cobran el "SEO" como un extra mágico, nosotros incluimos SEO técnico nativo (semántica perfecta, etiquetas Schema, y Core Web Vitals en verde). Una web que carga en menos de 1.5s ya tiene una ventaja brutal frente a tu competencia en Google.',
+        answer: 'Sí, desde la primera línea de código. A diferencia de otras agencias que te cobran el "SEO" como un extra mágico, nosotros incluimos SEO técnico nativo (semántica perfecta, etiquetas Schema, y Core Web Vitals en verde).',
       },
       {
         num: '05',
@@ -45,6 +45,36 @@ const FAQ_CATEGORIES = [
         question: '¿Qué velocidad de carga puedo esperar?',
         answer: 'En proyectos estándar obtenemos puntuaciones de 95–100 en Google Lighthouse. Al no depender de WordPress ni plugins pesados, el código que se envía al navegador es quirúrgicamente preciso. La mayoría de nuestras webs cargan en menos de 1.2 segundos en conexiones normales.',
       },
+      {
+        num: '08',
+        question: '¿Qué incluye el SEO On-Page?',
+        answer: 'El SEO On-Page es la optimización básica de la web para que Google pueda entender correctamente su contenido. Incluye una estructura clara de títulos, URLs ordenadas, metatítulos, metadescripciones, textos alternativos en imágenes, jerarquía semántica y una base técnica limpia. En planes superiores podemos añadir Schema y Rich Snippets para ayudar a que tus páginas destaquen mejor en los resultados de búsqueda.',
+      },
+      {
+        num: '09',
+        question: '¿Qué es Schema y para qué sirve?',
+        answer: 'Schema es una capa de datos estructurados que se añade al código de la web para explicar mejor a Google qué contiene cada página: servicios, negocio local, preguntas frecuentes, productos, reseñas, precios o eventos, entre otros. No garantiza aparecer más arriba, pero mejora la forma en la que los buscadores interpretan tu web y puede facilitar resultados más completos.',
+      },
+      {
+        num: '10',
+        question: '¿Qué son los Rich Snippets?',
+        answer: 'Los Rich Snippets son resultados enriquecidos que pueden aparecer en Google con información adicional, como estrellas, precios, preguntas frecuentes, disponibilidad o detalles de producto. Para poder optar a ellos, la web debe estar bien estructurada y contar con datos Schema correctamente implementados. Son especialmente útiles en webs de servicios, negocios locales y e-commerce.',
+      },
+      {
+        num: '11',
+        question: '¿Qué incluye la analítica web?',
+        answer: 'La analítica web permite medir qué ocurre dentro de tu página: cuántas personas entran, desde dónde llegan, qué páginas visitan y qué acciones realizan. En la configuración básica instalamos Google Analytics. En planes superiores añadimos Google Search Console para analizar el rendimiento en Google y, en e-commerce, medición específica de ventas, productos, carritos y conversiones.',
+      },
+      {
+        num: '12',
+        question: '¿Para qué sirve Google Search Console?',
+        answer: 'Google Search Console permite ver cómo aparece tu web en Google: qué búsquedas generan visitas, qué páginas se están indexando, si hay errores técnicos y cómo evoluciona el rendimiento orgánico. Es una herramienta clave para entender si la web está siendo encontrada correctamente y detectar oportunidades de mejora en SEO.',
+      },
+      {
+        num: '13',
+        question: '¿Qué analítica se configura en un e-commerce?',
+        answer: 'En un e-commerce no basta con saber cuántas visitas recibe la web. Configuramos una analítica orientada a negocio para medir productos vistos, productos añadidos al carrito, inicio de checkout, compras completadas e ingresos generados. Esto permite entender dónde se pierden ventas y qué partes del embudo necesitan optimización.',
+      },
     ],
   },
   {
@@ -60,7 +90,7 @@ const FAQ_CATEGORIES = [
       {
         num: '02',
         question: '¿Me obligáis a pagar un mantenimiento mensual?',
-        answer: 'No creemos en secuestrar clientes. Al no usar WordPress ni plugins de terceros, tu web no se va a romper por falta de actualizaciones. El código te pertenece al 100%. Te configuramos el hosting de alto rendimiento y, si decides que quieres que te llevemos el mantenimiento, será porque quieres, no porque estés obligado a ello.',
+        answer: 'No. El mantenimiento mensual es opcional. \n\nAl no depender de WordPress ni de plugins de terceros, no necesitas pagar solo para evitar que la web deje de funcionar por falta de actualizaciones. \n\nNosotros podemos ayudarte a configurar un hosting rápido y estable, y si más adelante quieres que nos encarguemos del mantenimiento, podrás contratarlo como un servicio adicional, no como una obligación.'
       },
       {
         num: '03',
@@ -86,18 +116,18 @@ const FAQ_CATEGORIES = [
     items: [
       {
         num: '01',
-        question: '¿Podéis entregar un proyecto en 10 días?',
+        question: '¿Podéis entregar un proyecto en 14 días?',
         answer: 'Sí, pero depende de la escala:\n\n• Para Landing Pages y webs acotadas es totalmente viable. Para proyectos complejos, priorizamos la robustez sobre la velocidad.\n\n• Somos muy ágiles porque eliminamos la burocracia. Si tú tienes claros los objetivos y los materiales listos tras el briefing, nosotros ejecutamos sin tiempos muertos ni reuniones inútiles.',
       },
       {
         num: '02',
         question: '¿Qué pasa si el diseño inicial no me gusta?',
-        answer: 'No dejamos margen al azar. \n\nNuestro proceso incluye una reunión de arranque donde te enseñamos una demo antes de escribir una sola línea de código definitiva. \n\nDependiendo de tu plan, tienes entre 1 y 5 rondas de revisiones incluidas. No avanzamos al desarrollo hasta que la interfaz esté exactamente como tu negocio necesita.',
+        answer: 'Nuestro proceso incluye una reunión de arranque donde te enseñamos una demo antes de escribir una sola línea de código definitiva. \n\nDependiendo de tu plan, tienes entre 2 y 5 rondas de revisiones correctivas incluidas. No avanzamos al desarrollo hasta que la interfaz esté exactamente como tu negocio necesita.',
       },
       {
         num: '03',
         question: '¿Podré ver la web antes de que esté terminada?',
-        answer: 'Sí, desde el principio del desarrollo tienes acceso a un enlace de preview privado o a reuniones donde puedes ver el avance. No esperas a la entrega final para saber cómo va quedando.',
+        answer: 'Sí, al principio del desarrollo te enseñaremos una demo, además de varias rondas de revisiones correctivas donde puedes ver el avance. No esperas a la entrega final para saber cómo va quedando.',
       },
       {
         num: '04',
@@ -107,12 +137,12 @@ const FAQ_CATEGORIES = [
       {
         num: '05',
         question: '¿Qué necesito tener preparado para empezar?',
-        answer: 'Principalmente: \n\n• Textos de tu negocio \n\n• Imágenes o fotos (si las tienes) \n\n• Claridad sobre qué quieres conseguir con la web. Si no tienes algo de esto, te orientamos. \n\n Cuanto más completo llegues al briefing, más rápido y preciso será el resultado.',
+        answer: 'Principalmente: \n• Textos de tu negocio \n• Imágenes o fotos (si las tienes) \n• Claridad sobre qué quieres conseguir con la web. Si no tienes algo de esto, te orientamos. \n\n Cuanto más completo llegues al briefing, más rápido y preciso será el resultado.',
       },
       {
         num: '06',
         question: '¿Qué pasa si no tengo los textos o imágenes listos?',
-        answer: 'No te preocupes. Podemos avanzar con la estructura y la maquetación visual de la web mientras tú preparas el contenido, adaptando la entrega final a tu ritmo.\n\nAdemás, si te atascas o prefieres no encargarte de esto, ofrecemos servicios de copywriting como módulo extra. Nosotros nos ocupamos de redactar los textos orientados a la venta y de integrarlos en el diseño para que tú no tengas que hacer nada.',
+        answer: 'No pasa nada si al empezar todavía no tienes todo el contenido preparado. Podemos avanzar con la estructura y el diseño visual de la web usando contenido provisional para que el proyecto no se bloquee.\n\nEso sí, para trabajar de forma ordenada y evitar retrasos, te pediremos que el contenido definitivo —textos, imágenes, logotipos y enlaces— se entregue agrupado en una única fase, no poco a poco. Así podemos integrarlo correctamente, revisar la web completa y mantener los plazos acordados.\n\nSi prefieres no encargarte de los textos, también ofrecemos servicio de copywriting como módulo extra. En ese caso, nos ocupamos de redactar el contenido orientado a la venta y adaptarlo al diseño de la web.'
       }
     ],
   },
@@ -139,7 +169,7 @@ const FAQ_CATEGORIES = [
       {
         num: '04',
         question: '¿Tenéis portfolio de proyectos anteriores?',
-        answer: 'Sí. Puedes verlo en la sección Portfolio de la web. Si quieres ver algo específico o tienes preguntas sobre algún proyecto, escríbenos directamente.',
+        answer: 'Sí. Puedes verlo en la sección Proyectos de la web. Si quieres ver algo específico o tienes preguntas sobre algún proyecto, escríbenos directamente.',
       },
       {
         num: '05',
@@ -155,7 +185,7 @@ const ALL_ITEMS = FAQ_CATEGORIES.flatMap((cat) =>
   cat.items.map((item) => ({ ...item, categoryLabel: cat.label, categoryTitle: cat.title }))
 )
 
-// 1. Ordenamos alfabéticamente por la pregunta
+  // 1. Ordenamos alfabéticamente por la pregunta
   .sort((a, b) => a.question.localeCompare(b.question))
   // 2. Mapeamos para añadir un número global correlativo (01, 02, 03...)
   .map((item, index) => ({
@@ -168,15 +198,12 @@ const NAV_CATEGORIES = [
   ...FAQ_CATEGORIES,
 ]
 
-function FaqItem({ item }) {
-  const [open, setOpen] = useState(false)
-  
-  // Usamos el número global si existe (Vista Todas), o el normal (Vista Categorías)
+function FaqItem({ item, isOpen, onToggle }) {
   const displayNum = item.globalNum || item.num;
 
   return (
-    <div className={`faq-item${open ? ' is-active' : ''}`}>
-      <button className="faq-question" aria-expanded={open} onClick={() => setOpen(!open)}>
+    <div className={`faq-item${isOpen ? ' is-active' : ''}`}>
+      <button className="faq-question" aria-expanded={isOpen} onClick={onToggle}>
         <span className="faq-num">{displayNum}</span>
         <span className="faq-text">
           {item.question}
@@ -184,7 +211,6 @@ function FaqItem({ item }) {
         <span className="faq-icon"></span>
       </button>
       <div className="faq-answer">
-        {/* Aquí mantén la lógica que decidieras usar para las negritas/saltos de línea */}
         <p>{item.answer}</p>
       </div>
     </div>
@@ -196,10 +222,16 @@ const INITIAL_VISIBLE = 7
 export default function FAQ() {
   const [activeCategory, setActiveCategory] = useState('todas')
   const [showAll, setShowAll] = useState(false)
+  const [openItemId, setOpenItemId] = useState(null)
   const totalQuestions = ALL_ITEMS.length
+
+  const handleItemToggle = useCallback((id) => {
+    setOpenItemId(prev => prev === id ? null : id)
+  }, [])
 
   const handleCategoryChange = (id) => {
     setActiveCategory(id)
+    setOpenItemId(null)
   }
 
   return (
@@ -320,7 +352,10 @@ export default function FAQ() {
                 </header>
                 <div className="faq-accordion">
                   {(showAll ? ALL_ITEMS : ALL_ITEMS.slice(0, INITIAL_VISIBLE)).map((item, i) => (
-                    <FaqItem key={`all-${i}`} item={item} showCategory={true} />
+                    <FaqItem key={`all-${i}`} item={item} showCategory={true}
+                      isOpen={openItemId === item.question}
+                      onToggle={() => handleItemToggle(item.question)}
+                    />
                   ))}
                 </div>
                 {!showAll && ALL_ITEMS.length > INITIAL_VISIBLE && (
@@ -348,7 +383,10 @@ export default function FAQ() {
                   </header>
                   <div className="faq-accordion">
                     {cat.items.map((item) => (
-                      <FaqItem key={item.num} item={item} />
+                      <FaqItem key={item.num} item={item}
+                        isOpen={openItemId === item.question}
+                        onToggle={() => handleItemToggle(item.question)}
+                      />
                     ))}
                   </div>
                 </div>

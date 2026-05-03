@@ -68,12 +68,19 @@ export default function Home() {
           </div>
 
           <div className="hero__content">
-            <h1 className="hero__h1" style={{ textTransform: 'none' }}>
-              Creamos la web que tu negocio<br /><span className="hero__h1-accent">necesita para crecer.</span>
-            </h1>
-            <p className="hero__sub">
-              Tu web no es un folleto, es el escaparate más importante de tu negocio. <br /> Creamos páginas confiables para convertir usuarios en clientes.
-            </p>
+       <h1 className="hero__h1 hero__h1--desktop" style={{ textTransform: 'none' }}>
+  Creamos la web que tu negocio
+  <br />
+  <span className="hero__h1-accent">necesita para crecer.</span>
+</h1>
+
+<h1 className="hero__h1 hero__h1--mobile" style={{ textTransform: 'none' }}>
+  Creamos la web<br />
+  que tu negocio<br />
+  <span className="hero__h1-accent">necesita para</span><br />
+  <span className="hero__h1-accent">crecer.</span>
+</h1>
+            
             <div className="hero__actions">
               <Link to="/servicios" className="btn btn--primary btn--chamfer">Nuestros servicios</Link>
               <Link to="/contacto" className="btn btn--ghost">Presupuesto rápido</Link>
