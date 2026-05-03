@@ -33,6 +33,12 @@
   color: var(--blade);
 }
 
+.footer__brand-logo {
+  height: 28px;
+  width: auto;
+  display: block;
+}
+
 .footer__tagline {
   font-family: var(--font-mono);
   font-size: 0.75rem;

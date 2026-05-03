@@ -40,6 +40,9 @@
 
 .nav__logo {
   flex-shrink: 0;
+  width: 36px;
+  height: 36px;
+  display: block;
 }
 
 .nav__wordmark {

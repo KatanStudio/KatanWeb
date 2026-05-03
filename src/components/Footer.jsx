@@ -17,7 +17,7 @@ export default function Footer() {
     <footer className="footer">
       <div className="container footer__inner">
         <div className="footer__row">
-          <span className="footer__brand">katan</span>
+          <img src="/logos/KATAN LOGO SVG (2).svg" className="footer__brand-logo" alt="Katan Studio" />
           <span className="footer__dot"></span>
           <span className="footer__tagline">// sharp by design</span>
         </div>

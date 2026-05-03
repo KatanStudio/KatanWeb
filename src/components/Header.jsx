@@ -11,17 +11,6 @@ const NAV_LINKS = [
   { to: '/contacto', label: 'Contacto' },
 ]
 
-const KatanLogo = () => (
-  <svg className="nav__logo" width="36" height="36" viewBox="0 0 96 96" fill="none" aria-hidden="true">
-    <path d="M0 0 H96 V82 L82 96 H0 Z" fill="#1E1E2A" />
-    <path d="M82 96 L96 82" stroke="#FF0080" strokeWidth="2.5" />
-    <rect x="26" y="22" width="7" height="52" fill="#F0F4F8" />
-    <path d="M33 48 L63 22 H72 L42 48 Z" fill="#F0F4F8" />
-    <path d="M33 48 L63 74 H72 L42 48 Z" fill="#F0F4F8" />
-    <circle cx="33" cy="48" r="3.5" fill="#FF0080" />
-  </svg>
-)
-
 export default function Header() {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
@@ -47,8 +36,7 @@ export default function Header() {
     <header className={`nav${scrolled ? ' nav--scrolled' : ''}`} id="nav">
       <div className="nav__inner">
         <Link to="/" className="nav__brand" aria-label="Katan Studio — Inicio">
-          <KatanLogo />
-          <span className="nav__wordmark">katan</span>
+          <img src="/logos/KATAN LOGO SVG (2).svg" className="nav__logo" alt="" aria-hidden="true" width="36" height="60" />
         </Link>
 
         <nav className="nav__links" aria-label="Navegación principal">

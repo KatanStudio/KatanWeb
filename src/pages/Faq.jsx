@@ -18,7 +18,7 @@ const FAQ_CATEGORIES = [
       {
         num: '02',
         question: '¿Podré modificar textos o fotos yo mismo?',
-        answer: 'Por supuesto. Si eliges un plan de Web Corporativa o E-Commerce, integramos un panel de administración limpio y adaptado solo con las opciones que necesitas tocar, sin configuraciones complejas que puedan romper la web.',
+        answer: 'Si eliges un plan de Web Corporativa o E-Commerce, integramos un panel de administración limpio y adaptado para las secciones modificables (no para la totalidad de la web), sin configuraciones complejas que puedan romper la web.',
       },
       {
         num: '03',
@@ -28,12 +28,12 @@ const FAQ_CATEGORIES = [
       {
         num: '04',
         question: '¿Mi web estará optimizada para salir en Google?',
-        answer: 'Sí, desde la primera línea de código. A diferencia de otras agencias que te cobran el "SEO" como un extra mágico, nosotros incluimos SEO técnico nativo (semántica perfecta, etiquetas Schema, y Core Web Vitals en verde).',
+        answer: 'Sí, desde la primera línea de código. A diferencia de otras agencias que te cobran el "SEO" como un extra mágico, nosotros incluimos SEO técnico en función del servicio contratado (semántica perfecta, etiquetas Schema, y Core Web Vitals en verde), todo listo para aprecer en Google.',
       },
       {
         num: '05',
         question: '¿Qué pasarelas de pago incluís en los E-Commerce?',
-        answer: 'Integramos la infraestructura financiera más robusta del mercado: Stripe (para cobros con tarjeta, Apple Pay y Google Pay con cero fricción) y PayPal. Si tu mercado principal es España, también te dejamos funcionando Redsys para pagos directos y Bizum.',
+        answer: 'Integramos la infraestructura financiera más robusta del mercado: Stripe (para cobros con tarjeta, Apple Pay y Google Pay con cero fricción).',
       },
       {
         num: '06',
@@ -85,7 +85,7 @@ const FAQ_CATEGORIES = [
       {
         num: '01',
         question: '¿El precio puede variar a mitad del proyecto?',
-        answer: 'Nunca. En Katan trabajamos con presupuestos cerrados. Tras analizar tu formulario inicial (briefing), te enviamos una propuesta con el coste exacto y las fechas de entrega. Lo que firmas el Día 1 es lo que pagas al terminar.',
+        answer: 'Nunca. En Katan trabajamos con presupuestos cerrados. Tras analizar tu formulario inicial (briefing), te enviamos una propuesta con el coste exacto y las fechas de entrega. Lo que firmas el día 1 es lo que pagas al terminar.',
       },
       {
         num: '02',
@@ -95,7 +95,7 @@ const FAQ_CATEGORIES = [
       {
         num: '03',
         question: '¿Hay algún coste oculto después de la entrega?',
-        answer: 'No. El único coste recurrente que tendrás es el hosting y el dominio, que son tuyos y los contratas directamente. Nosotros te ayudamos a configurarlos, pero la factura llega a tu nombre, no pasa por nosotros.',
+        answer: 'No. El único coste recurrente que tendrás es el hosting y el dominio, que puedes contratarlos tú directamente o a través de nuestro servicio adicional. \n\nEn el primer caso te orientamos a configurarlos, pero la factura llega a tu nombre. En el segundo caso, nosotros nos encargamos de todo.',
       },
       {
         num: '04',
@@ -116,8 +116,8 @@ const FAQ_CATEGORIES = [
     items: [
       {
         num: '01',
-        question: '¿Podéis entregar un proyecto en 14 días?',
-        answer: 'Sí, pero depende de la escala:\n\n• Para Landing Pages y webs acotadas es totalmente viable. Para proyectos complejos, priorizamos la robustez sobre la velocidad.\n\n• Somos muy ágiles porque eliminamos la burocracia. Si tú tienes claros los objetivos y los materiales listos tras el briefing, nosotros ejecutamos sin tiempos muertos ni reuniones inútiles.',
+        question: '¿Entregáis rápido los proyectos?',
+        answer: 'Sí, pero depende de la escala:\n\n• Para Landing Pages y webs acotadas es totalmente viable. Para proyectos complejos, priorizamos la robustez sobre la velocidad.\n\n• Somos muy ágiles porque eliminamos la burocracia. Si tú tienes claros los objetivos y los materiales listos tras el formulario, nosotros ejecutamos sin tiempos muertos ni reuniones inútiles.',
       },
       {
         num: '02',
@@ -137,12 +137,17 @@ const FAQ_CATEGORIES = [
       {
         num: '05',
         question: '¿Qué necesito tener preparado para empezar?',
-        answer: 'Principalmente: \n• Textos de tu negocio \n• Imágenes o fotos (si las tienes) \n• Claridad sobre qué quieres conseguir con la web. Si no tienes algo de esto, te orientamos. \n\n Cuanto más completo llegues al briefing, más rápido y preciso será el resultado.',
+        answer: 'Principalmente: \n• Textos de tu negocio. \n• Imágenes o fotos (si las tienes). \n• Claridad sobre qué quieres conseguir con la web. Si no tienes algo de esto, te orientamos. \n\n Cuanto más completo llegues al briefing, más rápido y preciso será el resultado.',
       },
       {
         num: '06',
         question: '¿Qué pasa si no tengo los textos o imágenes listos?',
-        answer: 'No pasa nada si al empezar todavía no tienes todo el contenido preparado. Podemos avanzar con la estructura y el diseño visual de la web usando contenido provisional para que el proyecto no se bloquee.\n\nEso sí, para trabajar de forma ordenada y evitar retrasos, te pediremos que el contenido definitivo —textos, imágenes, logotipos y enlaces— se entregue agrupado en una única fase, no poco a poco. Así podemos integrarlo correctamente, revisar la web completa y mantener los plazos acordados.\n\nSi prefieres no encargarte de los textos, también ofrecemos servicio de copywriting como módulo extra. En ese caso, nos ocupamos de redactar el contenido orientado a la venta y adaptarlo al diseño de la web.'
+        answer: 'No pasa nada si al empezar todavía no tienes todo el contenido preparado. Podemos avanzar con la estructura y el diseño visual de la web usando contenido provisional para que el proyecto no se bloquee.\n\nEso sí, para trabajar de forma ordenada y evitar retrasos, te pediremos que el contenido definitivo —textos, imágenes, logotipos y enlaces— se entregue agrupado en una única fase, no poco a poco. Así podemos integrarlo correctamente, revisar la web completa y mantener los plazos acordados.\n\nSi prefieres no encargarte de los textos o la identidad visual, también ofrecemos servicio de copywriting (textos) o de identidad visual (logos, tipografía, tonos de uso...) como módulo extra. En ese caso, nos ocupamos de redactar el contenido y diseñar la identidad para orientarlo a la venta y adaptarlo al diseño de la web.'
+      },
+      {
+        num: '07',
+        question: '¿Cómo son las rondas de revisiones?',
+        answer: '• Las rondas correctivas (tienes incluidas de 2 a 5 según tu plan) sirven para corregir y perfeccionar el trabajo original. \n\n• Las rondas evolutivas te permiten agregar nuevas funcionalidades fuera del presupuesto inicial y se facturan como servicio extra.'
       }
     ],
   },

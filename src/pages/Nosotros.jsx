@@ -266,14 +266,7 @@ export default function Nosotros() {
             <div className="compare">
               <div className="compare__col compare__col--katan">
                 <div className="compare__badge">
-                  <svg width="20" height="20" viewBox="0 0 96 96" fill="none" aria-hidden="true">
-                    <path d="M0 0 H96 V82 L82 96 H0 Z" fill="#1E1E2A" />
-                    <path d="M82 96 L96 82" stroke="#FF0080" strokeWidth="3" />
-                    <rect x="26" y="22" width="7" height="52" fill="#F0F4F8" />
-                    <path d="M33 48 L63 22 H72 L42 48 Z" fill="#F0F4F8" />
-                    <path d="M33 48 L63 74 H72 L42 48 Z" fill="#F0F4F8" />
-                    <circle cx="33" cy="48" r="3.5" fill="#FF0080" />
-                  </svg>
+                  <img src="/logos/KATAN LOGO SVG (2).svg" alt="" aria-hidden="true" width="20" height="20" />
                   Katan
                 </div>
                 <div className="compare__rows">

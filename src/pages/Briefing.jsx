@@ -3,17 +3,6 @@ import { Link } from 'react-router-dom'
 import { useState } from 'react'
 import Footer from '../components/Footer.jsx'
 
-const KatanLogo = () => (
-  <svg className="nav__logo" width="36" height="36" viewBox="0 0 96 96" fill="none" aria-hidden="true">
-    <path d="M0 0 H96 V82 L82 96 H0 Z" fill="#1E1E2A" />
-    <path d="M82 96 L96 82" stroke="#FF0080" strokeWidth="2.5" />
-    <rect x="26" y="22" width="7" height="52" fill="#F0F4F8" />
-    <path d="M33 48 L63 22 H72 L42 48 Z" fill="#F0F4F8" />
-    <path d="M33 48 L63 74 H72 L42 48 Z" fill="#F0F4F8" />
-    <circle cx="33" cy="48" r="3.5" fill="#FF0080" />
-  </svg>
-)
-
 const EXTRAS_LIST = [
   'Copywriting (Redacción de textos)',
   'Diseño de logotipo / Identidad visual',
@@ -104,10 +93,7 @@ export default function Briefing() {
         <div className="container" style={{ textAlign: 'center', padding: '6rem 1rem' }}>
           <div className="fade-in">
             <div style={{ marginBottom: '2rem' }}>
-              <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="var(--spark)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-                <polyline points="22 4 12 14.01 9 11.01"></polyline>
-              </svg>
+              <img src="/logos/KATAN LOGO SVG (2).svg" alt="Katan Studio" style={{ height: '80px', width: 'auto' }} />
             </div>
             <h1 className="legal-h1">¡Briefing recibido!</h1>
             <p className="section__sub" style={{ maxWidth: '500px', margin: '0 auto 2rem' }}>

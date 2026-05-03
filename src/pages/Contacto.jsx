@@ -18,17 +18,7 @@ export default function Contacto() {
           <div className="contacto-hero__bg" aria-hidden="true">
             <div className="glow-orb orb-page-1" />
             <div className="glow-orb orb-page-2" />
-            <svg className="contacto-hero__k" viewBox="0 0 96 96" fill="none" aria-hidden="true">
-              {/* Fondo: ahora transparente para evitar el bloque rojo sólido */}
-              <path d="M0 0 H96 V82 L82 96 H0 Z" fill="transparent" />
-              <path d="M82 96 L96 82" stroke="#FF0080" strokeWidth="2" />
-
-              {/* La "K" desplazada a la izquierda (X=6 en lugar de 26) */}
-              <rect x="6" y="22" width="7" height="52" fill="#FF0080" />
-              <path d="M13 48 L43 22 H52 L22 48 Z" fill="#FF0080" />
-              <path d="M13 48 L43 74 H52 L22 48 Z" fill="#FF0080" />
-              <circle cx="13" cy="48" r="3.5" fill="#FF0080" />
-            </svg>
+            <img src="/logos/KATAN LOGO SVG (3).svg" className="contacto-hero__k" alt="" aria-hidden="true" />
           </div>
           <div className="container">
             <div className="contacto-hero__content">
