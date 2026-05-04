@@ -7,7 +7,7 @@ const PROJECTS = [
   {
     href: 'https://viananails.com/',
     category: 'ecommerce',
-    img: '../../img/VianaNails.png',
+    img: '../../img/VianaNails.webp',
     alt: 'Proyecto VianaNails',
     tag: 'E-Commerce',
     title: 'Viana Nails',
@@ -19,7 +19,7 @@ const PROJECTS = [
   {
     href: 'https://xyloshome.com',
     category: 'landing',
-    img: '/img/XylosHome.png',
+    img: '/img/XylosHome.webp',
     alt: 'Proyecto XylosHome',
     tag: 'Landing Page',
     title: 'Xylos Home',
