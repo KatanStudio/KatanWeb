@@ -154,7 +154,7 @@ export default function Proceso() {
             <header className="section__header">
               <p className="section-label">/Proceso</p>
               <h2 className="section__h2" style={{ textTransform: 'none', textAlign: 'center' }}>Del formulario al<br /><span className="accent">lanzamiento.</span></h2>
-              <p className="section__sub" style={{ textAlign: 'center' }}>
+              <p className="section__sub" style={{ textAlign: 'center', margin: '1rem auto 0' }}>
                 Sin burocracia, sin reuniones vacías. Cada contacto tiene un propósito claro.
               </p>
             </header>

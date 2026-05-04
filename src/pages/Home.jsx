@@ -67,7 +67,7 @@ export default function Home() {
           </div>
 
           <img
-            src="/logos/KATAN LOGO SVG Negro.svg"
+            src="/logos/wetransfer_katan_2026-05-04_0628/KATAN LOGO SVG (1).svg"
             className="hero__watermark"
             alt=""
             aria-hidden="true"
