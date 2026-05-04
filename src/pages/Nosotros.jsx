@@ -266,7 +266,7 @@ export default function Nosotros() {
             <div className="compare">
               <div className="compare__col compare__col--katan">
                 <div className="compare__badge">
-                  <img src="/logos/KATAN LOGO SVG Blanco.svg" alt="" aria-hidden="true" width="32" height="32" />
+                  <img src="/logos/wetransfer_katan_2026-05-04_0628/KATAN LOGO SVG (2).svg" alt="" aria-hidden="true" width="100" height="50" />
                 </div>
                 <div className="compare__rows">
                   {[

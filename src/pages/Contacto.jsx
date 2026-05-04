@@ -18,7 +18,7 @@ export default function Contacto() {
           <div className="contacto-hero__bg" aria-hidden="true">
             <div className="glow-orb orb-blue-1" />
             <div className="glow-orb orb-blue-2" />
-            <img src="/logos/KATAN LOGO SVG Blanco.svg" className="contacto-hero__k" alt="" aria-hidden="true" />
+            <img src="/logos/wetransfer_katan_2026-05-04_0628/KATAN LOGO SVG (4).svg" className="contacto-hero__k" alt="" aria-hidden="true" />
           </div>
           <div className="container">
             <div className="contacto-hero__content">

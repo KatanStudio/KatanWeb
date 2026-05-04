@@ -92,8 +92,8 @@ export default function Briefing() {
       <div style={{ display: 'grid', gridTemplateRows: '1fr auto', minHeight: '100svh' }}>
         <div className="container" style={{ textAlign: 'center', padding: '6rem 1rem' }}>
           <div className="fade-in">
-            <div style={{ marginBottom: '2rem' }}>
-              <img src="/logos/KATAN LOGO SVG Blanco.svg" alt="Katan Studio" style={{ height: '80px', width: 'auto' }} />
+            <div style={{ marginBottom: '1rem' }}>
+              <img src="/logos/wetransfer_katan_2026-05-04_0628/KATAN LOGO SVG (2).svg" alt="Katan Studio" style={{ height: '90px', width: 'auto' }} />
             </div>
             <h1 className="legal-h1">¡Briefing recibido!</h1>
             <p className="section__sub" style={{ maxWidth: '500px', margin: '0 auto 2rem' }}>
