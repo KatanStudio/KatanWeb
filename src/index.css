@@ -1,0 +1,17 @@
+@import './styles/base.css';
+@import './styles/utilities.css';
+@import './styles/nav.css';
+@import './styles/hero.css';
+@import './styles/tech-stack.css';
+@import './styles/faq.css';
+@import './styles/cards.css';
+@import './styles/servicios.css';
+@import './styles/proceso.css';
+@import './styles/portfolio.css';
+@import './styles/contacto.css';
+@import './styles/cta.css';
+@import './styles/footer.css';
+@import './styles/cookies.css';
+@import './styles/legal.css';
+@import './styles/animations.css';
+@import './styles/mobile-fixes.css';

@@ -1,0 +1,61 @@
+/* ═══════════════════════════════════════════════
+   BASE — Reset & Design Tokens
+   ═══════════════════════════════════════════════ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --forge: #0A0A0A;
+  --sheath: #14141A;
+  --ghost: #1E1E2A;
+  --blade: #F0F4F8;
+  --edge: #FF0080;
+  --spark: #00E5FF;
+  --steel: #8A9BB4;
+
+  --font-head: 'Unbounded', sans-serif;
+  --font-body: 'Instrument Sans', sans-serif;
+  --font-mono: 'DM Mono', monospace;
+
+  --section-py: 5rem;
+  --container: 75%;
+  --gap: 2px;
+
+  --t-fast: 150ms ease;
+  --t-mid: 280ms ease;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  background: var(--forge);
+  color: var(--blade);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+img,
+svg {
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+}

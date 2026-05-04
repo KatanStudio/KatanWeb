@@ -1,0 +1,246 @@
+/* ═══════════════════════════════════════════════
+   UTILITIES — Container, Section, Buttons, Kicker
+   ═══════════════════════════════════════════════ */
+
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.accent {
+  color: var(--edge);
+}
+
+/* ── Kicker ── */
+.kicker {
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  letter-spacing: 0.25em;
+  color: var(--edge);
+  text-transform: uppercase;
+  margin-bottom: 1.30rem;
+}
+
+.kicker--center {
+  text-align: center;
+  margin-top: 15px;
+  margin-bottom: 0px;
+}
+
+/* ── Section ── */
+.section {
+  padding: var(--section-py) 0;
+  border-top: 1px solid var(--ghost);
+  position: relative;
+  isolation: isolate;
+}
+
+.section--dark {
+  background: var(--ghost);
+}
+
+.section__header {
+  margin-bottom: 3.5rem;
+}
+
+.section-label {
+  font-family: var(--font-mono);
+  font-size: 1rem;
+  letter-spacing: 0.25em;
+  color: var(--edge);
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+}
+
+.section-label::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: var(--ghost);
+}
+
+.section__h2 {
+  font-family: var(--font-head);
+  font-size: clamp(1.8rem, 6vw, 3.5rem);
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  line-height: 1.0;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+.section__sub {
+  font-size: 1.5rem;
+  color: var(--steel);
+  margin-top: 1rem;
+  max-width: 42ch;
+}
+
+/* ── Buttons ── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  cursor: pointer;
+  transition: opacity var(--t-mid), transform var(--t-mid), background var(--t-mid);
+  white-space: nowrap;
+  border: none;
+  outline: none;
+}
+
+.btn:hover {
+  opacity: 0.85;
+  transform: translateY(-1px);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+.btn--primary {
+  background: var(--edge);
+  color: #000;
+  padding: 0.55rem 1.25rem;
+  border-radius: 5px;
+}
+
+.btn--ghost {
+  background: transparent;
+  color: var(--blade);
+  border: 3px solid var(--edge);
+  padding: 0.85rem 1.5rem;
+  border-radius: 6px;
+  font-size: 0.95rem;
+}
+
+.btn--ghost:hover {
+  border-color: var(--steel);
+}
+
+.btn--chamfer {
+  background: var(--edge);
+  color: var(--blade);
+  padding: 0.85rem 1.5rem;
+  font-size: 0.95rem;
+  clip-path: polygon(0 0, calc(100% - 14px) 0, 100% 14px, 100% 100%, 14px 100%, 0 calc(100% - 14px));
+  border-radius: 0;
+  transition: background var(--t-mid), transform var(--t-mid), opacity var(--t-mid);
+}
+
+.btn--chamfer:hover {
+  background: #ff2694;
+  opacity: 1;
+  clip-path: polygon(0 0, calc(100% - 18px) 0, 100% 18px, 100% 100%, 18px 100%, 0 calc(100% - 18px));
+}
+
+.btn--large {
+  padding: 1.1rem 2.75rem;
+  font-size: 1rem;
+  clip-path: polygon(0 0, calc(100% - 18px) 0, 100% 18px, 100% 100%, 18px 100%, 0 calc(100% - 18px));
+}
+
+.btn--large:hover {
+  clip-path: polygon(0 0, calc(100% - 22px) 0, 100% 22px, 100% 100%, 22px 100%, 0 calc(100% - 22px));
+}
+
+/* ── Focus ── */
+:focus-visible {
+  outline: 2px solid var(--edge);
+  outline-offset: 3px;
+}
+
+/* ══════════════════════════════════════════════
+   PAGE ORBS — reutilizables en cualquier sección
+   ══════════════════════════════════════════════ */
+
+/* La sección necesita overflow:hidden para recortar los orbes */
+.section--orbs {
+  overflow: hidden;
+}
+
+.orb-page-1 {
+  width: 45vw;
+  height: 45vw;
+  background-color: var(--edge);
+  top: 25%;
+  right: -8%;
+  animation-delay: -4s;
+  animation-duration: 24s;
+}
+
+.orb-page-2 {
+  width: 38vw;
+  height: 38vw;
+  background-color: var(--spark);
+  top: -8%;
+  left: -5%;
+  animation-delay: -12s;
+  animation-duration: 30s;
+}
+
+/* ── Orbes azules (ambos cyan, sin el rosa) ── */
+.orb-blue-1 {
+  width: 45vw;
+  height: 45vw;
+  background-color: var(--spark);
+  top: 25%;
+  right: -8%;
+  animation-delay: -4s;
+  animation-duration: 24s;
+}
+
+.orb-blue-2 {
+  width: 38vw;
+  height: 38vw;
+  background-color: var(--spark);
+  top: -8%;
+  left: -5%;
+  animation-delay: -12s;
+  animation-duration: 30s;
+}
+
+/* ── Orbes con posiciones alternadas (izquierda/derecha invertidas) ── */
+.orb-alt-1 {
+  width: 45vw;
+  height: 45vw;
+  background-color: var(--edge);
+  top: 25%;
+  left: -8%;
+  animation-delay: -4s;
+  animation-duration: 24s;
+}
+
+.orb-alt-2 {
+  width: 38vw;
+  height: 38vw;
+  background-color: var(--spark);
+  top: -8%;
+  right: -5%;
+  animation-delay: -12s;
+  animation-duration: 30s;
+}
+
+/* ── Fondo degradado oscuro (igual que #modulos en Servicios) ── */
+.section--gradient-bg {
+  background: linear-gradient(to bottom, var(--ghost) 0%, var(--forge) 100%);
+}
+
+.section--gradient-bg::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(255, 0, 128, 0.05) 0%, transparent 80%);
+  pointer-events: none;
+  z-index: 0;
+}

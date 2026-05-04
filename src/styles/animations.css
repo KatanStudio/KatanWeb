@@ -1,0 +1,58 @@
+/* ═══════════════════════════════════════════════
+   ANIMATIONS — Fade-in stagger, reducción de movimiento
+   ═══════════════════════════════════════════════ */
+.anim-fade {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.anim-fade.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.services-grid .anim-fade:nth-child(2) { transition-delay: 0.1s; }
+.services-grid .anim-fade:nth-child(3) { transition-delay: 0.2s; }
+
+.modules-grid .anim-fade:nth-child(2) { transition-delay: 0.05s; }
+.modules-grid .anim-fade:nth-child(3) { transition-delay: 0.10s; }
+.modules-grid .anim-fade:nth-child(4) { transition-delay: 0.15s; }
+.modules-grid .anim-fade:nth-child(5) { transition-delay: 0.20s; }
+.modules-grid .anim-fade:nth-child(6) { transition-delay: 0.25s; }
+.modules-grid .anim-fade:nth-child(7) { transition-delay: 0.30s; }
+.modules-grid .anim-fade:nth-child(8) { transition-delay: 0.35s; }
+
+.process__step.anim-fade:nth-child(2) { transition-delay: 0.1s; }
+.process__step.anim-fade:nth-child(3) { transition-delay: 0.2s; }
+.process__step.anim-fade:nth-child(4) { transition-delay: 0.3s; }
+
+/* ── prefers-reduced-motion (unificado) ── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .anim-fade {
+    opacity: 1;
+    transform: none;
+  }
+
+  .process-card {
+    opacity: 1;
+    translate: 0 0;
+  }
+
+  .glow-orb,
+  .svc-sw__orb--1,
+  .svc-sw__orb--2,
+  .svc-sw__orb--3,
+  .tech-marquee__track,
+  .extras-marquee__track {
+    animation: none !important;
+  }
+}
