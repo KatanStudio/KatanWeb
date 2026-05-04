@@ -39,7 +39,7 @@ export default function Privacidad() {
                 </tr>
                 <tr>
                   <td><strong>Email de contacto</strong></td>
-                  <td><a href="mailto:katan.webs@gmail.com" style={{ color: 'var(--spark)' }}>katan.webs@gmail.com</a></td>
+                  <td><a href="mailto:info@katan.es" style={{ color: 'var(--spark)' }}>info@katan.es</a></td>
                 </tr>
               </tbody>
             </table>
@@ -69,7 +69,7 @@ export default function Privacidad() {
               <li><strong>Supresión:</strong> Pedirnos que borremos todo tu rastro de nuestro sistema.</li>
               <li><strong>Oposición y limitación:</strong> Oponerte al tratamiento de tus datos.</li>
             </ul>
-            <p>Para ejercerlos, simplemente escribe un email directo a <a href="mailto:katan.webs@gmail.com" style={{ color: 'var(--spark)' }}>katan.webs@gmail.com</a>. Lo procesaremos sin fricciones.</p>
+            <p>Para ejercerlos, simplemente escribe un email directo a <a href="mailto:info@katan.es" style={{ color: 'var(--spark)' }}>info@katan.es</a>. Lo procesaremos sin fricciones.</p>
 
             <h2>7. Medidas de seguridad</h2>
             <p>Hacemos webs seguras y tratamos tus datos de la misma manera. Hemos adoptado las medidas técnicas necesarias (como certificados SSL y encriptación básica) para evitar el acceso no autorizado o la pérdida de tu información.</p>

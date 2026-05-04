@@ -28,7 +28,7 @@ export default function Contacto() {
               <Link to="/briefing" className="btn btn--chamfer btn--large">Solicitar presupuesto</Link>
               <p className="contacto-hero__note">
                 O escríbenos directamente a{' '}
-                <a href="mailto:katan.webs@gmail.com" className="contacto-hero__email">katan.webs@gmail.com</a>
+                <a href="mailto:info@katan.es" className="contacto-hero__email">info@katan.es</a>
               </p>
             </div>
           </div>

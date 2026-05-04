@@ -417,7 +417,7 @@ export default function FAQ() {
                 <Link to="/contacto" className="btn btn--primary btn--large btn--chamfer">Contactar ahora →</Link>
                 <div className="cta-email-box">
                   <span className="cta-email-label">O escríbenos a:</span>
-                  <a href="mailto:katan.webs@gmail.com" className="cta-email-link">katan.webs@gmail.com</a>
+                  <a href="mailto:info@katan.es" className="cta-email-link">info@katan.es</a>
                 </div>
               </div>
             </div>

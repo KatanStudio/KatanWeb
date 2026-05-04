@@ -597,7 +597,7 @@ export default function Servicios() {
               </p><p className="section__sub">
                 ¿No sabes qué se adapta mejor a tu negocio?
               </p> <br />
-              <a href="mailto:katan.webs@gmail.com" className="btn btn--ghost">
+              <a href="mailto:info@katan.es" className="btn btn--ghost">
               Escribenos y te asesoramos gratis →
             </a>
             </header>
@@ -623,7 +623,7 @@ export default function Servicios() {
             <p className="section__sub" style={{ marginBottom: '1.5rem', textAlign: 'center', fontSize: '1.4rem' }}>
               ¿No encuentras el servicio exacto o necesitas algo a medida?
             </p>
-            <a href="mailto:katan.webs@gmail.com" className="btn btn--ghost">
+            <a href="mailto:info@katan.es" className="btn btn--ghost">
               Cuéntanos tu idea →
             </a>
           </div>

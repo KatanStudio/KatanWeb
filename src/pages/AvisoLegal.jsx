@@ -43,7 +43,7 @@ export default function AvisoLegal() {
                 </tr>
                 <tr>
                   <td><strong>Email de contacto</strong></td>
-                  <td><a href="mailto:katan.webs@gmail.com" style={{ color: 'var(--spark)' }}>katan.webs@gmail.com</a></td>
+                  <td><a href="mailto:info@katan.es" style={{ color: 'var(--spark)' }}>info@katan.es</a></td>
                 </tr>
               </tbody>
             </table>

@@ -23,7 +23,7 @@ export default function Footer() {
         </div>
 
         <div className="footer__row footer__contact">
-          <a href="mailto:katan.webs@gmail.com" className="contacto-hero__email">katan.webs@gmail.com</a>
+          <a href="mailto:info@katan.es" className="contacto-hero__email">info@katan.es</a>
           <span className="footer__dot"></span>
           <span className="footer__text">España</span>
         </div>
