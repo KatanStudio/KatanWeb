@@ -5,7 +5,6 @@ import Footer from '../components/Footer.jsx'
 
 // ─────────────────────────────────────────────
 // 🔧 CONFIGURACIÓN HUBSPOT
-// Sustituye estos dos valores por los tuyos
 // ─────────────────────────────────────────────
 const HUBSPOT_PORTAL_ID = '148402397';
 const HUBSPOT_FORM_ID   = 'c2601690-8d77-4f53-9477-13415070a477';
@@ -56,7 +55,6 @@ export default function Briefing() {
     negocio: '',
     publico: '',
     objetivo: '',
-    diferenciacion: '',
     competidores: '',
     servicio: '',
     extras: [],
@@ -95,35 +93,46 @@ export default function Briefing() {
 
   // ─────────────────────────────────────────────────────────────────────────
   // ENVÍO A HUBSPOT
-  // Cada { name } debe coincidir exactamente con el nombre interno
-  // de la propiedad en HubSpot (ver instrucciones al final del archivo)
+  //
+  // Campos fusionados:
+  //   · firstname + lastname  → se envían separados (HubSpot los une en "Nombre completo" automáticamente)
+  //   · servicios             → tipo de web + extras en una sola propiedad personalizada
+  //
+  // Propiedades personalizadas necesarias en HubSpot (9 en total):
+  //   sector, negocio, publico_objetivo, objetivo_web, competidores,
+  //   servicios, materiales_disponibles, referencias_visuales,
+  //   nivel_urgencia, presupuesto_estimado
   // ─────────────────────────────────────────────────────────────────────────
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSending(true);
     setErrorMsg('');
 
-    const fields = [
-      // ── Propiedades ESTÁNDAR de HubSpot (ya existen, no hay que crearlas) ──
-      { name: 'firstname',      value: formData.nombre },
-      { name: 'lastname',       value: formData.apellidos },
-      { name: 'email',          value: formData.email },
-      { name: 'phone',          value: `${formData.prefijo} ${formData.telefono}` },
-      { name: 'company',        value: formData.empresa },
+    const extrasTexto = formData.extras.length > 0
+      ? `\nExtras: ${formData.extras.join(', ')}`
+      : '\nExtras: Ninguno';
 
-      // ── Propiedades PERSONALIZADAS (hay que crearlas en HubSpot, ver abajo) ──
-      { name: 'sector',         value: formData.sector },
-      { name: 'negocio',        value: formData.negocio },
-      { name: 'publico_objetivo', value: formData.publico },
-      { name: 'objetivo_web',   value: formData.objetivo },
-      { name: 'diferenciacion', value: formData.diferenciacion },
-      { name: 'competidores',   value: formData.competidores },
-      { name: 'tipo_servicio',  value: formData.servicio },
-      { name: 'extras_seleccionados', value: formData.extras.join(', ') },
+    const serviciosFusionado = `Tipo de web: ${formData.servicio}${extrasTexto}`;
+
+    const fields = [
+      // ── Propiedades ESTÁNDAR (no hay que crearlas en HubSpot) ──
+      { name: 'firstname', value: formData.nombre },
+      { name: 'lastname',  value: formData.apellidos },
+      { name: 'email',     value: formData.email },
+      { name: 'phone',     value: `${formData.prefijo} ${formData.telefono}` },
+      { name: 'company',   value: formData.empresa },
+
+      // ── Propiedades PERSONALIZADAS ──
+      { name: 'sector',                 value: formData.sector },
+      { name: 'negocio',                value: formData.negocio },
+      { name: 'publico_objetivo',       value: formData.publico },
+      { name: 'objetivo_web',           value: formData.objetivo },
+      { name: 'competidores',           value: formData.competidores },
+      { name: 'servicios',              value: serviciosFusionado },  // ← tipo web + extras fusionados
       { name: 'materiales_disponibles', value: formData.materiales },
-      { name: 'referencias_visuales', value: formData.referencias },
-      { name: 'nivel_urgencia', value: formData.plazo },
-      { name: 'presupuesto_estimado', value: formData.presupuesto },
+      { name: 'referencias_visuales',   value: formData.referencias },
+      { name: 'nivel_urgencia',         value: formData.plazo },
+      { name: 'presupuesto_estimado',   value: formData.presupuesto },
     ];
 
     try {
@@ -361,10 +370,6 @@ export default function Briefing() {
                     <label>¿Cuál es el objetivo principal de la web?</label>
                     <textarea name="objetivo" value={formData.objetivo} onChange={handleChange} required rows="2" placeholder="Ej: Conseguir contactos, vender productos online, validar una idea de negocio..."></textarea>
                   </div>
-                  <div className="form-group">
-                    <label>¿Por qué un cliente debería elegirte a ti y no a tu competencia?</label>
-                    <textarea name="diferenciacion" value={formData.diferenciacion} onChange={handleChange} rows="2" placeholder="Tu propuesta de valor, qué te hace diferente o especial..."></textarea>
-                  </div>
                   <div className="form-row">
                     <div className="form-group">
                       <label>¿Quién es tu cliente ideal?</label>
@@ -483,7 +488,6 @@ export default function Briefing() {
                     </label>
                   </div>
 
-                  {/* Mensaje de error si falla el envío */}
                   {errorMsg && (
                     <div style={{ marginTop: '1rem', padding: '1rem', background: 'rgba(255,80,80,0.1)', border: '1px solid rgba(255,80,80,0.3)', borderRadius: '6px', color: '#ff5050', fontSize: '0.85rem' }}>
                       {errorMsg}
