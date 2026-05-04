@@ -7,8 +7,8 @@ import Footer from '../components/Footer.jsx'
 // 🔧 CONFIGURACIÓN HUBSPOT
 // Sustituye estos dos valores por los tuyos
 // ─────────────────────────────────────────────
-const HUBSPOT_PORTAL_ID = 'TU_PORTAL_ID';   // Ej: 12345678
-const HUBSPOT_FORM_ID   = 'TU_FORM_ID';     // Ej: a1b2c3d4-e5f6-...
+const HUBSPOT_PORTAL_ID = '148402397';
+const HUBSPOT_FORM_ID   = 'c2601690-8d77-4f53-9477-13415070a477';
 // ─────────────────────────────────────────────
 
 const EXTRAS_LIST = [
