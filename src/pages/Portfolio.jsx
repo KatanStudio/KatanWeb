@@ -7,7 +7,7 @@ const PROJECTS = [
   {
     href: 'https://viananails.com/',
     category: 'ecommerce',
-    img: '../../public/img/VianaNails.png',
+    img: '../../img/VianaNails.png',
     alt: 'Proyecto VianaNails',
     tag: 'E-Commerce',
     title: 'Viana Nails',
