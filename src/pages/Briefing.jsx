@@ -1,5 +1,5 @@
 import { Helmet } from 'react-helmet-async'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import Footer from '../components/Footer.jsx'
 
@@ -39,10 +39,12 @@ const SECTORES = [
 ];
 
 export default function Briefing() {
+  const navigate = useNavigate();
   const [step, setStep] = useState(0);
   const [submitted, setSubmitted] = useState(false);
   const [sending, setSending] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
+  const [showConfirm, setShowConfirm] = useState(false);
 
   const [formData, setFormData] = useState({
     nombre: '',
@@ -201,8 +203,16 @@ export default function Briefing() {
             <Link to="/" className="nav__brand" aria-label="Katan Studio — Inicio">
               <img src="/logos/wetransfer_katan_2026-05-04_0628/KATAN LOGO SVG (2).svg" className="nav__logo" alt="" aria-hidden="true" />
             </Link>
-            {step > 0 && <Link to="/" className="nav__link nav__link--inicio btn--ghost" style={{ fontSize: '1rem', letterSpacing: '0.05em' }}>Inicio</Link>}
-            <Link to="/contacto" className="btn btn--ghost" style={{ fontSize: '0.7rem' }}>← Cancelar</Link>
+            {step > 0 && (
+              <button
+                type="button"
+                className="btn btn--ghost"
+                style={{ fontSize: '0.7rem' }}
+                onClick={() => setShowConfirm(true)}
+              >
+                ← Cancelar
+              </button>
+            )}
           </div>
         </nav>
 
@@ -214,7 +224,7 @@ export default function Briefing() {
               <h1 className="legal-h1" style={{ textTransform: 'none' }}>Vamos a dar forma a <span className="accent"> tu idea.</span></h1>
               <p className="section__sub" style={{ marginBottom: '3rem', textAlign: 'center', margin: '0 auto 3rem', maxWidth: '520px' }}>Responde a unas preguntas clave para recibir tu presupuesto exacto.</p>
               <button type="button" onClick={nextStep} className="btn btn--primary btn--large">Empezar formulario (4 min)</button> <br />
-              <Link to="/" className="btn btn--ghost" style={{ marginTop: '1rem', display: 'inline-block' }}>Volver a inicio</Link>
+              <Link to="/contacto" className="btn btn--ghost" style={{ marginTop: '1rem', display: 'inline-block' }}>← Volver atrás</Link>
             </div>
           )}
 
@@ -236,21 +246,21 @@ export default function Briefing() {
                   <legend className="kicker">01 // Identificación</legend>
                   <div className="form-row">
                     <div className="form-group">
-                      <label>Nombre</label>
+                      <label>Nombre <span style={{color:'var(--edge)'}}>*</span></label>
                       <input type="text" name="nombre" value={formData.nombre} onChange={handleChange} required placeholder="Tu nombre" />
                     </div>
                     <div className="form-group">
-                      <label>Apellidos</label>
+                      <label>Apellidos <span style={{color:'var(--edge)'}}>*</span></label>
                       <input type="text" name="apellidos" value={formData.apellidos} onChange={handleChange} required placeholder="Tus apellidos" />
                     </div>
                   </div>
                   <div className="form-row">
                     <div className="form-group">
-                      <label>Email de contacto</label>
+                      <label>Email de contacto <span style={{color:'var(--edge)'}}>*</span></label>
                       <input type="email" name="email" value={formData.email} onChange={handleChange} required placeholder="hola@tuweb.com" />
                     </div>
                     <div className="form-group">
-                      <label>Teléfono</label>
+                      <label>Teléfono <span style={{color:'var(--edge)'}}>*</span></label>
                       <div style={{ display: 'flex', gap: '0.5rem' }}>
                         <select name="prefijo" value={formData.prefijo} onChange={handleChange} style={{ width: '180px', flexShrink: 0 }}>
                           <optgroup label="EUROPA">
@@ -345,7 +355,7 @@ export default function Briefing() {
                     </div>
                   </div>
                   <div className="form-group">
-                    <label>Nombre de la empresa o proyecto</label>
+                    <label>Nombre de la empresa o proyecto <span style={{color:'var(--edge)'}}>*</span></label>
                     <input type="text" name="empresa" value={formData.empresa} onChange={handleChange} required placeholder="El nombre de tu marca" />
                   </div>
                 </fieldset>
@@ -356,19 +366,19 @@ export default function Briefing() {
                 <fieldset className="fade-in">
                   <legend className="kicker">02 // Estrategia de Negocio</legend>
                   <div className="form-group">
-                    <label>Sector principal</label>
+                    <label>Sector principal <span style={{color:'var(--edge)'}}>*</span></label>
                     <select name="sector" value={formData.sector} onChange={handleChange} required>
                       <option value="">Selecciona tu sector...</option>
                       {SECTORES.map(s => <option key={s} value={s}>{s}</option>)}
                     </select>
                   </div>
                   <div className="form-group">
-                    <label>¿A qué se dedica tu negocio exactamente?</label>
+                    <label>¿A qué se dedica tu negocio exactamente? <span style={{color:'var(--edge)'}}>*</span></label>
                     <textarea name="negocio" value={formData.negocio} onChange={handleChange} required rows="2" placeholder="Explícanos qué vendes o qué servicio ofreces..."></textarea>
                   </div>
                   <div className="form-group">
                     <label>¿Cuál es el objetivo principal de la web?</label>
-                    <textarea name="objetivo" value={formData.objetivo} onChange={handleChange} required rows="2" placeholder="Ej: Conseguir contactos, vender productos online, validar una idea de negocio..."></textarea>
+                    <textarea name="objetivo" value={formData.objetivo} onChange={handleChange} rows="2" placeholder="Ej: Conseguir contactos, vender productos online, validar una idea de negocio..."></textarea>
                   </div>
                   <div className="form-row">
                     <div className="form-group">
@@ -388,7 +398,7 @@ export default function Briefing() {
                 <fieldset className="fade-in">
                   <legend className="kicker">03 // Configuración del Sistema</legend>
                   <div className="form-group">
-                    <label>Tipo de estructura principal (Obligatorio)</label>
+                    <label>Tipo de estructura principal <span style={{color:'var(--edge)'}}>*</span></label>
                     <div className="radio-grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))' }}>
                       <label className="radio-card">
                         <input type="radio" name="servicio" value="Landing" checked={formData.servicio === 'Landing'} onChange={handleChange} required />
@@ -433,7 +443,7 @@ export default function Briefing() {
                 <fieldset className="fade-in">
                   <legend className="kicker">04 // Activos y Referencias</legend>
                   <div className="form-group">
-                    <label>¿Qué materiales tienes preparados actualmente?</label>
+                    <label>¿Qué materiales tienes preparados actualmente? <span style={{color:'var(--edge)'}}>*</span></label>
                     <select name="materiales" value={formData.materiales} onChange={handleChange} required>
                       <option value="">Selecciona una opción...</option>
                       <option value="Todo">Tengo de todo (Logotipo, colores, textos escritos y fotos/vídeos)</option>
@@ -455,7 +465,7 @@ export default function Briefing() {
                   <legend className="kicker">05 // Lanzamiento</legend>
                   <div className="form-row">
                     <div className="form-group">
-                      <label>Inversión prevista para este proyecto</label>
+                      <label>Inversión prevista para este proyecto <span style={{color:'var(--edge)'}}>*</span></label>
                       <select name="presupuesto" value={formData.presupuesto} onChange={handleChange} required>
                         <option value="">Selecciona una horquilla...</option>
                         <option value="350-750">350€ - 750€</option>
@@ -465,7 +475,7 @@ export default function Briefing() {
                       </select>
                     </div>
                     <div className="form-group">
-                      <label>Nivel de urgencia</label>
+                      <label>Nivel de urgencia <span style={{color:'var(--edge)'}}>*</span></label>
                       <select name="plazo" value={formData.plazo} onChange={handleChange} required>
                         <option value="">Selecciona urgencia...</option>
                         <option value="Tranquilo">Tranquilo (Sin prisa, prioridad a la calidad)</option>
@@ -514,6 +524,63 @@ export default function Briefing() {
             </form>
           )}
         </div>
+
+        {showConfirm && (
+          <div
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="confirm-title"
+            style={{
+              position: 'fixed', inset: 0,
+              background: 'rgba(0,0,0,0.8)',
+              zIndex: 9999,
+              display: 'flex', alignItems: 'center', justifyContent: 'center',
+              padding: '1rem',
+            }}
+            onClick={() => setShowConfirm(false)}
+          >
+            <div
+              style={{
+                background: 'var(--sheath)',
+                border: '1px solid var(--ghost)',
+                borderRadius: '12px',
+                padding: '2rem',
+                maxWidth: '420px',
+                width: '100%',
+                textAlign: 'center',
+              }}
+              onClick={e => e.stopPropagation()}
+            >
+              <h3
+                id="confirm-title"
+                style={{ fontFamily: 'var(--font-head)', fontSize: '1.1rem', color: 'var(--blade)', marginBottom: '0.75rem' }}
+              >
+                ¿Seguro que quieres salir?
+              </h3>
+              <p style={{ color: 'var(--steel)', fontSize: '0.9rem', lineHeight: '1.6', marginBottom: '1.75rem' }}>
+                Perderás toda la información que has introducido y tendrás que empezar desde cero.
+              </p>
+              <div style={{ display: 'flex', gap: '0.75rem' }}>
+                <button
+                  type="button"
+                  className="btn btn--ghost"
+                  style={{ flex: 1 }}
+                  onClick={() => setShowConfirm(false)}
+                >
+                  Seguir rellenando
+                </button>
+                <button
+                  type="button"
+                  className="btn btn--primary"
+                  style={{ flex: 1, background: 'var(--edge)', border: 'none', color: '#fff' }}
+                  onClick={() => navigate('/contacto')}
+                >
+                  Sí, salir
+                </button>
+              </div>
+            </div>
+          </div>
+        )}
       </main>
       <Footer />
     </div>
