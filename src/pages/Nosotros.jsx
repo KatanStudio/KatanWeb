@@ -227,8 +227,8 @@ export default function Nosotros() {
 
       <main>
         <section className="section section--orbs" id="el-estudio">
-          <div className="glow-orb orb-page-1" aria-hidden="true" />
-          <div className="glow-orb orb-page-2" aria-hidden="true" />
+          <div className="glow-orb orb-blue-1" aria-hidden="true" />
+          <div className="glow-orb orb-blue-2" aria-hidden="true" />
           <div className="container">
             <header className="section__header">
               <p className="section-label">/El Estudio</p>
@@ -266,7 +266,7 @@ export default function Nosotros() {
             <div className="compare">
               <div className="compare__col compare__col--katan">
                 <div className="compare__badge">
-                  <img src="/logos/KATAN LOGO SVG (2).svg" alt="" aria-hidden="true" width="32" height="32" />
+                  <img src="/logos/KATAN LOGO SVG Blanco.svg" alt="" aria-hidden="true" width="32" height="32" />
                 </div>
                 <div className="compare__rows">
                   {[

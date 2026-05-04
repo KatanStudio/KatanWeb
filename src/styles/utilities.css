@@ -112,7 +112,7 @@
   background: var(--edge);
   color: #000;
   padding: 0.55rem 1.25rem;
-  border-radius: 2px;
+  border-radius: 5px;
 }
 
 .btn--ghost {
@@ -120,7 +120,7 @@
   color: var(--blade);
   border: 3px solid var(--edge);
   padding: 0.85rem 1.5rem;
-  border-radius: 2px;
+  border-radius: 6px;
   font-size: 0.95rem;
 }
 
@@ -185,6 +185,48 @@
   background-color: var(--spark);
   top: -8%;
   left: -5%;
+  animation-delay: -12s;
+  animation-duration: 30s;
+}
+
+/* ── Orbes azules (ambos cyan, sin el rosa) ── */
+.orb-blue-1 {
+  width: 45vw;
+  height: 45vw;
+  background-color: var(--spark);
+  top: 25%;
+  right: -8%;
+  animation-delay: -4s;
+  animation-duration: 24s;
+}
+
+.orb-blue-2 {
+  width: 38vw;
+  height: 38vw;
+  background-color: var(--spark);
+  top: -8%;
+  left: -5%;
+  animation-delay: -12s;
+  animation-duration: 30s;
+}
+
+/* ── Orbes con posiciones alternadas (izquierda/derecha invertidas) ── */
+.orb-alt-1 {
+  width: 45vw;
+  height: 45vw;
+  background-color: var(--edge);
+  top: 25%;
+  left: -8%;
+  animation-delay: -4s;
+  animation-duration: 24s;
+}
+
+.orb-alt-2 {
+  width: 38vw;
+  height: 38vw;
+  background-color: var(--spark);
+  top: -8%;
+  right: -5%;
   animation-delay: -12s;
   animation-duration: 30s;
 }

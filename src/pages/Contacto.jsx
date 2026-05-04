@@ -16,9 +16,9 @@ export default function Contacto() {
       <main>
         <section className="contacto-hero" id="contacto" style={{ textAlign: 'center' }}>
           <div className="contacto-hero__bg" aria-hidden="true">
-            <div className="glow-orb orb-page-1" />
-            <div className="glow-orb orb-page-2" />
-            <img src="/logos/KATAN LOGO SVG (3).svg" className="contacto-hero__k" alt="" aria-hidden="true" />
+            <div className="glow-orb orb-blue-1" />
+            <div className="glow-orb orb-blue-2" />
+            <img src="/logos/KATAN LOGO SVG Blanco.svg" className="contacto-hero__k" alt="" aria-hidden="true" />
           </div>
           <div className="container">
             <div className="contacto-hero__content">

@@ -49,6 +49,7 @@
   align-items: center;
   gap: 3rem;
   text-align: left;
+  border-radius: 5px;
 }
 
 .cta-section__h2 {
@@ -92,6 +93,7 @@
   border: 1px dashed var(--ghost);
   background: rgba(0, 0, 0, 0.3);
   transition: border-color var(--t-fast);
+  border-radius: 5px;
 }
 
 .cta-email-box:hover {

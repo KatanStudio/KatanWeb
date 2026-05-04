@@ -21,6 +21,7 @@
   transition: border-color var(--t-mid), background var(--t-mid);
   position: relative;
   overflow: hidden;
+  border-radius: 5px;
 }
 
 .service-card::before {
@@ -199,6 +200,7 @@
   transition: border-color var(--t-mid);
   justify-content: flex-start;
   height: 100%;
+  border-radius: 5px;
 }
 
 .module:hover {
@@ -277,6 +279,7 @@
   background: var(--sheath);
   border: 1px solid var(--ghost);
   padding: 2.5rem;
+  border-radius: 5px;
 }
 
 .compare__col--katan {
@@ -311,6 +314,7 @@
   margin-bottom: 2rem;
   padding: 0.35rem 0.85rem;
   border: 1px solid var(--ghost);
+  border-radius: 6px;
 }
 
 .compare__badge--wp {
@@ -365,6 +369,7 @@
   border-left: 3px solid var(--edge);
   padding: 2rem 2.5rem;
   max-width: 1100px;
+  border-radius: 5px;
 }
 
 .pull-quote p {

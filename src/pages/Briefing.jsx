@@ -93,14 +93,14 @@ export default function Briefing() {
         <div className="container" style={{ textAlign: 'center', padding: '6rem 1rem' }}>
           <div className="fade-in">
             <div style={{ marginBottom: '2rem' }}>
-              <img src="/logos/KATAN LOGO SVG (2).svg" alt="Katan Studio" style={{ height: '80px', width: 'auto' }} />
+              <img src="/logos/KATAN LOGO SVG Blanco.svg" alt="Katan Studio" style={{ height: '80px', width: 'auto' }} />
             </div>
             <h1 className="legal-h1">¡Briefing recibido!</h1>
             <p className="section__sub" style={{ maxWidth: '500px', margin: '0 auto 2rem' }}>
               Gracias por confiar en Katan. Hemos recibido tus especificaciones y nuestro equipo las está analizando.
               Te enviaremos una propuesta detallada en menos de 48 horas.
             </p>
-            <Link to="/" className="btn btn--primary">Volver al inicio</Link>
+            <Link to="/" className="btn btn--primary ">Volver al inicio</Link>
           </div>
         </div>
         <Footer />
@@ -115,8 +115,8 @@ export default function Briefing() {
       </Helmet>
 
       <main style={{ position: 'relative', overflow: 'hidden' }}>
-      <div className="glow-orb orb-page-1" aria-hidden="true" />
-      <div className="glow-orb orb-page-2" aria-hidden="true" />
+      <div className="glow-orb orb-alt-1" aria-hidden="true" />
+      <div className="glow-orb orb-alt-2" aria-hidden="true" />
       <nav className="nav nav--scrolled">
         <div className="nav__inner">
           <Link to="/" className="nav__brand" aria-label="Katan Studio — Inicio"><img src="/logos/K LOGO SVG Blanco.svg" className="nav__logo" alt="" aria-hidden="true" /></Link>
@@ -435,7 +435,7 @@ export default function Briefing() {
               {step < 5 ? (
                 <button type="button" onClick={nextStep} className="btn btn--primary" style={{ flex: 2 }}>Siguiente paso</button>
               ) : (
-                <button type="submit" className="btn btn--primary" style={{ flex: 2, background: 'var(--spark)', border: 'none', color: '#000' }}>Finalizar y enviar briefing</button>
+                <button type="submit" className="btn btn--primary btn--chamfer" style={{ flex: 2, background: 'var(--spark)', border: 'none', color: '#000' }}>Finalizar y enviar briefing</button>
               )}
             </div>
           </form>

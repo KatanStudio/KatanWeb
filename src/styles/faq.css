@@ -70,7 +70,17 @@
 /* ── Layout principal ── */
 .faq-page-body {
   padding: var(--section-py) 0;
-  background: var(--forge);
+  background: linear-gradient(to bottom, var(--ghost) 0%, var(--forge) 100%);
+  position: relative;
+}
+
+.faq-page-body::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(255, 0, 128, 0.05) 0%, transparent 80%);
+  pointer-events: none;
+  z-index: 0;
 }
 
 .faq-page-body__inner {
@@ -242,7 +252,7 @@
     font-weight: 600;
     padding: 0.9rem 2.5rem 0.9rem 1rem;
     cursor: pointer;
-    border-radius: 0;
+    border-radius: 6px;
     transition: border-color var(--t-fast), background var(--t-fast);
     box-sizing: border-box;
   }
@@ -294,9 +304,9 @@
 .orb-faq-1 {
   width: 50vw;
   height: 50vw;
-  background-color: var(--edge);
+  background-color: var(--spark);
   top: 40%;
-  right: -10%;
+  left: -10%;
   animation-delay: -3s;
   animation-duration: 20s;
 }
@@ -305,8 +315,8 @@
   width: 40vw;
   height: 40vw;
   background-color: var(--spark);
-  top: -120%;
-  left: -5%;
+  top: -10%;
+  right: -5%;
   animation-delay: -8s;
   animation-duration: 24s;
 }

@@ -66,8 +66,14 @@ export default function Home() {
             <div className="glow-orb orb-3"></div>
           </div>
 
+          <img
+            src="/logos/KATAN LOGO SVG Negro.svg"
+            className="hero__watermark"
+            alt=""
+            aria-hidden="true"
+          />
+
           <div className="hero__content">
-            <img src="/logos/KATAN LOGO SVG Blanco.svg" className="hero__k-logo" alt="Katan Studio" />
             <h1 className="hero__h1 hero__h1--desktop" style={{ textTransform: 'none' }}>
               Creamos la web que tu negocio
               <br />

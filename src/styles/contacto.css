@@ -116,7 +116,7 @@
   font-family: var(--font-mono);
   font-size: 0.85rem;
   padding: 1rem;
-  border-radius: 0;
+  border-radius: 6px;
   transition: border-color var(--t-fast), box-shadow var(--t-fast);
 }
 
@@ -157,6 +157,7 @@
   background: var(--sheath);
   border: 1px solid var(--ghost);
   transition: all var(--t-fast);
+  border-radius: 5px;
 }
 
 .radio-card .title {

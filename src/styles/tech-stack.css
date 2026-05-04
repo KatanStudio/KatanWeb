@@ -41,6 +41,7 @@
   letter-spacing: 0.05em;
   transition: color var(--t-fast), border-color var(--t-fast);
   cursor: default;
+  border-radius: 5px;
 }
 
 .tech-badge__icon {

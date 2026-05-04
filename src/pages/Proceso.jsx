@@ -148,13 +148,13 @@ export default function Proceso() {
 
         {/* ── Hero de sección ── */}
         <section className="section section--orbs" id="proceso">
-          <div className="glow-orb orb-page-1" aria-hidden="true" />
-          <div className="glow-orb orb-page-2" aria-hidden="true" />
+          <div className="glow-orb orb-alt-1" aria-hidden="true" />
+          <div className="glow-orb orb-alt-2" aria-hidden="true" />
           <div className="container">
             <header className="section__header">
               <p className="section-label">/Proceso</p>
-              <h2 className="section__h2" style={{ textTransform: 'none' }}>Del formulario al<br /><span className="accent">lanzamiento.</span></h2>
-              <p className="section__sub">
+              <h2 className="section__h2" style={{ textTransform: 'none', textAlign: 'center' }}>Del formulario al<br /><span className="accent">lanzamiento.</span></h2>
+              <p className="section__sub" style={{ textAlign: 'center' }}>
                 Sin burocracia, sin reuniones vacías. Cada contacto tiene un propósito claro.
               </p>
             </header>

@@ -21,6 +21,7 @@
   border: 1px solid var(--ghost);
   overflow: hidden;
   position: relative;
+  border-radius: 8px 8px 0 0;
 }
 
 .team-mobile__card[data-dir="1"] {
@@ -97,6 +98,7 @@
   border: 1px solid var(--ghost);
   backdrop-filter: blur(6px);
   padding: 0.25rem 0.6rem;
+  border-radius: 6px;
 }
 
 .team-mobile__num {
@@ -167,6 +169,7 @@
   background: var(--forge);
   border: 1px solid var(--ghost);
   border-top: none;
+  border-radius: 0 0 5px 5px;
 }
 
 .team-mobile__arrow {
@@ -185,6 +188,7 @@
   box-shadow: 0 0 8px rgba(255, 0, 128, 0.18);
   -webkit-tap-highlight-color: transparent;
   touch-action: manipulation;
+  border-radius: 6px;
 }
 
 .team-mobile__arrow:active:not(:disabled) {
@@ -260,6 +264,7 @@
     border: 1px solid var(--ghost);
     overflow: hidden;
     position: relative;
+    border-radius: 5px 5px 0 0;
   }
 
   /* Animación de entrada desde la derecha */
@@ -418,6 +423,7 @@
     background: var(--forge);
     border: 1px solid var(--ghost);
     border-top: none;
+    border-radius: 0 0 5px 5px;
   }
 
   .team-carousel__arrow {
@@ -434,6 +440,7 @@
     cursor: pointer;
     transition: background var(--t-fast), box-shadow var(--t-fast), transform var(--t-fast);
     box-shadow: 0 0 8px rgba(255, 0, 128, 0.2);
+    border-radius: 6px;
   }
 
   .team-carousel__arrow:hover:not(:disabled) {

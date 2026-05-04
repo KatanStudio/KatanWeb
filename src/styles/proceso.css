@@ -87,6 +87,7 @@
   border: 1px solid var(--ghost);
   border-left: 3px solid var(--edge);
   margin-top: 50px;
+  border-radius: 5px;
 }
 
 .proceso-philosophy__text {
@@ -176,6 +177,7 @@
     border-color 0.3s ease,
     box-shadow 0.3s ease,
     opacity 0.3s ease;
+  border-radius: 5px;
 }
 
 .proceso-timeline--has-active .proceso-step:not(.proceso-step--active) {
@@ -303,6 +305,7 @@
   border: 1px solid rgba(0, 229, 255, 0.18);
   padding: 0.18rem 0.4rem;
   white-space: nowrap;
+  border-radius: 4px;
 }
 
 .proceso-step__title {
@@ -370,6 +373,8 @@
   background: var(--sheath);
   border: 1px solid var(--ghost);
   border-top: 2px solid rgba(255, 0, 128, 0.25);
+  border-radius: 5px;
+  overflow: hidden;
 }
 
 .proceso-claims__item {
@@ -426,6 +431,7 @@
   position: relative;
   opacity: 1;
   transition: border-color var(--t-mid), box-shadow var(--t-mid);
+  border-radius: 5px;
 }
 
 .process-card--carousel {
@@ -456,6 +462,7 @@
   background: rgba(0, 229, 255, 0.05);
   padding: 0.25rem 0.5rem;
   border: 1px solid rgba(0, 229, 255, 0.2);
+  border-radius: 4px;
 }
 
 .process-card__title {
@@ -510,7 +517,7 @@
   font-family: var(--font-mono);
   font-size: 0.75rem;
   cursor: pointer;
-  border-radius: 2px;
+  border-radius: 6px;
   transition: border-color 0.2s, color 0.2s, background 0.2s;
 }
 
@@ -534,7 +541,7 @@
   line-height: 1;
   cursor: pointer;
   transition: border-color 0.2s, color 0.2s;
-  border-radius: 2px;
+  border-radius: 6px;
 }
 
 .process-carousel__arrow:disabled {
@@ -563,6 +570,7 @@
   display: flex;
   flex-direction: column;
   gap: 0.4rem;
+  border-radius: 5px;
 }
 
 .comm-item__label {
@@ -608,6 +616,7 @@
   display: flex;
   flex-direction: column;
   gap: 2rem;
+  border-radius: 5px;
 }
 
 .proceso-presencial-banner__tag {
@@ -646,6 +655,7 @@
   background: rgba(0, 229, 255, 0.06);
   border: 1px solid rgba(0, 229, 255, 0.2);
   padding: 0.3rem 0.75rem;
+  border-radius: 4px;
 }
 
 @media (min-width: 768px) {
@@ -683,6 +693,7 @@
   padding: 2.5rem 2rem 2rem;
   cursor: default;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  border-radius: 5px;
 }
 
 .requisito-item:hover {
