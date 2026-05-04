@@ -12,15 +12,19 @@ const HUBSPOT_FORM_ID   = 'c2601690-8d77-4f53-9477-13415070a477';
 // ─────────────────────────────────────────────
 
 const EXTRAS_LIST = [
-  'Copywriting (Redacción de textos)',
-  'Diseño de logotipo / Identidad visual',
+  'Dominio registrado',
+  'Email corporativo',
+  'Página adicional',
+  'Formulario Multipaso',
   'Sistema de Reservas',
-  'Dominio y Hosting',
-  'Mantenimiento Mensual',
-  'Pack Legal (Avisos RGPD)',
+  'Blog Estático',
+  'Copywriting',
+  'Pack Legal',
+  'Integraciones API',
+  'Identidad Corporativa',
   'Multiidioma',
-  'Integraciones (API, Mailchimp...)',
-  'Marketing (Sin publicidad)'
+  'Mantenimiento & Hosting',
+  'Revisiones evolutivas',
 ];
 
 const SECTORES = [
