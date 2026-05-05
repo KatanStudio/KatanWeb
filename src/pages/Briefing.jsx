@@ -175,7 +175,7 @@ export default function Briefing() {
       <div style={{ display: 'grid', gridTemplateRows: '1fr auto', minHeight: '100svh' }}>
         <div className="container" style={{ padding: '6rem 1rem' }}>
           <div className="fade-in" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', textAlign: 'center' }}>
-            <img src="/logos/wetransfer_katan_2026-05-04_0628/KATAN LOGO SVG (2).svg" alt="Katan Studio" style={{ height: '90px', width: 'auto', marginBottom: '1.5rem' }} />
+            <img src="/logos/wetransfer_katan_2026-05-04_0628/KATANLogoBlancoCompleto.svg" alt="Katan Studio" style={{ height: '90px', width: 'auto', marginBottom: '1.5rem' }} />
             <h1 className="legal-h1">¡Briefing recibido!</h1>
             <p className="section__sub" style={{ maxWidth: '500px', margin: '0 auto 2rem' }}>
               Gracias por confiar en Katan. Hemos recibido tus especificaciones y nuestro equipo las está analizando.
@@ -201,7 +201,7 @@ export default function Briefing() {
         <nav className="nav nav--scrolled">
           <div className="nav__inner">
             <Link to="/" className="nav__brand" aria-label="Katan Studio — Inicio">
-              <img src="/logos/wetransfer_katan_2026-05-04_0628/KATAN LOGO SVG (2).svg" className="nav__logo" alt="" aria-hidden="true" />
+              <img src="/logos/wetransfer_katan_2026-05-04_0628/KATANLogoBlancoCompleto.svg" className="nav__logo" alt="" aria-hidden="true" />
             </Link>
             {step > 0 && (
               <button

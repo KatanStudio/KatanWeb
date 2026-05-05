@@ -36,7 +36,7 @@ export default function Header() {
     <header className={`nav${scrolled ? ' nav--scrolled' : ''}`} id="nav">
       <div className="nav__inner">
         <Link to="/" className="nav__brand" aria-label="Katan Studio — Inicio">
-          <img src="/logos/wetransfer_katan_2026-05-04_0628/KATAN LOGO SVG (2).svg" className="nav__logo" alt="" aria-hidden="true" />
+          <img src="/logos/wetransfer_katan_2026-05-04_0628/KATANLogoBlancoCompleto.svg" className="nav__logo" alt="" aria-hidden="true" />
         </Link>
 
         <nav className="nav__links" aria-label="Navegación principal">
