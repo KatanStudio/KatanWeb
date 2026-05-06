@@ -31,7 +31,7 @@ const PROJECTS = [
   {
     href: '#',
     category: 'corporate',
-    img: 'https://via.placeholder.com/800x600/14141A/F0F4F8?text=Mockup+Jenny+Records',
+    img: '/img/JennyRecords.webp',
     alt: 'Proyecto Jenny Records',
     tag: 'Web Corporativa',
     title: 'Jenny Records',
