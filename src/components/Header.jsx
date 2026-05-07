@@ -59,7 +59,8 @@ export default function Header() {
           aria-expanded={menuOpen}
           onClick={() => setMenuOpen((o) => !o)}
         >
-          <span></span><span></span>
+          <span className="nav__hamburger-lines"><span></span><span></span></span>
+          <span className="nav__hamburger-label">{menuOpen ? 'Cerrar' : 'Menú'}</span>
         </button>
       </div>
 

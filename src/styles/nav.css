@@ -101,18 +101,25 @@
 /* Hamburger */
 .nav__hamburger {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 6px;
-  width: 32px;
-  height: 32px;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
   background: none;
   border: none;
   cursor: pointer;
   padding: 0;
 }
 
-.nav__hamburger span {
+.nav__hamburger-lines {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+  width: 32px;
+  height: 32px;
+}
+
+.nav__hamburger-lines span {
   display: block;
   height: 1.5px;
   background: var(--blade);
@@ -120,17 +127,26 @@
   transform-origin: left;
 }
 
-.nav__hamburger span:last-child {
+.nav__hamburger-lines span:last-child {
   width: 60%;
 }
 
-.nav__hamburger.is-open span:first-child {
+.nav__hamburger.is-open .nav__hamburger-lines span:first-child {
   transform: rotate(45deg) translate(1px, -1px);
 }
 
-.nav__hamburger.is-open span:last-child {
+.nav__hamburger.is-open .nav__hamburger-lines span:last-child {
   transform: rotate(-45deg) translate(1px, 1px);
   width: 100%;
+}
+
+.nav__hamburger-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--blade);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  user-select: none;
 }
 
 /* Mobile menu */
