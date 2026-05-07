@@ -1,7 +1,7 @@
 # Katan
 `// sharp by design`
 
-Repositorio oficial de **[Katan](URL MAS ADELANTE)**. 
+Repositorio oficial de **[Katan](katan.es)**. 
 
 Construimos presencias y herramientas digitales que hacen crecer negocios reales. Sin relleno, sin plantillas, sin letra pequeña. Código propio, resultados medibles y un proceso tan claro que nunca tendrás que preguntarte en qué punto estás.
 
