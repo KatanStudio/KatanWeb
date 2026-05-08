@@ -1,10 +1,9 @@
 /* ═══════════════════════════════════════════════
-   TEAM CAROUSEL (desktop) / MOBILE FALLBACK
+   TEAM — móvil: carrusel / desktop: grid circular
    ═══════════════════════════════════════════════ */
 
-/* ── Desktop carousel: oculto en móvil ── */
-.team-carousel__stage,
-.team-carousel__controls { display: none; }
+/* Desktop grid y carrusel antiguo: ocultos en móvil */
+.team-grid { display: none; }
 
 /* ════════════════════════════════════════
    MOBILE CAROUSEL
@@ -40,12 +39,17 @@
   to   { opacity: 1; transform: translateX(0); }
 }
 
-/* Foto */
+/* ── Foto: bug fix ──
+   - aspect-ratio en lugar de height fijo para que escale con el viewport
+   - object-position: top center muestra la cabeza en fotos de retrato
+   - display: block elimina el gap inline por defecto
+*/
 .team-mobile__img-wrap {
   display: block;
   position: relative;
   width: 100%;
-  height: 300px;
+  aspect-ratio: 4 / 5;
+  max-height: 420px;
   overflow: hidden;
   text-decoration: none;
 }
@@ -54,7 +58,9 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: center top;
+  /* center 45%: centra verticalmente la imagen, muestra la zona facial
+     independientemente del ratio del contenedor */
+  object-position: center 30%;
   display: block;
   filter: grayscale(15%);
   transition: transform 0.5s ease, filter 0.4s ease;
@@ -243,245 +249,174 @@
   text-transform: uppercase;
 }
 
+/* ════════════════════════════════════════
+   DESKTOP GRID (≥ 900px)
+   ════════════════════════════════════════ */
 @media (min-width: 900px) {
-  /* En desktop: mostrar carrusel desktop, ocultar carrusel móvil */
   .team-mobile { display: none; }
-  .team-carousel__stage { display: grid; }
-  .team-carousel__controls { display: flex; }
 
-  /* ── Wrapper ── */
-  .team-carousel {
-    overflow: hidden;
-    position: relative;
-  }
-
-  /* ── Stage: grid de 2 columnas foto|texto ── */
-  .team-carousel__stage {
+  /* Grid: dos columnas, gap generoso */
+  .team-grid {
+    display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 0;
-    min-height: 320px;
-    background: var(--sheath);
-    border: 1px solid var(--ghost);
-    overflow: hidden;
-    position: relative;
-    border-radius: 5px 5px 0 0;
+    gap: 2.5rem;
+    padding: 0.5rem 0 3rem;
   }
 
-  /* Animación de entrada desde la derecha */
-  .team-carousel__stage[data-dir="1"] {
-    animation: teamSlideRight 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-  }
-  /* Animación de entrada desde la izquierda */
-  .team-carousel__stage[data-dir="-1"] {
-    animation: teamSlideLeft 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-  }
-
-  @keyframes teamSlideRight {
-    from { opacity: 0; transform: translateX(40px); }
-    to   { opacity: 1; transform: translateX(0); }
-  }
-  @keyframes teamSlideLeft {
-    from { opacity: 0; transform: translateX(-40px); }
-    to   { opacity: 1; transform: translateX(0); }
-  }
-
-  /* ── Foto grande ── */
-  .team-carousel__img-wrap {
-    display: block;
-    position: relative;
-    overflow: hidden;
-    min-height: 320px;
-  }
-
-  /* dev.01: foto izquierda → orden 1 */
-  .team-carousel__img-wrap--left  { order: 1; }
-  /* dev.02: foto derecha → orden 2 */
-  .team-carousel__img-wrap--right { order: 2; }
-
-  .team-carousel__img-frame {
-    position: relative;
-    width: 100%;
-    height: 100%;
-    min-height: 320px;
-  }
-
-  .team-carousel__img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center top;
-    display: block;
-    transition: transform 0.6s ease;
-    filter: grayscale(20%);
-  }
-
-  .team-carousel__img-wrap:hover .team-carousel__img {
-    transform: scale(1.04);
-    filter: grayscale(0%);
-  }
-
-  /* Glow overlay sobre la foto */
-  .team-carousel__img-glow {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-      135deg,
-      rgba(255, 0, 128, 0.18) 0%,
-      transparent 50%
-    );
-    pointer-events: none;
-    mix-blend-mode: screen;
-    transition: opacity 0.4s ease;
-  }
-
-  .team-carousel__img-wrap:hover .team-carousel__img-glow {
-    opacity: 0.6;
-  }
-
-  /* Borde edge llamativo en el lado interior de la foto */
-  .team-carousel__img-wrap--left::after,
-  .team-carousel__img-wrap--right::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    width: 3px;
-    height: 100%;
-    background: linear-gradient(to bottom, transparent, var(--edge), transparent);
-    pointer-events: none;
-    opacity: 0.8;
-  }
-
-  .team-carousel__img-wrap--left::after  { right: 0; }
-  .team-carousel__img-wrap--right::after { left: 0; }
-
-  /* ── Texto ── */
-  .team-carousel__text {
+  /* ── Tarjeta ── */
+  .team-card {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    gap: 1.5rem;
-    padding: 3.5rem;
+    align-items: center;
+    gap: 0;
+    background: var(--sheath);
+    border: 1px solid var(--ghost);
+    border-radius: 12px;
+    overflow: hidden;
     position: relative;
   }
 
-  /* dev.01: texto derecha → orden 2 */
-  .team-carousel__text--left  { order: 2; }
-  /* dev.02: texto izquierda → orden 1 */
-  .team-carousel__text--right { order: 1; }
-
-  /* Fondo sutil con gradiente hacia el interior */
-  .team-carousel__text--left {
-    background: linear-gradient(to right, rgba(255,0,128,0.03), transparent);
-  }
-  .team-carousel__text--right {
-    background: linear-gradient(to left, rgba(255,0,128,0.03), transparent);
+  /* Línea de acento magenta en la parte superior de la card */
+  .team-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(to right, transparent 5%, var(--edge) 50%, transparent 95%);
+    opacity: 0.75;
   }
 
-  .team-carousel__top {
+  /* ── Zona de foto: fondo ligeramente más oscuro ── */
+  .team-card__photo-wrap {
+    position: relative;
+    width: 160px;
+    height: 160px;
+    flex-shrink: 0;
+    margin-top: 2.5rem;
+  }
+
+  /* Anillo magenta con glow */
+  .team-card__photo-glow {
+    position: absolute;
+    inset: -5px;
+    border-radius: 50%;
+    border: 2px solid var(--edge);
+    box-shadow:
+      0 0 16px rgba(255, 0, 128, 0.30),
+      0 0 44px rgba(255, 0, 128, 0.08);
+    pointer-events: none;
+    transition: box-shadow 0.4s ease;
+  }
+
+  /* Arco cian exterior — detalle de branding sutil */
+  .team-card__photo-wrap::before {
+    content: '';
+    position: absolute;
+    inset: -12px;
+    border-radius: 50%;
+    border: 1px solid rgba(0, 200, 220, 0.15);
+    pointer-events: none;
+  }
+
+  .team-card__photo {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: 1 / 1;
+    border-radius: 50%;
+    object-fit: cover;
+    object-position: center 45%;
+    display: block;
+    filter: grayscale(15%);
+    position: relative;
+    z-index: 1;
+    transition: filter 0.4s ease, transform 0.5s ease;
+  }
+
+  .team-card__photo-wrap:hover .team-card__photo {
+    filter: grayscale(0%);
+    transform: scale(1.04);
+  }
+
+  .team-card__photo-wrap:hover .team-card__photo-glow {
+    box-shadow:
+      0 0 26px rgba(255, 0, 128, 0.50),
+      0 0 64px rgba(255, 0, 128, 0.16);
+  }
+
+  /* ── Cuerpo de texto ── */
+  .team-card__body {
     display: flex;
-    align-items: baseline;
-    gap: 0.75rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+    padding: 1.75rem 2rem 2rem;
+    width: 100%;
+    flex: 1;
   }
 
-  .team-carousel__name {
-    font-family: var(--font-head);
-    font-size: clamp(2rem, 3.5vw, 3rem);
-    font-weight: 900;
-    letter-spacing: -0.05em;
-    line-height: 1;
-    color: var(--blade);
+  /* Etiqueta de rol: num + tag en una sola línea pequeña */
+  .team-card__top {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 0.6rem;
   }
 
-  .team-carousel__desc {
-    font-size: 1rem;
+  /* Sobreescribir tamaño global de service-card__num/tag dentro de la tarjeta de equipo */
+  .team-card__top .service-card__num,
+  .team-card__top .service-card__tag {
+    font-size: 1.10rem;
+    letter-spacing: 0.18em;
+  }
+
+  .team-card__top .service-card__tag {
     color: var(--steel);
-    line-height: 1.75;
-    max-width: 44ch;
   }
 
-  .team-carousel__link {
+  /* Separador fino antes del nombre */
+  .team-card__name::before {
+    content: '';
+    display: block;
+    width: 28px;
+    height: 2px;
+    background: var(--edge);
+    box-shadow: 0 0 8px rgba(255, 0, 128, 0.6);
+    margin-bottom: 0.75rem;
+  }
+
+  .team-card__name {
+    font-family: var(--font-head);
+    font-size: clamp(1.5rem, 2.2vw, 2rem);
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    line-height: 1.05;
+    color: var(--blade);
+    margin: 0 0 1rem;
+  }
+
+  .team-card__desc {
+    font-size: 0.9rem;
+    color: var(--steel);
+    line-height: 1.85;
+    margin: 0 0 1.25rem;
+  }
+
+  .team-card__link {
+    margin-top: auto;
     font-family: var(--font-mono);
-    font-size: 0.72rem;
-    letter-spacing: 0.15em;
+    font-size: 0.68rem;
+    letter-spacing: 0.16em;
     text-transform: uppercase;
     color: var(--edge);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255, 0, 128, 0.30);
+    padding-bottom: 3px;
     transition: letter-spacing var(--t-fast), color var(--t-fast);
-    align-self: flex-start;
   }
 
-  .team-carousel__link:hover {
-    letter-spacing: 0.25em;
+  .team-card__link:hover {
+    letter-spacing: 0.26em;
     color: var(--blade);
-  }
-
-  /* ── Controles ── */
-  .team-carousel__controls {
-    align-items: center;
-    justify-content: center;
-    gap: 1.5rem;
-    padding: 1.25rem;
-    background: var(--forge);
-    border: 1px solid var(--ghost);
-    border-top: none;
-    border-radius: 0 0 5px 5px;
-  }
-
-  .team-carousel__arrow {
-    width: 2.4rem;
-    height: 2.4rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(255, 0, 128, 0.07);
-    border: 1.5px solid var(--edge);
-    color: var(--edge);
-    font-family: var(--font-mono);
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background var(--t-fast), box-shadow var(--t-fast), transform var(--t-fast);
-    box-shadow: 0 0 8px rgba(255, 0, 128, 0.2);
-    border-radius: 6px;
-  }
-
-  .team-carousel__arrow:hover:not(:disabled) {
-    background: rgba(255, 0, 128, 0.18);
-    box-shadow: 0 0 18px rgba(255, 0, 128, 0.45);
-    transform: scale(1.08);
-  }
-
-  .team-carousel__arrow:disabled {
-    opacity: 0.2;
-    cursor: not-allowed;
-    box-shadow: none;
-    border-color: var(--ghost);
-    color: var(--steel);
-    background: transparent;
-  }
-
-  .team-carousel__dots {
-    display: flex;
-    gap: 8px;
-    align-items: center;
-  }
-
-  .team-carousel__dot {
-    width: 28px;
-    height: 3px;
-    border: none;
-    border-radius: 2px;
-    background: var(--ghost);
-    cursor: pointer;
-    padding: 0;
-    transition: background var(--t-mid), width var(--t-mid), box-shadow var(--t-mid);
-  }
-
-  .team-carousel__dot--active {
-    width: 52px;
-    background: var(--edge);
-    box-shadow: 0 0 8px rgba(255, 0, 128, 0.55);
-  }
-
-  .team-carousel__dot:hover:not(.team-carousel__dot--active) {
-    background: rgba(255, 0, 128, 0.4);
   }
 }

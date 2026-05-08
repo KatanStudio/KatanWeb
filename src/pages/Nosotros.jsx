@@ -12,7 +12,7 @@ const TEAM = [
     num: '_dev.01',
     tag: 'Negocio & UI/UX',
     name: 'Adrián Lozano',
-    img: '/img/FotoAdrian.webp',
+    img: '/img/AdrianDefinitiva.webp',
     alt: 'Adrián Lozano',
     linkedin: 'https://www.linkedin.com/in/adrián-lozano',
     imgSide: 'left',
@@ -22,7 +22,7 @@ const TEAM = [
     num: '_dev.02',
     tag: 'Gestión & Lógica',
     name: 'Alejandro Quintana',
-    img: '/img/FotoAlejandro.webp',
+    img: '/img/AlejandroDefinitiva.webp',
     alt: 'Alejandro Quintana',
     linkedin: 'https://www.linkedin.com/in/alejandro-quintana-rodriguez/',
     imgSide: 'right',
@@ -136,77 +136,32 @@ function TeamCarousel() {
       </div>
 
 
-      {/* ══ DESKTOP: stage foto|texto ═════════════════════════════════════════ */}
-      <div className="team-carousel">
-
-        <div
-          key={`desk-${animKey}`}
-          className="team-carousel__stage"
-          data-dir={dir}
-        >
-          {/* Foto */}
-          <a
-            href={member.linkedin}
-            target="_blank"
-            rel="noreferrer"
-            className={`team-carousel__img-wrap team-carousel__img-wrap--${member.imgSide}`}
-            aria-label={`LinkedIn de ${member.name}`}
-          >
-            <div className="team-carousel__img-frame">
-              <img src={member.img} alt={member.alt} className="team-carousel__img" />
-              <div className="team-carousel__img-glow" aria-hidden="true" />
+      {/* ══ DESKTOP: grid de perfiles en columnas ════════════════════════════ */}
+      <div className="team-grid">
+        {TEAM.map((m) => (
+          <div key={m.num} className="team-card">
+            <div className="team-card__photo-wrap">
+              <div className="team-card__photo-glow" aria-hidden="true" />
+              <img src={m.img} alt={m.alt} className="team-card__photo" />
             </div>
-          </a>
-
-          {/* Texto */}
-          <div className={`team-carousel__text team-carousel__text--${member.imgSide}`}>
-            <div className="team-carousel__top">
-              <span className="service-card__num">{member.num}</span>
-              <span className="service-card__tag">{member.tag}</span>
+            <div className="team-card__body">
+              <div className="team-card__top">
+                <span className="service-card__num">{m.num}</span>
+                <span className="service-card__tag">{m.tag}</span>
+              </div>
+              <h3 className="team-card__name">{m.name}</h3>
+              <p className="team-card__desc">{m.desc}</p>
+              <a
+                href={m.linkedin}
+                target="_blank"
+                rel="noreferrer"
+                className="team-card__link"
+              >
+                Ver en LinkedIn →
+              </a>
             </div>
-            <h3 className="team-carousel__name">{member.name}</h3>
-            <p className="team-carousel__desc">{member.desc}</p>
-            <a
-              href={member.linkedin}
-              target="_blank"
-              rel="noreferrer"
-              className="team-carousel__link"
-            >
-              Ver en LinkedIn →
-            </a>
           </div>
-        </div>
-
-        {/* Controles desktop */}
-        <div className="team-carousel__controls">
-          <button
-            className="team-carousel__arrow"
-            onClick={() => navigate(active - 1)}
-            disabled={active === 0}
-            aria-label="Anterior"
-          >←</button>
-
-          <div className="team-carousel__dots" role="tablist">
-            {TEAM.map((m, i) => (
-              <button
-                key={i}
-                role="tab"
-                aria-selected={i === active}
-                aria-label={m.name}
-                className={`team-carousel__dot${i === active ? ' team-carousel__dot--active' : ''}`}
-                onClick={() => navigate(i)}
-              />
-            ))}
-          </div>
-
-          <button
-            className="team-carousel__arrow"
-            onClick={() => navigate(active + 1)}
-            disabled={active === TEAM.length - 1}
-            aria-label="Siguiente"
-          >→</button>
-        </div>
-
+        ))}
       </div>
     </div>
   )
