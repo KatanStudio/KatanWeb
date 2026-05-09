@@ -220,6 +220,15 @@ export default function ServicesCarousel() {
   const prev_ = () => goTo(Math.max(0, active - 1))
   const next_ = () => goTo(Math.min(CARDS.length - 1, active + 1))
 
+  const touchStartX = useRef(null)
+  const onTouchStart = (e) => { touchStartX.current = e.touches[0].clientX }
+  const onTouchEnd = (e) => {
+    if (touchStartX.current === null) return
+    const delta = touchStartX.current - e.changedTouches[0].clientX
+    if (Math.abs(delta) > 40) delta > 0 ? next_() : prev_()
+    touchStartX.current = null
+  }
+
   // Compute slot for each card index
   const getSlot = (cardIdx) => {
     const diff = cardIdx - active
@@ -235,7 +244,12 @@ export default function ServicesCarousel() {
   return (
     <div className="svc3d">
       {/* ── Stage ── */}
-      <div className="svc3d__stage" aria-label="Carrusel de servicios">
+      <div
+        className="svc3d__stage"
+        aria-label="Carrusel de servicios"
+        onTouchStart={onTouchStart}
+        onTouchEnd={onTouchEnd}
+      >
         {CARDS.map((card, idx) => {
           const slot = getSlot(idx)
           const style = getSlotStyle(slot)

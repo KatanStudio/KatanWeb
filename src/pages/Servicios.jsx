@@ -327,6 +327,7 @@ function ServiceSwitcher() {
   const [particles, setParticles] = useState([])
   const prevRef = useRef(null)
   const pTimerRef = useRef(null)
+  const touchStartX = useRef(null)
 
   const handleSelect = useCallback((i) => {
     setActive(prev => {
@@ -349,8 +350,17 @@ function ServiceSwitcher() {
 
   const svc = SERVICES[active]
 
+  const onTouchStart = (e) => { touchStartX.current = e.touches[0].clientX }
+  const onTouchEnd = (e) => {
+    if (touchStartX.current === null) return
+    const delta = touchStartX.current - e.changedTouches[0].clientX
+    if (delta > 50) handleSelect(Math.min(SERVICES.length - 1, active + 1))
+    else if (delta < -50) handleSelect(Math.max(0, active - 1))
+    touchStartX.current = null
+  }
+
   return (
-    <div className="svc-sw">
+    <div className="svc-sw" onTouchStart={onTouchStart} onTouchEnd={onTouchEnd}>
 
       {/* ── Fondo con orbes animados — solo desktop (en móvil los gestiona PageOrbs) ── */}
       <div className="svc-sw__bg" aria-hidden="true">

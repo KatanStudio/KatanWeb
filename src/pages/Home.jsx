@@ -66,14 +66,13 @@ export default function Home() {
             <div className="glow-orb orb-3"></div>
           </div>
 
-          <img
-            src="/logos/wetransfer_katan_2026-05-04_0628/KATANLogoNegroCompleto.svg"
-            className="hero__watermark"
-            alt=""
-            aria-hidden="true"
-          />
-
           <div className="hero__content">
+            <img
+              src="/logos/wetransfer_katan_2026-05-04_0628/KATANLogoNegroCompleto.svg"
+              className="hero__watermark"
+              alt=""
+              aria-hidden="true"
+            />
             <h1 className="hero__h1 hero__h1--desktop" style={{ textTransform: 'none' }}>
               Creamos la web que tu negocio
               <br />
@@ -140,7 +139,7 @@ export default function Home() {
             <header className="section__header">
               <p className="section-label">/El Estándar Katan</p>
               <h2 className="section__h2">Construimos sistemas,<br /><span className="accent">no folletos.</span></h2>
-              <p className="section__sub">La mayoría de agencias de marketing  plantillas pesadas disfrazadas de diseño a medida.
+              <p className="section__sub">La mayoría de agencias de marketing utilizan plantillas pesadas disfrazadas de diseño a medida.
                 Nosotros damos forma a tu proyecto para dominar tu sector.</p>
             </header>
 
