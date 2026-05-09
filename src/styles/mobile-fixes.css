@@ -10,10 +10,6 @@
   }
 
   /* Hero stats — las 4 visibles sin scroll vertical */
-  .hero {
-    min-height: auto;
-  }
-
   .hero__stats {
     grid-template-columns: repeat(2, 1fr);
     position: static;

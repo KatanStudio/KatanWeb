@@ -3,6 +3,7 @@
    ═══════════════════════════════════════════════ */
 .hero {
   min-height: 100vh;
+  min-height: 100svh;
   display: flex;
   flex-direction: column;
   padding-top: 4.5rem;
@@ -124,14 +125,13 @@
 .hero__content {
   position: relative;
   z-index: 20;
+  flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   text-align: center;
-  padding: 2.5rem 0.75rem 2rem;
-  max-width: 100%;
-  margin: auto;
+  padding: 2.5rem 1.25rem 3rem;
   width: 100%;
 }
 
@@ -140,9 +140,9 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: clamp(420px, 90vw, 1600px);
+  width: clamp(280px, 85vw, 1600px);
   height: auto;
-  z-index: 5;
+  z-index: 0;
   opacity: 0.06;
   filter: invert(1);
   pointer-events: none;
@@ -150,6 +150,8 @@
 }
 
 .hero__h1 {
+  position: relative;
+  z-index: 1;
   font-family: var(--font-head);
   font-size: clamp(1.1rem, 4.8vw, 4.5rem);
   font-weight: 900;
@@ -178,6 +180,8 @@
 }
 
 .hero__actions {
+  position: relative;
+  z-index: 1;
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
@@ -192,7 +196,6 @@
   grid-template-columns: repeat(2, 1fr);
   position: relative;
   z-index: 2;
-  margin-top: auto;
   background: rgba(10, 10, 10, 0.4);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
@@ -280,10 +283,6 @@
 }
 
 @media (max-width: 639px) {
-  .hero__content {
-    padding: 2.5rem 1.25rem 2rem;
-  }
-
   .hero__h1--desktop {
     display: none;
   }
@@ -307,13 +306,14 @@
 @media (min-width: 900px) {
   .hero__watermark {
     top: 40%;
+    width: clamp(420px, 90vw, 1600px);
   }
 
   .hero__content {
-    max-width: none;
     width: min(1280px, calc(100vw - 6rem));
-    margin: auto;
+    margin: 0 auto;
     padding: 6.5rem 3rem 3rem;
+    justify-content: center;
     align-items: center;
     text-align: center;
   }
