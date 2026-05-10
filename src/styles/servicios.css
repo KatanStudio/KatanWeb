@@ -270,7 +270,7 @@
 
 .svc-sw__tab {
   flex: 1;
-  min-width: 150px;
+  min-width: 120px;
   display: flex;
   align-items: center;
   gap: 0.65rem;

@@ -89,6 +89,83 @@ const EcommerceDemo = memo(function EcommerceDemo() {
   )
 })
 
+const AppDemo = memo(function AppDemo() {
+  return (
+    <svg viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid slice" width="100%" height="100%" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect width="1200" height="600" fill="#07070F" />
+      <rect width="1200" height="600" fill="url(#sw-grid)" />
+      <circle cx="600" cy="300" r="400" fill="#FF0080" fillOpacity="0.04" />
+      <circle cx="600" cy="300" r="180" fill="#FF0080" fillOpacity="0.04" />
+      {/* ── Panel izquierdo: admin/backend ── */}
+      <rect x="50" y="80" width="320" height="60" rx="6" fill="#0B0B16" stroke="#1E1E2A" />
+      <rect x="70" y="98" width="80" height="10" rx="3" fill="#16162A" />
+      <rect x="70" y="116" width="60" height="8" rx="2" fill="#FF0080" fillOpacity="0.6" />
+      <rect x="50" y="158" width="320" height="100" rx="6" fill="#0B0B16" stroke="#1E1E2A" />
+      <rect x="70" y="176" width="100" height="10" rx="3" fill="#16162A" />
+      <rect x="70" y="196" width="60" height="32" rx="4" fill="#16162A" />
+      <rect x="148" y="196" width="60" height="32" rx="4" fill="#16162A" />
+      <rect x="226" y="196" width="60" height="32" rx="4" fill="#FF0080" fillOpacity="0.3" />
+      <rect x="50" y="276" width="320" height="60" rx="6" fill="#0B0B16" stroke="#1E1E2A" />
+      <rect x="70" y="294" width="120" height="10" rx="3" fill="#16162A" />
+      <rect x="50" y="354" width="320" height="80" rx="6" fill="#0B0B16" stroke="#1E1E2A" />
+      <rect x="70" y="372" width="100" height="10" rx="3" fill="#16162A" />
+      <rect x="240" y="369" width="80" height="24" rx="4" fill="#FF0080" fillOpacity="0.7" />
+      {/* ── Marco del teléfono ── */}
+      <rect x="432" y="15" width="336" height="570" rx="34" fill="#0D0D1A" stroke="#252535" strokeWidth="2" />
+      <rect x="444" y="48" width="312" height="504" rx="10" fill="#07070F" />
+      <rect x="554" y="48" width="92" height="18" rx="9" fill="#0D0D1A" />
+      {/* Header de la app */}
+      <rect x="444" y="66" width="312" height="48" fill="#0B0B18" />
+      <rect x="460" y="82" width="90" height="14" rx="3" fill="#FF0080" fillOpacity="0.8" />
+      <circle cx="736" cy="90" r="12" fill="#1A1A28" />
+      <circle cx="736" cy="90" r="5" fill="#FF0080" fillOpacity="0.6" />
+      {/* Tarjeta hero */}
+      <rect x="454" y="124" width="292" height="110" rx="8" fill="#0E0E1C" stroke="#1E1E2A" />
+      <rect x="468" y="140" width="140" height="14" rx="3" fill="#16162A" />
+      <rect x="468" y="162" width="100" height="9" rx="2" fill="#16162A" />
+      <rect x="468" y="204" width="90" height="18" rx="4" fill="#FF0080" fillOpacity="0.85" />
+      {/* Dos tarjetas de funcionalidad */}
+      <rect x="454" y="246" width="140" height="110" rx="8" fill="#0E0E1C" stroke="#1E1E2A" />
+      <rect x="606" y="246" width="140" height="110" rx="8" fill="#0E0E1C" stroke="#FF0080" strokeOpacity="0.35" />
+      <rect x="468" y="262" width="80" height="9" rx="2" fill="#16162A" />
+      <rect x="620" y="262" width="80" height="9" rx="2" fill="#16162A" />
+      <rect x="468" y="318" width="74" height="20" rx="4" fill="#FF0080" fillOpacity="0.65" />
+      <rect x="620" y="318" width="74" height="20" rx="4" fill="#16162A" />
+      {/* Filas de lista */}
+      <rect x="454" y="368" width="292" height="44" rx="6" fill="#0E0E1C" stroke="#1E1E2A" />
+      <circle cx="478" cy="390" r="10" fill="#1A1A28" />
+      <rect x="498" y="383" width="100" height="9" rx="2" fill="#16162A" />
+      <rect x="454" y="422" width="292" height="44" rx="6" fill="#0E0E1C" stroke="#1E1E2A" />
+      <circle cx="478" cy="444" r="10" fill="#FF0080" fillOpacity="0.15" />
+      <rect x="498" y="437" width="100" height="9" rx="2" fill="#16162A" />
+      {/* Nav inferior */}
+      <rect x="444" y="504" width="312" height="48" fill="#0B0B18" />
+      <circle cx="504" cy="528" r="14" fill="#FF0080" fillOpacity="0.12" />
+      <circle cx="504" cy="528" r="5" fill="#FF0080" />
+      <circle cx="564" cy="528" r="5" fill="#252535" />
+      <circle cx="624" cy="528" r="5" fill="#252535" />
+      <circle cx="684" cy="528" r="5" fill="#252535" />
+      <circle cx="744" cy="528" r="5" fill="#252535" />
+      {/* ── Panel derecho: notificaciones/actividad ── */}
+      <rect x="830" y="80" width="320" height="72" rx="6" fill="#0B0B16" stroke="#1E1E2A" />
+      <rect x="850" y="98" width="60" height="10" rx="3" fill="#FF0080" fillOpacity="0.6" />
+      <rect x="850" y="116" width="120" height="8" rx="2" fill="#16162A" />
+      <rect x="830" y="170" width="320" height="72" rx="6" fill="#0B0B16" stroke="#1E1E2A" />
+      <rect x="850" y="188" width="80" height="10" rx="3" fill="#16162A" />
+      <rect x="850" y="206" width="100" height="8" rx="2" fill="#16162A" />
+      <rect x="830" y="260" width="320" height="72" rx="6" fill="#0B0B16" stroke="#1E1E2A" />
+      <rect x="850" y="278" width="100" height="10" rx="3" fill="#16162A" />
+      <rect x="850" y="296" width="70" height="8" rx="2" fill="#16162A" />
+      <rect x="830" y="350" width="320" height="72" rx="6" fill="#0B0B16" stroke="#1E1E2A" />
+      <rect x="850" y="368" width="80" height="10" rx="3" fill="#16162A" />
+      <rect x="850" y="386" width="120" height="8" rx="2" fill="#16162A" />
+      <rect x="830" y="440" width="320" height="60" rx="6" fill="#0B0B16" stroke="#FF0080" strokeOpacity="0.28" />
+      <rect x="850" y="456" width="100" height="10" rx="3" fill="#16162A" />
+      <rect x="850" y="474" width="70" height="8" rx="2" fill="#FF0080" fillOpacity="0.5" />
+    </svg>
+  )
+})
+
 // ─────────────────────────────────────────────────────────────────────────────
 // SERVICE DATA
 // Each service has: id, num, label, desc, features[], price, demo (JSX)
@@ -133,8 +210,8 @@ const SERVICES = [
   {
     id: 'ecommerce',
     num: '03',
-    label: 'E-Commerce & App',
-    short: 'EC&A',
+    label: 'E-Commerce',
+    short: 'EC',
     desc: 'Solución completa para vender online. Catálogo ilimitado, pasarela de pagos y gestión de pedidos bajo un panel propio.',
     price: 'Desde 2.000 €',
     features: [
@@ -146,6 +223,23 @@ const SERVICES = [
       '5 rondas de revisiones correctivas.',
     ],
     demo: <EcommerceDemo />,
+  },
+  {
+    id: 'app',
+    num: '04',
+    label: 'App',
+    short: 'APP',
+    desc: 'Lleva tu negocio al bolsillo de tus clientes con una app nativa o híbrida. Diseñada para convertir, retener y fidelizar desde el primer toque.',
+    price: 'Desde 3.000 €',
+    features: [
+      'Diseño UI/UX nativo para iOS y Android.',
+      'Notificaciones push y mensajería in-app.',
+      'Publicación en App Store y Google Play.',
+      'Panel de gestión y métricas de uso en tiempo real.',
+      'Integración con pasarelas de pago (Stripe).',
+      '5 rondas de revisiones correctivas.',
+    ],
+    demo: <AppDemo />,
   },
 ]
 
@@ -175,22 +269,22 @@ const EXTRAS = [
 const Y = <span className="check-yes">✓</span>
 const N = <span className="check-no">—</span>
 
-const SPECS_COLS = ['01 / Landing', '02 / Corporativa', '03 / E-Commerce']
+const SPECS_COLS = ['01 / Landing', '02 / Corporativa', '03 / E-Commerce', '04 / App']
 
 const SPECS_ROWS = [
-  { label: 'Contenido',        values: ['Hasta 5 páginas',         'Hasta 10 páginas',              'Ilimitadas'] },
-  { label: 'Diseño a medida',           values: ['100% Personalizado',      '100% Personalizado',            '100% Personalizado'] },
-  { label: 'Diseño Responsive',         values: [Y,                          Y,                               Y] },
-  { label: 'SEO On-Page',               values: ['Básico',                   'Avanzado (Schema)',             'Avanzado + Rich Snippets'] },
-  { label: 'Blog Integrado',            values: [N,                          Y,                               Y] },
-  { label: 'Multiidioma',               values: [N,                          'Hasta 2 idiomas',               'Hasta 3 idiomas'] },
-  { label: 'Formularios de contacto',   values: ['1 formulario',             'Avanzados / Múltiples',         'Avanzados / Múltiples'] },
-  { label: 'Analítica Web',             values: ['Google Analytics',         'Analytics + Search Console',   'Analytics + SC + E-comm'] },
-  { label: 'Core Web Vitals',           values: ['Optimizado (>90)',         'Premium (>95)',                 'Premium'] },
-  { label: 'Catálogo & Pasarela',       values: [N,                          N,                               'Ilimitado (Stripe / PayPal)'] },
-  { label: 'Panel de administración',   values: [N,                          'Gestor básico (CMS)',           'Completo (Pedidos, stock)'] },
-  { label: 'Rondas de revisiones',      values: ['1 ronda',                  '3 rondas',                     '5 rondas'] },
-  { label: 'Soporte post-lanzamiento',  values: ['15 días',                  '30 días',                      '60 días'] },
+  { label: 'Contenido',               values: ['Hasta 5 páginas',       'Hasta 10 páginas',           'Ilimitadas',                 'Pantallas ilimitadas'] },
+  { label: 'Diseño a medida',         values: ['100% Personalizado',    '100% Personalizado',         '100% Personalizado',         '100% Personalizado'] },
+  { label: 'Diseño Responsive',       values: [Y,                       Y,                            Y,                            Y] },
+  { label: 'SEO On-Page',             values: ['Básico',                'Avanzado (Schema)',           'Avanzado + Rich Snippets',   N] },
+  { label: 'Blog Integrado',          values: [N,                       Y,                            Y,                            N] },
+  { label: 'Multiidioma',             values: [N,                       'Hasta 2 idiomas',             'Hasta 3 idiomas',            'Hasta 2 idiomas'] },
+  { label: 'Formularios de contacto', values: ['1 formulario',          'Avanzados / Múltiples',      'Avanzados / Múltiples',      'Formularios in-app'] },
+  { label: 'Analítica Web',           values: ['Google Analytics',      'Analytics + Search Console', 'Analytics + SC + E-comm',    'Analytics + Firebase'] },
+  { label: 'Core Web Vitals',         values: ['Optimizado (>90)',      'Premium (>95)',               'Premium',                    N] },
+  { label: 'Catálogo & Pasarela',     values: [N,                       N,                            'Ilimitado (Stripe / PayPal)', 'Integrable (Stripe)'] },
+  { label: 'Panel de administración', values: [N,                       'Gestor básico (CMS)',         'Completo (Pedidos, stock)',   'Dashboard completo'] },
+  { label: 'Rondas de revisiones',    values: ['1 ronda',               '3 rondas',                   '5 rondas',                   '5 rondas'] },
+  { label: 'Soporte post-lanzamiento',values: ['15 días',               '30 días',                    '60 días',                    '60 días'] },
 ]
 
 function SpecsCarousel() {
@@ -200,7 +294,7 @@ function SpecsCarousel() {
   const touchStartX           = useRef(null)
 
   const navigate = (next) => {
-    if (next < 0 || next > 2) return
+    if (next < 0 || next > 3) return
     setDir(next > active ? 1 : -1)
     setActive(next)
     setAnimKey(k => k + 1)
@@ -245,7 +339,7 @@ function SpecsCarousel() {
       <button
         className="specs-carousel__arrow"
         onClick={() => navigate(active + 1)}
-        disabled={active === 2}
+        disabled={active === 3}
         aria-label="Siguiente"
       >→</button>
     </div>
@@ -319,7 +413,7 @@ function makeParticles(color) {
 }
 
 // Colores para las partículas de cada servicio
-const SVC_COLORS = ['#FF0080', '#FF0080', '#FF0080'];
+const SVC_COLORS = ['#FF0080', '#FF0080', '#FF0080', '#FF0080'];
 
 function ServiceSwitcher() {
   const [active, setActive] = useState(0)
@@ -671,6 +765,7 @@ export default function Servicios() {
                     <th>01 / Landing</th>
                     <th className="col-highlight">02 / Corporativa</th>
                     <th>03 / E-Commerce</th>
+                    <th>04 / App</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -679,11 +774,13 @@ export default function Servicios() {
                     <td>Hasta 5 secciones</td>
                     <td className="col-highlight">Hasta 10 páginas</td>
                     <td>Ilimitado</td>
+                    <td>Pantallas ilimitadas</td>
                   </tr>
                   <tr>
                     <td><strong>Diseño a medida</strong></td>
                     <td>100% Personalizado</td>
                     <td className="col-highlight">100% Personalizado</td>
+                    <td>100% Personalizado</td>
                     <td>100% Personalizado</td>
                   </tr>
                   <tr>
@@ -691,65 +788,76 @@ export default function Servicios() {
                     <td><span className="check-yes">✓</span></td>
                     <td className="col-highlight"><span className="check-yes">✓</span></td>
                     <td><span className="check-yes">✓</span></td>
+                    <td><span className="check-yes">✓</span></td>
                   </tr>
                   <tr>
                     <td><strong>SEO On-Page</strong></td>
                     <td>Básico</td>
                     <td className="col-highlight">Avanzado (Schema)</td>
                     <td>Avanzado + Rich Snippets</td>
+                    <td><span className="check-no">—</span></td>
                   </tr>
                   <tr>
                     <td><strong>Blog Integrado</strong></td>
                     <td><span className="check-no">—</span></td>
                     <td className="col-highlight"><span className="check-yes">✓</span></td>
                     <td><span className="check-yes">✓</span></td>
+                    <td><span className="check-no">—</span></td>
                   </tr>
                   <tr>
                     <td><strong>Multiidioma</strong></td>
                     <td><span className="check-no">—</span></td>
-                    <td className="col-highlight check-no">—</td>
+                    <td className="col-highlight">Hasta 2 idiomas</td>
+                    <td>Hasta 3 idiomas</td>
                     <td>Hasta 2 idiomas</td>
                   </tr>
                   <tr>
                     <td><strong>Formularios de contacto</strong></td>
                     <td>Formulario básico</td>
-                    <td className="col-highlight">Formulario básico</td>
-                    <td>Formulario básico</td>
+                    <td className="col-highlight">Avanzados / Múltiples</td>
+                    <td>Avanzados / Múltiples</td>
+                    <td>Formularios in-app</td>
                   </tr>
                   <tr>
                     <td><strong>Analítica Web</strong></td>
                     <td>Google Analytics</td>
                     <td className="col-highlight">Analytics + Search Console</td>
-                    <td>Analytics + Search Console + E-comm</td>
+                    <td>Analytics + SC + E-comm</td>
+                    <td>Analytics + Firebase</td>
                   </tr>
                   <tr>
                     <td><strong>Core Web Vitals</strong></td>
                     <td>Optimizado (&gt;90)</td>
                     <td className="col-highlight">Optimización Premium (&gt;95)</td>
                     <td>Optimización Premium</td>
+                    <td><span className="check-no">—</span></td>
                   </tr>
                   <tr>
                     <td><strong>Catálogo &amp; Pasarela</strong></td>
                     <td><span className="check-no">—</span></td>
                     <td className="col-highlight"><span className="check-no">—</span></td>
                     <td>Ilimitado (Stripe / PayPal)</td>
+                    <td>Integrable (Stripe)</td>
                   </tr>
                   <tr>
                     <td><strong>Panel de administración</strong></td>
                     <td><span className="check-no">—</span></td>
                     <td className="col-highlight">Gestor básico (CMS)</td>
                     <td>Completo (Pedidos, stock)</td>
+                    <td>Dashboard completo</td>
                   </tr>
                   <tr>
-                    <td><strong>Rondas de revisiones </strong></td>
+                    <td><strong>Rondas de revisiones</strong></td>
                     <td>2 rondas correctivas</td>
                     <td className="col-highlight">3 rondas correctivas</td>
+                    <td>5 rondas correctivas</td>
                     <td>5 rondas correctivas</td>
                   </tr>
                   <tr>
                     <td><strong>Soporte post-lanzamiento</strong></td>
                     <td>15 días</td>
                     <td className="col-highlight">30 días</td>
+                    <td>60 días</td>
                     <td>60 días</td>
                   </tr>
                 </tbody>
