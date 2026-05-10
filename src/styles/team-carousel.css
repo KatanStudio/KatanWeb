@@ -373,22 +373,22 @@
 
 .team-col-num {
   font-family: var(--font-mono);
-  font-size: 0.62rem;
-  letter-spacing: 0.2em;
+  font-size: 0.78rem;
+  letter-spacing: 0.18em;
   color: var(--edge);
   text-transform: uppercase;
 }
 
 .team-col-sep {
   font-family: var(--font-mono);
-  font-size: 0.62rem;
-  color: var(--ghost);
+  font-size: 0.78rem;
+  color: rgba(255, 0, 128, 0.35);
 }
 
 .team-col-tag {
   font-family: var(--font-mono);
-  font-size: 0.62rem;
-  letter-spacing: 0.1em;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
   color: var(--steel);
   text-transform: uppercase;
 }
@@ -416,24 +416,29 @@
 .team-toggle {
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 7px;
   align-self: flex-start;
   font-family: var(--font-mono);
-  font-size: 0.66rem;
+  font-size: 0.74rem;
   font-weight: 600;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--edge);
-  background: none;
-  border: none;
+  background: rgba(255, 0, 128, 0.06);
+  border: 1px solid rgba(255, 0, 128, 0.38);
   cursor: pointer;
-  padding: 0;
-  margin-top: 0.4rem;
-  transition: letter-spacing 0.2s ease;
+  padding: 0.45rem 0.9rem;
+  border-radius: 5px;
+  margin-top: 0.75rem;
+  transition: background 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
   -webkit-tap-highlight-color: transparent;
 }
 
-.team-toggle:hover { letter-spacing: 0.18em; }
+.team-toggle:hover {
+  background: rgba(255, 0, 128, 0.13);
+  border-color: var(--edge);
+  box-shadow: 0 0 12px rgba(255, 0, 128, 0.22);
+}
 
 .team-toggle svg {
   flex-shrink: 0;
@@ -473,8 +478,8 @@
 
 .team-bio-kicker {
   font-family: var(--font-mono);
-  font-size: 0.62rem;
-  letter-spacing: 0.2em;
+  font-size: 0.88rem;
+  letter-spacing: 0.15em;
   text-transform: uppercase;
   color: var(--edge);
   margin: 0;
@@ -505,10 +510,10 @@
   align-items: flex-start;
   gap: 10px;
   font-family: var(--font-mono);
-  font-size: 0.76rem;
-  letter-spacing: 0.04em;
+  font-size: 1rem;
+  letter-spacing: 0.02em;
   color: var(--steel);
-  line-height: 1.5;
+  line-height: 1.65;
   animation: teamHighlightIn 0.38s cubic-bezier(0.22, 1, 0.36, 1) calc(0.2s + var(--i, 0) * 0.06s) both;
 }
 
@@ -530,7 +535,7 @@
 }
 
 .team-bio-body p {
-  font-size: 0.9rem;
+  font-size: 1rem;
   color: var(--steel);
   line-height: 1.85;
   animation: teamParaIn 0.4s cubic-bezier(0.22, 1, 0.36, 1) calc(0.38s + var(--i, 0) * 0.08s) both;
@@ -538,18 +543,27 @@
 
 .team-bio-linkedin {
   align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   font-family: var(--font-mono);
-  font-size: 0.68rem;
-  letter-spacing: 0.16em;
+  font-size: 0.76rem;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--edge);
   text-decoration: none;
-  border-bottom: 1px solid rgba(255, 0, 128, 0.3);
-  padding-bottom: 3px;
-  transition: letter-spacing 0.2s ease;
+  border: 1px solid rgba(255, 0, 128, 0.38);
+  background: rgba(255, 0, 128, 0.06);
+  padding: 0.5rem 1.1rem;
+  border-radius: 5px;
   margin-top: auto;
+  transition: background 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
 }
 
-.team-bio-linkedin:hover { letter-spacing: 0.24em; }
+.team-bio-linkedin:hover {
+  background: rgba(255, 0, 128, 0.13);
+  border-color: var(--edge);
+  box-shadow: 0 0 14px rgba(255, 0, 128, 0.25);
+}
 
 } /* end @media (min-width: 900px) */
