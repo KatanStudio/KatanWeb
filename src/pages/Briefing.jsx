@@ -399,7 +399,7 @@ export default function Briefing() {
                   <legend className="kicker">03 // Configuración del Sistema</legend>
                   <div className="form-group">
                     <label>Tipo de estructura principal <span style={{color:'var(--edge)'}}>*</span></label>
-                    <div className="radio-grid" style={{ gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))' }}>
+                    <div className="radio-grid">
                       <label className="radio-card">
                         <input type="radio" name="servicio" value="Landing" checked={formData.servicio === 'Landing'} onChange={handleChange} required />
                         <div className="card-content"><span className="title">Landing Page</span><span className="desc">Conversión y ventas (1 pág)</span></div>
@@ -411,6 +411,10 @@ export default function Briefing() {
                       <label className="radio-card">
                         <input type="radio" name="servicio" value="E-commerce" checked={formData.servicio === 'E-commerce'} onChange={handleChange} />
                         <div className="card-content"><span className="title">E-commerce</span><span className="desc">Catálogo y pagos online</span></div>
+                      </label>
+                      <label className="radio-card">
+                        <input type="radio" name="servicio" value="AppNativa" checked={formData.servicio === 'AppNativa'} onChange={handleChange} />
+                        <div className="card-content"><span className="title">App Móvil</span><span className="desc">App nativa para iOS / Android</span></div>
                       </label>
                       <label className="radio-card">
                         <input type="radio" name="servicio" value="Orientacion" checked={formData.servicio === 'Orientacion'} onChange={handleChange} />
