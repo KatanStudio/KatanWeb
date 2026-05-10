@@ -9,69 +9,47 @@ import '../styles/team-carousel.css'
 // ─────────────────────────────────────────────────────────────────────────────
 const TEAM = [
   {
+    id: 'adrian',
     num: '_dev.01',
     tag: 'Negocio & UI/UX',
     name: 'Adrián Lozano',
     img: '/img/AdrianDefinitivaV2.webp',
     alt: 'Adrián Lozano',
     linkedin: 'https://www.linkedin.com/in/adrián-lozano',
-    imgSide: 'left',
-    desc: 'Graduado en ADE (UCLM) y desarrollador web (DAW). Como responsable de Experiencia e Interfaz de Usuario (UI/UX) y Negocio, traduzco tus objetivos comerciales a código de alto rendimiento. Mi cometido es eliminar cualquier obstáculo entre tu cliente y la venta mediante interfaces limpias y arquitectura lógica.',
+    highlights: [
+      'Grado en ADE — UCLM',
+      'Ciclo Formativo DAW (Desarrollo de Aplicaciones Web)',
+      'Especialista en UI/UX e interfaces orientadas a conversión',
+      'Código de alto rendimiento para eliminar fricciones de venta',
+    ],
+    fullBio: 'Como responsable de Experiencia e Interfaz de Usuario (UI/UX) y Negocio, traduzco tus objetivos comerciales a código de alto rendimiento. Mi cometido es eliminar cualquier obstáculo entre tu cliente y la venta mediante interfaces limpias y arquitectura lógica.',
   },
   {
+    id: 'alejandro',
     num: '_dev.02',
     tag: 'Gestión & Lógica',
     name: 'Alejandro Quintana',
     img: '/img/AlejandroDefinitivaV2.webp',
     alt: 'Alejandro Quintana',
     linkedin: 'https://www.linkedin.com/in/alejandro-quintana-rodriguez/',
-    imgSide: 'right',
-    desc: 'Graduado en Ingeniería Informática (UCLM) y curtido en gestión de proyectos ágiles. Me encargo de eliminar el ruido entre lo que tu negocio pide y lo se muestra en la web, transformando tus ideas en requisitos técnicos. Construyo proyectos escalables, bases de datos eficientes y lógica compleja. Escribo el software para que tu sistema soporte el crecimiento de tu negocio, sin errores y sin fisuras.',
+    highlights: [
+      'Grado en Ingeniería Informática — UCLM',
+      'Gestión de proyectos ágiles (Scrum / Kanban)',
+      'Backend, bases de datos y sistemas escalables',
+      'Transformación de requisitos de negocio a arquitectura técnica',
+    ],
+    fullBio: 'Me encargo de eliminar el ruido entre lo que tu negocio pide y lo que se muestra en la web, transformando tus ideas en requisitos técnicos. Construyo proyectos escalables, bases de datos eficientes y lógica compleja. Escribo el software para que tu sistema soporte el crecimiento de tu negocio, sin errores y sin fisuras.',
   },
 ]
 
 // ─────────────────────────────────────────────────────────────────────────────
-// TEAM CAROUSEL
-// Móvil  (<900px): tarjeta con foto grande, dots, flechas y swipe táctil
-// Desktop (≥900px): stage foto|texto de pantalla completa con controles
+// TEAM MOBILE  (móvil <900px) — lista estática, uno debajo del otro
 // ─────────────────────────────────────────────────────────────────────────────
-function TeamCarousel() {
-  const [active, setActive] = useState(0)
-  const [dir, setDir] = useState(1)
-  const [animKey, setAnimKey] = useState(0)
-  const touchStartX = useRef(null)
-
-  const navigate = useCallback((next) => {
-    if (next < 0 || next >= TEAM.length) return
-    setDir(next > active ? 1 : -1)
-    setActive(next)
-    setAnimKey(k => k + 1)
-  }, [active])
-
-  const handleTouchStart = (e) => { touchStartX.current = e.touches[0].clientX }
-  const handleTouchEnd = (e) => {
-    if (touchStartX.current === null) return
-    const diff = touchStartX.current - e.changedTouches[0].clientX
-    if (diff > 50) navigate(active + 1)
-    else if (diff < -50) navigate(active - 1)
-    touchStartX.current = null
-  }
-
-  const member = TEAM[active]
-
+function TeamMobile() {
   return (
-    <div style={{ marginBottom: '4rem' }}>
-
-      {/* ══ MÓVIL: carrusel de tarjeta ════════════════════════════════════════ */}
-      <div
-        className="team-mobile"
-        onTouchStart={handleTouchStart}
-        onTouchEnd={handleTouchEnd}
-      >
-        {/* Card animada — key fuerza re-mount para animar */}
-        <div key={animKey} className="team-mobile__card" data-dir={dir}>
-
-          {/* Foto como enlace a LinkedIn */}
+    <div className="team-mobile">
+      {TEAM.map((member) => (
+        <div key={member.id} className="team-mobile__card">
           <a
             href={member.linkedin}
             target="_blank"
@@ -85,84 +63,136 @@ function TeamCarousel() {
               <span className="team-mobile__num">{member.num}</span>
             </div>
           </a>
-
-          {/* Bloque de texto */}
           <div className="team-mobile__body">
             <span className="team-mobile__tag">{member.tag}</span>
             <h3 className="team-mobile__name">{member.name}</h3>
-            <p className="team-mobile__desc">{member.desc}</p>
-            <a
-              href={member.linkedin}
-              target="_blank"
-              rel="noreferrer"
-              className="team-mobile__link"
-            >
+            <p className="team-mobile__desc">{member.fullBio}</p>
+            <a href={member.linkedin} target="_blank" rel="noreferrer" className="team-mobile__link">
               Ver LinkedIn →
             </a>
           </div>
         </div>
+      ))}
+    </div>
+  )
+}
 
-        {/* Controles: flechas + dots */}
-        <div className="team-mobile__controls">
-          <button
-            className="team-mobile__arrow"
-            onClick={() => navigate(active - 1)}
-            disabled={active === 0}
-            aria-label="Anterior"
-          >←</button>
+// ─────────────────────────────────────────────────────────────────────────────
+// TEAM STAGE  (desktop ≥900px) — grid animado estilo Jenny Records
+// ─────────────────────────────────────────────────────────────────────────────
+function TeamStage() {
+  const [expanded, setExpanded] = useState(null)
+  const [bioVisible, setBioVisible] = useState(null)
+  const [closing, setClosing] = useState(false)
+  const closingTimer = useRef(null)
 
-          <div className="team-mobile__dots" role="tablist">
-            {TEAM.map((m, i) => (
+  const toggle = useCallback((id) => {
+    if (closingTimer.current) clearTimeout(closingTimer.current)
+
+    if (closing && bioVisible === id) {
+      setExpanded(id)
+      setClosing(false)
+      return
+    }
+
+    if (expanded === id) {
+      setExpanded(null)
+      setClosing(true)
+      closingTimer.current = setTimeout(() => {
+        setBioVisible(null)
+        setClosing(false)
+      }, 420)
+    } else {
+      setClosing(false)
+      setBioVisible(id)
+      setExpanded(id)
+    }
+  }, [expanded, bioVisible, closing])
+
+  const bioDisplayPerson = bioVisible ? TEAM.find(m => m.id === bioVisible) : null
+  const bioDisplayIdx    = bioVisible ? TEAM.findIndex(m => m.id === bioVisible) : -1
+  const bioCol           = bioDisplayIdx === 0 ? 2 : 1
+  const bioDirection     = bioDisplayIdx === 1 ? 'left' : 'right'
+  const bioAnimClass     = closing
+    ? `team-bio--to-${bioDirection}`
+    : `team-bio--from-${bioDirection}`
+
+  return (
+    <div className={`team-stage${expanded ? ` team-stage--${expanded}-open` : ''}`}>
+      {TEAM.map((member, idx) => {
+        const isActive   = expanded === member.id
+        const isHidden   = expanded !== null && !isActive
+
+        return (
+          <div
+            key={member.id}
+            className={`team-col${isActive ? ' team-col--active' : ''}${isHidden ? ' team-col--hidden' : ''}`}
+            style={{ gridColumn: idx + 1, gridRow: 1 }}
+          >
+            <div className="team-photo-wrap" onClick={() => toggle(member.id)} aria-hidden="true">
+              <img src={member.img} alt={member.alt} className="team-photo" />
+              <div className="team-photo-overlay" aria-hidden="true" />
+              <div className="team-photo-badge" aria-hidden="true">
+                <span>{member.num}</span>
+              </div>
+            </div>
+
+            <div className="team-col-footer">
+              <div className="team-col-label">
+                <span className="team-col-num">{member.num}</span>
+                <span className="team-col-sep">/</span>
+                <span className="team-col-tag">{member.tag}</span>
+              </div>
+              <h3 className="team-col-name">{member.name}</h3>
               <button
-                key={i}
-                role="tab"
-                aria-selected={i === active}
-                aria-label={m.name}
-                className={`team-mobile__dot${i === active ? ' team-mobile__dot--active' : ''}`}
-                onClick={() => navigate(i)}
-              />
+                className={`team-toggle${isActive ? ' team-toggle--open' : ''}`}
+                onClick={() => toggle(member.id)}
+                aria-expanded={isActive}
+              >
+                <span>{isActive ? 'Cerrar' : 'Ver más'}</span>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                  <path d="M9 6l6 6-6 6" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </button>
+            </div>
+          </div>
+        )
+      })}
+
+      {bioDisplayPerson && (
+        <div
+          className={`team-bio ${bioAnimClass}`}
+          key={bioDisplayPerson.id}
+          style={{ gridColumn: bioCol, gridRow: 1 }}
+        >
+          <p className="team-bio-kicker">{bioDisplayPerson.num} / {bioDisplayPerson.tag}</p>
+          <h3 className="team-bio-name">{bioDisplayPerson.name}</h3>
+
+          <ul className="team-bio-highlights">
+            {bioDisplayPerson.highlights.map((h, i) => (
+              <li key={h} className="team-bio-highlight" style={{ '--i': i }}>
+                <span className="team-bio-dot" aria-hidden="true" />
+                {h}
+              </li>
+            ))}
+          </ul>
+
+          <div className="team-bio-body">
+            {bioDisplayPerson.fullBio.split('\n\n').map((para, i) => (
+              <p key={i} style={{ '--i': i }}>{para}</p>
             ))}
           </div>
 
-          <button
-            className="team-mobile__arrow"
-            onClick={() => navigate(active + 1)}
-            disabled={active === TEAM.length - 1}
-            aria-label="Siguiente"
-          >→</button>
+          <a
+            href={bioDisplayPerson.linkedin}
+            target="_blank"
+            rel="noreferrer"
+            className="team-bio-linkedin"
+          >
+            Ver en LinkedIn →
+          </a>
         </div>
-
-        <p className="team-mobile__hint" aria-hidden="true">← desliza para ver el equipo →</p>
-      </div>
-
-
-      {/* ══ DESKTOP: grid de perfiles en columnas ════════════════════════════ */}
-      <div className="team-grid">
-        {TEAM.map((m) => (
-          <div key={m.num} className="team-card">
-            <div className="team-card__photo-wrap">
-              <div className="team-card__photo-glow" aria-hidden="true" />
-              <img src={m.img} alt={m.alt} className="team-card__photo" />
-            </div>
-            <div className="team-card__body">
-              <div className="team-card__top">
-                <span className="service-card__num">{m.num}</span>
-                <span className="service-card__tag">{m.tag}</span>
-              </div>
-              <h3 className="team-card__name">{m.name}</h3>
-              <p className="team-card__desc">{m.desc}</p>
-              <a
-                href={m.linkedin}
-                target="_blank"
-                rel="noreferrer"
-                className="team-card__link"
-              >
-                Ver en LinkedIn →
-              </a>
-            </div>
-          </div>
-        ))}
-      </div>
+      )}
     </div>
   )
 }
@@ -195,8 +225,9 @@ export default function Nosotros() {
               </p>
             </header>
 
-            {/* ── Carrusel del equipo ── */}
-            <TeamCarousel />
+            {/* Lista en móvil, stage en desktop — CSS controla cuál se ve */}
+            <TeamMobile />
+            <TeamStage />
 
             <div className="module module--recurring" style={{ maxWidth: '100%' }}>
               <h3 className="module__price" style={{ marginBottom: '1rem' }}>Nuestra experiencia en la trinchera</h3>

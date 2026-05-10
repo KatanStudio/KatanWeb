@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//c/Users/User/Desktop/Proyectos/Katan/Jenny Records/JennyRecords/frontend/src/**)",
+      "Bash(Get-ChildItem -Path \"C:\\\\Users\\\\User\\\\Desktop\\\\Proyectos\\\\Katan\\\\Jenny Records\\\\JennyRecords\\\\frontend\\\\src\\\\components\" -Filter \"*.jsx\" -File)",
+      "Read(//c/Users/User/Desktop/Proyectos/Katan/Jenny Records/JennyRecords/**)"
+    ]
+  }
+}

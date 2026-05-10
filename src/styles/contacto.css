@@ -148,8 +148,9 @@
 }
 
 .radio-grid {
-  display: grid;
-  grid-template-columns: 1fr;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 1rem;
   margin-top: 0.5rem;
 }
@@ -157,6 +158,8 @@
 .radio-card {
   position: relative;
   cursor: pointer;
+  flex: 1 1 180px;
+  max-width: 260px;
 }
 
 .radio-card input {
@@ -229,8 +232,9 @@
   }
 }
 
-@media (min-width: 768px) {
-  .radio-grid {
-    grid-template-columns: repeat(3, 1fr);
+@media (max-width: 639px) {
+  .radio-card {
+    flex: 1 1 100%;
+    max-width: 100%;
   }
 }
