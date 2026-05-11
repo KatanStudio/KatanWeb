@@ -141,3 +141,15 @@ vite.config.ts.timestamp-*
 
 # Claude Code local settings (machine-specific, not for version control)
 .claude/settings.local.json
+.claude/memory/
+
+# Otros asistentes de IA (cachés y configuración local de máquina)
+.cursor/
+.aider/
+.aider.tags.cache.v3/
+.aider.chat.history.md
+.copilot/
+.continue/
+.codeium/
+.windsurf/
+.tabnine/
