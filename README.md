@@ -18,7 +18,7 @@ Construida con código propio, sin constructores visuales ni plantillas.
 | Estilos | CSS puro — Variables, Grid, Flexbox |
 
 Solo frontend. No hay servidor propio: los formularios de contacto y briefing
-se envían directamente a HubSpot desde el browser.
+se envían directamente desde el browser.
 
 ---
 
@@ -59,7 +59,7 @@ VITE_HUBSPOT_FORM_ID=     # UUID del formulario HubSpot
 
 ```bash
 npm install
-npm run dev       # http://localhost:5173
+npm run dev       
 npm run build     # Genera /dist
 npm run preview   # Preview del build en local
 ```
