@@ -344,7 +344,8 @@ export default function Briefing() {
                           name="telefono"
                           value={formData.telefono}
                           onChange={(e) => {
-                            const valorFiltrado = e.target.value.replace(/[^0-9\s]/g, '');
+                            // /[^0-9 ]/ en lugar de \s para no permitir tabs/newlines en campo teléfono
+                            const valorFiltrado = e.target.value.replace(/[^0-9 ]/g, '');
                             handleChange({ target: { name: 'telefono', value: valorFiltrado, type: 'text' } });
                           }}
                           required
