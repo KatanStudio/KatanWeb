@@ -22,7 +22,7 @@ const TEAM = [
       'Especialista en UI/UX e interfaces orientadas a conversión',
       'Código de alto rendimiento para eliminar fricciones de venta',
     ],
-    fullBio: 'Como responsable de Experiencia e Interfaz de Usuario (UI/UX) y Negocio, traduzco tus objetivos comerciales a código de alto rendimiento. Mi cometido es eliminar cualquier obstáculo entre tu cliente y la venta mediante interfaces limpias y arquitectura lógica.',
+    fullBio: 'Como responsable de Estrategia de Negocio y UI/UX, mi misión es transformar tus objetivos comerciales en experiencias digitales que realmente conviertan. Combino mi visión empresarial con el desarrollo técnico para crear interfaces limpias, atractivas y de alto rendimiento. \n\n Mi enfoque se centra en diseñar el camino perfecto para tu usuario: elimino cualquier fricción u obstáculo visual mediante una arquitectura lógica y fluida, garantizando que el diseño de tu plataforma no solo sea estético, sino el motor principal de tus ventas.',
   },
   {
     id: 'alejandro',
@@ -38,7 +38,7 @@ const TEAM = [
       'Backend, bases de datos y sistemas escalables',
       'Transformación de requisitos de negocio a arquitectura técnica',
     ],
-    fullBio: 'Me encargo de eliminar el ruido entre lo que tu negocio pide y lo que se muestra en la web, transformando tus ideas en requisitos técnicos. Construyo proyectos escalables, bases de datos eficientes y lógica compleja. Escribo el software para que tu sistema soporte el crecimiento de tu negocio, sin errores y sin fisuras.',
+    fullBio: 'Como especialista en Gestión y Arquitectura Lógica, soy el traductor entre las necesidades de tu negocio y la realidad técnica. Mi trabajo ocurre en el "backstage": construyo los cimientos invisibles pero fundamentales de tu proyecto. Desarrollo bases de datos eficientes, sistemas  escalables y lógica compleja, escribiendo un código robusto y libre de errores. \n\n Mi objetivo es que tu plataforma tenga la fuerza, la velocidad y la estabilidad para soportar el crecimiento de tu empresa, sin cuellos de botella que lo imposibiliten.',
   },
 ]
 
@@ -110,18 +110,18 @@ function TeamStage() {
   }, [expanded, bioVisible, closing])
 
   const bioDisplayPerson = bioVisible ? TEAM.find(m => m.id === bioVisible) : null
-  const bioDisplayIdx    = bioVisible ? TEAM.findIndex(m => m.id === bioVisible) : -1
-  const bioCol           = bioDisplayIdx === 0 ? 2 : 1
-  const bioDirection     = bioDisplayIdx === 1 ? 'left' : 'right'
-  const bioAnimClass     = closing
+  const bioDisplayIdx = bioVisible ? TEAM.findIndex(m => m.id === bioVisible) : -1
+  const bioCol = bioDisplayIdx === 0 ? 2 : 1
+  const bioDirection = bioDisplayIdx === 1 ? 'left' : 'right'
+  const bioAnimClass = closing
     ? `team-bio--to-${bioDirection}`
     : `team-bio--from-${bioDirection}`
 
   return (
     <div className={`team-stage${expanded ? ` team-stage--${expanded}-open` : ''}`}>
       {TEAM.map((member, idx) => {
-        const isActive   = expanded === member.id
-        const isHidden   = expanded !== null && !isActive
+        const isActive = expanded === member.id
+        const isHidden = expanded !== null && !isActive
 
         return (
           <div
@@ -235,7 +235,7 @@ export default function Nosotros() {
                 Llevamos a la espalda numerosos proyectos sin un solo cliente que haya tenido que recurrir a mantenimiento de
                 emergencia o negocios perdiendo dinero.
 
-                Por eso fundamos Katan, para ofrecer una alternativa cercana,<strong> soluciones profesionales y acercar tu negocio al público</strong>. 
+                Por eso fundamos Katan, para ofrecer una alternativa cercana,<strong> soluciones profesionales y acercar tu negocio al público</strong>.
                 No reinventamos la rueda, simplemente le damos un enfoque correcto.
               </p>
             </div>
