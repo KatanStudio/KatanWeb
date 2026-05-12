@@ -1,369 +1,84 @@
 /* ═══════════════════════════════════════════════
-   TEAM — móvil: carrusel / desktop: stage grid
+   1. ESTILOS GLOBALES (Compartidos en Móvil y PC)
    ═══════════════════════════════════════════════ */
 
-/* ════════════════════════════════════════
-   MOBILE CAROUSEL  (<900px)
-   ════════════════════════════════════════ */
-.team-mobile {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  margin-bottom: 4rem;
-}
-
-.team-mobile__card {
-  background: var(--sheath);
-  border: 1px solid var(--ghost);
-  overflow: hidden;
-  position: relative;
-  border-radius: 8px;
-}
-
-.team-mobile__card[data-dir="1"] {
-  animation: mobileSlideIn 0.38s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-}
-.team-mobile__card[data-dir="-1"] {
-  animation: mobileSlideInLeft 0.38s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
-}
-
-@keyframes mobileSlideIn {
-  from { opacity: 0; transform: translateX(32px); }
-  to   { opacity: 1; transform: translateX(0); }
-}
-@keyframes mobileSlideInLeft {
-  from { opacity: 0; transform: translateX(-32px); }
-  to   { opacity: 1; transform: translateX(0); }
-}
-
-.team-mobile__img-wrap {
-  display: block;
-  position: relative;
-  width: 100%;
-  aspect-ratio: 4 / 5;
-  max-height: 300px;
-  overflow: hidden;
-  text-decoration: none;
-}
-
-.team-mobile__img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center 30%;
-  display: block;
-  filter: grayscale(15%);
-  transition: transform 0.5s ease, filter 0.4s ease;
-}
-
-.team-mobile__img-wrap:active .team-mobile__img {
-  transform: scale(1.04);
-  filter: grayscale(0%);
-}
-
-.team-mobile__img-overlay {
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(to bottom, transparent 40%, var(--sheath) 100%),
-    linear-gradient(135deg, rgba(255, 0, 128, 0.12) 0%, transparent 60%);
-  pointer-events: none;
-}
-
-.team-mobile__img-wrap::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0;
-  width: 3px;
-  height: 100%;
-  background: linear-gradient(to bottom, transparent, var(--edge), transparent);
-  z-index: 2;
-  opacity: 0.9;
-}
-
-.team-mobile__img-badge {
-  position: absolute;
-  top: 1rem; right: 1rem;
-  z-index: 3;
-  background: rgba(10, 10, 18, 0.75);
-  border: 1px solid var(--ghost);
-  backdrop-filter: blur(6px);
-  padding: 0.25rem 0.6rem;
-  border-radius: 6px;
-}
-
-.team-mobile__num {
-  font-family: var(--font-mono);
-  font-size: 0.68rem;
-  color: var(--edge);
-  letter-spacing: 0.2em;
-}
-
-.team-mobile__body {
-  padding: 1.5rem 1.5rem 1.75rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.65rem;
-}
-
-.team-mobile__tag {
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--edge);
-}
-
-.team-mobile__name {
-  font-family: var(--font-head);
-  font-size: clamp(1.7rem, 7vw, 2.2rem);
-  font-weight: 900;
-  letter-spacing: -0.05em;
-  line-height: 1;
-  color: var(--blade);
-  margin: 0;
-}
-
-.team-mobile__desc {
-  font-size: 0.95rem;
-  color: var(--steel);
-  line-height: 1.75;
-  margin-top: 0.25rem;
-}
-
-.team-mobile__link {
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--edge);
-  text-decoration: none;
-  align-self: flex-start;
-  margin-top: 0.5rem;
-  transition: letter-spacing 0.2s ease;
-  border-bottom: 1px solid rgba(255, 0, 128, 0.35);
-  padding-bottom: 2px;
-}
-
-.team-mobile__link:active {
-  letter-spacing: 0.22em;
-}
-
-.team-mobile__controls {
-  display: flex;
+/* ── Botones Unificados (LinkedIn y Cerrar) ── */
+.team-bio-btn {
+  display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 1.25rem;
-  padding: 1rem 1.5rem;
-  background: var(--forge);
-  border: 1px solid var(--ghost);
-  border-top: none;
-  border-radius: 0 0 5px 5px;
-}
-
-.team-mobile__arrow {
-  width: 2.5rem;
-  height: 2.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(255, 0, 128, 0.07);
-  border: 1.5px solid var(--edge);
-  color: var(--edge);
-  font-family: var(--font-mono);
-  font-size: 1rem;
-  cursor: pointer;
-  transition: background 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
-  box-shadow: 0 0 8px rgba(255, 0, 128, 0.18);
-  -webkit-tap-highlight-color: transparent;
-  touch-action: manipulation;
-  border-radius: 6px;
-}
-
-.team-mobile__arrow:active:not(:disabled) {
-  background: rgba(255, 0, 128, 0.2);
-  box-shadow: 0 0 18px rgba(255, 0, 128, 0.45);
-  transform: scale(1.08);
-}
-
-.team-mobile__arrow:disabled {
-  opacity: 0.2;
-  cursor: not-allowed;
-  box-shadow: none;
-  border-color: var(--ghost);
-  color: var(--steel);
-  background: transparent;
-}
-
-.team-mobile__dots {
-  display: flex;
   gap: 8px;
-  align-items: center;
-}
-
-.team-mobile__dot {
-  width: 28px;
-  height: 3px;
-  border: none;
-  border-radius: 2px;
-  background: var(--ghost);
-  cursor: pointer;
-  padding: 0;
-  transition: background 0.25s ease, width 0.25s ease, box-shadow 0.25s ease;
-  -webkit-tap-highlight-color: transparent;
-  touch-action: manipulation;
-}
-
-.team-mobile__dot--active {
-  width: 52px;
-  background: var(--edge);
-  box-shadow: 0 0 8px rgba(255, 0, 128, 0.55);
-}
-
-.team-mobile__hint {
-  text-align: center;
   font-family: var(--font-mono);
-  font-size: 0.62rem;
-  letter-spacing: 0.14em;
-  color: var(--steel);
-  opacity: 0.45;
-  margin: 0.75rem 0 0;
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
-}
-
-@media (min-width: 900px) {
-  .team-mobile { display: none; }
-}
-
-/* ════════════════════════════════════════
-   DESKTOP STAGE (≥900px) — estilo Jenny Records
-   Foto grande, bio deslizante lateral
-   ════════════════════════════════════════ */
-
-/* Oculto en móvil */
-.team-stage { display: none; }
-
-@media (min-width: 900px) {
-
-.team-stage {
-  display: grid;
-  grid-template-columns: calc(50% - 20px) calc(50% - 20px);
-  gap: 40px;
-  align-items: start;
-  transition: grid-template-columns 0.55s cubic-bezier(0.4, 0, 0.2, 1);
-  margin-bottom: 4rem;
-}
-
-/* Adrián activo → col izquierda se estrecha, bio ocupa col derecha */
-.team-stage--adrian-open {
-  grid-template-columns:
-    clamp(180px, 27%, 300px)
-    calc(100% - 40px - clamp(180px, 27%, 300px));
-}
-
-/* Alejandro activo → col derecha se estrecha, bio ocupa col izquierda */
-.team-stage--alejandro-open {
-  grid-template-columns:
-    calc(100% - 40px - clamp(180px, 27%, 300px))
-    clamp(180px, 27%, 300px);
-}
-
-.team-bio { grid-row: 1; }
-
-/* ── Columna de persona ── */
-.team-col {
-  display: flex;
-  flex-direction: column;
-  gap: 0;
-  transition: opacity 0.4s ease, visibility 0.4s ease;
-}
-
-.team-col--hidden {
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-}
-
-/* ── Foto ── */
-.team-photo-wrap {
-  position: relative;
-  width: 100%;
-  height: clamp(280px, 38vw, 480px);
-  overflow: hidden;
-  border-radius: 8px;
-  background: var(--sheath);
-  flex-shrink: 0;
-  cursor: pointer;
-  transition: height 0.55s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.team-col--active .team-photo-wrap {
-  height: clamp(200px, 26vw, 340px);
-}
-
-.team-photo {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center 25%;
-  display: block;
-  filter: grayscale(15%);
-  transition: transform 0.6s ease, filter 0.4s ease;
-}
-
-.team-col:hover .team-photo {
-  transform: scale(1.03);
-  filter: grayscale(0%);
-}
-
-.team-photo-overlay {
-  position: absolute;
-  inset: 0;
-  background:
-    linear-gradient(to bottom, transparent 50%, rgba(10, 10, 18, 0.72) 100%),
-    linear-gradient(135deg, rgba(255, 0, 128, 0.08) 0%, transparent 60%);
-  pointer-events: none;
-}
-
-.team-photo-wrap::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0;
-  width: 3px;
-  height: 100%;
-  background: linear-gradient(to bottom, transparent, var(--edge), transparent);
-  z-index: 2;
-  opacity: 0.85;
-}
-
-.team-photo-badge {
-  position: absolute;
-  top: 1rem; right: 1rem;
-  z-index: 3;
-  background: rgba(10, 10, 18, 0.75);
-  border: 1px solid var(--ghost);
-  backdrop-filter: blur(6px);
-  -webkit-backdrop-filter: blur(6px);
-  padding: 0.25rem 0.6rem;
-  border-radius: 6px;
-}
-
-.team-photo-badge span {
-  font-family: var(--font-mono);
-  font-size: 0.62rem;
   color: var(--edge);
-  letter-spacing: 0.2em;
+  background: rgba(255, 0, 128, 0.06);
+  border: 1px solid rgba(255, 0, 128, 0.38);
+  cursor: pointer;
+  padding: 0.6rem 1.2rem;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  width: fit-content;
+}
+
+.team-bio-btn:hover {
+  background: rgba(255, 0, 128, 0.13);
+  border-color: var(--edge);
+  box-shadow: 0 0 12px rgba(255, 0, 128, 0.22);
+  transform: translateY(-1px);
+}
+
+.team-bio-btn:active {
+  transform: translateY(0);
+}
+
+/* ── Botón Toggle Estándar (Usado en el grid) ── */
+.team-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  align-self: flex-start;
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
+  color: var(--edge);
+  background: rgba(255, 0, 128, 0.06);
+  border: 1px solid rgba(255, 0, 128, 0.38);
+  cursor: pointer;
+  padding: 0.45rem 0.9rem;
+  border-radius: 5px;
+  transition: all 0.2s ease;
+  -webkit-tap-highlight-color: transparent;
 }
 
-/* ── Footer de columna ── */
-.team-col-footer {
-  padding-top: 1.1rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.35rem;
+.team-toggle:hover {
+  background: rgba(255, 0, 128, 0.13);
+  border-color: var(--edge);
+  box-shadow: 0 0 12px rgba(255, 0, 128, 0.22);
 }
 
+.team-toggle svg {
+  flex-shrink: 0;
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.team-toggle--open {
+  background: rgba(0, 0, 0, 0.5);
+  border-color: var(--edge);
+  box-shadow: 0 0 12px rgba(126, 16, 71, 0.15);
+}
+
+.team-toggle--open svg { 
+  transform: rotate(180deg); 
+}
+
+/* ── Etiquetas de arriba (Ej: _dev.01 / UI/UX) ── */
 .team-col-label {
   display: flex;
   align-items: center;
@@ -393,87 +108,11 @@
   text-transform: uppercase;
 }
 
-.team-col-name {
-  font-family: var(--font-head);
-  font-size: clamp(1.4rem, 2.2vw, 1.9rem);
-  font-weight: 900;
-  letter-spacing: -0.04em;
-  line-height: 1.05;
-  color: var(--blade);
-  margin: 0.15rem 0;
-  transition: font-size 0.4s ease, letter-spacing 0.4s ease;
-}
-
-.team-col--active .team-col-name {
-  font-size: 1rem;
-  letter-spacing: -0.01em;
-  font-family: var(--font-mono);
-  font-weight: 500;
-  color: var(--steel);
-}
-
-/* ── Botón Ver más / Cerrar ── */
-.team-toggle {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  align-self: flex-start;
-  font-family: var(--font-mono);
-  font-size: 0.74rem;
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--edge);
-  background: rgba(255, 0, 128, 0.06);
-  border: 1px solid rgba(255, 0, 128, 0.38);
-  cursor: pointer;
-  padding: 0.45rem 0.9rem;
-  border-radius: 5px;
-  margin-top: 0.75rem;
-  transition: background 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
-  -webkit-tap-highlight-color: transparent;
-}
-
-.team-toggle:hover {
-  background: rgba(255, 0, 128, 0.13);
-  border-color: var(--edge);
-  box-shadow: 0 0 12px rgba(255, 0, 128, 0.22);
-}
-
-.team-toggle svg {
-  flex-shrink: 0;
-  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.team-toggle--open svg { transform: rotate(180deg); }
-
-/* ═══════════════════════════════════════════════
-   BIO PANEL
-   ═══════════════════════════════════════════════ */
+/* ── Panel de Biografía (Textos) ── */
 .team-bio {
   display: flex;
   flex-direction: column;
   gap: 0;
-}
-
-.team-bio--from-left  { animation: teamBioFromLeft  0.55s cubic-bezier(0.22, 1, 0.36, 1) both; }
-.team-bio--from-right { animation: teamBioFromRight 0.55s cubic-bezier(0.22, 1, 0.36, 1) both; }
-.team-bio--to-left    { animation: teamBioToLeft    0.38s cubic-bezier(0.4, 0, 1, 1) both; }
-.team-bio--to-right   { animation: teamBioToRight   0.38s cubic-bezier(0.4, 0, 1, 1) both; }
-
-@keyframes teamBioFromLeft  { from { opacity: 0; transform: translateX(-28px) translateY(6px); } to { opacity: 1; transform: none; } }
-@keyframes teamBioFromRight { from { opacity: 0; transform: translateX(28px) translateY(6px); }  to { opacity: 1; transform: none; } }
-@keyframes teamBioToLeft    { from { opacity: 1; transform: none; } to { opacity: 0; transform: translateX(-20px) translateY(-4px); } }
-@keyframes teamBioToRight   { from { opacity: 1; transform: none; } to { opacity: 0; transform: translateX(20px) translateY(-4px); } }
-
-@keyframes teamHighlightIn {
-  from { opacity: 0; transform: translateX(-10px); }
-  to   { opacity: 1; transform: translateX(0); }
-}
-
-@keyframes teamParaIn {
-  from { opacity: 0; transform: translateY(8px); }
-  to   { opacity: 1; transform: translateY(0); }
 }
 
 .team-bio-kicker {
@@ -541,29 +180,486 @@
   animation: teamParaIn 0.4s cubic-bezier(0.22, 1, 0.36, 1) calc(0.38s + var(--i, 0) * 0.08s) both;
 }
 
-.team-bio-linkedin {
-  align-self: flex-start;
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  font-family: var(--font-mono);
-  font-size: 0.76rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--edge);
+@keyframes teamHighlightIn { from { opacity: 0; transform: translateX(-10px); } to { opacity: 1; transform: translateX(0); } }
+@keyframes teamParaIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+
+/* ═══════════════════════════════════════════════
+   2. MOBILE CAROUSEL Y MODAL (<900px)
+   ═══════════════════════════════════════════════ */
+.team-mobile {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-bottom: 4rem;
+}
+
+.team-mobile__wrapper {
+  background: var(--sheath);
+  border: 1px solid var(--ghost);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.25);
+}
+
+.team-mobile__card {
+  background: transparent;
+  border: none;
+  position: relative;
+  overflow: hidden;
+}
+
+.team-mobile__card[data-dir="1"] { animation: mobileSlideIn 0.38s cubic-bezier(0.25, 0.46, 0.45, 0.94) both; }
+.team-mobile__card[data-dir="-1"] { animation: mobileSlideInLeft 0.38s cubic-bezier(0.25, 0.46, 0.45, 0.94) both; }
+
+@keyframes mobileSlideIn { from { opacity: 0; transform: translateX(32px); } to { opacity: 1; transform: translateX(0); } }
+@keyframes mobileSlideInLeft { from { opacity: 0; transform: translateX(-32px); } to { opacity: 1; transform: translateX(0); } }
+
+.team-mobile__img-wrap {
+  display: block;
+  position: relative;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  max-height: 300px;
+  overflow: hidden;
   text-decoration: none;
-  border: 1px solid rgba(255, 0, 128, 0.38);
-  background: rgba(255, 0, 128, 0.06);
-  padding: 0.5rem 1.1rem;
-  border-radius: 5px;
-  margin-top: auto;
-  transition: background 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  cursor: pointer;
 }
 
-.team-bio-linkedin:hover {
-  background: rgba(255, 0, 128, 0.13);
+/* Ajuste de altura dinámica para evitar recortes de cara (474px a 900px) */
+@media (min-width: 474px) and (max-width: 899px) {
+  .team-mobile__img-wrap {
+    max-height: 480px; 
+    aspect-ratio: 1 / 1.1;
+  }
+  .team-mobile__img {
+    object-position: center 20% !important;
+  }
+}
+
+.team-mobile__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 30%;
+  display: block;
+  filter: grayscale(15%);
+  transition: transform 0.5s ease, filter 0.4s ease;
+}
+
+.team-mobile__img-wrap:active .team-mobile__img { transform: scale(1.04); filter: grayscale(0%); }
+
+.team-mobile__img-overlay {
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to bottom, transparent 40%, var(--sheath) 100%),
+    linear-gradient(135deg, rgba(255, 0, 128, 0.12) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.team-mobile__img-wrap::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 3px;
+  height: 100%;
+  background: linear-gradient(to bottom, transparent, var(--edge), transparent);
+  z-index: 2;
+  opacity: 0.9;
+}
+
+.team-mobile__img-badge {
+  position: absolute;
+  top: 1rem; right: 1rem;
+  z-index: 3;
+  background: rgba(10, 10, 18, 0.75);
+  border: 1px solid var(--ghost);
+  backdrop-filter: blur(6px);
+  padding: 0.25rem 0.6rem;
+  border-radius: 6px;
+}
+
+.team-mobile__num {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  color: var(--edge);
+  letter-spacing: 0.2em;
+}
+
+.team-mobile__body {
+  padding: 1.5rem 1.5rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.team-mobile__name {
+  font-family: var(--font-head);
+  font-size: clamp(1.7rem, 7vw, 2.2rem);
+  font-weight: 900;
+  letter-spacing: -0.05em;
+  line-height: 1;
+  color: var(--blade);
+  margin: 0;
+}
+
+/* ── Controles Carrusel Integrados ── */
+.team-mobile__controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 1.5rem 1.5rem;
+  background: transparent;
+}
+/* ── Flechas del Carrusel (Más visibles a prueba de despistes) ── */
+.team-mobile__arrow {
+  width: 2.8rem;  /* Un poco más grandes */
+  height: 2.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 0, 128, 0.08); /* Fondo rosa sutil en vez de transparente */
+  border: 1px solid rgba(255, 0, 128, 0.4); /* Borde rosa visible */
+  color: var(--edge);
+  font-family: var(--font-mono);
+  font-size: 1.3rem; /* Flecha más grande */
+  font-weight: 900; /* Flecha más gordita */
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border-radius: 8px;
+  -webkit-tap-highlight-color: transparent;
+  box-shadow: 0 0 12px rgba(255, 0, 128, 0.15); /* Brillo constante para llamar la atención */
+}
+
+.team-mobile__arrow:active:not(:disabled) {
+  background: rgba(255, 0, 128, 0.25);
   border-color: var(--edge);
-  box-shadow: 0 0 14px rgba(255, 0, 128, 0.25);
+  transform: scale(1.08);
+  box-shadow: 0 0 20px rgba(255, 0, 128, 0.4);
 }
 
-} /* end @media (min-width: 900px) */
+.team-mobile__arrow:disabled { 
+  opacity: 0.25; /* Un poco más visible incluso apagado para dar contexto */
+  background: transparent;
+  border-color: var(--ghost);
+  color: var(--steel);
+  box-shadow: none;
+}
+
+.team-mobile__dots { display: flex; gap: 8px; align-items: center; }
+
+.team-mobile__dot {
+  width: 28px;
+  height: 3px;
+  border: none;
+  border-radius: 2px;
+  background: var(--ghost);
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.25s ease;
+}
+
+.team-mobile__dot--active {
+  width: 52px;
+  background: var(--edge);
+  box-shadow: 0 0 8px rgba(255, 0, 128, 0.55);
+}
+
+/* ── Modal (Pop-up) ── */
+.team-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(4, 5, 8, 0.85);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 99999; 
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 1rem;
+  animation: fadeIn 0.3s ease forwards;
+}
+
+.team-modal-content {
+  background: var(--sheath);
+  border: 1px solid var(--ghost);
+  border-radius: 12px;
+  padding: 2.5rem 1.5rem 2rem;
+  width: 100%;
+  max-width: 500px;
+  max-height: 85vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 -10px 40px rgba(0,0,0, 0.7);
+  animation: slideUpModal 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+.team-modal-content::-webkit-scrollbar { width: 4px; }
+.team-modal-content::-webkit-scrollbar-thumb { background: var(--ghost); border-radius: 4px; }
+
+/* Botón "X" Superior */
+.team-modal-x {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  background: transparent;
+  border: none;
+  color: var(--steel);
+  cursor: pointer;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.2s ease, transform 0.2s ease;
+  z-index: 10;
+}
+
+.team-modal-x:hover {
+  color: var(--edge);
+  transform: scale(1.1);
+}
+
+/* Footer del Modal (Botones abajo) */
+.team-modal-footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 1.5rem;
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--ghost);
+}
+
+@media (max-width: 420px) {
+  .team-modal-footer { flex-direction: column; align-items: stretch; gap: 1rem; }
+  .team-modal-footer .team-bio-btn { width: 100%; }
+}
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+@keyframes slideUpModal { from { opacity: 0; transform: translateY(40px); } to { opacity: 1; transform: translateY(0); } }
+
+
+/* ═══════════════════════════════════════════════
+   3. DESKTOP STAGE (≥900px)
+   ═══════════════════════════════════════════════ */
+.team-stage { display: none; }
+
+@media (min-width: 900px) {
+  .team-mobile { display: none; }
+  
+  .team-stage {
+    display: grid;
+    grid-template-columns: calc(50% - 20px) calc(50% - 20px);
+    gap: 40px;
+    align-items: start;
+    transition: grid-template-columns 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+    margin-bottom: 4rem;
+  }
+
+  .team-stage--adrian-open { grid-template-columns: clamp(180px, 27%, 300px) calc(100% - 40px - clamp(180px, 27%, 300px)); }
+  .team-stage--alejandro-open { grid-template-columns: calc(100% - 40px - clamp(180px, 27%, 300px)) clamp(180px, 27%, 300px); }
+
+  .team-bio { grid-row: 1; }
+
+  .team-col {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+  }
+
+  .team-col--hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+
+  .team-photo-wrap {
+    position: relative;
+    width: 100%;
+    height: clamp(280px, 38vw, 480px);
+    overflow: hidden;
+    border-radius: 8px;
+    background: var(--sheath);
+    flex-shrink: 0;
+    cursor: pointer;
+    transition: height 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .team-col--active .team-photo-wrap { height: clamp(200px, 26vw, 340px); }
+
+  .team-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 25%;
+    display: block;
+    filter: grayscale(15%);
+    transition: transform 0.6s ease, filter 0.4s ease;
+  }
+
+  .team-col:hover .team-photo { transform: scale(1.03); filter: grayscale(0%); }
+
+  .team-photo-overlay {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(to bottom, transparent 50%, rgba(10, 10, 18, 0.72) 100%),
+      linear-gradient(135deg, rgba(255, 0, 128, 0.08) 0%, transparent 60%);
+    pointer-events: none;
+  }
+
+  .team-photo-wrap::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 3px;
+    height: 100%;
+    background: linear-gradient(to bottom, transparent, var(--edge), transparent);
+    z-index: 2;
+    opacity: 0.85;
+  }
+
+  .team-photo-badge {
+    position: absolute;
+    top: 1rem; right: 1rem;
+    z-index: 3;
+    background: rgba(10, 10, 18, 0.75);
+    border: 1px solid var(--ghost);
+    backdrop-filter: blur(6px);
+    padding: 0.25rem 0.6rem;
+    border-radius: 6px;
+  }
+
+  .team-photo-badge span {
+    font-family: var(--font-mono);
+    font-size: 0.62rem;
+    color: var(--edge);
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+
+  .team-col-footer { padding-top: 1.1rem; display: flex; flex-direction: column; gap: 0.35rem; }
+
+  .team-col-name {
+    font-family: var(--font-head);
+    font-size: clamp(1.4rem, 2.2vw, 1.9rem);
+    font-weight: 900;
+    letter-spacing: -0.04em;
+    line-height: 1.05;
+    color: var(--blade);
+    margin: 0.15rem 0;
+    transition: font-size 0.4s ease, letter-spacing 0.4s ease;
+  }
+
+  .team-col--active .team-col-name {
+    font-size: 1rem;
+    letter-spacing: -0.01em;
+    font-family: var(--font-mono);
+    font-weight: 500;
+    color: var(--steel);
+  }
+
+  .team-bio--from-left  { animation: teamBioFromLeft  0.55s cubic-bezier(0.22, 1, 0.36, 1) both; }
+  .team-bio--from-right { animation: teamBioFromRight 0.55s cubic-bezier(0.22, 1, 0.36, 1) both; }
+  .team-bio--to-left    { animation: teamBioToLeft    0.38s cubic-bezier(0.4, 0, 1, 1) both; }
+  .team-bio--to-right   { animation: teamBioToRight   0.38s cubic-bezier(0.4, 0, 1, 1) both; }
+
+  @keyframes teamBioFromLeft  { from { opacity: 0; transform: translateX(-28px) translateY(6px); } to { opacity: 1; transform: none; } }
+  @keyframes teamBioFromRight { from { opacity: 0; transform: translateX(28px) translateY(6px); }  to { opacity: 1; transform: none; } }
+  @keyframes teamBioToLeft    { from { opacity: 1; transform: none; } to { opacity: 0; transform: translateX(-20px) translateY(-4px); } }
+  @keyframes teamBioToRight   { from { opacity: 1; transform: none; } to { opacity: 0; transform: translateX(20px) translateY(-4px); } }
+
+} /* FIN @media (min-width: 900px) */
+
+/* ═══════════════════════════════════════════════
+   4. COMPARE CAROUSEL (Método - Móvil)
+   ═══════════════════════════════════════════════ */
+
+/* Por defecto, mostramos el carrusel en móvil y ocultamos la cuadrícula de PC */
+.compare-mobile {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 2rem;
+  width: 100%;
+}
+
+.compare-desktop {
+  display: none;
+}
+
+/* El divisor central "vs." dentro del carrusel */
+.compare-mobile__vs {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 1.5rem 0;
+  position: relative;
+}
+
+.compare-mobile__vs::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 1px;
+  background: var(--ghost);
+  z-index: 0;
+}
+
+.compare-mobile__vs span {
+  background: var(--sheath);
+  padding: 0 1rem;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--steel);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  position: relative;
+  z-index: 1;
+}
+
+.compare-mobile__half {
+  display: flex;
+  flex-direction: column;
+}
+/* ── Normalización de Badges (Katan vs Plantillas) ── */
+.compare__badge {
+  height: 34px; /* Altura fija para que ambos pesen lo mismo visualmente */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 1.2rem;
+  border-radius: 6px;
+  width: fit-content;
+  border: 1px solid var(--ghost);
+  background: rgba(255, 255, 255, 0.03);
+  margin-bottom: 1.2rem;
+}
+
+/* Ajuste específico para el de Plantillas */
+.compare__badge--wp {
+  background:rgba(255, 255, 255, 0.03); /* Azul corporativo o el color que prefiráis */
+  color: white;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border: none;
+}
+
+/* Ajuste para el logo de Katan dentro del badge */
+.compare__badge img {
+  height: 18px; /* Reducimos un pelín para que respire dentro de los 34px */
+  width: auto;
+  display: block;
+}
+
+
+/* --- CUANDO ESTAMOS EN ORDENADOR (≥900px) --- */
+@media (min-width: 900px) {
+  .compare-mobile {
+    display: none; /* Ocultamos el carrusel en PC */
+  }
+  .compare-desktop {
+    display: block; /* Mostramos la comparativa en columnas en PC */
+  }
+}
