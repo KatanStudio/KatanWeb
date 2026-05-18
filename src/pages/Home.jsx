@@ -35,7 +35,7 @@ function AnimFade({ children, className, ...props }) {
 
 const TECH_BADGES = [
   { label: 'HTML5',        slug: 'html5' },
-  { label: 'CSS3',         slug: 'css' },
+  { label: 'CSS3',         slug: 'css3' },
   { label: 'JavaScript',   slug: 'javascript' },
   { label: 'TypeScript',   slug: 'typescript' },
   { label: 'React',        slug: 'react' },
@@ -123,7 +123,6 @@ export default function Home() {
                       className="tech-badge__icon"
                       width="18"
                       height="18"
-                      loading="lazy"
                       aria-hidden="true"
                     />
                     <span className="tech-badge__label">{badge.label}</span>
