@@ -31,7 +31,7 @@ const PROJECTS = [
   {
     href: 'https://djosman.pages.dev/',
     category: 'landing',
-    img: 'https://via.placeholder.com/800x600/14141A/F0F4F8?text=Mockup+Portfolio+DJ',
+    img: '/img/DjOsman.webp',
     alt: 'Proyecto Portfolio DJ',
     tag: 'Landing Page',
     title: 'Portfolio DJ',
