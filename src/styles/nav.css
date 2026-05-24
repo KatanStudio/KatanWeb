@@ -308,8 +308,8 @@
   }
 
   .tabbar__icon {
-    width: 19px;
-    height: 19px;
+    width: 21px;
+    height: 21px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -322,9 +322,9 @@
   }
 
   .tabbar__label {
-    font-size: 0.52rem;
+    font-size: 0.55rem;
     font-weight: 600;
-    letter-spacing: 0.03em;
+    letter-spacing: 0.04em;
     text-transform: uppercase;
     line-height: 1;
     font-family: var(--font-mono);
