@@ -33,19 +33,33 @@ function AnimFade({ children, className, ...props }) {
   )
 }
 
-const TECH_BADGES = [
-  { label: 'HTML5',        slug: 'html5' },
-  { label: 'CSS3',         slug: 'css3' },
-  { label: 'JavaScript',   slug: 'javascript' },
-  { label: 'TypeScript',   slug: 'typescript' },
-  { label: 'React',        slug: 'react' },
-  { label: 'Vite',         slug: 'vite' },
-  { label: 'Astro',        slug: 'astro' },
-  { label: 'Tailwind CSS', slug: 'tailwindcss' },
-  { label: 'Node.js',      slug: 'nodedotjs' },
-  { label: 'PostgreSQL',   slug: 'postgresql' },
-  { label: 'Figma',        slug: 'figma' },
-  { label: 'Git',          slug: 'git' },
+const TECH_ROW_1 = [
+  { label: 'HTML5',        slug: 'html5',       color: 'E34F26' },
+  { label: 'CSS3',         slug: 'css3',         color: '1572B6' },
+  { label: 'JavaScript',   slug: 'javascript',   color: 'F7DF1E' },
+  { label: 'TypeScript',   slug: 'typescript',   color: '3178C6' },
+  { label: 'React',        slug: 'react',        color: '61DAFB' },
+  { label: 'React Router', slug: 'reactrouter',  color: 'CA4245' },
+  { label: 'Next.js',      slug: 'nextdotjs',    color: 'E2E2E2' },
+  { label: 'Vite',         slug: 'vite',         color: '646CFF' },
+  { label: 'Astro',        slug: 'astro',        color: 'FF5D01' },
+  { label: 'Tailwind CSS', slug: 'tailwindcss',  color: '06B6D4' },
+  { label: 'Framer',       slug: 'framer',       color: '0055FF' },
+  { label: 'Figma',        slug: 'figma',        color: 'F24E1E' },
+]
+
+const TECH_ROW_2 = [
+  { label: 'Node.js',  slug: 'nodedotjs', color: '5FA04E' },
+  { label: 'Express',  slug: 'express',   color: 'E2E2E2' },
+  { label: 'MongoDB',  slug: 'mongodb',   color: '47A248' },
+  { label: 'Stripe',   slug: 'stripe',    color: '635BFF' },
+  { label: 'Zod',      slug: 'zod',       color: '3E67B1' },
+  { label: 'Git',      slug: 'git',       color: 'F05032' },
+  { label: 'GitHub',   slug: 'github',    color: 'E2E2E2' },
+  { label: 'ESLint',   slug: 'eslint',    color: '4B32C3' },
+  { label: 'PostCSS',  slug: 'postcss',   color: 'DD3A0A' },
+  { label: 'Nodemon',  slug: 'nodemon',   color: '76D04B' },
+  { label: 'Lucide',   slug: 'lucide',    color: 'F56565' },
 ]
 
 export default function Home() {
@@ -115,10 +129,25 @@ export default function Home() {
             <p className="kicker" style={{ textAlign: 'center', marginBottom: '2rem' }}>/Tecnologías de última generación</p>
             <div className="tech-marquee">
               <div className="tech-marquee__track">
-                {[...TECH_BADGES, ...TECH_BADGES].map((badge, i) => (
+                {[...TECH_ROW_1, ...TECH_ROW_1].map((badge, i) => (
                   <span key={i} className="tech-badge">
                     <img
-                      src={`https://cdn.simpleicons.org/${badge.slug}/ffffff`}
+                      src={`https://cdn.simpleicons.org/${badge.slug}/${badge.color}`}
+                      alt=""
+                      className="tech-badge__icon"
+                      width="18"
+                      height="18"
+                      aria-hidden="true"
+                    />
+                    <span className="tech-badge__label">{badge.label}</span>
+                  </span>
+                ))}
+              </div>
+              <div className="tech-marquee__track tech-marquee__track--reverse">
+                {[...TECH_ROW_2, ...TECH_ROW_2].map((badge, i) => (
+                  <span key={i} className="tech-badge">
+                    <img
+                      src={`https://cdn.simpleicons.org/${badge.slug}/${badge.color}`}
                       alt=""
                       className="tech-badge__icon"
                       width="18"
