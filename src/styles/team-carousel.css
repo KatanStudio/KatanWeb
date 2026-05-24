@@ -654,12 +654,109 @@
 }
 
 
+/* ─── Compare scroll desktop ─── */
+.compare-scroll {
+  display: none;
+}
+
 /* --- CUANDO ESTAMOS EN ORDENADOR (≥900px) --- */
 @media (min-width: 900px) {
   .compare-mobile {
-    display: none; /* Ocultamos el carrusel en PC */
+    display: none;
   }
   .compare-desktop {
-    display: block; /* Mostramos la comparativa en columnas en PC */
+    display: none;
+  }
+
+  .compare-scroll {
+    display: flex;
+    gap: 1.25rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 1.25rem;
+    margin-bottom: 2rem;
+    scrollbar-width: thin;
+    scrollbar-color: var(--edge) transparent;
+  }
+
+  .compare-scroll::-webkit-scrollbar {
+    height: 3px;
+  }
+
+  .compare-scroll::-webkit-scrollbar-thumb {
+    background: var(--edge);
+    border-radius: 2px;
+  }
+
+  .compare-scroll__card {
+    flex: 0 0 320px;
+    scroll-snap-align: start;
+    background: var(--sheath);
+    border: 1px solid var(--ghost);
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .compare-scroll__half {
+    padding: 1.75rem;
+    flex: 1;
+  }
+
+  .compare-scroll__half--katan {
+    border-left: 2px solid var(--edge);
+    background: rgba(255, 0, 128, 0.04);
+  }
+
+  .compare-scroll__half--wp {
+    border-left: 2px solid var(--steel);
+    background: rgba(255, 255, 255, 0.015);
+  }
+
+  .compare-scroll__half .compare__badge {
+    margin-bottom: 1.25rem;
+    min-height: auto;
+    padding: 0.3rem 0.75rem;
+  }
+
+  .compare-scroll__half .compare__row strong {
+    font-size: 0.95rem;
+    line-height: 1.3;
+  }
+
+  .compare-scroll__half .compare__row p {
+    font-size: 0.85rem;
+    line-height: 1.55;
+  }
+
+  .compare-scroll__vs {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.6rem 0;
+    position: relative;
+    background: var(--ghost);
+  }
+
+  .compare-scroll__vs::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.06);
+    z-index: 0;
+  }
+
+  .compare-scroll__vs span {
+    background: var(--ghost);
+    padding: 0 0.75rem;
+    font-family: var(--font-mono);
+    font-size: 0.65rem;
+    color: var(--steel);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    position: relative;
+    z-index: 1;
   }
 }

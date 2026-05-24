@@ -252,6 +252,43 @@ function CompareMobile() {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
+// COMPARE SCROLL DESKTOP  (≥900px) — all 4 cards in a horizontal scroll row
+// ─────────────────────────────────────────────────────────────────────────────
+function CompareScrollDesktop() {
+  return (
+    <div className="compare-scroll">
+      {COMPARE_DATA.map((item) => (
+        <div key={item.id} className="compare-scroll__card">
+          <div className="compare-scroll__half compare-scroll__half--katan">
+            <div className="compare__badge">
+              <img src="/logos/wetransfer_katan_2026-05-04_0628/KATANLogoBlancoCompleto.svg" alt="Katan" style={{ height: '18px' }} />
+            </div>
+            <div className="compare__row">
+              <span className="compare__icon compare__icon--yes">✓</span>
+              <div>
+                <strong>{item.katan.title}</strong>
+                <p>{item.katan.desc}</p>
+              </div>
+            </div>
+          </div>
+          <div className="compare-scroll__vs"><span>vs.</span></div>
+          <div className="compare-scroll__half compare-scroll__half--wp">
+            <div className="compare__badge compare__badge--wp" style={{ marginBottom: '1.5rem' }}>Plantillas</div>
+            <div className="compare__row">
+              <span className="compare__icon compare__icon--no">✗</span>
+              <div>
+                <strong>{item.wp.title}</strong>
+                <p>{item.wp.desc}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  )
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
 // TEAM STAGE  (desktop ≥900px)
 // ─────────────────────────────────────────────────────────────────────────────
 function TeamStage() {
@@ -383,42 +420,7 @@ export function NosotrosSection() {
           </header>
 
           <CompareMobile />
-
-          <div className="compare-desktop">
-            <div className="compare">
-              <div className="compare__col compare__col--katan">
-                <div className="compare__badge">
-                  <img src="/logos/wetransfer_katan_2026-05-04_0628/KATANLogoBlancoCompleto.svg" alt="" aria-hidden="true" />
-                </div>
-                <div className="compare__rows">
-                  {COMPARE_DATA.map((row) => (
-                    <div key={row.id} className="compare__row">
-                      <span className="compare__icon compare__icon--yes">✓</span>
-                      <div>
-                        <strong>{row.katan.title}</strong>
-                        <p>{row.katan.desc}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-              <div className="compare__sep" aria-hidden="true"><span>vs.</span></div>
-              <div className="compare__col compare__col--wp">
-                <div className="compare__badge compare__badge--wp">Plantillas</div>
-                <div className="compare__rows">
-                  {COMPARE_DATA.map((row) => (
-                    <div key={row.id} className="compare__row">
-                      <span className="compare__icon compare__icon--no">✗</span>
-                      <div>
-                        <strong>{row.wp.title}</strong>
-                        <p>{row.wp.desc}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
+          <CompareScrollDesktop />
 
           <blockquote className="pull-quote" style={{ marginTop: '3rem' }}>
             <p>"Hacemos que tu página se convierta en una herramienta útil para tu día a día, atrayendo a las personas que de verdad buscan tus servicios."</p>
