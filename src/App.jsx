@@ -11,11 +11,13 @@ import AvisoLegal from './pages/AvisoLegal.jsx'
 import Privacidad from './pages/Privacidad.jsx'
 import Cookies from './pages/Cookies.jsx'
 import ScrollToTop from './components/ScrollToTop.jsx'
+import Cursor from './components/Cursor.jsx'
 
 export default function App() {
   return (
     <BrowserRouter>
       <ScrollToTop />
+      <Cursor />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/servicios" element={<Servicios />} />
