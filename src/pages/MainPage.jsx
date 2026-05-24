@@ -181,32 +181,54 @@ export default function MainPage() {
             </header>
 
             <div className="modules-grid">
-              <AnimFade className="module">
-                <span className="module__price">01</span>
-                <h3 className="module__title" style={{ margin: '0.5rem 0' }}>Velocidad extrema.</h3>
-                <p className="module__desc">
-                  ¿A quién le gusta esperar? <br /> El tiempo de tus clientes vale dinero.
-                  Si tu web tarda en abrir, se van a la competencia.
-                  Hacemos que no se te escape ni una sola oportunidad de venta.
-                </p>
+              <AnimFade className="module-flip" tabIndex={0}>
+                <div className="module__inner">
+                  <div className="module__front">
+                    <span className="module__price">01</span>
+                    <h3 className="module__title">Velocidad extrema.</h3>
+                  </div>
+                  <div className="module__back">
+                    <span className="module__price">01</span>
+                    <h3 className="module__title">Velocidad extrema.</h3>
+                    <p className="module__desc">
+                      ¿A quién le gusta esperar? <br /> El tiempo de tus clientes vale dinero.
+                      Si tu web tarda en abrir, se van a la competencia.
+                      Hacemos que no se te escape ni una sola oportunidad de venta.
+                    </p>
+                  </div>
+                </div>
               </AnimFade>
 
-              <AnimFade className="module module--recurring">
-                <span className="module__price">02</span>
-                <h3 className="module__title" style={{ margin: '0.5rem 0' }}>Código propio.</h3>
-                <p className="module__desc">
-                  El código que construimos es 100% tuyo desde el primer día. Sin parches externos que se rompen o te dejan la web abierta a hackers y sin renovaciones de licencias
-                  sorpresa.
-                </p>
+              <AnimFade className="module-flip module-flip--cyan" tabIndex={0}>
+                <div className="module__inner">
+                  <div className="module__front">
+                    <span className="module__price">02</span>
+                    <h3 className="module__title">Código propio.</h3>
+                  </div>
+                  <div className="module__back">
+                    <span className="module__price">02</span>
+                    <h3 className="module__title">Código propio.</h3>
+                    <p className="module__desc">
+                      El código que construimos es 100% tuyo desde el primer día. Sin parches externos que se rompen o te dejan la web abierta a hackers y sin renovaciones de licencias sorpresa.
+                    </p>
+                  </div>
+                </div>
               </AnimFade>
 
-              <AnimFade className="module">
-                <span className="module__price">03</span>
-                <h3 className="module__title" style={{ margin: '0.5rem 0' }}>Cero burocracia.</h3>
-                <p className="module__desc">
-                  No delegamos los proyectos a terceros ni te hacemos perder el tiempo. Presupuesto cerrado en 48h. Hablas
-                  directamente con los encargados de tu proyecto.
-                </p>
+              <AnimFade className="module-flip" tabIndex={0}>
+                <div className="module__inner">
+                  <div className="module__front">
+                    <span className="module__price">03</span>
+                    <h3 className="module__title">Cero burocracia.</h3>
+                  </div>
+                  <div className="module__back">
+                    <span className="module__price">03</span>
+                    <h3 className="module__title">Cero burocracia.</h3>
+                    <p className="module__desc">
+                      No delegamos los proyectos a terceros ni te hacemos perder el tiempo. Presupuesto cerrado en 48h. Hablas directamente con los encargados de tu proyecto.
+                    </p>
+                  </div>
+                </div>
               </AnimFade>
             </div>
 

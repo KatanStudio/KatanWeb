@@ -1131,7 +1131,7 @@
 }
 
 .svc-hs__card-title {
-  font-size: clamp(1.6rem, 2.8vw, 2.5rem);
+  font-size: clamp(1.35rem, 2.1vw, 2.5rem);
   font-weight: 700;
   margin: 0 0 0.65rem;
   line-height: 1.15;
@@ -1139,7 +1139,7 @@
 
 .svc-hs__card-desc {
   color: var(--spark);
-  font-size: clamp(1.02rem, 1.15vw, 1rem);
+  font-size: clamp(0.82rem, 1.0vw, 1.05rem);
   line-height: 1.7;
   margin-bottom: 1rem;
 }
@@ -1148,14 +1148,13 @@
   list-style: none;
   padding: 0;
   margin: 0;
-  flex: 1;
 }
 
 .svc-hs__card-features li {
   display: flex;
   gap: 0.5rem;
   padding: 0.3rem 0;
-  font-size: clamp(0.9rem, 0.9vw, 0.8rem);
+  font-size: clamp(0.78rem, 0.85vw, 0.9rem);
   color: var(--);
   border-bottom: 1px solid rgba(255, 255, 255, 0.04);
   align-items: flex-start;
@@ -1193,7 +1192,7 @@
   overflow: hidden;
   background: var(--sheath);
   /* diagonal divider: top of seam is shifted right, bottom aligns with grid boundary */
-  clip-path: polygon(10% 0%, 100% 0%, 100% 100%, 0% 100%);
+  clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 10% 100%);
 }
 
 .svc-hs__card-mockup {
@@ -1239,6 +1238,24 @@
   color: rgba(255, 255, 255, 0.25);
   letter-spacing: 0.05em;
   white-space: nowrap;
+}
+
+/* ── Laptop (1200–1600px): wider cards + tighter layout ── */
+@media (min-width: 1200px) and (max-width: 1600px) {
+  .svc-hs__card {
+    width: 72vw;
+    max-width: 1050px;
+    height: calc(100vh - 13rem);
+    max-height: 560px;
+  }
+
+  .svc-hs__head {
+    padding: 3.5rem 5vw 1rem;
+  }
+
+  .svc-hs__card-left {
+    padding: 1.5rem 1.25rem 1.25rem 1.5rem;
+  }
 }
 
 /* ── Mobile: vertical stack, no scroll-jacking ── */

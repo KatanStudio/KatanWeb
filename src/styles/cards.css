@@ -215,6 +215,77 @@
   border-color: rgba(0, 229, 255, 0.6);
 }
 
+/* ── Flip Cards ── */
+.module-flip {
+  perspective: 1200px;
+  cursor: pointer;
+}
+.module-flip:focus { outline: none; }
+
+.module__inner {
+  display: grid;
+  grid-template-areas: 'card';
+  transform-style: preserve-3d;
+  transition: transform 0.65s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.module-flip:hover .module__inner,
+.module-flip:focus-within .module__inner {
+  transform: rotateY(180deg);
+}
+
+.module__front,
+.module__back {
+  grid-area: card;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  background: var(--forge);
+  border: 1px solid var(--ghost);
+  border-radius: 5px;
+  padding: 1.75rem 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  transition: border-color var(--t-mid);
+}
+
+.module__front {
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.module__back {
+  transform: rotateY(180deg);
+  align-items: center;
+  text-align: center;
+}
+
+.module-flip:hover .module__front,
+.module-flip:focus-within .module__front,
+.module-flip:hover .module__back,
+.module-flip:focus-within .module__back {
+  border-color: rgba(255, 0, 128, 0.4);
+}
+
+.module-flip--cyan .module__front,
+.module-flip--cyan .module__back {
+  border-color: rgba(0, 229, 255, 0.3);
+}
+
+.module-flip--cyan:hover .module__front,
+.module-flip--cyan:focus-within .module__front,
+.module-flip--cyan:hover .module__back,
+.module-flip--cyan:focus-within .module__back {
+  border-color: rgba(0, 229, 255, 0.6);
+}
+
+.module__front .module__price,
+.module__back .module__price {
+  padding-top: 0;
+  margin-top: 0;
+}
+
 .module__price {
   font-family: var(--font-head);
   font-size: 1.5rem;

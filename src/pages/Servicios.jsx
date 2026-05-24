@@ -191,6 +191,52 @@ const EcommerceDemo = memo(function EcommerceDemo() {
   )
 })
 
+// Auto-discover service images from public/img/<folder>/.
+// Drop any image into the folder and it appears in that service's carousel.
+const _IMGS = import.meta.glob(
+  '/public/img/{landing,corporativa,ecommerce,app}/*.{png,jpg,jpeg,webp,PNG,JPG,JPEG,WEBP}',
+  { eager: true, as: 'url' }
+)
+
+function slidesInFolder(folder) {
+  return Object.entries(_IMGS)
+    .filter(([key]) => key.includes(`/img/${folder}/`))
+    .sort(([a], [b]) => a.localeCompare(b))
+    .map(([, url]) => url)
+}
+
+function ServiceCarousel({ slides, fallback = null }) {
+  const [idx, setIdx] = useState(0)
+  useEffect(() => {
+    if (slides.length <= 1) return
+    const t = setInterval(() => setIdx(i => (i + 1) % slides.length), 3200)
+    return () => clearInterval(t)
+  }, [slides.length])
+  if (!slides.length) return fallback
+  return (
+    <div style={{ position: 'absolute', inset: 0, overflow: 'hidden' }}>
+      {slides.map((src, i) => (
+        <img
+          key={src}
+          src={src}
+          alt=""
+          aria-hidden="true"
+          style={{
+            position: 'absolute',
+            inset: 0,
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            objectPosition: 'center top',
+            opacity: i === idx ? 1 : 0,
+            transition: 'opacity 0.9s ease',
+          }}
+        />
+      ))}
+    </div>
+  )
+}
+
 const AppDemo = memo(function AppDemo() {
   return (
     <svg viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid slice" width="100%" height="100%" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -289,7 +335,7 @@ const SERVICES = [
       'Alta velocidad, tu página carga en un pestañeo.', 
       '2 ronda de revisiones correctivas.', //añadir enlace a FAQ ppara explicar la diferencia entre correctivas y evolutivas
     ],
-    demo: <LandingDemo />,
+    demo: <ServiceCarousel slides={slidesInFolder('landing')} fallback={<LandingDemo />} />,
   },
   {
     id: 'corporativa',
@@ -307,7 +353,7 @@ const SERVICES = [
       'Alta velocidad, sin importar la cantidad de contenido.',
       '3 rondas de revisiones correctivas.',
     ],
-    demo: <CorporativaDemo />,
+    demo: <ServiceCarousel slides={slidesInFolder('corporativa')} fallback={<CorporativaDemo />} />,
   },
   {
     id: 'ecommerce',
@@ -324,7 +370,7 @@ const SERVICES = [
       'Emails automatizados.',
       '5 rondas de revisiones correctivas.',
     ],
-    demo: <EcommerceDemo />,
+    demo: <ServiceCarousel slides={slidesInFolder('ecommerce')} fallback={<EcommerceDemo />} />,
   },
   {
     id: 'app',
@@ -341,7 +387,7 @@ const SERVICES = [
       'Integración con pasarelas de pago (Stripe).',
       '5 rondas de revisiones correctivas.',
     ],
-    demo: <AppDemo />,
+    demo: <ServiceCarousel slides={slidesInFolder('app')} fallback={<AppDemo />} />,
   },
 ]
 
