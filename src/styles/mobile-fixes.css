@@ -29,15 +29,14 @@
     letter-spacing: 0.07em;
   }
 
-  /* Tech marquee — más alto en móvil */
+  /* Tech marquee — dos filas en móvil */
   .tech-stack {
     padding: 2.5rem 0;
   }
 
   .tech-marquee {
-    min-height: 60px;
-    display: flex;
-    align-items: center;
+    flex-direction: column;
+    gap: 0.75rem;
   }
 
   .tech-badge {

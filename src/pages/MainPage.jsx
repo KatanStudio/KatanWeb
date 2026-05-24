@@ -1,11 +1,15 @@
 import { useState, useEffect, useRef } from 'react'
-import { Link } from 'react-router-dom'
 import { Helmet } from 'react-helmet-async'
 import Header from '../components/Header.jsx'
 import Footer from '../components/Footer.jsx'
+import { ServiciosSection } from './Servicios.jsx'
+import { PortfolioSection } from './Portfolio.jsx'
+import { NosotrosSection } from './Nosotros.jsx'
+import { ProcesoSection } from './Proceso.jsx'
+import { FaqSection } from './Faq.jsx'
+import { ContactoSection } from './Contacto.jsx'
 
-
-
+// ─── AnimFade helper ─────────────────────────────────────────────────────────
 function AnimFade({ children, className, ...props }) {
   const ref = useRef(null)
   const [visible, setVisible] = useState(false)
@@ -33,6 +37,7 @@ function AnimFade({ children, className, ...props }) {
   )
 }
 
+// ─── Tech badges ─────────────────────────────────────────────────────────────
 const TECH_ROW_1 = [
   { label: 'HTML5',        slug: 'html5',       color: 'E34F26' },
   { label: 'CSS3',         slug: 'css3',         color: '1572B6' },
@@ -62,7 +67,8 @@ const TECH_ROW_2 = [
   { label: 'Lucide',   slug: 'lucide',    color: 'F56565' },
 ]
 
-export default function Home() {
+// ─────────────────────────────────────────────────────────────────────────────
+export default function MainPage() {
   return (
     <>
       <Helmet>
@@ -73,6 +79,7 @@ export default function Home() {
       <Header />
 
       <main>
+        {/* ── INICIO ── */}
         <section className="hero" id="inicio">
           <div className="hero__visual">
             <div className="glow-orb orb-1"></div>
@@ -99,8 +106,8 @@ export default function Home() {
               <span className="hero__h1-accent">crecer.</span>
             </h1>
             <div className="hero__actions">
-              <Link to="/servicios" className="btn btn--primary btn--chamfer">Nuestros servicios</Link>
-              <Link to="/contacto" className="btn btn--ghost">Presupuesto rápido</Link>
+              <a href="#servicios" className="btn btn--primary btn--chamfer">Nuestros servicios</a>
+              <a href="#contacto" className="btn btn--ghost">Presupuesto rápido</a>
             </div>
           </div>
 
@@ -124,6 +131,7 @@ export default function Home() {
           </div>
         </section>
 
+        {/* ── TECH STACK ── */}
         <section className="tech-stack">
           <div className="container">
             <p className="kicker" style={{ textAlign: 'center', marginBottom: '2rem' }}>/Tecnologías de última generación</p>
@@ -162,6 +170,7 @@ export default function Home() {
           </div>
         </section>
 
+        {/* ── FILOSOFÍA ── */}
         <section className="section" id="filosofia">
           <div className="container">
             <header className="section__header">
@@ -176,9 +185,8 @@ export default function Home() {
                 <span className="module__price">01</span>
                 <h3 className="module__title" style={{ margin: '0.5rem 0' }}>Velocidad extrema.</h3>
                 <p className="module__desc">
-
-                  ¿A quién le gusta esperar? <br /> El tiempo de tus clientes vale dinero. 
-                  Si tu web tarda en abrir, se van a la competencia. 
+                  ¿A quién le gusta esperar? <br /> El tiempo de tus clientes vale dinero.
+                  Si tu web tarda en abrir, se van a la competencia.
                   Hacemos que no se te escape ni una sola oportunidad de venta.
                 </p>
               </AnimFade>
@@ -188,7 +196,7 @@ export default function Home() {
                 <h3 className="module__title" style={{ margin: '0.5rem 0' }}>Código propio.</h3>
                 <p className="module__desc">
                   El código que construimos es 100% tuyo desde el primer día. Sin parches externos que se rompen o te dejan la web abierta a hackers y sin renovaciones de licencias
-                  sorpresa. 
+                  sorpresa.
                 </p>
               </AnimFade>
 
@@ -203,31 +211,28 @@ export default function Home() {
             </div>
 
             <div style={{ marginTop: '3.5rem', display: 'flex', justifyContent: 'flex-end' }}>
-              <Link to="/nosotros" className="btn btn--ghost">Conoce la anti-agencia →</Link>
+              <a href="#nosotros" className="btn btn--ghost">Conoce la anti-agencia →</a>
             </div>
           </div>
         </section>
 
-        <section className="cta-section" id="contacto">
-          <div className="cta-section__glow" aria-hidden="true"></div>
-          <div className="container cta-section__container">
-            <div className="cta-section__box">
-              <p className="kicker kicker--center">// Contáctanos</p>
-              <h2 className="cta-section__h2" style={{ textTransform: 'none' }}>Empecemos con una llamada.</h2>
-              <p className="cta-section__sub">
-                Presupuesto cerrado en 48h. Sin letra pequeña. Sin reuniones eternas. Hablas directamente con los
-                desarrolladores, nosotros escribimos el código.
-              </p>
-              <div className="cta-actions">
-                <Link to="/contacto" className="btn btn--primary btn--large btn--chamfer">Iniciar proyecto →</Link>
-                <div className="cta-email-box">
-                  <span className="cta-email-label">O envíanos un correo a:</span>
-                  <a href="mailto:info@katan.es" className="cta-email-link">info@katan.es</a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+        {/* ── SERVICIOS ── */}
+        <ServiciosSection />
+
+        {/* ── PORTFOLIO ── */}
+        <PortfolioSection />
+
+        {/* ── NOSOTROS ── */}
+        <NosotrosSection />
+
+        {/* ── PROCESO ── */}
+        <ProcesoSection />
+
+        {/* ── FAQ ── */}
+        <FaqSection />
+
+        {/* ── CONTACTO ── */}
+        <ContactoSection />
       </main>
 
       <Footer />

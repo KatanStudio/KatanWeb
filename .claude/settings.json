@@ -3,7 +3,13 @@
     "allow": [
       "Read(//c/Users/User/Desktop/Proyectos/Katan/Jenny Records/JennyRecords/frontend/src/**)",
       "Bash(Get-ChildItem -Path \"C:\\\\Users\\\\User\\\\Desktop\\\\Proyectos\\\\Katan\\\\Jenny Records\\\\JennyRecords\\\\frontend\\\\src\\\\components\" -Filter \"*.jsx\" -File)",
-      "Read(//c/Users/User/Desktop/Proyectos/Katan/Jenny Records/JennyRecords/**)"
+      "Read(//c/Users/User/Desktop/Proyectos/Katan/Jenny Records/JennyRecords/**)",
+      "Bash(pnpm run *)",
+      "Bash(npm run *)",
+      "Bash(git stash *)",
+      "Bash(git pull *)",
+      "Bash(git checkout *)",
+      "Bash(git add *)"
     ]
   }
 }

@@ -12,6 +12,9 @@
   position: relative;
   width: 100%;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
   -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
   mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
 }
@@ -20,11 +23,11 @@
   display: flex;
   gap: 1.5rem;
   width: max-content;
-  animation: scrollTech 30s linear infinite;
+  animation: scrollTech 40s linear infinite;
 }
 
-.tech-marquee__track:hover {
-  animation-play-state: running;
+.tech-marquee__track--reverse {
+  animation: scrollTechReverse 35s linear infinite;
 }
 
 .tech-badge {
@@ -59,4 +62,9 @@
 @keyframes scrollTech {
   0%   { transform: translateX(0); }
   100% { transform: translateX(calc(-50% - 0.75rem)); }
+}
+
+@keyframes scrollTechReverse {
+  0%   { transform: translateX(calc(-50% - 0.75rem)); }
+  100% { transform: translateX(0); }
 }

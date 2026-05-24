@@ -340,6 +340,96 @@ function TeamStage() {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
+// SECTION EXPORT — used by MainPage for single-page scroll layout
+// ─────────────────────────────────────────────────────────────────────────────
+export function NosotrosSection() {
+  return (
+    <>
+      <section className="section section--orbs" id="nosotros">
+        <div className="glow-orb orb-blue-1" aria-hidden="true" />
+        <div className="glow-orb orb-blue-2" aria-hidden="true" />
+        <div className="container">
+          <header className="section__header">
+            <p className="section-label">/El Estudio</p>
+            <h2 className="section__h2">La anti-agencia.<br /><span className="accent">Cero intermediarios.</span></h2>
+            <p className="section__sub" style={{ maxWidth: '60ch', fontSize: '1.1rem', marginTop: '1.5rem', color: 'white' }}>
+              No somos una agencia tradicional llena de burocracia, reuniones inútiles y plantillas
+              recicladas. Somos Katan: un estudio independiente formado por dos desarrolladores. Tú hablas con nosotros,
+              y te ayudamos a llevar tu negocio a internet.
+            </p>
+          </header>
+
+          <TeamMobile />
+          <TeamStage />
+
+          <div className="module module--recurring" style={{ maxWidth: '100%' }}>
+            <h3 className="module__price" style={{ marginBottom: '1rem' }}>Nuestra experiencia en la trinchera</h3>
+            <p className="module__desc" style={{ fontSize: '1.2rem' }}>
+              Llevamos a la espalda numerosos proyectos sin un solo cliente que haya tenido que recurrir a mantenimiento de
+              emergencia o negocios perdiendo dinero.
+
+              Por eso fundamos Katan, para ofrecer una alternativa cercana,<strong> soluciones profesionales y acercar tu negocio al público</strong>.
+              No reinventamos la rueda, simplemente le damos un enfoque correcto.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section className="section section--gradient-bg" id="diferenciador">
+        <div className="container">
+          <header className="section__header">
+            <p className="section-label">/Método</p>
+            <h2 className="section__h2">Katan <span className="accent">vs.</span> Otras agencias</h2>
+          </header>
+
+          <CompareMobile />
+
+          <div className="compare-desktop">
+            <div className="compare">
+              <div className="compare__col compare__col--katan">
+                <div className="compare__badge">
+                  <img src="/logos/wetransfer_katan_2026-05-04_0628/KATANLogoBlancoCompleto.svg" alt="" aria-hidden="true" />
+                </div>
+                <div className="compare__rows">
+                  {COMPARE_DATA.map((row) => (
+                    <div key={row.id} className="compare__row">
+                      <span className="compare__icon compare__icon--yes">✓</span>
+                      <div>
+                        <strong>{row.katan.title}</strong>
+                        <p>{row.katan.desc}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div className="compare__sep" aria-hidden="true"><span>vs.</span></div>
+              <div className="compare__col compare__col--wp">
+                <div className="compare__badge compare__badge--wp">Plantillas</div>
+                <div className="compare__rows">
+                  {COMPARE_DATA.map((row) => (
+                    <div key={row.id} className="compare__row">
+                      <span className="compare__icon compare__icon--no">✗</span>
+                      <div>
+                        <strong>{row.wp.title}</strong>
+                        <p>{row.wp.desc}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <blockquote className="pull-quote" style={{ marginTop: '3rem' }}>
+            <p>"Hacemos que tu página se convierta en una herramienta útil para tu día a día, atrayendo a las personas que de verdad buscan tus servicios."</p>
+          </blockquote>
+        </div>
+      </section>
+    </>
+  )
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
 // PAGE
 // ─────────────────────────────────────────────────────────────────────────────
 export default function Nosotros() {
