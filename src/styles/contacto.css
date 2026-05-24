@@ -12,6 +12,27 @@
   background: var(--forge);
 }
 
+.contacto-hero::before,
+.contacto-hero::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 14rem;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.contacto-hero::before {
+  top: 0;
+  background: linear-gradient(to bottom, var(--forge), transparent);
+}
+
+.contacto-hero::after {
+  bottom: 0;
+  background: linear-gradient(to top, var(--forge), transparent);
+}
+
 .contacto-hero__bg::before {
   content: '';
   position: absolute;

@@ -866,7 +866,13 @@
 /* ── #modulos background ── */
 #modulos {
   position: relative;
-  background: linear-gradient(to bottom, var(--ghost) 0%, var(--forge) 100%);
+  background: linear-gradient(
+    180deg,
+    var(--forge)  0%,
+    var(--ghost) 18%,
+    var(--ghost) 75%,
+    var(--forge) 100%
+  );
   z-index: 1;
 }
 
@@ -878,7 +884,7 @@
   transform: translateX(-50%);
   width: 100vw;
   height: 100%;
-  background: radial-gradient(ellipse 80% 50% at 50% 0%, rgba(255, 0, 128, 0.05) 0%, transparent 80%);
+  background: radial-gradient(ellipse 80% 50% at 50% 40%, rgba(255, 0, 128, 0.05) 0%, transparent 75%);
   z-index: -1;
   pointer-events: none;
 }

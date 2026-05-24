@@ -191,6 +191,19 @@
   max-width: 320px;
 }
 
+/* Fade inferior del hero: funde los orbes con la siguiente sección */
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 18rem;
+  background: linear-gradient(to bottom, transparent, var(--forge));
+  z-index: 1;
+  pointer-events: none;
+}
+
 .hero__stats {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
