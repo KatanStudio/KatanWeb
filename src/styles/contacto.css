@@ -37,10 +37,8 @@
   content: '';
   position: absolute;
   inset: 0;
-  background-image: url('/logos/wetransfer_katan_2026-05-04_0628/KATANLBrandMarkBlanco.svg');
-  background-repeat: repeat;
-  background-size: 160px 160px;
-  opacity: 0.04;
+  background: radial-gradient(ellipse 70% 60% at 50% 40%, rgba(0, 229, 255, 0.05) 0%, transparent 70%);
+  pointer-events: none;
 }
 
 

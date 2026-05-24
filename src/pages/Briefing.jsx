@@ -196,8 +196,8 @@ export default function Briefing() {
       </Helmet>
 
       <main style={{ position: 'relative', overflow: 'hidden' }}>
-        <div className="glow-orb orb-alt-1" aria-hidden="true" />
-        <div className="glow-orb orb-alt-2" aria-hidden="true" />
+        <div className="glow-orb orb-blue-1" aria-hidden="true" />
+        <div className="glow-orb orb-blue-2" aria-hidden="true" />
         <nav className="nav nav--scrolled">
           <div className="nav__inner">
             <Link to="/" className="nav__brand" aria-label="Katan Studio — Inicio">
