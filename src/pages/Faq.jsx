@@ -224,6 +224,156 @@ function FaqItem({ item, isOpen, onToggle }) {
 
 const INITIAL_VISIBLE = 7
 
+export function FaqSection() {
+  const [activeCategory, setActiveCategory] = useState('todas')
+  const [showAll, setShowAll] = useState(false)
+  const [openItemId, setOpenItemId] = useState(null)
+  const totalQuestions = ALL_ITEMS.length
+
+  const handleItemToggle = useCallback((id) => {
+    setOpenItemId(prev => prev === id ? null : id)
+  }, [])
+
+  const handleCategoryChange = (id) => {
+    setActiveCategory(id)
+    setOpenItemId(null)
+  }
+
+  return (
+    <>
+      <section className="faq-page-hero" id="faq">
+        <div className="faq__visual" aria-hidden="true">
+          <div className="glow-orb orb-faq-1"></div>
+          <div className="glow-orb orb-faq-2"></div>
+        </div>
+        <div className="container faq-page-hero__inner">
+          <div>
+            <p className="section-label">/ FAQ</p>
+            <h2 className="section__h2" style={{ fontSize: 'clamp(2.5rem, 7vw, 4.5rem)' }}>
+              Todo lo que<br /><span className="accent">necesitas saber.</span>
+            </h2>
+            <p className="section__sub" style={{ marginTop: '1.25rem' }}>
+              Sin evasivas. Aquí están las respuestas a todo
+              lo que suelen preguntarnos antes de arrancar un proyecto.
+            </p>
+          </div>
+          <div className="faq-page-hero__meta">
+            <div className="faq-hero-stat">
+              <span className="faq-hero-stat__num">{totalQuestions}</span>
+              <span className="faq-hero-stat__label">preguntas<br />respondidas</span>
+            </div>
+            <div className="faq-hero-stat">
+              <span className="faq-hero-stat__num">{FAQ_CATEGORIES.length}</span>
+              <span className="faq-hero-stat__label">categorías</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="faq-page-body">
+        <div className="container faq-page-body__inner">
+          <nav className="faq-page-nav faq-page-nav--desktop" aria-label="Categorías FAQ">
+            <p className="faq-page-nav__label">Categorías</p>
+            {NAV_CATEGORIES.map((cat) => (
+              <button key={cat.id} className={`faq-page-nav__item${activeCategory === cat.id ? ' is-active' : ''}`} onClick={() => handleCategoryChange(cat.id)}>
+                {cat.id === 'todas' ? (
+                  <>
+                    <span className="faq-page-nav__cat-label">00 / Vista general</span>
+                    <span className="faq-page-nav__cat-title">Todas las preguntas</span>
+                    <span className="faq-page-nav__count">{totalQuestions}</span>
+                  </>
+                ) : (
+                  <>
+                    <span className="faq-page-nav__cat-label">{cat.label}</span>
+                    <span className="faq-page-nav__cat-title">{cat.title}</span>
+                    <span className="faq-page-nav__count">{cat.items.length}</span>
+                  </>
+                )}
+              </button>
+            ))}
+            <div className="faq-page-nav__cta">
+              <p>¿No encuentras tu respuesta?</p>
+              <a href="#contacto" className="btn btn--ghost" style={{ width: '100%', justifyContent: 'center', marginTop: '0.75rem' }}>
+                Pregúntanos →
+              </a>
+            </div>
+          </nav>
+
+          <div className="faq-page-nav faq-page-nav--mobile" aria-label="Categorías FAQ">
+            <p className="faq-page-nav__label">Categorías</p>
+            <div className="faq-page-select-wrap">
+              <select className="faq-page-select" value={activeCategory} onChange={(e) => handleCategoryChange(e.target.value)} aria-label="Seleccionar categoría">
+                {NAV_CATEGORIES.map((cat) => (
+                  <option key={cat.id} value={cat.id}>
+                    {cat.id === 'todas' ? `Todas las preguntas (${totalQuestions})` : `${cat.title} (${cat.items.length})`}
+                  </option>
+                ))}
+              </select>
+              <span className="faq-page-select__arrow" aria-hidden="true">↓</span>
+            </div>
+          </div>
+
+          <div className="faq-page-content">
+            <div className={`faq-page-section${activeCategory === 'todas' ? ' is-active' : ''}`} aria-hidden={activeCategory !== 'todas'}>
+              <header className="faq-page-section__header">
+                <p className="section-label" style={{ marginBottom: '0.5rem' }}>00 / Vista general</p>
+                <h3 className="faq-page-section__title">Todas las preguntas</h3>
+              </header>
+              <div className="faq-accordion">
+                {(showAll ? ALL_ITEMS : ALL_ITEMS.slice(0, INITIAL_VISIBLE)).map((item, i) => (
+                  <FaqItem key={`all-${i}`} item={item} showCategory={true} isOpen={openItemId === item.question} onToggle={() => handleItemToggle(item.question)} />
+                ))}
+              </div>
+              {!showAll && ALL_ITEMS.length > INITIAL_VISIBLE && (
+                <div style={{ textAlign: 'center', marginTop: '2rem' }}>
+                  <button className="btn btn--ghost" onClick={() => setShowAll(true)}>
+                    Cargar más preguntas ({ALL_ITEMS.length - INITIAL_VISIBLE} restantes) →
+                  </button>
+                </div>
+              )}
+            </div>
+
+            {FAQ_CATEGORIES.map((cat) => (
+              <div key={cat.id} className={`faq-page-section${activeCategory === cat.id ? ' is-active' : ''}`} aria-hidden={activeCategory !== cat.id}>
+                <header className="faq-page-section__header">
+                  <p className="section-label" style={{ marginBottom: '0.5rem' }}>{cat.label}</p>
+                  <h3 className="faq-page-section__title">{cat.title}</h3>
+                </header>
+                <div className="faq-accordion">
+                  {cat.items.map((item) => (
+                    <FaqItem key={item.num} item={item} isOpen={openItemId === item.question} onToggle={() => handleItemToggle(item.question)} />
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="cta-section">
+        <div className="cta-section__glow" aria-hidden="true"></div>
+        <div className="container cta-section__container">
+          <div className="cta-section__box">
+            <p className="kicker kicker--center">// ¿Todo claro?</p>
+            <h2 className="cta-section__h2" style={{ textTransform: 'none' }}>Empecemos con una llamada.</h2>
+            <p className="cta-section__sub">
+              15 minutos para contarnos tu proyecto. Sin presentaciones largas,
+              sin compromiso. Solo claridad.
+            </p>
+            <div className="cta-actions">
+              <a href="#contacto" className="btn btn--primary btn--large btn--chamfer">Contactar ahora →</a>
+              <div className="cta-email-box">
+                <span className="cta-email-label">O escríbenos a:</span>
+                <a href="mailto:info@katan.es" className="cta-email-link">info@katan.es</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </>
+  )
+}
+
 export default function FAQ() {
   const [activeCategory, setActiveCategory] = useState('todas')
   const [showAll, setShowAll] = useState(false)

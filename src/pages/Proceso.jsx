@@ -112,6 +112,191 @@ const CLAIMS = [
   'Seguimiento del proceso',
 ]
 
+export function ProcesoSection() {
+  const [activeStep, setActiveStep] = useState(null)
+  const [openReq, setOpenReq] = useState(null)
+  const swipeRef = useRef(null)
+  const [swipeIndex, setSwipeIndex] = useState(0)
+
+  const scrollToCard = (i) => {
+    const el = swipeRef.current
+    if (!el) return
+    el.scrollTo({ left: el.clientWidth * i, behavior: 'smooth' })
+  }
+
+  useEffect(() => {
+    const el = swipeRef.current
+    if (!el) return
+    const handleScroll = () => {
+      const i = Math.round(el.scrollLeft / el.clientWidth)
+      setSwipeIndex(Math.max(0, Math.min(i, STEPS.length - 1)))
+    }
+    el.addEventListener('scroll', handleScroll, { passive: true })
+    return () => el.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  return (
+    <>
+      <section className="section section--orbs" id="proceso">
+        <div className="glow-orb orb-alt-1" aria-hidden="true" />
+        <div className="glow-orb orb-alt-2" aria-hidden="true" />
+        <div className="container">
+          <header className="section__header">
+            <p className="section-label">/Proceso</p>
+            <h2 className="section__h2" style={{ textTransform: 'none', textAlign: 'center' }}>Del formulario al<br /><span className="accent">lanzamiento.</span></h2>
+            <p className="section__sub" style={{ textAlign: 'center', margin: '1rem auto 0' }}>
+              Sin burocracia, sin reuniones vacías. Cada contacto tiene un propósito claro.
+            </p>
+          </header>
+
+          <div
+            className={`proceso-timeline${activeStep !== null ? ' proceso-timeline--has-active' : ''}`}
+            style={{ marginTop: '4rem' }}
+            onMouseLeave={() => setActiveStep(null)}
+          >
+            {STEPS.map((step, i) => (
+              <article
+                key={step.num}
+                className={`proceso-step${i === activeStep ? ' proceso-step--active' : ''}${step.highlight ? ' proceso-step--highlight' : ''}`}
+                onMouseEnter={() => setActiveStep(i)}
+                onClick={() => setActiveStep(activeStep === i ? null : i)}
+                onFocus={() => setActiveStep(i)}
+                tabIndex={0}
+                aria-expanded={i === activeStep}
+                aria-label={`Paso ${step.num}: ${step.title}`}
+              >
+                <span className="proceso-step__dot" aria-hidden="true" />
+                <div className="proceso-step__inner">
+                  <div className="proceso-step__header">
+                    <span className="proceso-step__num">{step.num}</span>
+                    <span className="proceso-step__time">{step.time}</span>
+                  </div>
+                  <h3 className="proceso-step__title">{step.title}</h3>
+                  <p className="proceso-step__micro">{step.micro}</p>
+                  <div className="proceso-step__body">
+                    <div className="proceso-step__body-inner">
+                      <p className="proceso-step__desc">{step.desc}</p>
+                      <p className="proceso-step__detail">{step.detail}</p>
+                    </div>
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+
+          <div className="process-swipe" ref={swipeRef} style={{ marginTop: '4rem' }}>
+            {STEPS.map((step) => (
+              <div key={step.num} className={`process-card process-card--carousel is-visible${step.highlight ? ' process-card--highlight' : ''}`}>
+                <div className="process-card__header">
+                  <span className="process-card__num">{step.num}</span>
+                  <span className="process-card__time">{step.time}</span>
+                </div>
+                <h4 className="process-card__title">{step.title}</h4>
+                <p className="process-card__desc">{step.desc}</p>
+                <p className="process-card__detail">{step.detail}</p>
+              </div>
+            ))}
+          </div>
+          <div className="process-carousel__dots" style={{ marginTop: '1.25rem' }}>
+            {STEPS.map((_, i) => (
+              <button key={i} className={`process-carousel__dot${i === swipeIndex ? ' process-carousel__dot--active' : ''}`} onClick={() => scrollToCard(i)} aria-label={`Ir al paso ${i + 1}`}>{i + 1}</button>
+            ))}
+          </div>
+
+          <div className="proceso-claims">
+            {CLAIMS.map((claim, i) => (
+              <div key={i} className="proceso-claims__item">
+                <span className="proceso-claims__mark" aria-hidden="true" />
+                <span>{claim}</span>
+              </div>
+            ))}
+          </div>
+
+          <div className="proceso-philosophy">
+            <div className="proceso-philosophy__text">
+              <p className="section-label" style={{ marginBottom: '1rem' }}>/Nuestra forma de trabajar</p>
+              <p>
+                No somos de las agencias que te mandan un PDF con el proceso y luego desaparecen
+                detrás de un gestor de clientes. Creemos en el contacto directo, en las reuniones con propósito
+                y en la transparencia a lo largo del proceso.
+              </p>
+              <p style={{ marginTop: '1rem' }}>
+                Si estás en <strong>Toledo, Madrid</strong> o alrededores, nos reunimos en persona.
+                Si no, por videollamada. Siempre con algo concreto que enseñarte, nunca a mano vacía.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="section section--gradient-bg" id="requisitos">
+        <div className="container">
+          <header className="section__header">
+            <p className="section-label">/Lo que necesitamos de ti</p>
+            <h2 className="section__h2" style={{ textTransform: 'none' }}>
+              El proyecto es<br /><span className="accent">un equipo.</span>
+            </h2>
+            <p className="section__sub">
+              Para entregar en los dias pactados necesitamos que el cliente también sea ágil.
+              Aquí están las únicas cosas que te pedimos.
+            </p>
+          </header>
+
+          <div className="requisitos-grid">
+            {REQUIREMENTS.map((req) => (
+              <div key={req.num} className="requisito-item">
+                <span className="requisito-item__num">{req.num}</span>
+                <div className="requisito-item__content">
+                  <h4 className="requisito-item__title">{req.title}</h4>
+                  <p className="requisito-item__desc">{req.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <div className="requisitos-accordion">
+            {REQUIREMENTS.map((req, i) => (
+              <div key={req.num} className={`requisito-acc__item${openReq === i ? ' requisito-acc__item--open' : ''}`}>
+                <button className="requisito-acc__trigger" onClick={() => setOpenReq(openReq === i ? null : i)} aria-expanded={openReq === i}>
+                  <span className="requisito-acc__num">{req.num}</span>
+                  <span className="requisito-acc__title">{req.title}</span>
+                  <span className="requisito-acc__icon" aria-hidden="true">+</span>
+                </button>
+                <div className="requisito-acc__body">
+                  <div className="requisito-acc__body-inner">
+                    <p className="requisito-acc__desc">{req.desc}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="cta-section">
+        <div className="cta-section__glow" aria-hidden="true"></div>
+        <div className="container cta-section__container">
+          <div className="cta-section__box">
+            <p className="kicker kicker--center">// Primer paso</p>
+            <h2 className="cta-section__h2" style={{ textTransform: 'none' }}>¿Empezamos con una llamada?</h2>
+            <p className="cta-section__sub">
+              15 minutos. Te explicamos el briefing, resolvemos tus dudas y arrancamos.
+              Sin compromiso, sin presentaciones largas.
+            </p>
+            <div className="cta-actions">
+              <a href="#contacto" className="btn btn--primary btn--large btn--chamfer">Solicitar llamada →</a>
+              <div className="cta-email-box">
+                <span className="cta-email-label">O escríbenos directamente:</span>
+                <a href="mailto:info@katan.es" className="cta-email-link">info@katan.es</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </>
+  )
+}
+
 export default function Proceso() {
   const [activeStep, setActiveStep] = useState(null)
   const [openReq, setOpenReq] = useState(null)

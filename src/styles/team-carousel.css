@@ -224,6 +224,7 @@
   overflow: hidden;
   text-decoration: none;
   cursor: pointer;
+  animation: float 5s ease-in-out infinite alternate;
 }
 
 /* Ajuste de altura dinámica para evitar recortes de cara (474px a 900px) */
@@ -482,6 +483,12 @@
     flex-shrink: 0;
     cursor: pointer;
     transition: height 0.55s cubic-bezier(0.4, 0, 0.2, 1);
+    animation: float 4.5s ease-in-out infinite alternate;
+  }
+
+  .team-col:nth-child(2) .team-photo-wrap {
+    animation-duration: 5.5s;
+    animation-delay: -2.5s;
   }
 
   .team-col--active .team-photo-wrap { height: clamp(200px, 26vw, 340px); }

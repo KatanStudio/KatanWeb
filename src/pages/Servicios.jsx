@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef, memo, useCallback, Fragment } from 'react'
 import { Helmet } from 'react-helmet-async'
-import { Link } from 'react-router-dom'
 import {
   Globe, Mail, FilePlus, ListFilter, CalendarDays,
   BookOpen, PenLine, ShieldCheck, Plug, Palette,
@@ -503,9 +502,9 @@ function ServiceSwitcher() {
               <span className="svc-sw__price">{svc.price}</span>
               <span className="svc-sw__price-note">+ IVA</span>
             </div>
-            <Link to="/contacto" className="btn btn--chamfer btn--large" style={{ background: SVC_COLORS[active] }}>
+            <a href="#contacto" className="btn btn--chamfer btn--large" style={{ background: SVC_COLORS[active] }}>
               Solicitar Presupuesto →
-            </Link>
+            </a>
           </div>
         </div>
 
@@ -543,9 +542,9 @@ function ServiceSwitcher() {
               <span className="svc-sw__price">{svc.price}</span>
               <span className="svc-sw__price-note">+ IVA</span>
             </div>
-            <Link to="/contacto" className="btn btn--chamfer btn--large" style={{ background: SVC_COLORS[active] }}>
+            <a href="#contacto" className="btn btn--chamfer btn--large" style={{ background: SVC_COLORS[active] }}>
               Solicitar Presupuesto →
-            </Link>
+            </a>
           </div>
         </div>
       </div>
@@ -553,110 +552,228 @@ function ServiceSwitcher() {
   )
 }
 
-// ── TICKET 3: Extras Carousel (Marquee) ──────────────────────────────────────
-// PERF: memo() evita que todos los badges del marquee se re-rendericen
-// cuando uno solo cambia su estado open/close
-const ExtraBadge = memo(function ExtraBadge({ title, desc, open, onToggle, onMouseEnter, onMouseLeave, isMobile }) {
-  return (
-    <div
-      className={`extras-badge${open ? " extras-badge--open" : ""}${isMobile ? " extras-badge--mobile" : ""}`}
-      onMouseEnter={onMouseEnter}
-      onMouseLeave={onMouseLeave}
-    >
-      <button className="extras-badge__face" onClick={onToggle} aria-expanded={open}>
-        <span className="extras-badge__title">{title}</span>
-      </button>
-      <div className="extras-badge__body">
-        <p className="extras-badge__desc">{desc}</p>
-        <Link to="/contacto" className="extras-badge__cta">Solicitar →</Link>
-      </div>
-    </div>
-  )
-})
+// ── Extras Marquee (dos filas, estilo tech-stack) ─────────────────────────
+const EXTRAS_ROW_1 = EXTRAS.slice(0, 7)
+const EXTRAS_ROW_2 = EXTRAS.slice(7)
 
 function ExtrasMarquee() {
-  const [activeIndex, setActiveIndex] = useState(0)
-  const [animDir, setAnimDir]         = useState(1)
-  const [animKey, setAnimKey]         = useState(0)
-  const touchStartX                   = useRef(null)
-
-  const navigate = useCallback((next) => {
-    if (next < 0 || next >= EXTRAS.length) return
-    setAnimDir(next > activeIndex ? 1 : -1)
-    setActiveIndex(next)
-    setAnimKey(k => k + 1)
-  }, [activeIndex])
-
-  const handleTouchStart = (e) => { touchStartX.current = e.touches[0].clientX }
-  const handleTouchEnd   = (e) => {
-    if (touchStartX.current === null) return
-    const diff = touchStartX.current - e.changedTouches[0].clientX
-    if (diff > 50)       navigate(activeIndex + 1)
-    else if (diff < -50) navigate(activeIndex - 1)
-    touchStartX.current = null
-  }
-
-  const extra     = EXTRAS[activeIndex]
-  const animClass = animDir > 0 ? 'em-card--from-right' : 'em-card--from-left'
-
-  const WINDOW = 5
-  const half   = Math.floor(WINDOW / 2)
-  const total  = EXTRAS.length
-  let winStart = Math.max(0, activeIndex - half)
-  let winEnd   = winStart + WINDOW
-  if (winEnd > total) { winEnd = total; winStart = Math.max(0, total - WINDOW) }
-  const visibleDots = Array.from({ length: total }, (_, i) => i).slice(winStart, winEnd)
-
-  const marqueeItems = [...EXTRAS, ...EXTRAS]
-
   return (
-    <div>
-      {/* Navegador de tarjetas — siempre visible en todas las pantallas */}
-      <div className="em-wrap" onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
-        <div className="em-nav em-nav--dots-only">
-          <div className="em-dots" role="tablist">
-            {visibleDots.map((i) => (
-              <button key={i} role="tab" aria-selected={i === activeIndex}
-                className={`em-dot${i === activeIndex ? ' em-dot--active' : ''}`}
-                onClick={() => navigate(i)} aria-label={EXTRAS[i].title} />
-            ))}
-          </div>
-        </div>
-
-        <div className="em-stage">
-          <div key={animKey} className={`em-card ${animClass}`}>
-            <ExtraBadge
-              title={extra.title} desc={extra.desc}
-              open={true}
-              onToggle={undefined}
-              isMobile={true}
-            />
-          </div>
-        </div>
-
-        <div className="em-nav em-nav--bottom">
-          <button className="em-arrow" onClick={() => navigate(activeIndex - 1)} disabled={activeIndex === 0} aria-label="Anterior">←</button>
-          <span className="em-counter">{activeIndex + 1} / {EXTRAS.length}</span>
-          <button className="em-arrow" onClick={() => navigate(activeIndex + 1)} disabled={activeIndex === EXTRAS.length - 1} aria-label="Siguiente">→</button>
-        </div>
-      </div>
-
-      {/* Carrusel visual — solo muestra los títulos, sin precio ni desplegable */}
-      <div className="extras-marquee">
-        <div className="extras-marquee__track">
-          {marqueeItems.map((e, i) => (
-            <div key={i} className="extras-badge extras-badge--visual">
-              <span className="extras-badge__title">{e.title}</span>
+    <div className="extras-marquee">
+      <div className="extras-marquee__track">
+        {[...EXTRAS_ROW_1, ...EXTRAS_ROW_1].map((e, i) => {
+          const Icon = e.icon
+          return (
+            <div key={i} className="extras-card">
+              <div className="extras-card__header">
+                <Icon size={18} className="extras-card__icon" aria-hidden="true" />
+                <span className="extras-card__title">{e.title}</span>
+              </div>
+              <p className="extras-card__desc">{e.desc}</p>
             </div>
-          ))}
-        </div>
+          )
+        })}
+      </div>
+      <div className="extras-marquee__track extras-marquee__track--reverse">
+        {[...EXTRAS_ROW_2, ...EXTRAS_ROW_2].map((e, i) => {
+          const Icon = e.icon
+          return (
+            <div key={i} className="extras-card">
+              <div className="extras-card__header">
+                <Icon size={18} className="extras-card__icon" aria-hidden="true" />
+                <span className="extras-card__title">{e.title}</span>
+              </div>
+              <p className="extras-card__desc">{e.desc}</p>
+            </div>
+          )
+        })}
       </div>
     </div>
   )
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// PAGE
+// HORIZONTAL SCROLL SERVICES — scroll-jacked horizontal card panning
+// ─────────────────────────────────────────────────────────────────────────────
+function ServiciosHorizontal() {
+  const outerRef = useRef(null)
+  const trackRef = useRef(null)
+  const progressBarRef = useRef(null)
+  const progressLabelRef = useRef(null)
+
+  useEffect(() => {
+    let maxTranslate = 0
+
+    const measure = () => {
+      const track = trackRef.current
+      const outer = outerRef.current
+      if (!track || !outer) return
+      if (window.innerWidth <= 768) {
+        outer.style.height = 'auto'
+        return
+      }
+      maxTranslate = Math.max(0, track.scrollWidth - window.innerWidth)
+      outer.style.height = `${maxTranslate + window.innerHeight}px`
+      handleScroll()
+    }
+
+    const handleScroll = () => {
+      const el = outerRef.current
+      const track = trackRef.current
+      if (!el || !track || window.innerWidth <= 768 || maxTranslate <= 0) return
+      const rect = el.getBoundingClientRect()
+      const p = Math.max(0, Math.min(1, -rect.top / maxTranslate))
+      track.style.transform = `translateX(${-p * maxTranslate}px)`
+      if (progressBarRef.current) progressBarRef.current.style.width = `${p * 100}%`
+      if (progressLabelRef.current) {
+        const n = Math.min(SERVICES.length - 1, Math.round(p * (SERVICES.length - 1))) + 1
+        progressLabelRef.current.textContent =
+          `${String(n).padStart(2, '0')} / ${String(SERVICES.length).padStart(2, '0')}`
+      }
+    }
+
+    requestAnimationFrame(measure)
+    window.addEventListener('resize', measure)
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => {
+      window.removeEventListener('resize', measure)
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [])
+
+  return (
+    <div ref={outerRef} className="svc-hs" id="servicios">
+      <div className="svc-hs__sticky">
+
+        <div className="svc-hs__head">
+          <p className="section-label">/Servicios</p>
+          <h2 className="section__h2">
+            Lo que <span className="accent">construimos.</span>
+          </h2>
+        </div>
+
+        <div className="svc-hs__track-wrap">
+          <div ref={trackRef} className="svc-hs__track">
+            {SERVICES.map((svc) => (
+              <article key={svc.id} className="svc-hs__card">
+                <div className="svc-hs__card-left">
+                  <p className="svc-hs__card-num">{svc.num} // {svc.label}</p>
+                  <h3 className="svc-hs__card-title">{svc.label}</h3>
+                  <p className="svc-hs__card-desc">{svc.desc}</p>
+                  <ul className="svc-hs__card-features">
+                    {svc.features.map((f, fi) => (
+                      <li key={fi}>{f}</li>
+                    ))}
+                  </ul>
+                  <div className="svc-hs__card-footer">
+                    <div>
+                      <span className="svc-hs__card-price">{svc.price}</span>
+                      <span className="svc-hs__card-price-note"> + IVA</span>
+                    </div>
+                    <a href="#contacto" className="btn btn--chamfer">Solicitar →</a>
+                  </div>
+                </div>
+                <div className="svc-hs__card-right" aria-hidden="true">
+                  <div className="svc-hs__card-mockup">{svc.demo}</div>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+
+        <div className="svc-hs__progress">
+          <span ref={progressLabelRef} className="svc-hs__progress-label">
+            01 / {String(SERVICES.length).padStart(2, '0')}
+          </span>
+          <div className="svc-hs__progress-bar-wrap">
+            <div ref={progressBarRef} className="svc-hs__progress-bar" />
+          </div>
+          <span className="svc-hs__hint">↓ scroll</span>
+        </div>
+
+      </div>
+    </div>
+  )
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// SECTION EXPORT — used by MainPage for single-page scroll layout
+// ─────────────────────────────────────────────────────────────────────────────
+export function ServiciosSection() {
+  return (
+    <>
+      <ServiciosHorizontal />
+
+      <section className="section section--dark" id="modulos">
+        <div className="container">
+          <header className="section__header" style={{ marginBottom: '3rem' }}>
+            <p className="section-label">/Extras</p>
+            <h2 className="section__h2">Servicios <span className="accent">adicionales.</span></h2>
+            <p className="section__sub">
+              Precio fijo por módulo. Sin sorpresas. Elige cuando contratarlos.
+            </p>
+          </header>
+        </div>
+        <ExtrasMarquee />
+        <div className="container" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '3.5rem' }}>
+          <p className="section__sub" style={{ marginBottom: '1.5rem', textAlign: 'center', fontSize: '1.4rem' }}>
+            ¿No encuentras el servicio exacto o necesitas algo a medida?
+          </p>
+          <a href="mailto:info@katan.es" className="btn btn--ghost">
+            Cuéntanos tu idea →
+          </a>
+        </div>
+      </section>
+
+      <section className="section section--dark" id="specs" style={{ paddingTop: '2rem' }}>
+        <div className="specs__visual" aria-hidden="true">
+          <div className="glow-orb orb-specs-1"></div>
+          <div className="glow-orb orb-specs-2"></div>
+        </div>
+        <div className="container">
+          <header className="section__header" style={{ marginBottom: '2.5rem' }}>
+            <h2 className="section__h2" style={{ fontSize: 'clamp(1.5rem, 3vw, 2.5rem)', textTransform: 'none' }}>
+              Especificaciones <span className="accent"> técnicas.</span>
+            </h2>
+            <p className="section__sub">
+              Comparativa técnica detallada de nuestros serviciones.
+            </p>
+          </header>
+          <SpecsCarousel />
+          <div className="table-responsive">
+            <table className="specs-table">
+              <thead>
+                <tr>
+                  <th></th>
+                  <th>01 / Landing</th>
+                  <th className="col-highlight">02 / Corporativa</th>
+                  <th>03 / E-Commerce</th>
+                  <th>04 / App</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td><strong>Contenido</strong></td><td>Hasta 5 secciones</td><td className="col-highlight">Hasta 10 páginas</td><td>Ilimitado</td><td>Pantallas ilimitadas</td></tr>
+                <tr><td><strong>Diseño a medida</strong></td><td>100% Personalizado</td><td className="col-highlight">100% Personalizado</td><td>100% Personalizado</td><td>100% Personalizado</td></tr>
+                <tr><td><strong>Diseño Responsive</strong></td><td><span className="check-yes">✓</span></td><td className="col-highlight"><span className="check-yes">✓</span></td><td><span className="check-yes">✓</span></td><td><span className="check-yes">✓</span></td></tr>
+                <tr><td><strong>SEO On-Page</strong></td><td>Básico</td><td className="col-highlight">Avanzado (Schema)</td><td>Avanzado + Rich Snippets</td><td><span className="check-no">—</span></td></tr>
+                <tr><td><strong>Blog Integrado</strong></td><td><span className="check-no">—</span></td><td className="col-highlight"><span className="check-yes">✓</span></td><td><span className="check-yes">✓</span></td><td><span className="check-no">—</span></td></tr>
+                <tr><td><strong>Multiidioma</strong></td><td><span className="check-no">—</span></td><td className="col-highlight">Hasta 2 idiomas</td><td>Hasta 3 idiomas</td><td>Hasta 2 idiomas</td></tr>
+                <tr><td><strong>Formularios de contacto</strong></td><td>Formulario básico</td><td className="col-highlight">Avanzados / Múltiples</td><td>Avanzados / Múltiples</td><td>Formularios in-app</td></tr>
+                <tr><td><strong>Analítica Web</strong></td><td>Google Analytics</td><td className="col-highlight">Analytics + Search Console</td><td>Analytics + SC + E-comm</td><td>Analytics + Firebase</td></tr>
+                <tr><td><strong>Core Web Vitals</strong></td><td>Optimizado (&gt;90)</td><td className="col-highlight">Optimización Premium (&gt;95)</td><td>Optimización Premium</td><td><span className="check-no">—</span></td></tr>
+                <tr><td><strong>Catálogo &amp; Pasarela</strong></td><td><span className="check-no">—</span></td><td className="col-highlight"><span className="check-no">—</span></td><td>Ilimitado (Stripe / PayPal)</td><td>Integrable (Stripe)</td></tr>
+                <tr><td><strong>Panel de administración</strong></td><td><span className="check-no">—</span></td><td className="col-highlight">Gestor básico (CMS)</td><td>Completo (Pedidos, stock)</td><td>Dashboard completo</td></tr>
+                <tr><td><strong>Rondas de revisiones</strong></td><td>2 rondas correctivas</td><td className="col-highlight">3 rondas correctivas</td><td>5 rondas correctivas</td><td>5 rondas correctivas</td></tr>
+                <tr><td><strong>Soporte post-lanzamiento</strong></td><td>15 días</td><td className="col-highlight">30 días</td><td>60 días</td><td>60 días</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+    </>
+  )
+}
+
 // ─────────────────────────────────────────────────────────────────────────────
 export default function Servicios() {
   return (
@@ -862,47 +979,6 @@ export default function Servicios() {
                   </tr>
                 </tbody>
               </table>
-            </div>
-          </div>
-        </section>
-
-        {/* ── TICKET 5: CTA Final ──────────────────────────────────────────── */}
-        <section className="section cta-final" id="presupuesto">
-          {/* Ambient glow */}
-          <div className="cta-final__glow" aria-hidden="true" />
-
-          <div className="container">
-            <div className="cta-final__inner">
-              <p className="cta-final__label">/ Siguiente paso</p>
-
-              <h2 className="cta-final__h2">
-                ¿Listo para llevar tu<br />
-                <span style={{ color: 'var(--edge)' }}>negocio al siguiente nivel?</span>
-              </h2>
-
-              <p className="cta-final__sub">
-                Cuéntanos tu proyecto. Respuesta en menos de 48&nbsp;h,
-                presupuesto cerrado sin ninguna sorpresa.
-              </p>
-
-              <div className="cta-final__actions">
-                <Link to="/contacto" className="btn btn--chamfer btn--large">
-                  Pedir Presupuesto →
-                </Link>
-                <Link to="/proceso" className="btn btn--ghost">
-                  Ver cómo trabajamos
-                </Link>
-              </div>
-
-              {/* Social proof strip */}
-              <div className="cta-final__proof">
-                <span>Proyectos entregados a tiempo</span>
-                <span className="cta-final__proof-dot" />
-                <span>PageSpeed &gt; 95 garantizado</span>
-                <span className="cta-final__proof-dot" />
-                <span>Código sin dependencias innecesarias</span>
-                <span className="cta-final__proof-dot" />
-              </div>
             </div>
           </div>
         </section>
