@@ -27,12 +27,6 @@
 .process__step.anim-fade:nth-child(3) { transition-delay: 0.2s; }
 .process__step.anim-fade:nth-child(4) { transition-delay: 0.3s; }
 
-/* ── Float (título hero + fotos equipo) ── */
-@keyframes float {
-  from { transform: translateY(0); }
-  to   { transform: translateY(-10px); }
-}
-
 /* ── prefers-reduced-motion (unificado) ── */
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -58,10 +52,7 @@
   .svc-sw__orb--2,
   .svc-sw__orb--3,
   .tech-marquee__track,
-  .extras-marquee__track,
-  .hero__h1,
-  .team-photo-wrap,
-  .team-mobile__img-wrap {
+  .extras-marquee__track {
     animation: none !important;
   }
 }

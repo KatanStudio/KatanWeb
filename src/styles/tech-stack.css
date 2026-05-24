@@ -4,7 +4,6 @@
 .tech-stack {
   padding: 3rem 0;
   background: var(--forge);
-  border-bottom: 1px solid var(--ghost);
   overflow: hidden;
 }
 

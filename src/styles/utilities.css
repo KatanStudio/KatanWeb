@@ -8,7 +8,7 @@
   margin: 0 auto;
   padding: 0 1.5rem;
   position: relative;
-  z-index: 1;
+  z-index: 2;
 }
 
 .accent {
@@ -34,13 +34,18 @@
 /* ── Section ── */
 .section {
   padding: var(--section-py) 0;
-  border-top: 1px solid var(--ghost);
   position: relative;
   isolation: isolate;
 }
 
 .section--dark {
-  background: var(--ghost);
+  background: linear-gradient(
+    180deg,
+    var(--forge) 0%,
+    var(--ghost) 12%,
+    var(--ghost) 88%,
+    var(--forge) 100%
+  );
 }
 
 .section__header {
@@ -169,12 +174,36 @@
   overflow: hidden;
 }
 
+/* Fundido negro en los bordes superior e inferior — los orbes nunca llegan al límite */
+.section--orbs::before,
+.section--orbs::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 14rem;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.section--orbs::before {
+  top: 0;
+  background: linear-gradient(to bottom, var(--forge), transparent);
+}
+
+.section--orbs::after {
+  bottom: 0;
+  background: linear-gradient(to top, var(--forge), transparent);
+}
+
 .orb-page-1 {
   width: 45vw;
   height: 45vw;
   background-color: var(--edge);
   top: 25%;
   right: -8%;
+  opacity: 0.15;
+  filter: blur(180px);
   animation-delay: -4s;
   animation-duration: 24s;
 }
@@ -185,6 +214,8 @@
   background-color: var(--spark);
   top: -8%;
   left: -5%;
+  opacity: 0.08;
+  filter: blur(200px);
   animation-delay: -12s;
   animation-duration: 30s;
 }
@@ -196,6 +227,8 @@
   background-color: var(--spark);
   top: 25%;
   right: -8%;
+  opacity: 0.07;
+  filter: blur(200px);
   animation-delay: -4s;
   animation-duration: 24s;
 }
@@ -206,6 +239,8 @@
   background-color: var(--spark);
   top: -8%;
   left: -5%;
+  opacity: 0.06;
+  filter: blur(200px);
   animation-delay: -12s;
   animation-duration: 30s;
 }
@@ -217,6 +252,8 @@
   background-color: var(--edge);
   top: 25%;
   left: -8%;
+  opacity: 0.14;
+  filter: blur(180px);
   animation-delay: -4s;
   animation-duration: 24s;
 }
@@ -227,6 +264,8 @@
   background-color: var(--spark);
   top: -8%;
   right: -5%;
+  opacity: 0.08;
+  filter: blur(200px);
   animation-delay: -12s;
   animation-duration: 30s;
 }

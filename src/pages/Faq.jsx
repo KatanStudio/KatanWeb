@@ -350,26 +350,6 @@ export function FaqSection() {
         </div>
       </section>
 
-      <section className="cta-section">
-        <div className="cta-section__glow" aria-hidden="true"></div>
-        <div className="container cta-section__container">
-          <div className="cta-section__box">
-            <p className="kicker kicker--center">// ¿Todo claro?</p>
-            <h2 className="cta-section__h2" style={{ textTransform: 'none' }}>Empecemos con una llamada.</h2>
-            <p className="cta-section__sub">
-              15 minutos para contarnos tu proyecto. Sin presentaciones largas,
-              sin compromiso. Solo claridad.
-            </p>
-            <div className="cta-actions">
-              <a href="#contacto" className="btn btn--primary btn--large btn--chamfer">Contactar ahora →</a>
-              <div className="cta-email-box">
-                <span className="cta-email-label">O escríbenos a:</span>
-                <a href="mailto:info@katan.es" className="cta-email-link">info@katan.es</a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
     </>
   )
 }
@@ -550,29 +530,6 @@ export default function FAQ() {
             </div>
 
           </div>
-        </section>
-
-        {/* ── CTA ── */}
-        <section className="cta-section">
-          <div className="cta-section__glow" aria-hidden="true"></div>
-          <div className="container cta-section__container">
-            <div className="cta-section__box">
-              <p className="kicker kicker--center">// ¿Todo claro?</p>
-              <h2 className="cta-section__h2" style={{ textTransform: 'none' }}>Empecemos con una llamada.</h2>
-              <p className="cta-section__sub">
-                15 minutos para contarnos tu proyecto. Sin presentaciones largas,
-                sin compromiso. Solo claridad.
-              </p>
-              <div className="cta-actions">
-                <Link to="/contacto" className="btn btn--primary btn--large btn--chamfer">Contactar ahora →</Link>
-                <div className="cta-email-box">
-                  <span className="cta-email-label">O escríbenos a:</span>
-                  <a href="mailto:info@katan.es" className="cta-email-link">info@katan.es</a>
-                </div>
-              </div>
-            </div>
-          </div>
-
         </section>
 
       </main>

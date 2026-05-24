@@ -163,7 +163,6 @@
   word-break: normal;
   overflow-wrap: normal;
   hyphens: none;
-  animation: float 5s ease-in-out infinite alternate;
 }
 
 .hero__h1-accent {
@@ -190,6 +189,19 @@
   justify-content: center;
   width: 100%;
   max-width: 320px;
+}
+
+/* Fade inferior del hero: funde los orbes con la siguiente sección */
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 18rem;
+  background: linear-gradient(to bottom, transparent, var(--forge));
+  z-index: 1;
+  pointer-events: none;
 }
 
 .hero__stats {
