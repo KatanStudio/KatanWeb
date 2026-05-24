@@ -13,7 +13,7 @@ const PROJECTS = [
     title: 'Viana Nails',
     problem: 'Academia de manicura atrapada en una plataforma de terceros que fallaba sin parar: alumnas sin acceso a sus cursos, una gestión completamente manual que consumía horas cada semana y navegación muy lenta.',
     solution: 'Rediseño de plataforma 100% a medida con tienda online, sistema de reservas, pasarela de pago propia y área privada de alumnas. Los fallos desaparecieron y la academia pasó a gestionarse sola.',
-    technologies: ['React', 'Vite', 'Node.js', 'PostgreSQL', 'Figma'],
+    technologies: ['React', 'Vite', 'Node.js', 'MongoDB', 'Stripe', 'Figma'],
     external: true,
   },
   {

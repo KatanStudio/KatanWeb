@@ -271,6 +271,7 @@
   .tabbar__item {
     flex: 1;
     display: flex;
+    min-width: 0;
   }
 
   .tabbar__link {
@@ -278,9 +279,9 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 3px;
+    gap: 2px;
     width: 100%;
-    padding: 6px 4px;
+    padding: 5px 2px;
     color: var(--steel);
     transition: color var(--t-fast);
     position: relative;
@@ -307,8 +308,8 @@
   }
 
   .tabbar__icon {
-    width: 21px;
-    height: 21px;
+    width: 19px;
+    height: 19px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -321,12 +322,16 @@
   }
 
   .tabbar__label {
-    font-size: 0.58rem;
+    font-size: 0.52rem;
     font-weight: 600;
-    letter-spacing: 0.05em;
+    letter-spacing: 0.03em;
     text-transform: uppercase;
     line-height: 1;
     font-family: var(--font-mono);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
   }
 
   body {

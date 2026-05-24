@@ -54,6 +54,27 @@ const TABBAR_LINKS = [
     ),
   },
   {
+    to: '/proceso',
+    label: 'Proceso',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M9 11l3 3L22 4" />
+        <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
+      </svg>
+    ),
+  },
+  {
+    to: '/Faq',
+    label: 'FAQ',
+    icon: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+        <circle cx="12" cy="12" r="10" />
+        <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3" />
+        <circle cx="12" cy="17" r="0.5" fill="currentColor" />
+      </svg>
+    ),
+  },
+  {
     to: '/contacto',
     label: 'Contacto',
     icon: (
