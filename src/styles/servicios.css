@@ -1097,7 +1097,7 @@
 
 .svc-hs__card {
   flex-shrink: 0;
-  width:67vw;
+  width:57vw;
   max-width: 1600px;
   height: calc(100vh - 12rem);
   max-height: 580px;
@@ -1118,15 +1118,14 @@
 }
 
 .svc-hs__card-num {
-  font-size: 0.7rem;
-  letter-spacing: 0.12em;
   color: var(--edge);
+  font-family: var(--font-mono);
+  letter-spacing: 0.08em;
   font-weight: 600;
-  margin-bottom: 0.4rem;
 }
 
 .svc-hs__card-title {
-  font-size: clamp(1.3rem, 2.2vw, 2rem);
+  font-size: clamp(1.6rem, 2.8vw, 2.5rem);
   font-weight: 700;
   margin: 0 0 0.65rem;
   line-height: 1.15;
@@ -1142,7 +1141,7 @@
 .svc-hs__card-features {
   list-style: none;
   padding: 0;
-  margin: 0 0 1rem;
+  margin: 0;
   flex: 1;
 }
 
@@ -1238,7 +1237,7 @@
 
 /* ── Mobile: vertical stack, no scroll-jacking ── */
 
-@media (max-width: 768px) {
+@media (max-width: 1199px) {
   .svc-hs {
     height: auto !important;
   }
@@ -1282,4 +1281,91 @@
   .svc-hs__progress {
     padding: 1rem 1.25rem 2rem;
   }
+}
+
+/* ── Specs Modal ── */
+.specs-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+.specs-modal {
+  background: var(--sheath);
+  border: 1px solid var(--ghost);
+  border-radius: 12px;
+  max-width: min(1500px, 98vw);
+  width: 98vw;
+  max-height: 90vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 24px 80px rgba(0, 0, 0, 0.6);
+}
+
+.specs-modal__header {
+  display: flex;
+  justify-content: flex-end;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid var(--ghost);
+  flex-shrink: 0;
+}
+
+.specs-modal__close {
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--forge);
+  border: 1px solid var(--ghost);
+  color: var(--blade);
+  cursor: pointer;
+  border-radius: 50%;
+  font-size: 0.85rem;
+  transition: background var(--t-fast), color var(--t-fast), border-color var(--t-fast);
+}
+
+.specs-modal__close:hover {
+  background: rgba(255, 0, 128, 0.15);
+  color: var(--edge);
+  border-color: var(--edge);
+}
+
+.specs-modal__table-wrap {
+  overflow: auto;
+  flex: 1;
+  padding: 1.5rem;
+}
+
+.specs-modal__table-wrap .table-responsive {
+  margin-top: 0;
+}
+
+/* "Ver todo" link button */
+.specs-link-btn {
+  display: block;
+  width: 100%;
+  text-align: right;
+  background: none;
+  border: none;
+  padding: 0.25rem 0;
+  margin-bottom: 0.4rem;
+  font-size: 0.8rem;
+  color: var(--edge);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+  transition: opacity var(--t-fast);
+}
+
+.specs-link-btn:hover {
+  opacity: 0.75;
 }

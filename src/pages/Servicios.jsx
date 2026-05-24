@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef, memo, useCallback, Fragment } from 'react'
+import { createPortal } from 'react-dom'
 import { Helmet } from 'react-helmet-async'
 import {
   Globe, Mail, FilePlus, ListFilter, CalendarDays,
@@ -286,8 +287,8 @@ const SPECS_ROWS = [
   { label: 'Soporte post-lanzamiento',values: ['15 días',               '30 días',                    '60 días',                    '60 días'] },
 ]
 
-function SpecsCarousel() {
-  const [active, setActive]   = useState(0)
+function SpecsCarousel({ initialCol = 0 }) {
+  const [active, setActive]   = useState(initialCol)
   const [dir, setDir]         = useState(1)
   const [animKey, setAnimKey] = useState(0)
   const touchStartX           = useRef(null)
@@ -387,6 +388,58 @@ function SpecsCarousel() {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
+// SPECS MODAL — full table popup with dynamic column highlight
+// ─────────────────────────────────────────────────────────────────────────────
+function SpecsModal({ colIndex, onClose }) {
+  useEffect(() => {
+    const onKey = (e) => { if (e.key === 'Escape') onClose() }
+    document.addEventListener('keydown', onKey)
+    const prev = document.body.style.overflow
+    document.body.style.overflow = 'hidden'
+    return () => {
+      document.removeEventListener('keydown', onKey)
+      document.body.style.overflow = prev
+    }
+  }, [onClose])
+
+  return createPortal(
+    <div className="specs-modal-overlay" onClick={onClose} role="dialog" aria-modal="true">
+      <div className="specs-modal" onClick={e => e.stopPropagation()}>
+        <div className="specs-modal__header">
+          <button className="specs-modal__close" onClick={onClose} aria-label="Cerrar">✕</button>
+        </div>
+        <div className="specs-modal__table-wrap">
+          <SpecsCarousel initialCol={colIndex} />
+          <div className="table-responsive">
+            <table className="specs-table">
+              <thead>
+                <tr>
+                  <th></th>
+                  {SPECS_COLS.map((col, i) => (
+                    <th key={i} className={i === colIndex ? 'col-highlight' : ''}>{col}</th>
+                  ))}
+                </tr>
+              </thead>
+              <tbody>
+                {SPECS_ROWS.map((row, ri) => (
+                  <tr key={ri}>
+                    <td><strong>{row.label}</strong></td>
+                    {row.values.map((val, vi) => (
+                      <td key={vi} className={vi === colIndex ? 'col-highlight' : ''}>{val}</td>
+                    ))}
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>,
+    document.body
+  )
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
 // TICKET 1 — INTERACTIVE SERVICE SWITCHER (Con Auto-Play y Partículas)
 // ─────────────────────────────────────────────────────────────────────────────
 
@@ -418,6 +471,7 @@ function ServiceSwitcher() {
   const [active, setActive] = useState(0)
   const [animKey, setAnimKey] = useState(0)
   const [particles, setParticles] = useState([])
+  const [specsCol, setSpecsCol] = useState(null)
   const prevRef = useRef(null)
   const pTimerRef = useRef(null)
   const touchStartX = useRef(null)
@@ -454,6 +508,7 @@ function ServiceSwitcher() {
 
   return (
     <div className="svc-sw" onTouchStart={onTouchStart} onTouchEnd={onTouchEnd}>
+      {specsCol !== null && <SpecsModal colIndex={specsCol} onClose={() => setSpecsCol(null)} />}
 
       {/* ── Fondo con orbes animados — solo desktop (en móvil los gestiona PageOrbs) ── */}
       <div className="svc-sw__bg" aria-hidden="true">
@@ -484,10 +539,9 @@ function ServiceSwitcher() {
 
         {/* LEFT: copy + CTA */}
         <div className="svc-sw__left">
-          <p className="kicker" style={{ color: SVC_COLORS[active] }}>
-            {svc.num} // {svc.label}
-          </p>
-          <h2 className="svc-sw__title">{svc.label}</h2>
+          <h2 className="svc-sw__title">
+            <span style={{ color: SVC_COLORS[active] }}>{svc.num}</span> {svc.label}
+          </h2>
           <p className="svc-sw__desc">{svc.desc}</p>
 
           <ul className="svc-sw__features">
@@ -495,6 +549,8 @@ function ServiceSwitcher() {
               <li key={i}>{f}</li>
             ))}
           </ul>
+
+          <button className="specs-link-btn" onClick={() => setSpecsCol(active)}>Ver todo</button>
 
           {/* Footer aquí también para móvil (en desktop se oculta via CSS) */}
           <div className="svc-sw__footer svc-sw__footer--mobile">
@@ -599,6 +655,7 @@ function ServiciosHorizontal() {
   const trackRef = useRef(null)
   const progressBarRef = useRef(null)
   const progressLabelRef = useRef(null)
+  const [specsCol, setSpecsCol] = useState(null)
 
   useEffect(() => {
     let maxTranslate = 0
@@ -607,11 +664,12 @@ function ServiciosHorizontal() {
       const track = trackRef.current
       const outer = outerRef.current
       if (!track || !outer) return
-      if (window.innerWidth <= 768) {
+      if (window.innerWidth < 1200) {
         outer.style.height = 'auto'
         return
       }
-      maxTranslate = Math.max(0, track.scrollWidth - window.innerWidth)
+      const paddingRight = parseFloat(getComputedStyle(track).paddingRight) || 0
+      maxTranslate = Math.max(0, track.scrollWidth - window.innerWidth - paddingRight + 108)
       outer.style.height = `${maxTranslate + window.innerHeight}px`
       handleScroll()
     }
@@ -619,7 +677,7 @@ function ServiciosHorizontal() {
     const handleScroll = () => {
       const el = outerRef.current
       const track = trackRef.current
-      if (!el || !track || window.innerWidth <= 768 || maxTranslate <= 0) return
+      if (!el || !track || window.innerWidth < 1200 || maxTranslate <= 0) return
       const rect = el.getBoundingClientRect()
       const p = Math.max(0, Math.min(1, -rect.top / maxTranslate))
       track.style.transform = `translateX(${-p * maxTranslate}px)`
@@ -642,6 +700,7 @@ function ServiciosHorizontal() {
 
   return (
     <div ref={outerRef} className="svc-hs" id="servicios">
+      {specsCol !== null && <SpecsModal colIndex={specsCol} onClose={() => setSpecsCol(null)} />}
       <div className="svc-hs__sticky">
 
         <div className="svc-hs__head">
@@ -653,17 +712,19 @@ function ServiciosHorizontal() {
 
         <div className="svc-hs__track-wrap">
           <div ref={trackRef} className="svc-hs__track">
-            {SERVICES.map((svc) => (
+            {SERVICES.map((svc, idx) => (
               <article key={svc.id} className="svc-hs__card">
                 <div className="svc-hs__card-left">
-                  <p className="svc-hs__card-num">{svc.num} // {svc.label}</p>
-                  <h3 className="svc-hs__card-title">{svc.label}</h3>
+                  <h3 className="svc-hs__card-title">
+                    <span className="svc-hs__card-num">{svc.num}</span> {svc.label}
+                  </h3>
                   <p className="svc-hs__card-desc">{svc.desc}</p>
                   <ul className="svc-hs__card-features">
                     {svc.features.map((f, fi) => (
                       <li key={fi}>{f}</li>
                     ))}
                   </ul>
+                  <button className="specs-link-btn" onClick={() => setSpecsCol(idx)}>Ver todo</button>
                   <div className="svc-hs__card-footer">
                     <div>
                       <span className="svc-hs__card-price">{svc.price}</span>
@@ -706,68 +767,10 @@ export function ServiciosSection() {
       <section className="section section--dark" id="modulos">
         <div className="container">
           <header className="section__header" style={{ marginBottom: '3rem' }}>
-            <p className="section-label">/Extras</p>
-            <h2 className="section__h2">Servicios <span className="accent">adicionales.</span></h2>
-            <p className="section__sub">
-              Precio fijo por módulo. Sin sorpresas. Elige cuando contratarlos.
-            </p>
+            <p className="section-label">/Servicios adicionales</p>
           </header>
         </div>
         <ExtrasMarquee />
-        <div className="container" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '3.5rem' }}>
-          <p className="section__sub" style={{ marginBottom: '1.5rem', textAlign: 'center', fontSize: '1.4rem' }}>
-            ¿No encuentras el servicio exacto o necesitas algo a medida?
-          </p>
-          <a href="mailto:info@katan.es" className="btn btn--ghost">
-            Cuéntanos tu idea →
-          </a>
-        </div>
-      </section>
-
-      <section className="section section--dark" id="specs" style={{ paddingTop: '2rem' }}>
-        <div className="specs__visual" aria-hidden="true">
-          <div className="glow-orb orb-specs-1"></div>
-          <div className="glow-orb orb-specs-2"></div>
-        </div>
-        <div className="container">
-          <header className="section__header" style={{ marginBottom: '2.5rem' }}>
-            <h2 className="section__h2" style={{ fontSize: 'clamp(1.5rem, 3vw, 2.5rem)', textTransform: 'none' }}>
-              Especificaciones <span className="accent"> técnicas.</span>
-            </h2>
-            <p className="section__sub">
-              Comparativa técnica detallada de nuestros serviciones.
-            </p>
-          </header>
-          <SpecsCarousel />
-          <div className="table-responsive">
-            <table className="specs-table">
-              <thead>
-                <tr>
-                  <th></th>
-                  <th>01 / Landing</th>
-                  <th className="col-highlight">02 / Corporativa</th>
-                  <th>03 / E-Commerce</th>
-                  <th>04 / App</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr><td><strong>Contenido</strong></td><td>Hasta 5 secciones</td><td className="col-highlight">Hasta 10 páginas</td><td>Ilimitado</td><td>Pantallas ilimitadas</td></tr>
-                <tr><td><strong>Diseño a medida</strong></td><td>100% Personalizado</td><td className="col-highlight">100% Personalizado</td><td>100% Personalizado</td><td>100% Personalizado</td></tr>
-                <tr><td><strong>Diseño Responsive</strong></td><td><span className="check-yes">✓</span></td><td className="col-highlight"><span className="check-yes">✓</span></td><td><span className="check-yes">✓</span></td><td><span className="check-yes">✓</span></td></tr>
-                <tr><td><strong>SEO On-Page</strong></td><td>Básico</td><td className="col-highlight">Avanzado (Schema)</td><td>Avanzado + Rich Snippets</td><td><span className="check-no">—</span></td></tr>
-                <tr><td><strong>Blog Integrado</strong></td><td><span className="check-no">—</span></td><td className="col-highlight"><span className="check-yes">✓</span></td><td><span className="check-yes">✓</span></td><td><span className="check-no">—</span></td></tr>
-                <tr><td><strong>Multiidioma</strong></td><td><span className="check-no">—</span></td><td className="col-highlight">Hasta 2 idiomas</td><td>Hasta 3 idiomas</td><td>Hasta 2 idiomas</td></tr>
-                <tr><td><strong>Formularios de contacto</strong></td><td>Formulario básico</td><td className="col-highlight">Avanzados / Múltiples</td><td>Avanzados / Múltiples</td><td>Formularios in-app</td></tr>
-                <tr><td><strong>Analítica Web</strong></td><td>Google Analytics</td><td className="col-highlight">Analytics + Search Console</td><td>Analytics + SC + E-comm</td><td>Analytics + Firebase</td></tr>
-                <tr><td><strong>Core Web Vitals</strong></td><td>Optimizado (&gt;90)</td><td className="col-highlight">Optimización Premium (&gt;95)</td><td>Optimización Premium</td><td><span className="check-no">—</span></td></tr>
-                <tr><td><strong>Catálogo &amp; Pasarela</strong></td><td><span className="check-no">—</span></td><td className="col-highlight"><span className="check-no">—</span></td><td>Ilimitado (Stripe / PayPal)</td><td>Integrable (Stripe)</td></tr>
-                <tr><td><strong>Panel de administración</strong></td><td><span className="check-no">—</span></td><td className="col-highlight">Gestor básico (CMS)</td><td>Completo (Pedidos, stock)</td><td>Dashboard completo</td></tr>
-                <tr><td><strong>Rondas de revisiones</strong></td><td>2 rondas correctivas</td><td className="col-highlight">3 rondas correctivas</td><td>5 rondas correctivas</td><td>5 rondas correctivas</td></tr>
-                <tr><td><strong>Soporte post-lanzamiento</strong></td><td>15 días</td><td className="col-highlight">30 días</td><td>60 días</td><td>60 días</td></tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
       </section>
 
     </>
@@ -850,137 +853,6 @@ export default function Servicios() {
           </div>
 
 
-        </section>
-
-        {/* ── TICKET 4: Specs Table (unchanged) ───────────────────────────── */}
-        <section className="section section--dark" id="specs" style={{ paddingTop: '2rem' }}>
-          {/* Orbes de fondo */}
-          <div className="specs__visual" aria-hidden="true">
-            <div className="glow-orb orb-specs-1"></div>
-            <div className="glow-orb orb-specs-2"></div>
-          </div>
-          <div className="container">
-            <header className="section__header" style={{ marginBottom: '2.5rem' }}>
-              <h2
-                className="section__h2"
-                style={{ fontSize: 'clamp(1.5rem, 3vw, 2.5rem)', textTransform: 'none' }}
-              >
-                Especificaciones <span className="accent"> técnicas.</span>
-              </h2>
-              <p className="section__sub">
-                Comparativa técnica detallada de nuestros serviciones.
-              </p>
-            </header>
-
-            <SpecsCarousel />
-
-            <div className="table-responsive">
-              <table className="specs-table">
-                <thead>
-                  <tr>
-                    <th></th>
-                    <th>01 / Landing</th>
-                    <th className="col-highlight">02 / Corporativa</th>
-                    <th>03 / E-Commerce</th>
-                    <th>04 / App</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><strong>Contenido</strong></td>
-                    <td>Hasta 5 secciones</td>
-                    <td className="col-highlight">Hasta 10 páginas</td>
-                    <td>Ilimitado</td>
-                    <td>Pantallas ilimitadas</td>
-                  </tr>
-                  <tr>
-                    <td><strong>Diseño a medida</strong></td>
-                    <td>100% Personalizado</td>
-                    <td className="col-highlight">100% Personalizado</td>
-                    <td>100% Personalizado</td>
-                    <td>100% Personalizado</td>
-                  </tr>
-                  <tr>
-                    <td><strong>Diseño Responsive</strong></td>
-                    <td><span className="check-yes">✓</span></td>
-                    <td className="col-highlight"><span className="check-yes">✓</span></td>
-                    <td><span className="check-yes">✓</span></td>
-                    <td><span className="check-yes">✓</span></td>
-                  </tr>
-                  <tr>
-                    <td><strong>SEO On-Page</strong></td>
-                    <td>Básico</td>
-                    <td className="col-highlight">Avanzado (Schema)</td>
-                    <td>Avanzado + Rich Snippets</td>
-                    <td><span className="check-no">—</span></td>
-                  </tr>
-                  <tr>
-                    <td><strong>Blog Integrado</strong></td>
-                    <td><span className="check-no">—</span></td>
-                    <td className="col-highlight"><span className="check-yes">✓</span></td>
-                    <td><span className="check-yes">✓</span></td>
-                    <td><span className="check-no">—</span></td>
-                  </tr>
-                  <tr>
-                    <td><strong>Multiidioma</strong></td>
-                    <td><span className="check-no">—</span></td>
-                    <td className="col-highlight">Hasta 2 idiomas</td>
-                    <td>Hasta 3 idiomas</td>
-                    <td>Hasta 2 idiomas</td>
-                  </tr>
-                  <tr>
-                    <td><strong>Formularios de contacto</strong></td>
-                    <td>Formulario básico</td>
-                    <td className="col-highlight">Avanzados / Múltiples</td>
-                    <td>Avanzados / Múltiples</td>
-                    <td>Formularios in-app</td>
-                  </tr>
-                  <tr>
-                    <td><strong>Analítica Web</strong></td>
-                    <td>Google Analytics</td>
-                    <td className="col-highlight">Analytics + Search Console</td>
-                    <td>Analytics + SC + E-comm</td>
-                    <td>Analytics + Firebase</td>
-                  </tr>
-                  <tr>
-                    <td><strong>Core Web Vitals</strong></td>
-                    <td>Optimizado (&gt;90)</td>
-                    <td className="col-highlight">Optimización Premium (&gt;95)</td>
-                    <td>Optimización Premium</td>
-                    <td><span className="check-no">—</span></td>
-                  </tr>
-                  <tr>
-                    <td><strong>Catálogo &amp; Pasarela</strong></td>
-                    <td><span className="check-no">—</span></td>
-                    <td className="col-highlight"><span className="check-no">—</span></td>
-                    <td>Ilimitado (Stripe / PayPal)</td>
-                    <td>Integrable (Stripe)</td>
-                  </tr>
-                  <tr>
-                    <td><strong>Panel de administración</strong></td>
-                    <td><span className="check-no">—</span></td>
-                    <td className="col-highlight">Gestor básico (CMS)</td>
-                    <td>Completo (Pedidos, stock)</td>
-                    <td>Dashboard completo</td>
-                  </tr>
-                  <tr>
-                    <td><strong>Rondas de revisiones</strong></td>
-                    <td>2 rondas correctivas</td>
-                    <td className="col-highlight">3 rondas correctivas</td>
-                    <td>5 rondas correctivas</td>
-                    <td>5 rondas correctivas</td>
-                  </tr>
-                  <tr>
-                    <td><strong>Soporte post-lanzamiento</strong></td>
-                    <td>15 días</td>
-                    <td className="col-highlight">30 días</td>
-                    <td>60 días</td>
-                    <td>60 días</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
         </section>
 
       </main>

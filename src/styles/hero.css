@@ -163,7 +163,6 @@
   word-break: normal;
   overflow-wrap: normal;
   hyphens: none;
-  animation: float 5s ease-in-out infinite alternate;
 }
 
 .hero__h1-accent {
