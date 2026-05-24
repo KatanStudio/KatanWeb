@@ -517,6 +517,164 @@ function TeamStage() {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
+// COMPARE HORIZONTAL  (desktop ≥1200px) — scroll-jacked horizontal panning
+// ─────────────────────────────────────────────────────────────────────────────
+function CompareHorizontal() {
+  const outerRef = useRef(null)
+  const trackRef = useRef(null)
+  const progressBarRef = useRef(null)
+  const progressLabelRef = useRef(null)
+
+  useEffect(() => {
+    let maxTranslate = 0
+
+    const measure = () => {
+      const track = trackRef.current
+      const outer = outerRef.current
+      if (!track || !outer) return
+      if (window.innerWidth < 1200) { outer.style.height = 'auto'; return }
+      maxTranslate = Math.max(0, track.scrollWidth - window.innerWidth + 80)
+      outer.style.height = `${maxTranslate + window.innerHeight}px`
+      handleScroll()
+    }
+
+    const handleScroll = () => {
+      const el = outerRef.current
+      const track = trackRef.current
+      if (!el || !track || window.innerWidth < 1200 || maxTranslate <= 0) return
+      const rect = el.getBoundingClientRect()
+      const p = Math.max(0, Math.min(1, -rect.top / maxTranslate))
+      track.style.transform = `translateX(${-p * maxTranslate}px)`
+      if (progressBarRef.current) progressBarRef.current.style.width = `${p * 100}%`
+      if (progressLabelRef.current) {
+        const n = Math.min(COMPARE_DATA.length - 1, Math.round(p * (COMPARE_DATA.length - 1))) + 1
+        progressLabelRef.current.textContent = `${String(n).padStart(2, '0')} / ${String(COMPARE_DATA.length).padStart(2, '0')}`
+      }
+    }
+
+    requestAnimationFrame(measure)
+    window.addEventListener('resize', measure)
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => {
+      window.removeEventListener('resize', measure)
+      window.removeEventListener('scroll', handleScroll)
+    }
+  }, [])
+
+  return (
+    <div ref={outerRef} className="cmp-hs">
+      <div className="cmp-hs__sticky">
+        <div className="cmp-hs__head">
+          <p className="section-label">/Método</p>
+          <h2 className="section__h2">Katan <span className="accent">vs.</span> Otras agencias</h2>
+        </div>
+
+        <div className="cmp-hs__track-wrap">
+          <div ref={trackRef} className="cmp-hs__track">
+            {COMPARE_DATA.map((item) => (
+              <div key={item.id} className="cmp-hs__card">
+                <div className="cmp-hs__cat">
+                  <span className="cmp-hs__cat-icon">{CATEGORY_ICONS[item.id]}</span>
+                  <span className="cmp-hs__cat-label">{item.category}</span>
+                </div>
+                <div className="cmp-hs__body">
+                  {/* Katan */}
+                  <div className="cmp-hs__side cmp-hs__side--katan">
+                    <img src="/logos/wetransfer_katan_2026-05-04_0628/KATANLogoBlancoCompleto.svg" alt="Katan" className="cmp-hs__logo" />
+                    <div className="cmp-hs__metric">{item.katan.metric}</div>
+                    <div className="cmp-hs__indicator">
+                      {item.id === 'speed' && (
+                        <div className="cmp-bar cmp-bar--speed">
+                          <div className="cmp-bar__fill cmp-bar__fill--good" style={{ width: `${item.katan.bar}%` }} />
+                          <span className="cmp-bar__label">{item.katan.label}</span>
+                        </div>
+                      )}
+                      {item.id === 'code' && (
+                        <div className="cmp-ownership cmp-ownership--good">
+                          <span className="cmp-ownership__check">✓</span>
+                          <span>{item.katan.label}</span>
+                        </div>
+                      )}
+                      {item.id === 'security' && (
+                        <div className="cmp-shield cmp-shield--good">
+                          <svg width="42" height="42" viewBox="0 0 24 24" fill="none">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" fill="rgba(255,0,128,0.15)" stroke="#FF0080" strokeWidth="1.5"/>
+                            <path d="M9 12l2 2 4-4" stroke="#FF0080" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                          </svg>
+                          <span>{item.katan.label}</span>
+                        </div>
+                      )}
+                      {item.id === 'price' && (
+                        <div className="cmp-price-tag cmp-price-tag--good">
+                          <span className="cmp-price-tag__badge">CERRADO</span>
+                          <span>{item.katan.label}</span>
+                        </div>
+                      )}
+                    </div>
+                    <h4 className="cmp-hs__title">{item.katan.title}</h4>
+                    <p className="cmp-hs__desc">{item.katan.desc}</p>
+                  </div>
+
+                  <div className="cmp-hs__vs" aria-hidden="true"><span>vs.</span></div>
+
+                  {/* Otras agencias */}
+                  <div className="cmp-hs__side cmp-hs__side--wp">
+                    <span className="cmp-hs__wp-label">Otras agencias</span>
+                    <div className="cmp-hs__metric cmp-hs__metric--bad">{item.wp.metric}</div>
+                    <div className="cmp-hs__indicator">
+                      {item.id === 'speed' && (
+                        <div className="cmp-bar cmp-bar--speed">
+                          <div className="cmp-bar__fill cmp-bar__fill--bad" style={{ width: `${item.wp.bar}%` }} />
+                          <span className="cmp-bar__label">{item.wp.label}</span>
+                        </div>
+                      )}
+                      {item.id === 'code' && (
+                        <div className="cmp-ownership cmp-ownership--bad">
+                          <span className="cmp-ownership__check">✗</span>
+                          <span>{item.wp.label}</span>
+                        </div>
+                      )}
+                      {item.id === 'security' && (
+                        <div className="cmp-shield cmp-shield--bad">
+                          <svg width="42" height="42" viewBox="0 0 24 24" fill="none">
+                            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" fill="rgba(138,155,180,0.08)" stroke="#8A9BB4" strokeWidth="1.5" strokeDasharray="3 2"/>
+                            <line x1="9" y1="9" x2="15" y2="15" stroke="#8A9BB4" strokeWidth="1.8" strokeLinecap="round"/>
+                            <line x1="15" y1="9" x2="9" y2="15" stroke="#8A9BB4" strokeWidth="1.8" strokeLinecap="round"/>
+                          </svg>
+                          <span>{item.wp.label}</span>
+                        </div>
+                      )}
+                      {item.id === 'price' && (
+                        <div className="cmp-price-tag cmp-price-tag--bad">
+                          <span className="cmp-price-tag__badge cmp-price-tag__badge--bad">VARIABLE</span>
+                          <span>{item.wp.label}</span>
+                        </div>
+                      )}
+                    </div>
+                    <h4 className="cmp-hs__title cmp-hs__title--muted">{item.wp.title}</h4>
+                    <p className="cmp-hs__desc">{item.wp.desc}</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        <div className="cmp-hs__progress">
+          <span ref={progressLabelRef} className="cmp-hs__progress-label">
+            01 / {String(COMPARE_DATA.length).padStart(2, '0')}
+          </span>
+          <div className="cmp-hs__progress-bar-wrap">
+            <div ref={progressBarRef} className="cmp-hs__progress-bar" />
+          </div>
+          <span className="cmp-hs__hint">↓ scroll</span>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
 // SECTION EXPORT — used by MainPage for single-page scroll layout
 // ─────────────────────────────────────────────────────────────────────────────
 export function NosotrosSection() {
@@ -552,21 +710,20 @@ export function NosotrosSection() {
         </div>
       </section>
 
-      <section className="section section--gradient-bg" id="diferenciador">
+      <span id="diferenciador" style={{ display: 'block', height: 0, visibility: 'hidden' }} aria-hidden="true" />
+      <section className="section section--gradient-bg cmp-mob-wrap">
         <div className="container">
           <header className="section__header">
             <p className="section-label">/Método</p>
             <h2 className="section__h2">Katan <span className="accent">vs.</span> Otras agencias</h2>
           </header>
-
           <CompareMobile />
-          <CompareVisualDesktop />
-
           <blockquote className="pull-quote" style={{ marginTop: '3rem' }}>
             <p>"Hacemos que tu página se convierta en una herramienta útil para tu día a día, atrayendo a las personas que de verdad buscan tus servicios."</p>
           </blockquote>
         </div>
       </section>
+      <CompareHorizontal />
     </>
   )
 }
@@ -615,60 +772,20 @@ export default function Nosotros() {
           </div>
         </section>
 
-        <section className="section section--gradient-bg" id="diferenciador">
+        <span id="diferenciador" style={{ display: 'block', height: 0, visibility: 'hidden' }} aria-hidden="true" />
+        <section className="section section--gradient-bg cmp-mob-wrap">
           <div className="container">
             <header className="section__header">
               <p className="section-label">/Método</p>
               <h2 className="section__h2">Katan <span className="accent">vs.</span> Otras agencias</h2>
             </header>
-
-            {/* CARRUSEL DE COMPARACIÓN (Solo Móvil) */}
             <CompareMobile />
-
-            {/* LISTA COMPLETA DE COMPARACIÓN (Solo Desktop) */}
-            <div className="compare-desktop">
-              <div className="compare">
-                <div className="compare__col compare__col--katan">
-                  <div className="compare__badge">
-                    <img src="/logos/wetransfer_katan_2026-05-04_0628/KATANLogoBlancoCompleto.svg" alt="" aria-hidden="true" />
-                  </div>
-                  <div className="compare__rows">
-                    {COMPARE_DATA.map((row) => (
-                      <div key={row.id} className="compare__row">
-                        <span className="compare__icon compare__icon--yes">✓</span>
-                        <div>
-                          <strong>{row.katan.title}</strong>
-                          <p>{row.katan.desc}</p>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="compare__sep" aria-hidden="true"><span>vs.</span></div>
-
-                <div className="compare__col compare__col--wp">
-                  <div className="compare__badge compare__badge--wp"> Plantillas</div>
-                  <div className="compare__rows">
-                    {COMPARE_DATA.map((row) => (
-                      <div key={row.id} className="compare__row">
-                        <span className="compare__icon compare__icon--no">✗</span>
-                        <div>
-                          <strong>{row.wp.title}</strong>
-                          <p>{row.wp.desc}</p>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-
             <blockquote className="pull-quote" style={{ marginTop: '3rem' }}>
               <p>"Hacemos que tu página se convierta en una herramienta útil para tu día a día, atrayendo a las personas que de verdad buscan tus servicios."</p>
             </blockquote>
           </div>
         </section>
+        <CompareHorizontal />
       </main>
 
       <Footer />
