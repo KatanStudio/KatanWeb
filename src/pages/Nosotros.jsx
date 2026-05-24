@@ -44,29 +44,81 @@ const TEAM = [
 ]
 
 // ─────────────────────────────────────────────────────────────────────────────
-// COMPARE DATA (Para el nuevo Carrusel Móvil)
+// COMPARE DATA — enriquecido con métricas visuales
 // ─────────────────────────────────────────────────────────────────────────────
 const COMPARE_DATA = [
   {
     id: 'speed',
-    katan: { title: 'Carga en un parpadeo (<1.5s)', desc: 'Código limpio que hace que la página aparezca al instante para que nadie se canse de esperar y se vaya a la competencia.' },
-    wp: { title: '3–8s de carga media', desc: 'Si la web lenta frustra fácilmente a tus clientes. Si tarda más de 3 segundos, mucha gente cierra la pestaña y te olvida.' }
+    category: 'Velocidad de carga',
+    katan: {
+      metric: '< 1.5s',
+      bar: 15,
+      label: 'Velocidad real',
+      title: 'Carga en un parpadeo',
+      desc: 'Código limpio sin plugins ni capas de JS innecesarias. Tu página aparece antes de que el cliente parpadee.',
+    },
+    wp: {
+      metric: '3 – 8s',
+      bar: 78,
+      label: 'Velocidad media',
+      title: 'El 40% abandona a los 3s',
+      desc: 'Cada segundo de espera cuesta ventas. Las plantillas acumulan scripts que nadie pidió y nadie puede quitar.',
+    },
   },
   {
     id: 'code',
-    katan: { title: 'Código 100% tuyo, sin licencias', desc: 'Te entregamos el código sin renovaciones anuales, sin dependencia de terceros.' },
-    wp: { title: 'Dependencia de licencias', desc: 'Múltiples dependencias de sistemas de terceros. Cada uno con su renovación.' }
+    category: 'Propiedad del código',
+    katan: {
+      metric: '100%',
+      bar: 100,
+      label: 'Tuyo para siempre',
+      title: 'Código que te pertenece',
+      desc: 'Te entregamos el repositorio completo. Sin renovaciones, sin dependencias de terceros, sin ataduras.',
+    },
+    wp: {
+      metric: '0%',
+      bar: 0,
+      label: 'Propiedad real',
+      title: 'Licencias de por vida',
+      desc: 'Tu web vive en una plataforma de terceros. Si cierran, suben precios o cambian condiciones, tú dependes de ellos.',
+    },
   },
   {
     id: 'security',
-    katan: { title: 'Seguridad blindada', desc: 'Sin plugins vulnerables. Sin actualizaciones que rompen la web en cualquier momento.' },
-    wp: { title: 'El 43% de la web usa plantillas genéricas', desc: 'El objetivo favorito de los atacantes. Una vulnerabilidad afecta a millones de sitios a la vez.' }
+    category: 'Seguridad',
+    katan: {
+      metric: '0',
+      bar: 0,
+      label: 'Vulnerabilidades',
+      title: 'Sin superficie de ataque',
+      desc: 'Sin plugins de terceros que parchear. Sin actualizaciones que rompen la web a las 3am. Sin vectores de entrada.',
+    },
+    wp: {
+      metric: '43%',
+      bar: 43,
+      label: 'De la web con plantillas',
+      title: 'El objetivo favorito de hackers',
+      desc: 'Una vulnerabilidad en un plugin popular afecta a millones de webs a la vez. La tuya incluida.',
+    },
   },
   {
     id: 'price',
-    katan: { title: 'Precio cerrado desde el comienzo', desc: 'El presupuesto que firmas es el que aparece en la factura. Sin letra pequeña.' },
-    wp: { title: 'Añadidos sorpresa garantizados', desc: 'El presupuesto inicial crece con cada "añade esta función" que aparece en el camino.' }
-  }
+    category: 'Precio',
+    katan: {
+      metric: '= €',
+      bar: 100,
+      label: 'Precio cerrado siempre',
+      title: 'Sin letra pequeña',
+      desc: 'El presupuesto que firmas es el que aparece en la factura. El alcance está definido antes de empezar.',
+    },
+    wp: {
+      metric: '+ ???',
+      bar: 0,
+      label: 'Coste real desconocido',
+      title: 'Añadidos sorpresa garantizados',
+      desc: 'Cada "arreglo rápido" se cobra aparte. El presupuesto inicial crece con cada reunión y cada cambio de última hora.',
+    },
+  },
 ]
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -175,7 +227,7 @@ function TeamMobile() {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// COMPARE MOBILE CARRUSEL (móvil <900px)
+// COMPARE MOBILE CARRUSEL (< 900px) — con métricas grandes
 // ─────────────────────────────────────────────────────────────────────────────
 function CompareMobile() {
   const [currentIndex, setCurrentIndex] = useState(0)
@@ -183,103 +235,187 @@ function CompareMobile() {
   const [touchStart, setTouchStart] = useState(null)
   const [touchEnd, setTouchEnd] = useState(null)
 
-  const next = () => { if (currentIndex < COMPARE_DATA.length - 1) { setDir(1); setCurrentIndex(prev => prev + 1) } }
-  const prev = () => { if (currentIndex > 0) { setDir(-1); setCurrentIndex(prev => prev - 1) } }
-
+  const next = () => { if (currentIndex < COMPARE_DATA.length - 1) { setDir(1); setCurrentIndex(p => p + 1) } }
+  const prev = () => { if (currentIndex > 0) { setDir(-1); setCurrentIndex(p => p - 1) } }
   const onTouchStart = (e) => { setTouchEnd(null); setTouchStart(e.targetTouches[0].clientX) }
   const onTouchMove = (e) => { setTouchEnd(e.targetTouches[0].clientX) }
   const onTouchEndAction = () => {
     if (!touchStart || !touchEnd) return
-    const distance = touchStart - touchEnd
-    if (distance > 50 && currentIndex < COMPARE_DATA.length - 1) next()
-    if (distance < -50 && currentIndex > 0) prev()
+    const d = touchStart - touchEnd
+    if (d > 50) next()
+    if (d < -50) prev()
   }
-
   const current = COMPARE_DATA[currentIndex]
 
   return (
     <div className="compare-mobile">
       <div className="team-mobile__wrapper" onTouchStart={onTouchStart} onTouchMove={onTouchMove} onTouchEnd={onTouchEndAction}>
-        
-        {/* Reciclamos animación y estructura base de tarjeta */}
-        <div key={current.id} className="team-mobile__card" data-dir={dir} style={{ padding: '2rem 1.5rem' }}>
-          
-          {/* KATAN INFO */}
-          <div className="compare-mobile__half">
-            <div className="compare__badge" style={{ marginBottom: '1rem', width: 'fit-content' }}>
-              <img src="/logos/wetransfer_katan_2026-05-04_0628/KATANLogoBlancoCompleto.svg" alt="Katan" aria-hidden="true" style={{ height: '20px' }} />
-            </div>
-            <div className="compare__row" style={{ alignItems: 'flex-start' }}>
-              <span className="compare__icon compare__icon--yes" style={{ marginTop: '4px' }}>✓</span>
-              <div>
-                <strong style={{ color: 'var(--blade)', fontSize: '1.15rem' }}>{current.katan.title}</strong>
-                <p style={{ color: 'var(--steel)', fontSize: '0.95rem', marginTop: '0.4rem', lineHeight: '1.6' }}>{current.katan.desc}</p>
-              </div>
-            </div>
+        <div key={current.id} className="team-mobile__card" data-dir={dir}>
+          {/* Categoría */}
+          <div className="cmp-mob__cat">
+            <span className="cmp-mob__cat-icon">{CATEGORY_ICONS[current.id]}</span>
+            <span className="cmp-mob__cat-label">{current.category}</span>
           </div>
-
-          {/* VS SEPARATOR */}
+          {/* Katan */}
+          <div className="cmp-mob__half cmp-mob__half--katan">
+            <img src="/logos/wetransfer_katan_2026-05-04_0628/KATANLogoBlancoCompleto.svg" alt="Katan" className="cmp-mob__logo" />
+            <div className="cmp-mob__metric">{current.katan.metric}</div>
+            {current.id === 'speed' && <div className="cmp-bar"><div className="cmp-bar__fill cmp-bar__fill--good" style={{ width: `${current.katan.bar}%` }} /></div>}
+            <strong className="cmp-mob__title">{current.katan.title}</strong>
+            <p className="cmp-mob__desc">{current.katan.desc}</p>
+          </div>
+          {/* VS */}
           <div className="compare-mobile__vs"><span>vs.</span></div>
-
-          {/* OTRAS AGENCIAS INFO */}
-          <div className="compare-mobile__half">
-            <div className="compare__badge compare__badge--wp" style={{ marginBottom: '1rem', width: 'fit-content' }}>Plantillas</div>
-            <div className="compare__row" style={{ alignItems: 'flex-start' }}>
-              <span className="compare__icon compare__icon--no" style={{ marginTop: '4px' }}>✗</span>
-              <div>
-                <strong style={{ color: 'var(--blade)', fontSize: '1.15rem' }}>{current.wp.title}</strong>
-                <p style={{ color: 'var(--steel)', fontSize: '0.95rem', marginTop: '0.4rem', lineHeight: '1.6' }}>{current.wp.desc}</p>
-              </div>
-            </div>
+          {/* Plantillas */}
+          <div className="cmp-mob__half cmp-mob__half--wp">
+            <span className="cmp-mob__wp-label">Plantillas</span>
+            <div className="cmp-mob__metric cmp-mob__metric--bad">{current.wp.metric}</div>
+            {current.id === 'speed' && <div className="cmp-bar"><div className="cmp-bar__fill cmp-bar__fill--bad" style={{ width: `${current.wp.bar}%` }} /></div>}
+            <strong className="cmp-mob__title">{current.wp.title}</strong>
+            <p className="cmp-mob__desc">{current.wp.desc}</p>
           </div>
-
         </div>
-
-        {/* Controles reutilizados con las flechas latientes que hicimos antes */}
         <div className="team-mobile__controls" style={{ borderTop: '1px solid var(--ghost)' }}>
           <button className="team-mobile__arrow" onClick={prev} disabled={currentIndex === 0}>←</button>
           <div className="team-mobile__dots">
             {COMPARE_DATA.map((_, i) => (
-              <button key={i} className={`team-mobile__dot ${i === currentIndex ? 'team-mobile__dot--active' : ''}`} onClick={() => { setDir(i > currentIndex ? 1 : -1); setCurrentIndex(i); }} />
+              <button key={i} className={`team-mobile__dot ${i === currentIndex ? 'team-mobile__dot--active' : ''}`} onClick={() => { setDir(i > currentIndex ? 1 : -1); setCurrentIndex(i) }} />
             ))}
           </div>
           <button className="team-mobile__arrow" onClick={next} disabled={currentIndex === COMPARE_DATA.length - 1}>→</button>
         </div>
-
       </div>
     </div>
   )
 }
 
+// ─── Iconos SVG por categoría ───────────────────────────────────────────────
+const CATEGORY_ICONS = {
+  speed: (
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+    </svg>
+  ),
+  code: (
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="3" y="11" width="18" height="11" rx="2"/>
+      <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+    </svg>
+  ),
+  security: (
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+    </svg>
+  ),
+  price: (
+    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/>
+      <line x1="7" y1="7" x2="7.01" y2="7"/>
+    </svg>
+  ),
+}
+
 // ─────────────────────────────────────────────────────────────────────────────
-// COMPARE SCROLL DESKTOP  (≥900px) — all 4 cards in a horizontal scroll row
+// COMPARE VISUAL DESKTOP  (≥900px) — duel rows con métricas grandes
 // ─────────────────────────────────────────────────────────────────────────────
-function CompareScrollDesktop() {
+function CompareVisualDesktop() {
   return (
-    <div className="compare-scroll">
-      {COMPARE_DATA.map((item) => (
-        <div key={item.id} className="compare-scroll__card">
-          <div className="compare-scroll__half compare-scroll__half--katan">
-            <div className="compare__badge">
-              <img src="/logos/wetransfer_katan_2026-05-04_0628/KATANLogoBlancoCompleto.svg" alt="Katan" style={{ height: '18px' }} />
-            </div>
-            <div className="compare__row">
-              <span className="compare__icon compare__icon--yes">✓</span>
-              <div>
-                <strong>{item.katan.title}</strong>
-                <p>{item.katan.desc}</p>
-              </div>
-            </div>
+    <div className="cmp-visual">
+      {/* Cabeceras de columna */}
+      <div className="cmp-visual__header">
+        <div className="cmp-visual__col-head cmp-visual__col-head--katan">
+          <img src="/logos/wetransfer_katan_2026-05-04_0628/KATANLogoBlancoCompleto.svg" alt="Katan Studio" className="cmp-visual__col-logo" />
+        </div>
+        <div className="cmp-visual__col-spacer" />
+        <div className="cmp-visual__col-head cmp-visual__col-head--wp">
+          <span className="cmp-visual__col-wp-label">Plantillas /<br/>Otras agencias</span>
+        </div>
+      </div>
+
+      {/* Filas de comparativa */}
+      {COMPARE_DATA.map((item, idx) => (
+        <div key={item.id} className={`cmp-row${idx % 2 === 1 ? ' cmp-row--alt' : ''}`}>
+          {/* Categoría centrada */}
+          <div className="cmp-row__category">
+            <span className="cmp-row__cat-icon">{CATEGORY_ICONS[item.id]}</span>
+            <span className="cmp-row__cat-label">{item.category}</span>
           </div>
-          <div className="compare-scroll__vs"><span>vs.</span></div>
-          <div className="compare-scroll__half compare-scroll__half--wp">
-            <div className="compare__badge compare__badge--wp" style={{ marginBottom: '1.5rem' }}>Plantillas</div>
-            <div className="compare__row">
-              <span className="compare__icon compare__icon--no">✗</span>
-              <div>
-                <strong>{item.wp.title}</strong>
-                <p>{item.wp.desc}</p>
+
+          <div className="cmp-row__body">
+            {/* Lado Katan */}
+            <div className="cmp-side cmp-side--katan">
+              <div className="cmp-side__metric">{item.katan.metric}</div>
+              <div className="cmp-side__bar-wrap">
+                {item.id === 'speed' && (
+                  <div className="cmp-bar cmp-bar--speed">
+                    <div className="cmp-bar__fill cmp-bar__fill--good" style={{ width: `${item.katan.bar}%` }} />
+                    <span className="cmp-bar__label">{item.katan.label}</span>
+                  </div>
+                )}
+                {item.id === 'code' && (
+                  <div className="cmp-ownership cmp-ownership--good">
+                    <span className="cmp-ownership__check">✓</span>
+                    <span>{item.katan.label}</span>
+                  </div>
+                )}
+                {item.id === 'security' && (
+                  <div className="cmp-shield cmp-shield--good">
+                    <svg width="38" height="38" viewBox="0 0 24 24" fill="none">
+                      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" fill="rgba(255,0,128,0.15)" stroke="#FF0080" strokeWidth="1.5"/>
+                      <path d="M9 12l2 2 4-4" stroke="#FF0080" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                    <span>{item.katan.label}</span>
+                  </div>
+                )}
+                {item.id === 'price' && (
+                  <div className="cmp-price-tag cmp-price-tag--good">
+                    <span className="cmp-price-tag__badge">CERRADO</span>
+                    <span>{item.katan.label}</span>
+                  </div>
+                )}
               </div>
+              <h4 className="cmp-side__title">{item.katan.title}</h4>
+              <p className="cmp-side__desc">{item.katan.desc}</p>
+            </div>
+
+            {/* Separador VS */}
+            <div className="cmp-vs" aria-hidden="true"><span>vs.</span></div>
+
+            {/* Lado Plantillas */}
+            <div className="cmp-side cmp-side--wp">
+              <div className="cmp-side__metric cmp-side__metric--bad">{item.wp.metric}</div>
+              <div className="cmp-side__bar-wrap">
+                {item.id === 'speed' && (
+                  <div className="cmp-bar cmp-bar--speed">
+                    <div className="cmp-bar__fill cmp-bar__fill--bad" style={{ width: `${item.wp.bar}%` }} />
+                    <span className="cmp-bar__label">{item.wp.label}</span>
+                  </div>
+                )}
+                {item.id === 'code' && (
+                  <div className="cmp-ownership cmp-ownership--bad">
+                    <span className="cmp-ownership__check">✗</span>
+                    <span>{item.wp.label}</span>
+                  </div>
+                )}
+                {item.id === 'security' && (
+                  <div className="cmp-shield cmp-shield--bad">
+                    <svg width="38" height="38" viewBox="0 0 24 24" fill="none">
+                      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" fill="rgba(138,155,180,0.08)" stroke="#8A9BB4" strokeWidth="1.5" strokeDasharray="3 2"/>
+                      <line x1="9" y1="9" x2="15" y2="15" stroke="#8A9BB4" strokeWidth="1.8" strokeLinecap="round"/>
+                      <line x1="15" y1="9" x2="9" y2="15" stroke="#8A9BB4" strokeWidth="1.8" strokeLinecap="round"/>
+                    </svg>
+                    <span>{item.wp.label}</span>
+                  </div>
+                )}
+                {item.id === 'price' && (
+                  <div className="cmp-price-tag cmp-price-tag--bad">
+                    <span className="cmp-price-tag__badge cmp-price-tag__badge--bad">VARIABLE</span>
+                    <span>{item.wp.label}</span>
+                  </div>
+                )}
+              </div>
+              <h4 className="cmp-side__title">{item.wp.title}</h4>
+              <p className="cmp-side__desc">{item.wp.desc}</p>
             </div>
           </div>
         </div>
@@ -287,6 +423,10 @@ function CompareScrollDesktop() {
     </div>
   )
 }
+
+// ─────────────────────────────────────────────────────────────────────────────
+// COMPARE MOBILE CARD  (< 900px) — una carta a la vez, más visual
+// ─────────────────────────────────────────────────────────────────────────────
 
 // ─────────────────────────────────────────────────────────────────────────────
 // TEAM STAGE  (desktop ≥900px)
@@ -420,7 +560,7 @@ export function NosotrosSection() {
           </header>
 
           <CompareMobile />
-          <CompareScrollDesktop />
+          <CompareVisualDesktop />
 
           <blockquote className="pull-quote" style={{ marginTop: '3rem' }}>
             <p>"Hacemos que tu página se convierta en una herramienta útil para tu día a día, atrayendo a las personas que de verdad buscan tus servicios."</p>
