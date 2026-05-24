@@ -6,10 +6,12 @@ import Privacidad from './pages/Privacidad.jsx'
 import Cookies from './pages/Cookies.jsx'
 import ScrollToTop from './components/ScrollToTop.jsx'
 import Cursor from './components/Cursor.jsx'
+import Loader from './components/Loader.jsx'
 
 export default function App() {
   return (
     <BrowserRouter>
+      <Loader />
       <ScrollToTop />
       <Cursor />
       <Routes>

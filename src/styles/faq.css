@@ -70,8 +70,7 @@
 /* ── Layout principal ── */
 .faq-page-body {
   padding: var(--section-py) 0;
-  background: linear-gradient(to bottom, var(--ghost) 0%, var(--forge) 100%);
-  position: relative;
+  background: linear-gradient(180deg, var(--forge) 0%, var(--ghost) 12%, var(--ghost) 88%, var(--forge) 100%);  position: relative;
 }
 
 .faq-page-body::before {

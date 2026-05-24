@@ -753,7 +753,7 @@
 
 .extras-card__title {
   font-family: var(--font-head);
-  font-size: 1rem;
+  font-size: 1.05rem;
   font-weight: 700;
   letter-spacing: -0.02em;
   color: var(--blade);
@@ -763,9 +763,9 @@
 }
 
 .extras-card__desc {
-  font-size: 0.82rem;
+  font-size: 1.15rem;
   color: var(--steel);
-  line-height: 1.45;
+  line-height: 1.5;
   white-space: normal;
 }
 
@@ -1138,9 +1138,9 @@
 }
 
 .svc-hs__card-desc {
-  color: var(--steel);
-  font-size: clamp(0.8rem, 1vw, 0.9rem);
-  line-height: 1.65;
+  color: var(--spark);
+  font-size: clamp(1.02rem, 1.15vw, 1rem);
+  line-height: 1.7;
   margin-bottom: 1rem;
 }
 
@@ -1155,8 +1155,8 @@
   display: flex;
   gap: 0.5rem;
   padding: 0.3rem 0;
-  font-size: clamp(0.72rem, 0.9vw, 0.8rem);
-  color: var(--steel);
+  font-size: clamp(0.9rem, 0.9vw, 0.8rem);
+  color: var(--);
   border-bottom: 1px solid rgba(255, 255, 255, 0.04);
   align-items: flex-start;
 }
@@ -1355,23 +1355,41 @@
   margin-top: 0;
 }
 
-/* "Ver todo" link button */
+/* "Ver todo" button */
 .specs-link-btn {
-  display: block;
-  width: 100%;
-  text-align: right;
-  background: none;
-  border: none;
-  padding: 0.25rem 0;
-  margin-bottom: 0.4rem;
-  font-size: 0.8rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  align-self: flex-start;
+  background: transparent;
+  border: 1px solid rgba(255, 0, 128, 0.4);
+  padding: 0.45rem 1rem;
+  border-radius: 5px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
   color: var(--edge);
-  text-decoration: underline;
-  text-underline-offset: 3px;
   cursor: pointer;
-  transition: opacity var(--t-fast);
+  text-decoration: none;
+  transition: background var(--t-fast), border-color var(--t-fast), box-shadow var(--t-fast);
+  margin-bottom: 0.5rem;
+  white-space: nowrap;
+}
+
+.specs-link-btn::after {
+  content: '→';
+  font-size: 0.9em;
+  transition: transform var(--t-fast);
 }
 
 .specs-link-btn:hover {
-  opacity: 0.75;
+  background: rgba(255, 0, 128, 0.08);
+  border-color: var(--edge);
+  box-shadow: 0 0 10px rgba(255, 0, 128, 0.18);
+}
+
+.specs-link-btn:hover::after {
+  transform: translateX(3px);
 }
