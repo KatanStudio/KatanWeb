@@ -232,7 +232,7 @@
 }
 
 .module-flip:hover .module__inner,
-.module-flip:focus-within .module__inner {
+.module-flip.is-flipped .module__inner {
   transform: rotateY(180deg);
 }
 
@@ -250,6 +250,7 @@
   gap: 0.75rem;
   transition: border-color var(--t-mid);
   min-height: 220px;
+  position: relative;
 }
 
 .module__front {
@@ -265,9 +266,9 @@
 }
 
 .module-flip:hover .module__front,
-.module-flip:focus-within .module__front,
+.module-flip.is-flipped .module__front,
 .module-flip:hover .module__back,
-.module-flip:focus-within .module__back {
+.module-flip.is-flipped .module__back {
   border-color: rgba(255, 0, 128, 0.4);
 }
 
@@ -277,10 +278,21 @@
 }
 
 .module-flip--cyan:hover .module__front,
-.module-flip--cyan:focus-within .module__front,
+.module-flip--cyan.is-flipped .module__front,
 .module-flip--cyan:hover .module__back,
-.module-flip--cyan:focus-within .module__back {
+.module-flip--cyan.is-flipped .module__back {
   border-color: rgba(0, 229, 255, 0.6);
+}
+
+.module__flip-hint {
+  position: absolute;
+  top: 0.65rem;
+  right: 0.75rem;
+  font-size: 0.8rem;
+  color: var(--steel);
+  opacity: 0.45;
+  pointer-events: none;
+  user-select: none;
 }
 
 .module__front .module__price,

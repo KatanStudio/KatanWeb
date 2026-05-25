@@ -9,6 +9,20 @@ import { ProcesoSection } from './Proceso.jsx'
 import { FaqSection } from './Faq.jsx'
 import { ContactoSection } from './Contacto.jsx'
 
+// ─── FlipCard helper ─────────────────────────────────────────────────────────
+function FlipCard({ children, className, ...props }) {
+  const [flipped, setFlipped] = useState(false)
+  return (
+    <AnimFade
+      className={`${className || ''} ${flipped ? 'is-flipped' : ''}`}
+      onClick={() => setFlipped(f => !f)}
+      {...props}
+    >
+      {children}
+    </AnimFade>
+  )
+}
+
 // ─── AnimFade helper ─────────────────────────────────────────────────────────
 function AnimFade({ children, className, ...props }) {
   const ref = useRef(null)
@@ -181,13 +195,15 @@ export default function MainPage() {
             </header>
 
             <div className="modules-grid">
-              <AnimFade className="module-flip" tabIndex={0}>
+              <FlipCard className="module-flip">
                 <div className="module__inner">
                   <div className="module__front">
+                    <span className="module__flip-hint">↻</span>
                     <span className="module__price">01</span>
                     <h3 className="module__title">Velocidad extrema.</h3>
                   </div>
                   <div className="module__back">
+                    <span className="module__flip-hint">↺</span>
                     <span className="module__price">01</span>
                     <h3 className="module__title">Velocidad extrema.</h3>
                     <p className="module__desc">
@@ -197,15 +213,17 @@ export default function MainPage() {
                     </p>
                   </div>
                 </div>
-              </AnimFade>
+              </FlipCard>
 
-              <AnimFade className="module-flip module-flip--cyan" tabIndex={0}>
+              <FlipCard className="module-flip module-flip--cyan">
                 <div className="module__inner">
                   <div className="module__front">
+                    <span className="module__flip-hint">↻</span>
                     <span className="module__price">02</span>
                     <h3 className="module__title">Código propio.</h3>
                   </div>
                   <div className="module__back">
+                    <span className="module__flip-hint">↺</span>
                     <span className="module__price">02</span>
                     <h3 className="module__title">Código propio.</h3>
                     <p className="module__desc">
@@ -213,15 +231,17 @@ export default function MainPage() {
                     </p>
                   </div>
                 </div>
-              </AnimFade>
+              </FlipCard>
 
-              <AnimFade className="module-flip" tabIndex={0}>
+              <FlipCard className="module-flip">
                 <div className="module__inner">
                   <div className="module__front">
+                    <span className="module__flip-hint">↻</span>
                     <span className="module__price">03</span>
                     <h3 className="module__title">Cero burocracia.</h3>
                   </div>
                   <div className="module__back">
+                    <span className="module__flip-hint">↺</span>
                     <span className="module__price">03</span>
                     <h3 className="module__title">Cero burocracia.</h3>
                     <p className="module__desc">
@@ -229,7 +249,7 @@ export default function MainPage() {
                     </p>
                   </div>
                 </div>
-              </AnimFade>
+              </FlipCard>
             </div>
 
             <div style={{ marginTop: '3.5rem', display: 'flex', justifyContent: 'flex-end' }}>
