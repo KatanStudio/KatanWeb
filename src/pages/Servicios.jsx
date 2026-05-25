@@ -698,7 +698,7 @@ function ServiceSwitcher() {
             ))}
           </ul>
 
-          <button className="specs-link-btn" onClick={() => setSpecsCol(active)}>Ver todo</button>
+          <button className="specs-link-btn" onClick={() => setSpecsCol(active)}>Especificaciones</button>
 
           {/* Footer aquí también para móvil (en desktop se oculta via CSS) */}
           <div className="svc-sw__footer svc-sw__footer--mobile">
@@ -872,7 +872,7 @@ function ServiciosHorizontal() {
                       <li key={fi}>{f}</li>
                     ))}
                   </ul>
-                  <button className="specs-link-btn" onClick={() => setSpecsCol(idx)}>Ver todo</button>
+                  <button className="specs-link-btn" onClick={() => setSpecsCol(idx)}>Especificaciones</button>
                   <div className="svc-hs__card-footer">
                     <div>
                       <span className="svc-hs__card-price">{svc.price}</span>

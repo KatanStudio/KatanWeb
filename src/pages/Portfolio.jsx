@@ -105,7 +105,7 @@ export function PortfolioSection() {
       <div className="container">
         <header className="section__header" style={{ textAlign: 'center' }}>
           <p className="section-label" style={{ justifyContent: 'center' }}>
-            <span style={{ flex: 0, marginRight: '1rem' }}>/Portfolio</span>
+            <span style={{ flex: 0, marginRight: '1rem' }}>/Proyectos</span>
           </p>
           <h2 className="section__h2" style={{ textTransform: 'none' }}>Nuestros <span className="accent"> clientes.</span></h2>
           <p className="section__sub" style={{ margin: '1rem auto 0' }}>
@@ -243,7 +243,7 @@ export default function Portfolio() {
           <div className="container">
             <header className="section__header" style={{ textAlign: 'center' }}>
               <p className="section-label" style={{ justifyContent: 'center' }}>
-                <span style={{ flex: 0, marginRight: '1rem' }}>/Portfolio</span>
+                <span style={{ flex: 0, marginRight: '1rem' }}>/Proyectos</span>
               </p>
               <h2 className="section__h2" style={{ textTransform: 'none' }}>Nuestros <span className="accent"> clientes.</span></h2>
               <p className="section__sub" style={{ margin: '1rem auto 0' }}>
