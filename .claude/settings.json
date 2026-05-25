@@ -11,7 +11,14 @@
       "Bash(git checkout *)",
       "Bash(git add *)",
       "Bash(node -e \"const p = require\\('./package.json'\\); console.log\\(JSON.stringify\\({...p.dependencies, ...p.devDependencies}, null, 2\\)\\)\")",
-      "Bash(npm install *)"
+      "Bash(npm install *)",
+      "Bash(Get-ChildItem -Recurse \"c:\\\\Users\\\\User\\\\Desktop\\\\Proyectos\\\\Katan\\\\Web Katan\\\\KatanWeb\\\\public\\\\img\" -File)",
+      "Bash(Select-Object FullName, Extension)",
+      "Bash(ffmpeg -version)",
+      "Bash(magick -version)",
+      "Bash(cwebp -version)",
+      "Bash(node -e \"require\\('sharp'\\)\")",
+      "Bash(node -e ' *)"
     ]
   }
 }
