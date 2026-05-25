@@ -100,7 +100,7 @@
 
 /* Hamburger */
 .nav__hamburger {
-  display: flex;
+  display: none;
   flex-direction: row;
   align-items: center;
   gap: 8px;
@@ -206,7 +206,7 @@
 }
 
 /* ─────────────────────────────────────────
-   MOBILE TOP BAR + TAB BAR  (≤ 767px)
+   MOBILE TOP BAR + TAB BAR  (≤ 1382px)
 ───────────────────────────────────────── */
 .nav--mobile-top {
   display: none;
@@ -221,8 +221,8 @@
   display: none;
 }
 
-@media (max-width: 767px) {
-  /* Ocultar nav de escritorio/tablet */
+@media (max-width: 1382px) {
+  /* Ocultar nav de escritorio */
   .nav:not(.nav--mobile-top) {
     display: none;
   }

@@ -4,9 +4,10 @@ export default function Loader() {
   const [phase, setPhase] = useState('enter')  // enter → visible → exit → done
 
   useEffect(() => {
-    const t1 = setTimeout(() => setPhase('exit'), 1800)
-    const t2 = setTimeout(() => setPhase('done'), 2500)
-    return () => { clearTimeout(t1); clearTimeout(t2) }
+    const t0 = setTimeout(() => setPhase('visible'), 80)
+    const t1 = setTimeout(() => setPhase('exit'), 2000)
+    const t2 = setTimeout(() => setPhase('done'), 2800)
+    return () => { clearTimeout(t0); clearTimeout(t1); clearTimeout(t2) }
   }, [])
 
   if (phase === 'done') return null

@@ -18,24 +18,59 @@ import Footer from '../components/Footer.jsx'
 const LandingDemo = memo(function LandingDemo() {
   return (
     <svg viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid slice" width="100%" height="100%" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <rect width="1200" height="600" fill="#07070F" />
       <defs>
         <pattern id="sw-grid" x="0" y="0" width="32" height="32" patternUnits="userSpaceOnUse">
-          <circle cx="1" cy="1" r="1" fill="#1A1A28" />
+          <circle cx="1" cy="1" r="1.2" fill="#1E1E30" />
         </pattern>
+        <linearGradient id="ld-hero-grad" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stopColor="#FF0080" stopOpacity="0.18" />
+          <stop offset="100%" stopColor="#00E5FF" stopOpacity="0.07" />
+        </linearGradient>
       </defs>
+      <rect width="1200" height="600" fill="#07070F" />
       <rect width="1200" height="600" fill="url(#sw-grid)" />
-      <circle cx="600" cy="300" r="400" fill="#FF0080" fillOpacity="0.05" />
-      <circle cx="600" cy="300" r="200" fill="#FF0080" fillOpacity="0.08" />
-      <rect x="150" y="60" width="900" height="50" rx="6" fill="#0B0B16" stroke="#1E1E2A" />
-      <rect x="180" y="80" width="40" height="10" rx="2" fill="#FF0080" />
-      <rect x="940" y="75" width="80" height="20" rx="4" fill="#FF0080" fillOpacity="0.8" />
-      <rect x="350" y="190" width="500" height="50" rx="4" fill="#16162A" />
-      <rect x="410" y="260" width="380" height="24" rx="4" fill="#16162A" />
-      <rect x="510" y="340" width="180" height="44" rx="4" fill="#FF0080" fillOpacity="0.85" />
-      <rect x="200" y="430" width="240" height="100" rx="4" fill="#0E0E1C" stroke="#1E1E2A" />
-      <rect x="480" y="430" width="240" height="100" rx="4" fill="#0E0E1C" stroke="#1E1E2A" />
-      <rect x="760" y="430" width="240" height="100" rx="4" fill="#0E0E1C" stroke="#1E1E2A" />
+      {/* Glow */}
+      <circle cx="650" cy="260" r="380" fill="#FF0080" fillOpacity="0.1" />
+      <circle cx="650" cy="260" r="200" fill="#FF0080" fillOpacity="0.12" />
+      {/* Nav */}
+      <rect x="80" y="42" width="1040" height="52" rx="6" fill="#0D0D1C" stroke="#252538" />
+      <rect x="106" y="60" width="32" height="16" rx="3" fill="#FF0080" />
+      <rect x="158" y="64" width="56" height="8" rx="2" fill="#252540" />
+      <rect x="230" y="64" width="62" height="8" rx="2" fill="#252540" />
+      <rect x="308" y="64" width="50" height="8" rx="2" fill="#252540" />
+      <rect x="374" y="64" width="58" height="8" rx="2" fill="#252540" />
+      <rect x="1010" y="56" width="88" height="24" rx="4" fill="#FF0080" fillOpacity="0.92" />
+      {/* Hero text left */}
+      <rect x="80" y="138" width="490" height="42" rx="4" fill="#252540" />
+      <rect x="80" y="192" width="440" height="36" rx="4" fill="#1E1E30" />
+      <rect x="80" y="244" width="340" height="16" rx="3" fill="#1A1A28" />
+      <rect x="80" y="270" width="300" height="14" rx="3" fill="#1A1A28" />
+      <rect x="80" y="308" width="164" height="44" rx="5" fill="#FF0080" fillOpacity="0.92" />
+      <rect x="260" y="308" width="140" height="44" rx="5" fill="none" stroke="#FF0080" strokeOpacity="0.45" strokeWidth="1.5" />
+      {/* Hero right: image block */}
+      <rect x="640" y="118" width="500" height="330" rx="10" fill="#0D0D1A" stroke="#252538" />
+      <rect x="640" y="118" width="500" height="330" rx="10" fill="url(#ld-hero-grad)" />
+      <rect x="670" y="152" width="200" height="22" rx="3" fill="#252540" />
+      <rect x="670" y="184" width="150" height="12" rx="2" fill="#1A1A28" />
+      <rect x="670" y="208" width="120" height="12" rx="2" fill="#1A1A28" />
+      <rect x="670" y="240" width="96" height="28" rx="4" fill="#FF0080" fillOpacity="0.85" />
+      <rect x="890" y="148" width="216" height="280" rx="14" fill="#0B0B18" stroke="#252535" strokeWidth="1.5" />
+      <rect x="904" y="176" width="188" height="220" rx="6" fill="#0F0F1E" />
+      <rect x="914" y="192" width="110" height="10" rx="2" fill="#FF0080" fillOpacity="0.7" />
+      <rect x="914" y="212" width="140" height="8" rx="2" fill="#1E1E2A" />
+      <rect x="914" y="232" width="110" height="8" rx="2" fill="#1E1E2A" />
+      <rect x="914" y="258" width="76" height="22" rx="3" fill="#FF0080" fillOpacity="0.8" />
+      {/* Stats strip */}
+      <rect x="80" y="476" width="1040" height="1" fill="#1E1E2A" />
+      <rect x="80" y="492" width="200" height="70" rx="5" fill="#0D0D1C" stroke="#1E1E2A" />
+      <rect x="102" y="508" width="72" height="16" rx="2" fill="#FF0080" fillOpacity="0.8" />
+      <rect x="102" y="534" width="96" height="8" rx="2" fill="#1A1A28" />
+      <rect x="300" y="492" width="200" height="70" rx="5" fill="#0D0D1C" stroke="#1E1E2A" />
+      <rect x="322" y="508" width="72" height="16" rx="2" fill="#00E5FF" fillOpacity="0.65" />
+      <rect x="322" y="534" width="96" height="8" rx="2" fill="#1A1A28" />
+      <rect x="520" y="492" width="200" height="70" rx="5" fill="#0D0D1C" stroke="#1E1E2A" />
+      <rect x="542" y="508" width="72" height="16" rx="2" fill="#FF0080" fillOpacity="0.65" />
+      <rect x="542" y="534" width="96" height="8" rx="2" fill="#1A1A28" />
     </svg>
   )
 })
@@ -45,16 +80,51 @@ const CorporativaDemo = memo(function CorporativaDemo() {
     <svg viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid slice" width="100%" height="100%" fill="none" xmlns="http://www.w3.org/2000/svg">
       <rect width="1200" height="600" fill="#07070F" />
       <rect width="1200" height="600" fill="url(#sw-grid)" />
-      <circle cx="300" cy="400" r="350" fill="#00E5FF" fillOpacity="0.03" />
-      <circle cx="900" cy="200" r="350" fill="#FF0080" fillOpacity="0.04" />
-      <rect x="150" y="60" width="900" height="50" rx="6" fill="#0B0B16" stroke="#1E1E2A" />
-      <rect x="155" y="155" width="420" height="36" rx="4" fill="#16162A" />
-      <rect x="155" y="208" width="220" height="18" rx="4" fill="#16162A" />
-      <rect x="155" y="238" width="160" height="18" rx="4" fill="#16162A" />
-      <rect x="155" y="280" width="120" height="36" rx="4" fill="#FF0080" fillOpacity="0.8" />
-      <rect x="155" y="340" width="290" height="200" rx="6" fill="#0E0E1C" stroke="#1E1E2A" />
-      <rect x="465" y="340" width="290" height="200" rx="6" fill="#0E0E1C" stroke="#00E5FF" strokeOpacity="0.3" />
-      <rect x="775" y="340" width="270" height="200" rx="6" fill="#0E0E1C" stroke="#1E1E2A" />
+      <circle cx="240" cy="420" r="320" fill="#00E5FF" fillOpacity="0.06" />
+      <circle cx="900" cy="180" r="300" fill="#FF0080" fillOpacity="0.07" />
+      {/* Nav with multiple items */}
+      <rect x="80" y="42" width="1040" height="52" rx="6" fill="#0D0D1C" stroke="#252538" />
+      <rect x="106" y="60" width="32" height="16" rx="3" fill="#FF0080" />
+      <rect x="158" y="63" width="54" height="8" rx="2" fill="#252540" />
+      <rect x="228" y="63" width="62" height="8" rx="2" fill="#252540" />
+      <rect x="306" y="63" width="48" height="8" rx="2" fill="#252540" />
+      <rect x="370" y="63" width="66" height="8" rx="2" fill="#252540" />
+      <rect x="452" y="63" width="54" height="8" rx="2" fill="#252540" />
+      <rect x="1010" y="56" width="88" height="24" rx="4" fill="#FF0080" fillOpacity="0.9" />
+      {/* Hero left text */}
+      <rect x="80" y="136" width="460" height="40" rx="4" fill="#252540" />
+      <rect x="80" y="186" width="380" height="26" rx="4" fill="#1E1E30" />
+      <rect x="80" y="228" width="340" height="12" rx="3" fill="#1A1A28" />
+      <rect x="80" y="250" width="300" height="12" rx="3" fill="#1A1A28" />
+      <rect x="80" y="280" width="130" height="38" rx="4" fill="#FF0080" fillOpacity="0.9" />
+      <rect x="226" y="280" width="130" height="38" rx="4" fill="none" stroke="#252540" strokeWidth="1.5" />
+      {/* Hero right image */}
+      <rect x="620" y="118" width="520" height="240" rx="8" fill="#0D0D1A" stroke="#252538" />
+      <rect x="640" y="138" width="200" height="22" rx="3" fill="#252540" />
+      <rect x="640" y="170" width="260" height="12" rx="2" fill="#1A1A28" />
+      <rect x="640" y="192" width="220" height="12" rx="2" fill="#1A1A28" />
+      <rect x="640" y="220" width="200" height="100" rx="6" fill="#1A1A28" stroke="#252538" />
+      <rect x="860" y="138" width="248" height="200" rx="6" fill="#0B0B18" stroke="#252538" />
+      <rect x="876" y="155" width="160" height="12" rx="2" fill="#252540" />
+      <rect x="876" y="176" width="200" height="80" rx="4" fill="#1A1A28" />
+      <rect x="876" y="266" width="110" height="12" rx="2" fill="#1A1A28" />
+      <rect x="876" y="286" width="76" height="22" rx="3" fill="#FF0080" fillOpacity="0.75" />
+      {/* Blog posts row */}
+      <rect x="80" y="385" width="333" height="180" rx="8" fill="#0D0D1C" stroke="#252538" />
+      <rect x="80" y="385" width="333" height="80" rx="8" fill="#1A1A28" />
+      <rect x="100" y="476" width="160" height="12" rx="2" fill="#252540" />
+      <rect x="100" y="498" width="200" height="8" rx="2" fill="#1A1A28" />
+      <rect x="100" y="514" width="160" height="8" rx="2" fill="#1A1A28" />
+      <rect x="432" y="385" width="333" height="180" rx="8" fill="#0D0D1C" stroke="#00E5FF" strokeOpacity="0.3" />
+      <rect x="432" y="385" width="333" height="80" rx="8" fill="#1A1A28" />
+      <rect x="452" y="476" width="160" height="12" rx="2" fill="#252540" />
+      <rect x="452" y="498" width="200" height="8" rx="2" fill="#1A1A28" />
+      <rect x="452" y="514" width="160" height="8" rx="2" fill="#1A1A28" />
+      <rect x="784" y="385" width="336" height="180" rx="8" fill="#0D0D1C" stroke="#252538" />
+      <rect x="784" y="385" width="336" height="80" rx="8" fill="#1A1A28" />
+      <rect x="804" y="476" width="160" height="12" rx="2" fill="#252540" />
+      <rect x="804" y="498" width="200" height="8" rx="2" fill="#1A1A28" />
+      <rect x="804" y="514" width="160" height="8" rx="2" fill="#1A1A28" />
     </svg>
   )
 })
@@ -64,38 +134,116 @@ const EcommerceDemo = memo(function EcommerceDemo() {
     <svg viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid slice" width="100%" height="100%" fill="none" xmlns="http://www.w3.org/2000/svg">
       <rect width="1200" height="600" fill="#07070F" />
       <rect width="1200" height="600" fill="url(#sw-grid)" />
-      <circle cx="700" cy="300" r="420" fill="#FF0080" fillOpacity="0.04" />
-      <rect x="150" y="60" width="900" height="50" rx="6" fill="#0B0B16" stroke="#1E1E2A" />
-      <rect x="850" y="75" width="120" height="20" rx="4" fill="#16162A" />
-      {/* ── Carrito de la compra ── */}
-      <g stroke="#FF0080" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" fill="none">
-        <path d="M 996 75 h 5 l 4 13 h 14 l 3 -9.5 h -18" />
-        <circle cx="1007" cy="94" r="2.5" fill="#FF0080" stroke="none" />
-        <circle cx="1018" cy="94" r="2.5" fill="#FF0080" stroke="none" />
-      </g>      {/* Sidebar */}
-      <rect x="150" y="130" width="190" height="420" rx="6" fill="#0B0B16" stroke="#1E1E2A" />
-      <rect x="172" y="158" width="130" height="10" rx="2" fill="#16162A" />
-      <rect x="172" y="180" width="100" height="8" rx="2" fill="#16162A" />
-      <rect x="172" y="200" width="115" height="8" rx="2" fill="#16162A" />
-      <rect x="172" y="220" width="90" height="8" rx="2" fill="#16162A" />
-      {/* Product grid */}
-      <rect x="360" y="130" width="200" height="240" rx="6" fill="#0E0E1C" stroke="#1E1E2A" />
-      <rect x="580" y="130" width="200" height="240" rx="6" fill="#0E0E1C" stroke="#FF0080" strokeOpacity="0.4" />
-      <rect x="800" y="130" width="200" height="240" rx="6" fill="#0E0E1C" stroke="#1E1E2A" />
-      <rect x="360" y="390" width="200" height="160" rx="6" fill="#0E0E1C" stroke="#1E1E2A" />
-      <rect x="580" y="390" width="200" height="160" rx="6" fill="#0E0E1C" stroke="#1E1E2A" />
-      <rect x="800" y="390" width="200" height="160" rx="6" fill="#0E0E1C" stroke="#1E1E2A" />
+      <circle cx="750" cy="300" r="380" fill="#FF0080" fillOpacity="0.07" />
+      {/* Nav */}
+      <rect x="80" y="42" width="1040" height="52" rx="6" fill="#0D0D1C" stroke="#252538" />
+      <rect x="106" y="60" width="32" height="16" rx="3" fill="#FF0080" />
+      <rect x="160" y="64" width="52" height="8" rx="2" fill="#252540" />
+      <rect x="228" y="64" width="60" height="8" rx="2" fill="#252540" />
+      {/* Search bar */}
+      <rect x="440" y="56" width="320" height="26" rx="13" fill="#0B0B18" stroke="#252538" />
+      <rect x="460" y="65" width="100" height="8" rx="2" fill="#1A1A28" />
+      {/* Cart icon with badge */}
+      <g stroke="#FF0080" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" fill="none">
+        <path d="M 1024 62 h 5 l 5 14 h 16 l 4 -10 h -21" />
+        <circle cx="1036" cy="82" r="3" fill="#FF0080" stroke="none" />
+        <circle cx="1048" cy="82" r="3" fill="#FF0080" stroke="none" />
+      </g>
+      <circle cx="1050" cy="63" r="8" fill="#FF0080" />
+      <text x="1050" y="67" textAnchor="middle" fill="#000" fontSize="9" fontWeight="bold">3</text>
+      <rect x="1070" y="56" width="36" height="26" rx="4" fill="none" stroke="#252538" />
+      {/* Sidebar filters */}
+      <rect x="80" y="116" width="195" height="440" rx="6" fill="#0D0D1C" stroke="#252538" />
+      <rect x="100" y="136" width="100" height="10" rx="2" fill="#252540" />
+      <rect x="100" y="162" width="80" height="8" rx="2" fill="#1A1A28" />
+      <rect x="100" y="180" width="95" height="8" rx="2" fill="#1A1A28" />
+      <rect x="100" y="198" width="75" height="8" rx="2" fill="#1A1A28" />
+      <rect x="100" y="216" width="88" height="8" rx="2" fill="#1A1A28" />
+      <rect x="100" y="250" width="100" height="10" rx="2" fill="#252540" />
+      {/* Price range slider */}
+      <rect x="100" y="278" width="155" height="3" rx="2" fill="#1E1E2A" />
+      <rect x="100" y="278" width="90" height="3" rx="2" fill="#FF0080" fillOpacity="0.8" />
+      <circle cx="190" cy="280" r="5" fill="#FF0080" />
+      {/* Product grid: 3 cols × 2 rows */}
+      {[0, 1, 2].map(col => (
+        <g key={`top-${col}`}>
+          <rect x={292 + col * 306} y={116} width={292} height={230} rx="6" fill="#0D0D1C" stroke={col === 1 ? '#FF0080' : '#252538'} strokeOpacity={col === 1 ? 0.5 : 1} />
+          {/* product image area */}
+          <rect x={292 + col * 306} y={116} width={292} height={138} rx="6" fill={col === 1 ? 'rgba(255,0,128,0.12)' : '#111120'} />
+          {/* product title */}
+          <rect x={310 + col * 306} y={268} width={160} height={10} rx="2" fill="#252540" />
+          {/* price */}
+          <rect x={310 + col * 306} y={288} width={80} height={12} rx="2" fill="#FF0080" fillOpacity="0.8" />
+          {/* add to cart */}
+          <rect x={310 + col * 306} y={314} width={120} height={24} rx="4" fill={col === 1 ? '#FF0080' : 'none'} fillOpacity={col === 1 ? 0.85 : 0} stroke={col === 1 ? 'none' : '#252538'} />
+        </g>
+      ))}
+      {[0, 1, 2].map(col => (
+        <g key={`bot-${col}`}>
+          <rect x={292 + col * 306} y={362} width={292} height={194} rx="6" fill="#0D0D1C" stroke="#252538" />
+          <rect x={292 + col * 306} y={362} width={292} height={108} rx="6" fill="#111120" />
+          <rect x={310 + col * 306} y={484} width={140} height={10} rx="2" fill="#252540" />
+          <rect x={310 + col * 306} y={504} width={70} height={10} rx="2" fill="#FF0080" fillOpacity="0.7" />
+          <rect x={310 + col * 306} y={526} width={110} height={22} rx="4" fill="none" stroke="#252538" />
+        </g>
+      ))}
     </svg>
   )
 })
+
+// Auto-discover service images from public/img/<folder>/.
+// Drop any image into the folder and it appears in that service's carousel.
+const _IMGS = import.meta.glob(
+  '/public/img/{landing,corporativa,ecommerce,app}/*.{png,jpg,jpeg,webp,PNG,JPG,JPEG,WEBP}',
+  { eager: true, as: 'url' }
+)
+
+function slidesInFolder(folder) {
+  return Object.entries(_IMGS)
+    .filter(([key]) => key.includes(`/img/${folder}/`))
+    .sort(([a], [b]) => a.localeCompare(b))
+    .map(([, url]) => url)
+}
+
+function ServiceCarousel({ slides, fallback = null }) {
+  const [idx, setIdx] = useState(0)
+  useEffect(() => {
+    if (slides.length <= 1) return
+    const t = setInterval(() => setIdx(i => (i + 1) % slides.length), 3200)
+    return () => clearInterval(t)
+  }, [slides.length])
+  if (!slides.length) return fallback
+  return (
+    <div style={{ position: 'absolute', inset: 0, overflow: 'hidden' }}>
+      {slides.map((src, i) => (
+        <img
+          key={src}
+          src={src}
+          alt=""
+          aria-hidden="true"
+          style={{
+            position: 'absolute',
+            inset: 0,
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            objectPosition: 'center top',
+            opacity: i === idx ? 1 : 0,
+            transition: 'opacity 0.9s ease',
+          }}
+        />
+      ))}
+    </div>
+  )
+}
 
 const AppDemo = memo(function AppDemo() {
   return (
     <svg viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid slice" width="100%" height="100%" fill="none" xmlns="http://www.w3.org/2000/svg">
       <rect width="1200" height="600" fill="#07070F" />
       <rect width="1200" height="600" fill="url(#sw-grid)" />
-      <circle cx="600" cy="300" r="400" fill="#FF0080" fillOpacity="0.04" />
-      <circle cx="600" cy="300" r="180" fill="#FF0080" fillOpacity="0.04" />
+      <circle cx="600" cy="300" r="400" fill="#FF0080" fillOpacity="0.09" />
+      <circle cx="600" cy="300" r="180" fill="#FF0080" fillOpacity="0.1" />
       {/* ── Panel izquierdo: admin/backend ── */}
       <rect x="50" y="80" width="320" height="60" rx="6" fill="#0B0B16" stroke="#1E1E2A" />
       <rect x="70" y="98" width="80" height="10" rx="3" fill="#16162A" />
@@ -187,7 +335,7 @@ const SERVICES = [
       'Alta velocidad, tu página carga en un pestañeo.', 
       '2 ronda de revisiones correctivas.', //añadir enlace a FAQ ppara explicar la diferencia entre correctivas y evolutivas
     ],
-    demo: <LandingDemo />,
+    demo: <ServiceCarousel slides={slidesInFolder('landing')} fallback={<LandingDemo />} />,
   },
   {
     id: 'corporativa',
@@ -205,7 +353,7 @@ const SERVICES = [
       'Alta velocidad, sin importar la cantidad de contenido.',
       '3 rondas de revisiones correctivas.',
     ],
-    demo: <CorporativaDemo />,
+    demo: <ServiceCarousel slides={slidesInFolder('corporativa')} fallback={<CorporativaDemo />} />,
   },
   {
     id: 'ecommerce',
@@ -222,7 +370,7 @@ const SERVICES = [
       'Emails automatizados.',
       '5 rondas de revisiones correctivas.',
     ],
-    demo: <EcommerceDemo />,
+    demo: <ServiceCarousel slides={slidesInFolder('ecommerce')} fallback={<EcommerceDemo />} />,
   },
   {
     id: 'app',
@@ -239,7 +387,7 @@ const SERVICES = [
       'Integración con pasarelas de pago (Stripe).',
       '5 rondas de revisiones correctivas.',
     ],
-    demo: <AppDemo />,
+    demo: <ServiceCarousel slides={slidesInFolder('app')} fallback={<AppDemo />} />,
   },
 ]
 
@@ -550,7 +698,7 @@ function ServiceSwitcher() {
             ))}
           </ul>
 
-          <button className="specs-link-btn" onClick={() => setSpecsCol(active)}>Ver todo</button>
+          <button className="specs-link-btn" onClick={() => setSpecsCol(active)}>Especificaciones</button>
 
           {/* Footer aquí también para móvil (en desktop se oculta via CSS) */}
           <div className="svc-sw__footer svc-sw__footer--mobile">
@@ -724,7 +872,7 @@ function ServiciosHorizontal() {
                       <li key={fi}>{f}</li>
                     ))}
                   </ul>
-                  <button className="specs-link-btn" onClick={() => setSpecsCol(idx)}>Ver todo</button>
+                  <button className="specs-link-btn" onClick={() => setSpecsCol(idx)}>Especificaciones</button>
                   <div className="svc-hs__card-footer">
                     <div>
                       <span className="svc-hs__card-price">{svc.price}</span>
