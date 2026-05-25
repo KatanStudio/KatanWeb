@@ -191,16 +191,16 @@ const EcommerceDemo = memo(function EcommerceDemo() {
   )
 })
 
-// Auto-discover service images from public/img/<folder>/.
-// Drop any image into the folder and it appears in that service's carousel.
+// Auto-discover service images from src/assets/img/<folder>/.
+// Drop any .webp into the folder and it appears in that service's carousel.
 const _IMGS = import.meta.glob(
-  '/public/img/{landing,corporativa,ecommerce,app}/*.{png,jpg,jpeg,webp,PNG,JPG,JPEG,WEBP}',
-  { eager: true, as: 'url' }
+  '/src/assets/img/{landing,corporativa,ecommerce,app}/*.{webp,png,jpg,jpeg,WEBP,PNG,JPG,JPEG}',
+  { eager: true, query: '?url', import: 'default' }
 )
 
 function slidesInFolder(folder) {
   return Object.entries(_IMGS)
-    .filter(([key]) => key.includes(`/img/${folder}/`))
+    .filter(([key]) => key.includes(`/assets/img/${folder}/`))
     .sort(([a], [b]) => a.localeCompare(b))
     .map(([, url]) => url)
 }

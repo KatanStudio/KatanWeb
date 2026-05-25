@@ -18,7 +18,9 @@
       "Bash(magick -version)",
       "Bash(cwebp -version)",
       "Bash(node -e \"require\\('sharp'\\)\")",
-      "Bash(node -e ' *)"
+      "Bash(node -e ' *)",
+      "Bash(node -e \"const p = require\\('./package.json'\\); console.log\\('vite:', p.devDependencies?.vite || p.dependencies?.vite\\)\")",
+      "Bash(pnpm remove *)"
     ]
   }
 }
