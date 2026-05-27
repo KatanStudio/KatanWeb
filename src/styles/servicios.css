@@ -723,7 +723,8 @@
 /* ── Extras Card ── */
 .extras-card {
   flex-shrink: 0;
-  width: 280px;
+  width: max-content;
+  min-width: 280px;
   padding: 1rem 1.25rem;
   background: var(--forge);
   border: 1px solid var(--ghost);
@@ -757,8 +758,6 @@
   letter-spacing: -0.02em;
   color: var(--blade);
   white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 .extras-card__desc {
@@ -766,6 +765,12 @@
   color: var(--steel);
   line-height: 1.5;
   white-space: normal;
+  width: 0;
+  min-width: 100%;
+  text-align: justify;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+  overflow-wrap: break-word;
 }
 
 /* ── CTA Final ── */
