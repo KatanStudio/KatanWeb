@@ -205,6 +205,63 @@ function slidesInFolder(folder) {
     .map(([, url]) => url)
 }
 
+function BrowserMockup({ children }) {
+  return (
+    <div style={{
+      width: '100%', height: '100%',
+      display: 'flex', flexDirection: 'column',
+      borderRadius: '0.5rem',
+      overflow: 'hidden',
+      boxShadow: '0 8px 32px rgba(0,0,0,0.55), 0 0 0 1px rgba(255,255,255,0.08)',
+    }}>
+      {/* Chrome bar */}
+      <div style={{
+        background: '#0d0d15',
+        height: '2.1rem',
+        display: 'flex',
+        alignItems: 'center',
+        gap: '0.6rem',
+        padding: '0 0.75rem',
+        flexShrink: 0,
+        borderBottom: '1px solid rgba(255,255,255,0.06)',
+      }}>
+        {/* Traffic lights */}
+        <div style={{ display: 'flex', gap: '0.32rem', flexShrink: 0 }}>
+          {[['#FF5F57','#C0342C'],['#FEBC2E','#C49A1A'],['#28C840','#1A9B2F']].map(([bg, ring]) => (
+            <span key={bg} style={{
+              width: '0.65rem', height: '0.65rem', borderRadius: '50%',
+              background: bg, boxShadow: `inset 0 0 0 0.5px ${ring}`, display: 'block',
+            }} />
+          ))}
+        </div>
+        {/* URL bar */}
+        <div style={{
+          flex: 1, height: '1.2rem',
+          background: 'rgba(255,255,255,0.05)',
+          borderRadius: '0.22rem',
+          display: 'flex', alignItems: 'center',
+          padding: '0 0.5rem', gap: '0.35rem',
+          overflow: 'hidden',
+        }}>
+          <svg width="8" height="8" viewBox="0 0 24 24" fill="none"
+            stroke="rgba(255,255,255,0.22)" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+            <rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+          </svg>
+          <span style={{
+            fontSize: '0.58rem', color: 'rgba(255,255,255,0.2)',
+            fontFamily: 'var(--font-mono)', letterSpacing: '0.02em',
+            whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis',
+          }}>katan.studio</span>
+        </div>
+      </div>
+      {/* Viewport */}
+      <div style={{ position: 'relative', flex: 1, overflow: 'hidden' }}>
+        {children}
+      </div>
+    </div>
+  )
+}
+
 function ServiceCarousel({ slides, fallback = null }) {
   const [idx, setIdx] = useState(0)
   useEffect(() => {
@@ -761,9 +818,148 @@ const EXTRAS_ROW_1 = EXTRAS.slice(0, 7)
 const EXTRAS_ROW_2 = EXTRAS.slice(7)
 
 function ExtrasMarquee() {
+  const wrapRef   = useRef(null)
+  const track1Ref = useRef(null)
+  const track2Ref = useRef(null)
+
+  useEffect(() => {
+    const wrap   = wrapRef.current
+    const track1 = track1Ref.current
+    const track2 = track2Ref.current
+    if (!wrap || !track1 || !track2) return
+
+    // Loop distance = X offset of the first item of the second copy.
+    // Computed from offsetLeft so it naturally accounts for gap: 1rem.
+    let loop1 = 0
+    let loop2 = 0
+    const measure = () => {
+      const c1 = track1.children[EXTRAS_ROW_1.length]
+      const c2 = track2.children[EXTRAS_ROW_2.length]
+      loop1 = c1 ? c1.offsetLeft : track1.scrollWidth / 2
+      loop2 = c2 ? c2.offsetLeft : track2.scrollWidth / 2
+    }
+
+    // Physics state
+    let p1 = 0, v1 = 0   // track1: position (px), velocity (px/ms)
+    let p2 = 0, v2 = 0   // track2: position (px), velocity (px/ms)
+
+    // Touch state — activeTrack: null | 1 | 2  (which row is being dragged)
+    let activeTrack = null
+    let horizontal  = false
+    let startX = 0, startY = 0
+    let lastX  = 0, lastT  = 0
+    let touchVel = 0
+
+    let raf = null, prevT = null
+
+    const tick = (now) => {
+      raf = requestAnimationFrame(tick)
+      if (prevT === null) { prevT = now; return }
+      const dt = Math.min(now - prevT, 50)
+      prevT = now
+
+      if (loop1 > 0) {
+        const f = 1 - Math.exp(-0.003 * dt)
+
+        // Run auto physics for each track unless it's the one being dragged horizontally
+        if (activeTrack !== 1 || !horizontal) {
+          v1 += (-(loop1 / 52000) - v1) * f   // track1: leftward,  52 s / cycle
+          p1 += v1 * dt
+          p1 %= loop1; if (p1 > 0) p1 -= loop1
+        }
+
+        if (activeTrack !== 2 || !horizontal) {
+          v2 += (+(loop2 / 48000) - v2) * f   // track2: rightward, 48 s / cycle
+          p2 += v2 * dt
+          p2 %= loop2; if (p2 >= 0) p2 -= loop2
+        }
+      }
+
+      track1.style.transform = `translateX(${p1}px)`
+      track2.style.transform = `translateX(${p2}px)`
+    }
+
+    const onTouchStart = (e) => {
+      // Identify which row the touch started on
+      if      (track1.contains(e.target)) activeTrack = 1
+      else if (track2.contains(e.target)) activeTrack = 2
+      else { activeTrack = null; return }
+
+      horizontal = false
+      startX = lastX = e.touches[0].clientX
+      startY = e.touches[0].clientY
+      lastT  = performance.now()
+      touchVel = 0
+    }
+
+    const onTouchMove = (e) => {
+      if (!activeTrack) return
+      const x = e.touches[0].clientX
+      const y = e.touches[0].clientY
+
+      // Decide direction on first significant movement
+      if (!horizontal) {
+        if (Math.abs(y - startY) > Math.abs(x - startX) + 5) { activeTrack = null; return }
+        if (Math.abs(x - startX) > 5) horizontal = true
+        else return
+      }
+
+      const now = performance.now()
+      const dx  = x - lastX
+      const dt  = now - lastT || 1
+
+      // EMA for smoother velocity estimate
+      touchVel = 0.4 * (dx / dt) + 0.6 * touchVel
+
+      // Move only the touched row
+      if (activeTrack === 1) {
+        p1 += dx
+        if (loop1 > 0) { p1 %= loop1; if (p1 > 0) p1 -= loop1 }
+      } else {
+        p2 += dx
+        if (loop2 > 0) { p2 %= loop2; if (p2 >= 0) p2 -= loop2 }
+      }
+
+      lastX = x
+      lastT = now
+    }
+
+    const onTouchEnd = () => {
+      if (!activeTrack || !horizontal) { activeTrack = null; return }
+      // Drop fling if finger was stationary before lifting
+      const vel = performance.now() - lastT > 100 ? 0 : touchVel
+      if (activeTrack === 1) v1 = vel
+      else                   v2 = vel
+      activeTrack = null
+    }
+
+    const onTouchCancel = () => { activeTrack = null }
+
+    // Initialise: track2 starts at the same visual position as the CSS animation's `from`
+    measure()
+    p2 = loop2 > 0 ? -loop2 : 0
+    track2.style.transform = `translateX(${p2}px)`
+
+    raf = requestAnimationFrame(tick)
+    wrap.addEventListener('touchstart',  onTouchStart,  { passive: true })
+    wrap.addEventListener('touchmove',   onTouchMove,   { passive: true })
+    wrap.addEventListener('touchend',    onTouchEnd,    { passive: true })
+    wrap.addEventListener('touchcancel', onTouchCancel, { passive: true })
+    window.addEventListener('resize', measure)
+
+    return () => {
+      cancelAnimationFrame(raf)
+      wrap.removeEventListener('touchstart',  onTouchStart)
+      wrap.removeEventListener('touchmove',   onTouchMove)
+      wrap.removeEventListener('touchend',    onTouchEnd)
+      wrap.removeEventListener('touchcancel', onTouchCancel)
+      window.removeEventListener('resize', measure)
+    }
+  }, [])
+
   return (
-    <div className="extras-marquee">
-      <div className="extras-marquee__track">
+    <div ref={wrapRef} className="extras-marquee">
+      <div ref={track1Ref} className="extras-marquee__track">
         {[...EXTRAS_ROW_1, ...EXTRAS_ROW_1].map((e, i) => {
           const Icon = e.icon
           return (
@@ -777,7 +973,7 @@ function ExtrasMarquee() {
           )
         })}
       </div>
-      <div className="extras-marquee__track extras-marquee__track--reverse">
+      <div ref={track2Ref} className="extras-marquee__track extras-marquee__track--reverse">
         {[...EXTRAS_ROW_2, ...EXTRAS_ROW_2].map((e, i) => {
           const Icon = e.icon
           return (
@@ -862,27 +1058,24 @@ function ServiciosHorizontal() {
           <div ref={trackRef} className="svc-hs__track">
             {SERVICES.map((svc, idx) => (
               <article key={svc.id} className="svc-hs__card">
+                {/* Fila 1 — texto */}
                 <div className="svc-hs__card-left">
-                  <h3 className="svc-hs__card-title">
-                    <span className="svc-hs__card-num">{svc.num}</span> {svc.label}
-                  </h3>
+                  <span className="svc-hs__card-num">{svc.num}</span>
+                  <h3 className="svc-hs__card-title">{svc.label}</h3>
                   <p className="svc-hs__card-desc">{svc.desc}</p>
-                  <ul className="svc-hs__card-features">
-                    {svc.features.map((f, fi) => (
-                      <li key={fi}>{f}</li>
-                    ))}
-                  </ul>
                   <button className="specs-link-btn" onClick={() => setSpecsCol(idx)}>Especificaciones</button>
-                  <div className="svc-hs__card-footer">
-                    <div>
-                      <span className="svc-hs__card-price">{svc.price}</span>
-                      <span className="svc-hs__card-price-note"> + IVA</span>
-                    </div>
-                    <a href="#contacto" className="btn btn--chamfer">Solicitar →</a>
-                  </div>
                 </div>
+                {/* Fila 2 — imagen 16:9 a sangre */}
                 <div className="svc-hs__card-right" aria-hidden="true">
-                  <div className="svc-hs__card-mockup">{svc.demo}</div>
+                  {svc.demo}
+                </div>
+                {/* Fila 3 — precio + CTA */}
+                <div className="svc-hs__card-footer">
+                  <div>
+                    <span className="svc-hs__card-price">{svc.price}</span>
+                    <span className="svc-hs__card-price-note"> + IVA</span>
+                  </div>
+                  <a href="#contacto" className="btn btn--chamfer">Solicitar →</a>
                 </div>
               </article>
             ))}
