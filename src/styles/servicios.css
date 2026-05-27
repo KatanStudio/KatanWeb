@@ -697,19 +697,18 @@
   gap: 1rem;
   -webkit-mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
   mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+  touch-action: pan-y;
 }
 
 .extras-marquee__track {
   display: flex;
   gap: 1rem;
   width: max-content;
-  animation: scrollExtras 52s linear infinite;
+  will-change: transform;
   align-items: stretch;
 }
 
-.extras-marquee__track--reverse {
-  animation: scrollExtrasReverse 48s linear infinite;
-}
+/* .extras-marquee__track--reverse direction is controlled by the JS RAF loop */
 
 @keyframes scrollExtras {
   from { transform: translateX(0); }
@@ -724,7 +723,8 @@
 /* ── Extras Card ── */
 .extras-card {
   flex-shrink: 0;
-  width: 280px;
+  width: max-content;
+  min-width: 280px;
   padding: 1rem 1.25rem;
   background: var(--forge);
   border: 1px solid var(--ghost);
@@ -758,8 +758,6 @@
   letter-spacing: -0.02em;
   color: var(--blade);
   white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
 }
 
 .extras-card__desc {
@@ -767,6 +765,12 @@
   color: var(--steel);
   line-height: 1.5;
   white-space: normal;
+  width: 0;
+  min-width: 100%;
+  text-align: justify;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+  overflow-wrap: break-word;
 }
 
 /* ── CTA Final ── */
@@ -1103,107 +1107,100 @@
 
 .svc-hs__card {
   flex-shrink: 0;
-  width:57vw;
-  max-width: 1600px;
-  height: calc(100vh - 12rem);
+  width: 76vw;
+  max-width: 1200px;
+  height: calc(100vh - 14rem);
   max-height: 580px;
-  min-height: 320px;
+  min-height: 400px;
   background: var(--ghost);
   border: 1px solid rgba(255, 255, 255, 0.07);
   border-radius: 1.25rem;
-  display: grid;
-  grid-template-columns: 40% 60%;
   overflow: hidden;
+  position: relative;
+  display: grid;
+  grid-template-columns: 34% 1fr;
+  grid-template-rows: 1fr auto;
+  grid-template-areas:
+    "left right"
+    "footer right";
 }
 
+.svc-hs__card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 34%;
+  width: 1px;
+  background: rgba(255, 255, 255, 0.06);
+  pointer-events: none;
+}
+
+/* ── Columna izquierda: texto ── */
 .svc-hs__card-left {
-  padding: 2rem 1.75rem 1.5rem 2rem;
+  grid-area: left;
+  padding: 2.5rem 2rem 1.5rem;
   display: flex;
   flex-direction: column;
-  overflow-y: auto;
 }
 
 .svc-hs__card-num {
   color: var(--edge);
   font-family: var(--font-mono);
-  letter-spacing: 0.08em;
+  font-size: 0.82rem;
+  letter-spacing: 0.12em;
   font-weight: 600;
   display: block;
-  margin-bottom: 0.3rem;
+  margin-bottom: 0.35rem;
 }
 
 .svc-hs__card-title {
-  font-size: clamp(1.6rem, 3.8vw, 3.6rem);
-  font-weight: 700;
-  margin: 0 0 0.65rem;
-  line-height: 1.1;
+  font-size: clamp(1.6rem, 2.6vw, 2.8rem);
+  font-weight: 900;
+  letter-spacing: -0.03em;
+  line-height: 1.0;
+  margin: 0 0 0.5rem;
+}
+
+.svc-hs__card-desc {
+  color: var(--steel);
+  font-size: clamp(0.8rem, 1vw, 0.92rem);
+  line-height: 1.6;
+  margin-bottom: 0.9rem;
 }
 
 .svc-hs__card-features {
   display: none;
 }
 
-.svc-hs__card-desc {
-  color: var(--spark);
-  font-size: clamp(1rem, 3.0vw, 1.35rem);
-  line-height: 1.7;
-  margin-bottom: 1rem;
+/* ── Columna derecha: imagen — ocupa el alto completo ── */
+.svc-hs__card-right {
+  grid-area: right;
+  position: relative;
+  overflow: hidden;
 }
 
-.svc-hs__card-features {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-}
-
-.svc-hs__card-features li {
-  display: flex;
-  gap: 0.5rem;
-  padding: 0.3rem 0;
-  font-size: clamp(0.78rem, 0.85vw, 0.9rem);
-  color: var(--);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-  align-items: flex-start;
-}
-
-.svc-hs__card-features li::before {
-  content: '→';
-  color: var(--edge);
-  flex-shrink: 0;
-}
-
+/* ── Pie izquierdo: precio + CTA ── */
 .svc-hs__card-footer {
+  grid-area: footer;
   display: flex;
   align-items: center;
-  gap: 1rem;
-  padding-top: 1rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  gap: 0.75rem;
   flex-wrap: wrap;
-  margin-top: auto;
+  padding: 1rem 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .svc-hs__card-price {
-  font-size: 1.1rem;
+  font-size: 1.05rem;
   font-weight: 700;
   color: var(--edge);
 }
 
 .svc-hs__card-price-note {
-  font-size: 0.72rem;
+  font-size: 0.68rem;
   color: var(--steel);
-}
-
-.svc-hs__card-right {
-  position: relative;
-  overflow: hidden;
-  background: var(--sheath);
-  /* diagonal divider: top of seam is shifted right, bottom aligns with grid boundary */
-  clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 10% 100%);
-}
-
-.svc-hs__card-mockup {
-  position: absolute;
-  inset: 0;
+  margin-right: auto;
 }
 
 /* ── Progress bar ── */
@@ -1249,18 +1246,14 @@
 /* ── Laptop (1200–1600px): wider cards + tighter layout ── */
 @media (min-width: 1200px) and (max-width: 1600px) {
   .svc-hs__card {
-    width: 72vw;
-    max-width: 1050px;
-    height: calc(100vh - 13rem);
-    max-height: 560px;
+    width: 84vw;
+    max-width: 1100px;
+    height: calc(100vh - 14rem);
+    max-height: 540px;
   }
 
   .svc-hs__head {
     padding: 3.5rem 5vw 1rem;
-  }
-
-  .svc-hs__card-left {
-    padding: 1.5rem 1.25rem 1.25rem 1.5rem;
   }
 }
 
@@ -1293,54 +1286,48 @@
   }
 
   .svc-hs__card {
+    display: flex;
+    flex-direction: column;
     width: 100%;
     height: auto;
-    max-height: none;
     min-height: 0;
-    grid-template-columns: 1fr 1fr;
+    max-height: none;
     border-radius: 1rem;
   }
 
+  .svc-hs__card::after {
+    display: none;
+  }
+
   .svc-hs__card-left {
-    overflow-y: visible;
+    grid-area: unset;
+    padding: 1.25rem 1.25rem 1rem;
+  }
+
+  .svc-hs__card-right {
+    grid-area: unset;
+    flex: none;
+    aspect-ratio: 16 / 9;
+  }
+
+  .svc-hs__card-footer {
+    grid-area: unset;
+  }
+
+  .svc-hs__card-title {
+    font-size: clamp(1.4rem, 5.5vw, 2.2rem);
+  }
+
+  .svc-hs__card-desc {
+    font-size: clamp(0.8rem, 3vw, 0.92rem);
+  }
+
+  .svc-hs__card-footer {
+    padding: 0.85rem 1.25rem;
   }
 
   .svc-hs__progress {
     padding: 1rem 1.25rem 2rem;
-  }
-}
-
-/* ── Card fluid font scaling on mobile/tablet ── */
-@media (max-width: 1199px) {
-  .svc-hs__card-left {
-    padding: clamp(1rem, 3vw, 2rem) clamp(0.75rem, 2.5vw, 1.75rem) clamp(1rem, 2.5vw, 1.5rem) clamp(1rem, 3vw, 2rem);
-  }
-  .svc-hs__card-title {
-    font-size: clamp(1.1rem, 5vw, 2.5rem);
-    margin-bottom: 0.5rem;
-  }
-  .svc-hs__card-desc {
-    font-size: clamp(0.85rem, 2.8vw, 1.05rem);
-    margin-bottom: 0.75rem;
-    line-height: 1.6;
-  }
-  .svc-hs__card-footer {
-    padding-top: 0.75rem;
-    gap: 0.6rem;
-  }
-  .svc-hs__card-price {
-    font-size: clamp(0.9rem, 3vw, 1.1rem);
-  }
-  .svc-hs__card-price-note {
-    font-size: clamp(0.6rem, 1.5vw, 0.72rem);
-  }
-  .svc-hs__card .specs-link-btn {
-    font-size: clamp(0.6rem, 1.5vw, 0.72rem);
-    padding: 0.35rem 0.75rem;
-  }
-  .svc-hs__card-footer .btn--chamfer {
-    padding: 0.5rem 1rem;
-    font-size: clamp(0.75rem, 2.5vw, 0.95rem);
   }
 }
 
@@ -1410,39 +1397,41 @@
   margin-top: 0;
 }
 
-/* "Ver todo" button */
+/* "Especificaciones" link */
 .specs-link-btn {
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
+  gap: 0.3rem;
   align-self: flex-start;
   background: transparent;
-  border: 1px solid rgba(255, 0, 128, 0.4);
-  padding: 0.45rem 1rem;
-  border-radius: 5px;
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  border: none;
+  padding: 0;
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  font-weight: 500;
+  letter-spacing: 0;
+  text-transform: none;
   color: var(--edge);
   cursor: pointer;
-  text-decoration: none;
-  transition: background var(--t-fast), border-color var(--t-fast), box-shadow var(--t-fast);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-decoration-color: rgba(255, 0, 128, 0.45);
+  transition: color var(--t-fast), text-decoration-color var(--t-fast);
   margin-bottom: 0.5rem;
   white-space: nowrap;
 }
 
 .specs-link-btn::after {
   content: '→';
-  font-size: 0.9em;
+  font-size: 0.85em;
+  display: inline-block;
+  text-decoration: none;
   transition: transform var(--t-fast);
 }
 
 .specs-link-btn:hover {
-  background: rgba(255, 0, 128, 0.08);
-  border-color: var(--edge);
-  box-shadow: 0 0 10px rgba(255, 0, 128, 0.18);
+  color: var(--blade);
+  text-decoration-color: rgba(255, 255, 255, 0.35);
 }
 
 .specs-link-btn:hover::after {

@@ -444,11 +444,14 @@
 /* ═══════════════════════════════════════════════
    3. DESKTOP STAGE (≥900px)
    ═══════════════════════════════════════════════ */
+.team-experience { display: none; }
+
 .team-stage { display: none; }
 
 @media (min-width: 900px) {
   .team-mobile { display: none; }
-  
+  .team-experience { display: block; }
+
   .team-stage {
     display: grid;
     grid-template-columns: calc(50% - 20px) calc(50% - 20px);

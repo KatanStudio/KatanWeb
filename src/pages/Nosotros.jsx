@@ -122,61 +122,43 @@ const COMPARE_DATA = [
 ]
 
 // ─────────────────────────────────────────────────────────────────────────────
-// TEAM MOBILE  (móvil <900px)
+// TEAM MOBILE  (móvil <900px) — stack vertical, sin carrusel
 // ─────────────────────────────────────────────────────────────────────────────
 function TeamMobile() {
-  const [currentIndex, setCurrentIndex] = useState(0)
-  const [dir, setDir] = useState(1)
-  const [isModalOpen, setIsModalOpen] = useState(false)
-  const [touchStart, setTouchStart] = useState(null)
-  const [touchEnd, setTouchEnd] = useState(null)
-
-  const member = TEAM[currentIndex]
+  const [modalMember, setModalMember] = useState(null)
 
   useEffect(() => {
-    if (isModalOpen) document.body.style.overflow = 'hidden'
-    else document.body.style.overflow = 'unset'
+    document.body.style.overflow = modalMember ? 'hidden' : 'unset'
     return () => { document.body.style.overflow = 'unset' }
-  }, [isModalOpen])
+  }, [modalMember])
 
-  const next = () => { if (currentIndex < TEAM.length - 1) { setDir(1); setCurrentIndex(prev => prev + 1) } }
-  const prev = () => { if (currentIndex > 0) { setDir(-1); setCurrentIndex(prev => prev - 1) } }
+  const closeModal = () => setModalMember(null)
 
-  const onTouchStart = (e) => { setTouchEnd(null); setTouchStart(e.targetTouches[0].clientX) }
-  const onTouchMove = (e) => { setTouchEnd(e.targetTouches[0].clientX) }
-  const onTouchEndAction = () => {
-    if (!touchStart || !touchEnd) return
-    const distance = touchStart - touchEnd
-    if (distance > 50 && currentIndex < TEAM.length - 1) next()
-    if (distance < -50 && currentIndex > 0) prev()
-  }
-
-  const modalContent = isModalOpen && (
-    <div className="team-modal-overlay" onClick={() => setIsModalOpen(false)}>
+  const modalContent = modalMember && (
+    <div className="team-modal-overlay" onClick={closeModal}>
       <div className="team-modal-content" onClick={e => e.stopPropagation()}>
-        <button className="team-modal-x" onClick={() => setIsModalOpen(false)} aria-label="Cerrar modal">
+        <button className="team-modal-x" onClick={closeModal} aria-label="Cerrar modal">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <line x1="18" y1="6" x2="6" y2="18"></line>
-            <line x1="6" y1="6" x2="18" y2="18"></line>
+            <line x1="18" y1="6" x2="6" y2="18" /><line x1="6" y1="6" x2="18" y2="18" />
           </svg>
         </button>
-        <p className="team-bio-kicker">{member.num} / {member.tag}</p>
-        <h3 className="team-bio-name">{member.name}</h3>
+        <p className="team-bio-kicker">{modalMember.num} / {modalMember.tag}</p>
+        <h3 className="team-bio-name">{modalMember.name}</h3>
         <ul className="team-bio-highlights">
-          {member.highlights.map((h, i) => (
+          {modalMember.highlights.map((h, i) => (
             <li key={h} className="team-bio-highlight" style={{ '--i': i }}>
               <span className="team-bio-dot" aria-hidden="true" />{h}
             </li>
           ))}
         </ul>
         <div className="team-bio-body">
-          {member.fullBio.split('\n\n').map((para, i) => (
+          {modalMember.fullBio.split('\n\n').map((para, i) => (
             <p key={i} style={{ '--i': i }}>{para}</p>
           ))}
         </div>
         <div className="team-modal-footer">
-          <a href={member.linkedin} target="_blank" rel="noreferrer" className="team-bio-btn">Ver en LinkedIn →</a>
-          <button className="team-bio-btn" onClick={() => setIsModalOpen(false)}>
+          <a href={modalMember.linkedin} target="_blank" rel="noreferrer" className="team-bio-btn">Ver en LinkedIn →</a>
+          <button className="team-bio-btn" onClick={closeModal}>
             Cerrar
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" aria-hidden="true" style={{ transform: 'rotate(180deg)' }}>
               <path d="M9 6l6 6-6 6" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -185,41 +167,38 @@ function TeamMobile() {
         </div>
       </div>
     </div>
-  );
+  )
 
   return (
     <>
       <div className="team-mobile">
-        <div className="team-mobile__wrapper" onTouchStart={onTouchStart} onTouchMove={onTouchMove} onTouchEnd={onTouchEndAction}>
-          <div key={member.id} className="team-mobile__card" data-dir={dir}>
-            <div className="team-mobile__img-wrap" onClick={() => setIsModalOpen(true)}>
-              <img src={member.img} alt={member.alt} className="team-mobile__img" />
-              <div className="team-mobile__img-overlay" aria-hidden="true" />
-              <div className="team-mobile__img-badge" aria-hidden="true"><span className="team-mobile__num">{member.num}</span></div>
-            </div>
-            <div className="team-mobile__body">
-              <div className="team-col-label" style={{ marginBottom: '0.5rem' }}>
-                <span className="team-col-num">{member.num}</span><span className="team-col-sep">/</span><span className="team-col-tag">{member.tag}</span>
+        {TEAM.map(member => (
+          <div key={member.id} className="team-mobile__wrapper">
+            <div className="team-mobile__card">
+              <div className="team-mobile__img-wrap" onClick={() => setModalMember(member)}>
+                <img src={member.img} alt={member.alt} className="team-mobile__img" />
+                <div className="team-mobile__img-overlay" aria-hidden="true" />
+                <div className="team-mobile__img-badge" aria-hidden="true">
+                  <span className="team-mobile__num">{member.num}</span>
+                </div>
               </div>
-              <h3 className="team-mobile__name">{member.name}</h3>
-              <button className="team-toggle" onClick={() => setIsModalOpen(true)} style={{ marginTop: '0.5rem' }}>
-                <span>Ver más</span>
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                  <path d="M9 6l6 6-6 6" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </button>
+              <div className="team-mobile__body">
+                <div className="team-col-label" style={{ marginBottom: '0.5rem' }}>
+                  <span className="team-col-num">{member.num}</span>
+                  <span className="team-col-sep">/</span>
+                  <span className="team-col-tag">{member.tag}</span>
+                </div>
+                <h3 className="team-mobile__name">{member.name}</h3>
+                <button className="team-toggle" onClick={() => setModalMember(member)} style={{ marginTop: '0.5rem' }}>
+                  <span>Ver más</span>
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <path d="M9 6l6 6-6 6" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </button>
+              </div>
             </div>
           </div>
-          <div className="team-mobile__controls">
-            <button className="team-mobile__arrow" onClick={prev} disabled={currentIndex === 0} aria-label="Anterior">←</button>
-            <div className="team-mobile__dots">
-              {TEAM.map((_, i) => (
-                <button key={i} className={`team-mobile__dot ${i === currentIndex ? 'team-mobile__dot--active' : ''}`} onClick={() => { setDir(i > currentIndex ? 1 : -1); setCurrentIndex(i) }} aria-label={`Ver miembro ${i + 1}`} />
-              ))}
-            </div>
-            <button className="team-mobile__arrow" onClick={next} disabled={currentIndex === TEAM.length - 1} aria-label="Siguiente">→</button>
-          </div>
-        </div>
+        ))}
       </div>
       {typeof document !== 'undefined' && createPortal(modalContent, document.body)}
     </>
@@ -539,7 +518,7 @@ export function NosotrosSection() {
           <TeamMobile />
           <TeamStage />
 
-          <div className="module module--recurring" style={{ maxWidth: '100%' }}>
+          <div className="module module--recurring team-experience" style={{ maxWidth: '100%' }}>
             <h3 className="module__price" style={{ marginBottom: '1rem' }}>Nuestra experiencia en la trinchera</h3>
             <p className="module__desc" style={{ fontSize: '1.2rem' }}>
               Llevamos a la espalda numerosos proyectos sin un solo cliente que haya tenido que recurrir a mantenimiento de
@@ -600,7 +579,7 @@ export default function Nosotros() {
             <TeamMobile />
             <TeamStage />
 
-            <div className="module module--recurring" style={{ maxWidth: '100%' }}>
+            <div className="module module--recurring team-experience" style={{ maxWidth: '100%' }}>
               <h3 className="module__price" style={{ marginBottom: '1rem' }}>Nuestra experiencia en la trinchera</h3>
               <p className="module__desc" style={{ fontSize: '1.2rem' }}>
                 Llevamos a la espalda numerosos proyectos sin un solo cliente que haya tenido que recurrir a mantenimiento de
