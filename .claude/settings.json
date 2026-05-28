@@ -26,7 +26,10 @@
       "Bash(rm \"src/assets/img/landing/\"*.png)",
       "Bash(git restore *)",
       "Bash(node -e *)",
-      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:5173)"
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" http://localhost:5173)",
+      "PowerShell(magick -version 2>&1)",
+      "PowerShell(python -c \"from PIL import Image; print\\('PIL ok'\\)\" 2>&1)",
+      "PowerShell(ffmpeg -version 2>&1)"
     ]
   }
 }

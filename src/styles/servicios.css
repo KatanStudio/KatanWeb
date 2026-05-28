@@ -1147,7 +1147,7 @@
 .svc-hs__card-num {
   color: var(--edge);
   font-family: var(--font-mono);
-  font-size: 0.82rem;
+  font-size: 2rem;
   letter-spacing: 0.12em;
   font-weight: 600;
   display: block;
@@ -1164,7 +1164,7 @@
 
 .svc-hs__card-desc {
   color: var(--steel);
-  font-size: clamp(0.8rem, 1vw, 0.92rem);
+  font-size: clamp(1.2rem, 1vw, 1rem);
   line-height: 1.6;
   margin-bottom: 0.9rem;
 }
@@ -1436,4 +1436,29 @@
 
 .specs-link-btn:hover::after {
   transform: translateX(3px);
+}
+
+/* ── Image overlay + zoom on hover (desktop only) ── */
+@media (min-width: 1200px) {
+  .svc-hs__card-right::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.35);
+    z-index: 1;
+    pointer-events: none;
+    transition: opacity 0.45s ease;
+  }
+
+  .svc-hs__card-right > div {
+    transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  }
+
+  .svc-hs__card:hover .svc-hs__card-right::after {
+    opacity: 0;
+  }
+
+  .svc-hs__card:hover .svc-hs__card-right > div {
+    transform: scale(1.06);
+  }
 }
