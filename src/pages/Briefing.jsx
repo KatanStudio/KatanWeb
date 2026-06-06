@@ -1,13 +1,15 @@
 import { Helmet } from 'react-helmet-async'
 import { Link, useNavigate } from 'react-router-dom'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Footer from '../components/Footer.jsx'
 
 // ─────────────────────────────────────────────
-// 🔧 CONFIGURACIÓN HUBSPOT
+// 🔧 CONFIGURACIÓN
 // ─────────────────────────────────────────────
-const HUBSPOT_PORTAL_ID = '148402397';
-const HUBSPOT_FORM_ID   = 'c2601690-8d77-4f53-9477-13415070a477';
+const HUBSPOT_PORTAL_ID  = '148402397';
+const HUBSPOT_FORM_ID    = 'c2601690-8d77-4f53-9477-13415070a477';
+const TURNSTILE_SITE_KEY = '0x4AAAAAADfz5x6ue0X6nlmR';
+const WORKER_URL         = 'https://little-cake-0776.katan-f68.workers.dev';
 // ─────────────────────────────────────────────
 
 const EXTRAS_LIST = [
@@ -68,6 +70,8 @@ export default function Briefing() {
     _hp_website: '',
   });
   const [formStartTime, setFormStartTime] = useState(null);
+  const [turnstileToken, setTurnstileToken] = useState(null);
+  const turnstileRendered = useRef(false);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -81,9 +85,34 @@ export default function Briefing() {
   };
 
   useEffect(() => {
-    if (step === 1 && !formStartTime) {
-      setFormStartTime(Date.now());
-    }
+    if (step === 1 && !formStartTime) setFormStartTime(Date.now());
+  }, [step]);
+
+  // Carga el script de Turnstile una sola vez
+  useEffect(() => {
+    if (document.getElementById('cf-turnstile-script')) return;
+    const script = document.createElement('script');
+    script.id = 'cf-turnstile-script';
+    script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js';
+    script.async = true;
+    document.head.appendChild(script);
+  }, []);
+
+  // Renderiza el widget cuando el usuario llega al paso 5
+  useEffect(() => {
+    if (step !== 5 || turnstileRendered.current) return;
+    const tryRender = () => {
+      if (!window.turnstile) { setTimeout(tryRender, 100); return; }
+      window.turnstile.render('#turnstile-widget', {
+        sitekey: TURNSTILE_SITE_KEY,
+        theme: 'dark',
+        callback: (token) => setTurnstileToken(token),
+        'expired-callback': () => setTurnstileToken(null),
+        'error-callback': () => setTurnstileToken(null),
+      });
+      turnstileRendered.current = true;
+    };
+    tryRender();
   }, [step]);
 
   const nextStep = (e) => {
@@ -155,24 +184,22 @@ export default function Briefing() {
     ];
 
     try {
-      const res = await fetch(
-        `https://api.hsforms.com/submissions/v3/integration/submit/${HUBSPOT_PORTAL_ID}/${HUBSPOT_FORM_ID}`,
-        {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            fields,
-            context: {
-              pageUri: window.location.href,
-              pageName: 'Briefing — Katan Studio',
-            },
-          }),
-        }
-      );
+      const res = await fetch(WORKER_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          turnstileToken,
+          fields,
+          context: {
+            pageUri: window.location.href,
+            pageName: 'Briefing — Katan Studio',
+          },
+        }),
+      });
 
       if (!res.ok) {
         const errData = await res.json().catch(() => ({}));
-        throw new Error(errData?.message || `Error ${res.status}`);
+        throw new Error(errData?.error || `Error ${res.status}`);
       }
 
       setSubmitted(true);
@@ -520,6 +547,8 @@ export default function Briefing() {
                     </label>
                   </div>
 
+                  <div id="turnstile-widget" style={{ margin: '1.5rem 0' }} />
+
                   {errorMsg && (
                     <div style={{ marginTop: '1rem', padding: '1rem', background: 'rgba(255,80,80,0.1)', border: '1px solid rgba(255,80,80,0.3)', borderRadius: '6px', color: '#ff5050', fontSize: '0.85rem' }}>
                       {errorMsg}
@@ -550,10 +579,10 @@ export default function Briefing() {
                   <button
                     type="submit"
                     className="btn btn--primary btn--chamfer"
-                    style={{ flex: 2, background: 'var(--spark)', border: 'none', color: '#000', opacity: sending ? 0.7 : 1 }}
-                    disabled={sending}
+                    style={{ flex: 2, background: 'var(--spark)', border: 'none', color: '#000', opacity: (sending || !turnstileToken) ? 0.7 : 1 }}
+                    disabled={sending || !turnstileToken}
                   >
-                    {sending ? 'Enviando...' : 'Finalizar y enviar briefing'}
+                    {sending ? 'Enviando...' : !turnstileToken ? 'Verificando...' : 'Finalizar y enviar briefing'}
                   </button>
                 )}
               </div>
