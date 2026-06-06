@@ -1,6 +1,6 @@
 import { Helmet } from 'react-helmet-async'
 import { Link, useNavigate } from 'react-router-dom'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Footer from '../components/Footer.jsx'
 
 // ─────────────────────────────────────────────
@@ -64,8 +64,10 @@ export default function Briefing() {
     referencias: '',
     plazo: '',
     presupuesto: '',
-    aceptaLegal: false
+    aceptaLegal: false,
+    _hp_website: '',
   });
+  const [formStartTime, setFormStartTime] = useState(null);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -77,6 +79,12 @@ export default function Briefing() {
       setFormData({ ...formData, [name]: type === 'checkbox' ? checked : value });
     }
   };
+
+  useEffect(() => {
+    if (step === 1 && !formStartTime) {
+      setFormStartTime(Date.now());
+    }
+  }, [step]);
 
   const nextStep = (e) => {
     const form = e.target.closest('form');
@@ -109,6 +117,15 @@ export default function Briefing() {
     e.preventDefault();
     setSending(true);
     setErrorMsg('');
+
+    // Bot detection: honeypot field filled or form submitted too fast (<15s)
+    const isBot = formData._hp_website !== '' || (formStartTime && Date.now() - formStartTime < 15000);
+    if (isBot) {
+      await new Promise(r => setTimeout(r, 1200));
+      setSubmitted(true);
+      setSending(false);
+      return;
+    }
 
     const extrasTexto = formData.extras.length > 0
       ? `\nExtras: ${formData.extras.join(', ')}`
@@ -510,6 +527,20 @@ export default function Briefing() {
                   )}
                 </fieldset>
               )}
+
+              {/* Honeypot — oculto para humanos, visible para bots */}
+              <div aria-hidden="true" style={{ position: 'absolute', left: '-9999px', top: '-9999px', width: '1px', height: '1px', overflow: 'hidden' }}>
+                <label htmlFor="_hp_website">Website</label>
+                <input
+                  id="_hp_website"
+                  type="text"
+                  name="_hp_website"
+                  value={formData._hp_website}
+                  onChange={handleChange}
+                  tabIndex={-1}
+                  autoComplete="off"
+                />
+              </div>
 
               <div className="form-actions" style={{ display: 'flex', gap: '1rem', marginTop: '3rem' }}>
                 <button type="button" onClick={prevStep} className="btn btn--ghost" style={{ flex: 1 }}>← Atrás</button>
