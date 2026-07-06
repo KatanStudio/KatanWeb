@@ -2,16 +2,19 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 export default function Footer() {
-  const [cookiesAccepted, setCookiesAccepted] = useState(
-    () => localStorage.getItem('katanCookiesAceptadas') === 'true'
+  const [cookiePref, setCookiePref] = useState(
+    () => localStorage.getItem('katanCookiesAceptadas')
   )
   const [bannerHiding, setBannerHiding] = useState(false)
 
-  const acceptCookies = () => {
-    localStorage.setItem('katanCookiesAceptadas', 'true')
+  const dismissBanner = (pref) => {
+    localStorage.setItem('katanCookiesAceptadas', pref)
     setBannerHiding(true)
-    setTimeout(() => setCookiesAccepted(true), 600)
+    setTimeout(() => setCookiePref(pref), 600)
   }
+
+  const acceptCookies = () => dismissBanner('accepted')
+  const rejectCookies = () => dismissBanner('rejected')
 
   return (
     <footer className="footer">
@@ -40,24 +43,32 @@ export default function Footer() {
         </div>
       </div>
 
-      {!cookiesAccepted && (
+      {!cookiePref && (
         <div
           id="banner-cookies"
           className={`cookies-banner${bannerHiding ? ' cookies-banner--hidden' : ''}`}
         >
           <div className="container cookies-banner__inner">
             <p className="cookies-banner__text">
-              Utilizamos cookies propias y de terceros para asegurar el rendimiento de la web.
-              Sin rastreadores innecesarios.
+              Usamos <strong>cookies esenciales</strong> para el funcionamiento de la web y
+              <strong> cookies analíticas</strong> para entender cómo la usas.
+              Puedes aceptar todas o solo las esenciales.{' '}
+              <Link to="/legal/cookies" className="cookies-banner__link">Más información</Link>
             </p>
             <div className="cookies-banner__actions">
-              <Link to="/legal/cookies" className="cookies-banner__link">Más información</Link>
+              <button
+                id="btn-rechazar-cookies"
+                className="btn btn--ghost"
+                onClick={rejectCookies}
+              >
+                Solo esenciales
+              </button>
               <button
                 id="btn-aceptar-cookies"
                 className="btn btn--primary btn--chamfer"
                 onClick={acceptCookies}
               >
-                Aceptar
+                Aceptar todas
               </button>
             </div>
           </div>

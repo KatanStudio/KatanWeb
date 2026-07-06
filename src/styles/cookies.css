@@ -34,7 +34,8 @@
 .cookies-banner__actions {
   display: flex;
   align-items: center;
-  gap: 1.5rem;
+  flex-wrap: wrap;
+  gap: 1rem;
 }
 
 .cookies-banner__link {
