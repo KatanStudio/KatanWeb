@@ -257,8 +257,8 @@ function CompareMobile() {
         <div className="team-mobile__controls" style={{ borderTop: '1px solid var(--ghost)' }}>
           <button className="team-mobile__arrow" onClick={prev} disabled={currentIndex === 0}>←</button>
           <div className="team-mobile__dots">
-            {COMPARE_DATA.map((_, i) => (
-              <button key={i} className={`team-mobile__dot ${i === currentIndex ? 'team-mobile__dot--active' : ''}`} onClick={() => { setDir(i > currentIndex ? 1 : -1); setCurrentIndex(i) }} />
+            {COMPARE_DATA.map((item, i) => (
+              <button key={i} className={`team-mobile__dot ${i === currentIndex ? 'team-mobile__dot--active' : ''}`} onClick={() => { setDir(i > currentIndex ? 1 : -1); setCurrentIndex(i) }} aria-label={`Ver comparativa: ${item.category}`} />
             ))}
           </div>
           <button className="team-mobile__arrow" onClick={next} disabled={currentIndex === COMPARE_DATA.length - 1}>→</button>

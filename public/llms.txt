@@ -1,0 +1,21 @@
+# Katan Studio
+
+Katan Studio es un estudio de desarrollo web y apps con sede en Toledo, España. Creamos webs a medida, landing pages, e-commerce y aplicaciones móviles para negocios. Sin plantillas, código propio.
+
+## Servicios
+- Diseño y desarrollo web a medida
+- Landing pages de alta conversión
+- Tiendas online (e-commerce)
+- Aplicaciones móviles nativas (iOS y Android)
+- Hosting y mantenimiento
+- Consultoría tecnológica
+
+## Proyectos
+- [Viana Nails](https://viananails.com/) — Academia de manicura en Toledo. Plataforma e-commerce a medida con tienda online, sistema de reservas, pasarela de pago propia y área privada de alumnas.
+- [Jenny Records](https://jennyrecords.com) — Estudio de grabación profesional con 30 años de historia. Web corporativa con fichas técnicas de las salas y discografía enlazada a Spotify, Apple Music y YouTube.
+- [Xylos Home](https://xyloshome.com) — Empresa de casas modulares. Landing page con formulario de captación de leads en 10 pasos conectado a HubSpot e identidad visual completa.
+- [Portfolio DJ](https://djosman.pages.dev/) — Portfolio personal para DJ con estética clubbing, reproductor de audio integrado y press kit para promotores.
+
+## Contacto
+- Web: https://katan.es
+- Email: info@katan.es
