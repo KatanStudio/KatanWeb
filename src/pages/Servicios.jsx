@@ -482,7 +482,7 @@ const SPECS_ROWS = [
   { label: 'Diseño Responsive',       values: [Y,                       Y,                            Y,                            Y] },
   { label: 'SEO On-Page',             values: ['Básico',                'Avanzado (Schema)',           'Avanzado + Rich Snippets',   N] },
   { label: 'Blog Integrado',          values: [N,                       Y,                            Y,                            N] },
-  { label: 'Multiidioma',             values: [N,                       'Hasta 2 idiomas',             'Hasta 3 idiomas',            'Hasta 2 idiomas'] },
+  { label: 'Multiidioma',             values: [N,                       N,                            'Hasta 2 idiomas',            'Hasta 2 idiomas'] },
   { label: 'Formularios de contacto', values: ['1 formulario',          'Avanzados / Múltiples',      'Avanzados / Múltiples',      'Formularios in-app'] },
   { label: 'Analítica Web',           values: ['Google Analytics',      'Analytics + Search Console', 'Analytics + SC + E-comm',    'Analytics + Firebase'] },
   { label: 'Core Web Vitals',         values: ['Optimizado (>90)',      'Premium (>95)',               'Premium',                    N] },
