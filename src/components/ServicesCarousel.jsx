@@ -82,7 +82,7 @@ const CARDS = [
       'Panel de administración intuitivo',
       'SEO técnico de producto (Rich Snippets)',
       'Emails transaccionales automatizados',
-      'Multiidioma (hasta 3 idiomas)',
+      'Multiidioma (hasta 2 idiomas)',
       '5 rondas de revisiones',
       'Entrega en 8-10 semanas',
     ],
