@@ -158,10 +158,12 @@ export default function MainPage() {
                   <span key={i} className="tech-badge">
                     <img
                       src={`/icons/tech/${badge.slug}.svg`}
-                      alt=""
+                      alt={badge.label}
                       className="tech-badge__icon"
                       width="18"
                       height="18"
+                      loading="lazy"
+                      decoding="async"
                       aria-hidden="true"
                     />
                     <span className="tech-badge__label">{badge.label}</span>
@@ -173,10 +175,12 @@ export default function MainPage() {
                   <span key={i} className="tech-badge">
                     <img
                       src={`/icons/tech/${badge.slug}.svg`}
-                      alt=""
+                      alt={badge.label}
                       className="tech-badge__icon"
                       width="18"
                       height="18"
+                      loading="lazy"
+                      decoding="async"
                       aria-hidden="true"
                     />
                     <span className="tech-badge__label">{badge.label}</span>
