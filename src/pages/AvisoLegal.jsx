@@ -9,6 +9,7 @@ export default function AvisoLegal() {
       <Helmet>
         <title>Aviso Legal — Katan Studio</title>
         <meta name="description" content="Información identificativa y normas de uso del sitio web de Katan Studio." />
+        <link rel="canonical" href="https://katan.es/legal/aviso-legal" />
       </Helmet>
 
       <Header />

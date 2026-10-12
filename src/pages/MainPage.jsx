@@ -85,9 +85,11 @@ const TECH_ROW_2 = [
 export default function MainPage() {
   return (
     <>
+      {/* Título y descripción deben coincidir con los de index.html */}
       <Helmet>
-        <title>Katan — Sharp by Design</title>
-        <meta name="description" content="Katan Studio — Webs que cortan. Código propio, precio cerrado, entrega en 10 días." />
+        <title>Diseño y desarrollo web y app | Katan Studio</title>
+        <meta name="description" content="Estudio de desarrollo web en Toledo. Webs y aplicaciones a medida." />
+        <link rel="canonical" href="https://katan.es/" />
       </Helmet>
 
       <Header />

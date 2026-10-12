@@ -237,6 +237,7 @@ export default function Briefing() {
     <div style={{ display: 'grid', gridTemplateRows: '1fr auto', minHeight: '100svh' }}>
       <Helmet>
         <title>Briefing — Katan Studio</title>
+        <link rel="canonical" href="https://katan.es/briefing" />
       </Helmet>
 
       <main style={{ position: 'relative', overflow: 'hidden' }}>

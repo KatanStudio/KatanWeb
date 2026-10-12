@@ -9,6 +9,7 @@ export default function Cookies() {
       <Helmet>
         <title>Política de Cookies — Katan Studio</title>
         <meta name="description" content="Información clara sobre el uso de cookies en nuestro sistema." />
+        <link rel="canonical" href="https://katan.es/legal/cookies" />
       </Helmet>
 
       <Header />
