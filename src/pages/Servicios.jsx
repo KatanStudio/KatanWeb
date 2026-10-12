@@ -278,6 +278,10 @@ function ServiceCarousel({ slides, fallback = null }) {
           src={src}
           alt=""
           aria-hidden="true"
+          width="1200"
+          height="580"
+          loading="lazy"
+          decoding="async"
           style={{
             position: 'absolute',
             inset: 0,
