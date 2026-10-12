@@ -9,6 +9,7 @@ export default function Privacidad() {
       <Helmet>
         <title>Política de Privacidad — Katan Studio</title>
         <meta name="description" content="Tus datos son tuyos. Aquí te explicamos cómo los protegemos y para qué los usamos." />
+        <link rel="canonical" href="https://katan.es/legal/privacidad" />
       </Helmet>
 
       <Header />
