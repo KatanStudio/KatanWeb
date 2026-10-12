@@ -197,7 +197,7 @@ export default function Header() {
       <header className={`nav nav--mobile-top${scrolled ? ' nav--scrolled' : ''}`} aria-hidden="true">
         <div className="nav__inner">
           <a href={getHref('inicio')} className="nav__brand" tabIndex={-1} onClick={(e) => handleNavClick(e, 'inicio')}>
-            <img src="/logos/wetransfer_katan_2026-05-04_0628/KATANLogoBlancoCompleto.svg" className="nav__logo" alt="" aria-hidden="true" />
+            <img src="/logos/wetransfer_katan_2026-05-04_0628/KATANLogoBlancoCompleto.svg" className="nav__logo" alt="" aria-hidden="true" width="92" height="92" />
           </a>
           <a
             href={getHref('contacto')}

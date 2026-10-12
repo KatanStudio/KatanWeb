@@ -14,7 +14,8 @@ const TEAM = [
     num: '_dev.01',
     tag: 'Negocio & UI/UX',
     name: 'Adrián Lozano',
-    img: '/img/AdrianDefinitivaV2.webp',
+    img: '/img/AdrianDefinitivaV2-682.webp',
+    srcSet: '/img/AdrianDefinitivaV2-400.webp 400w, /img/AdrianDefinitivaV2-682.webp 682w',
     alt: 'Adrián Lozano',
     linkedin: 'https://www.linkedin.com/in/adrián-lozano',
     highlights: [
@@ -30,7 +31,8 @@ const TEAM = [
     num: '_dev.02',
     tag: 'Gestión & Lógica',
     name: 'Alejandro Quintana',
-    img: '/img/AlejandroDefinitivaV2.webp',
+    img: '/img/AlejandroDefinitivaV2-800.webp',
+    srcSet: '/img/AlejandroDefinitivaV2-400.webp 400w, /img/AlejandroDefinitivaV2-800.webp 800w',
     alt: 'Alejandro Quintana',
     linkedin: 'https://www.linkedin.com/in/alejandro-quintana-rodriguez/',
     highlights: [
@@ -176,7 +178,7 @@ function TeamMobile() {
           <div key={member.id} className="team-mobile__wrapper">
             <div className="team-mobile__card">
               <div className="team-mobile__img-wrap" onClick={() => setModalMember(member)}>
-                <img src={member.img} alt={member.alt} className="team-mobile__img" />
+                <img src={member.img} srcSet={member.srcSet} sizes="(min-width: 900px) 50vw, 100vw" alt={member.alt} className="team-mobile__img" width="800" height="1200" loading="lazy" decoding="async" />
                 <div className="team-mobile__img-overlay" aria-hidden="true" />
                 <div className="team-mobile__img-badge" aria-hidden="true">
                   <span className="team-mobile__num">{member.num}</span>
@@ -454,7 +456,7 @@ function TeamStage() {
         return (
           <div key={member.id} className={`team-col${isActive ? ' team-col--active' : ''}${isHidden ? ' team-col--hidden' : ''}`} style={{ gridColumn: idx + 1, gridRow: 1 }}>
             <div className="team-photo-wrap" onClick={() => toggle(member.id)} aria-hidden="true">
-              <img src={member.img} alt={member.alt} className="team-photo" />
+              <img src={member.img} srcSet={member.srcSet} sizes="(min-width: 900px) 50vw, 100vw" alt={member.alt} className="team-photo" width="800" height="1200" loading="lazy" decoding="async" />
               <div className="team-photo-overlay" aria-hidden="true" />
               <div className="team-photo-badge" aria-hidden="true"><span>{member.num}</span></div>
             </div>
