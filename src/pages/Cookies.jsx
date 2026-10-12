@@ -59,6 +59,8 @@ export default function Cookies() {
               </tbody>
             </table>
 
+            <p><strong>Almacenamiento técnico en el navegador.</strong> Además de las cookies, guardamos en el almacenamiento local de tu navegador (localStorage) la marca <strong>katanSplashVisto</strong>, que solo indica que ya has visto la animación de entrada para no repetírtela en tus siguientes visitas. No contiene datos personales, no se envía a ningún servidor y puedes eliminarla borrando los datos del sitio en tu navegador.</p>
+
             <h2>3. Cookies de terceros</h2>
             <p>Este sitio web puede utilizar servicios de terceros (como análisis estadístico) que recopilan información de forma anónima. Nunca vendemos datos a terceros ni usamos cookies para publicidad invasiva.</p>
 
