@@ -7,7 +7,7 @@ const PROJECTS = [
   {
     href: 'https://viananails.com/',
     category: 'ecommerce',
-    img: '../../img/VianaNails.webp',
+    img: 'VianaNails',
     alt: 'Proyecto VianaNails',
     tag: 'E-Commerce',
     title: 'Viana Nails',
@@ -19,7 +19,7 @@ const PROJECTS = [
   {
     href: 'https://jennyrecords.com',
     category: 'corporate',
-    img: '/img/JennyRecords.webp',
+    img: 'JennyRecords',
     alt: 'Proyecto Jenny Records',
     tag: 'Web Corporativa',
     title: 'Jenny Records',
@@ -31,7 +31,7 @@ const PROJECTS = [
   {
     href: 'https://djosman.pages.dev/',
     category: 'landing',
-    img: '/img/DjOsman.webp',
+    img: 'DjOsman',
     alt: 'Proyecto Portfolio DJ',
     tag: 'Landing Page',
     title: 'Portfolio DJ',
@@ -43,7 +43,7 @@ const PROJECTS = [
    {
     href: 'https://xyloshome.com',
     category: 'landing',
-    img: '/img/XylosHome.webp',
+    img: 'XylosHome',
     alt: 'Proyecto XylosHome',
     tag: 'Landing Page',
     title: 'Xylos Home',
@@ -62,6 +62,25 @@ const FILTERS = [
 ]
 
 const PER_PAGE = 2
+
+// Variantes responsive en public/img/<img>-<ancho>.webp
+const IMG_WIDTHS = [480, 800, 1200]
+
+function PortfolioImg({ project }) {
+  return (
+    <img
+      src={`/img/${project.img}-800.webp`}
+      srcSet={IMG_WIDTHS.map(w => `/img/${project.img}-${w}.webp ${w}w`).join(', ')}
+      sizes="(min-width: 1000px) 38vw, 92vw"
+      alt={project.alt}
+      className="portfolio-card__img"
+      width="1200"
+      height="750"
+      loading="lazy"
+      decoding="async"
+    />
+  )
+}
 
 export function PortfolioSection() {
   const [activeFilter, setActiveFilter] = useState('all')
@@ -132,7 +151,7 @@ export function PortfolioSection() {
             {currentItems.map((project) => (
               <a key={project.title} href={project.href} className="portfolio-card" data-category={project.category} target={project.external ? '_blank' : undefined} rel={project.external ? 'noreferrer' : undefined}>
                 <div className="portfolio-card__img-wrap">
-                  <img src={project.img} alt={project.alt} className="portfolio-card__img" />
+                  <PortfolioImg project={project} />
                   <div className="portfolio-card__overlay"><span className="btn btn--primary btn--chamfer">Ver proyecto</span></div>
                 </div>
                 <div className="portfolio-card__info">
@@ -164,7 +183,7 @@ export function PortfolioSection() {
               <div key={project.title} className="portfolio-swipe__item">
                 <a href={project.href} className="portfolio-card" data-category={project.category} target={project.external ? '_blank' : undefined} rel={project.external ? 'noreferrer' : undefined}>
                   <div className="portfolio-card__img-wrap">
-                    <img src={project.img} alt={project.alt} className="portfolio-card__img" />
+                    <PortfolioImg project={project} />
                     <div className="portfolio-card__overlay"><span className="btn btn--primary btn--chamfer">Ver proyecto</span></div>
                   </div>
                   <div className="portfolio-card__info">
@@ -283,7 +302,7 @@ export default function Portfolio() {
                     rel={project.external ? 'noreferrer' : undefined}
                   >
                     <div className="portfolio-card__img-wrap">
-                      <img src={project.img} alt={project.alt} className="portfolio-card__img" />
+                      <PortfolioImg project={project} />
                       <div className="portfolio-card__overlay">
                         <span className="btn btn--primary btn--chamfer">Ver proyecto</span>
                       </div>
@@ -343,7 +362,7 @@ export default function Portfolio() {
                     rel={project.external ? 'noreferrer' : undefined}
                   >
                     <div className="portfolio-card__img-wrap">
-                      <img src={project.img} alt={project.alt} className="portfolio-card__img" />
+                      <PortfolioImg project={project} />
                       <div className="portfolio-card__overlay">
                         <span className="btn btn--primary btn--chamfer">Ver proyecto</span>
                       </div>

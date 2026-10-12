@@ -1,12 +1,18 @@
 import { useState, useEffect } from 'react'
 
+// Duración total del splash: 0,9 s. El fundido de salida (DONE_AT - EXIT_AT)
+// debe coincidir con la transition de .loader en loader.css (400ms)
+const VISIBLE_AT = 80
+const EXIT_AT = 500
+const DONE_AT = 900
+
 export default function Loader() {
   const [phase, setPhase] = useState('enter')  // enter → visible → exit → done
 
   useEffect(() => {
-    const t0 = setTimeout(() => setPhase('visible'), 80)
-    const t1 = setTimeout(() => setPhase('exit'), 2000)
-    const t2 = setTimeout(() => setPhase('done'), 2800)
+    const t0 = setTimeout(() => setPhase('visible'), VISIBLE_AT)
+    const t1 = setTimeout(() => setPhase('exit'), EXIT_AT)
+    const t2 = setTimeout(() => setPhase('done'), DONE_AT)
     return () => { clearTimeout(t0); clearTimeout(t1); clearTimeout(t2) }
   }, [])
 

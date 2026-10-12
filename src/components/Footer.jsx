@@ -20,7 +20,7 @@ export default function Footer() {
     <footer className="footer">
       <div className="container footer__inner">
         <div className="footer__row">
-          <img src="/logos/wetransfer_katan_2026-05-04_0628/KATANLogoBlancoCompleto.svg" className="footer__brand-logo" alt="Katan Studio" />
+          <img src="/logos/wetransfer_katan_2026-05-04_0628/KATANLogoBlancoCompleto.svg" className="footer__brand-logo" alt="Katan Studio" width="78" height="44" />
           <span className="footer__dot"></span>
           <span className="footer__tagline">// sharp by design</span>
         </div>
